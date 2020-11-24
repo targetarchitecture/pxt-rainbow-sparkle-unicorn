@@ -52,7 +52,6 @@ namespace RainbowSparkleUnicorn {
      * Add into the start function to initialise the board.
      * @param SN The serial number of the Rainbox Sparkle Unicorn board, eg: "SN4"
      */
-    //% blockId=TargetArchitecture_initwithserialnumber
     //% block="Start Rainbow Sparkle Unicorn"
     //% weight=65
     export function start(SN: string): void {
