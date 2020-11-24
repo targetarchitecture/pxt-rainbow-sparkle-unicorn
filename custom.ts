@@ -52,8 +52,7 @@ namespace RainbowSparkleUnicorn {
      * Add into the start function to initialise the board.
      * @param SN The serial number of the Rainbox Sparkle Unicorn board, eg: "SN4"
      */
-      //% blockId=TargetArchitecture_initwithserialnumber  
-    //% block="Start Rainbow Sparkle Unicorn"
+    //% block="Start Rainbow Sparkle Unicorn $SN"
     //% weight=65
     export function start(SN: string): void {
 
@@ -124,4 +123,21 @@ namespace RainbowSparkleUnicorn {
             }
         );
     }
+
+    /**
+     * Set the analog dial to a certain voltage.
+     * @param voltage the touch sensor to be checked, eg: 90
+     */
+    //% block="Set ADC 1 to $voltage \\%"
+    //% voltage.shadow="protractorPicker"
+    export function ADC1(voltage: number) {
+        //Need to resolve 180 to 100
+
+    }
+
+
+  function sendMessage(message: string): void {
+        serial.writeLine(message)
+    }
+
 }
