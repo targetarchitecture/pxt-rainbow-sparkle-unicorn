@@ -1,6 +1,10 @@
 
 > Open this page at [https://targetarchitecture.github.io/sn4-extension-attempt-1/](https://targetarchitecture.github.io/sn4-extension-attempt-1/)
 
+https://www.dfrobot.com/blog-1145.html
+https://github.com/1010Technologies/pxt-makerbit
+
+
 ## Use as Extension
 
 This repository can be added as an **extension** in MakeCode.

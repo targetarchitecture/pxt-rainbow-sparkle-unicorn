@@ -45,6 +45,33 @@ let MICROBIT_EVT_ANY = 0  // MICROBIT_EVT_ANY
  */
 //% color=#FF6EC7 weight=100 icon="\uf004" block="Rainbow Sparkle Unicorn"
 namespace custom {
+
+    let initialized = false
+    let serialNumber: string
+
+    /**
+     * Add into the start function to initialise the board.
+     * @param value the serial number of the Rainbox Sparkle Unicorn board
+     */
+    //% blockId=TargetArchitecture_initwithserialnumber
+    //% block="Start Rainbow Sparkle Unicorn $SN"
+    //% weight=65
+    export function init(SN: string): void {
+
+        serial.redirect(
+            SerialPin.P0,
+            SerialPin.P1,
+            BaudRate.BaudRate115200
+        )
+        serialNumber = SN
+
+        basic.showIcon(IconNames.Happy)
+
+        initialized = true
+    }
+
+
+
     /**
      * TODO: describe your function here
      * @param n describe parameter here, eg: 5
