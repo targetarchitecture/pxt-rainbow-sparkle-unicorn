@@ -7,10 +7,5 @@ input.onButtonPressed(Button.AB, function () {
 input.onButtonPressed(Button.B, function () {
     serial.writeLine("Z5")
 })
-serial.redirect(
-SerialPin.P1,
-SerialPin.P2,
-BaudRate.BaudRate115200
-)
+RainbowSparkleUnicorn.start("SN4")
 serial.writeLine("Z1,15")
-

@@ -30,6 +30,7 @@ const enum TouchAction {
 
 let MICROBIT_RAINBOW_SPARKLE_UNICORN_TOUCH_SENSOR_TOUCHED_ID = 2148
 let MICROBIT_RAINBOW_SPARKLE_UNICORN_TOUCH_SENSOR_RELEASED_ID = 2149
+let MICROBIT_EVT_ANY = 0  // MICROBIT_EVT_ANY
 
 const enum MyEnum {
     //% block="one"
@@ -37,8 +38,6 @@ const enum MyEnum {
     //% block="two"
     Two
 }
-
-let MICROBIT_EVT_ANY = 0  // MICROBIT_EVT_ANY
 
 /**
  * Custom blocks
@@ -51,7 +50,7 @@ namespace RainbowSparkleUnicorn {
 
     /**
      * Add into the start function to initialise the board.
-     * @param value the serial number of the Rainbox Sparkle Unicorn board
+     * @param the serial number of the Rainbox Sparkle Unicorn board, eg: "SN4"
      */
     //% blockId=TargetArchitecture_initwithserialnumber
     //% block="Start Rainbow Sparkle Unicorn $SN"
