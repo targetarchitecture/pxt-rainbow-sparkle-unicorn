@@ -61,11 +61,10 @@ namespace RainbowSparkleUnicorn {
             SerialPin.P2,
             BaudRate.BaudRate115200
         )
-        serialNumber = SN
+
+        serialNumber = SN        
         initialized = true
     }
-
-
 
     /**
      * TODO: describe your function here

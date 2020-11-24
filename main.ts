@@ -8,3 +8,4 @@ input.onButtonPressed(Button.B, function () {
     serial.writeLine("Z5")
 })
 serial.writeLine("Z1,15")
+RainbowSparkleUnicorn.start("SN4")
