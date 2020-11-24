@@ -13,3 +13,4 @@ SerialPin.P2,
 BaudRate.BaudRate115200
 )
 serial.writeLine("Z1,15")
+

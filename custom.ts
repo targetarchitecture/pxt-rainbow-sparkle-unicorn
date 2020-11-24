@@ -44,7 +44,7 @@ let MICROBIT_EVT_ANY = 0  // MICROBIT_EVT_ANY
  * Custom blocks
  */
 //% color=#FF6EC7 weight=100 icon="\uf004" block="Rainbow Sparkle Unicorn"
-namespace custom {
+namespace RainbowSparkleUnicorn {
 
     let initialized = false
     let serialNumber: string
@@ -56,11 +56,11 @@ namespace custom {
     //% blockId=TargetArchitecture_initwithserialnumber
     //% block="Start Rainbow Sparkle Unicorn $SN"
     //% weight=65
-    export function init(SN: string): void {
+    export function start(SN: string): void {
 
         serial.redirect(
-            SerialPin.P0,
             SerialPin.P1,
+            SerialPin.P2,
             BaudRate.BaudRate115200
         )
         serialNumber = SN
