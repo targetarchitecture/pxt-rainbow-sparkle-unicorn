@@ -53,7 +53,7 @@ namespace RainbowSparkleUnicorn {
      * @param the serial number of the Rainbox Sparkle Unicorn board, eg: "SN4"
      */
     //% blockId=TargetArchitecture_initwithserialnumber
-    //% block="Start Rainbow Sparkle Unicorn $SN"
+    //% block="Start Rainbow Sparkle Unicorn"
     //% weight=65
     export function start(SN: string): void {
 
@@ -63,9 +63,6 @@ namespace RainbowSparkleUnicorn {
             BaudRate.BaudRate115200
         )
         serialNumber = SN
-
-        basic.showIcon(IconNames.Happy)
-
         initialized = true
     }
 
