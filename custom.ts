@@ -128,12 +128,13 @@ namespace RainbowSparkleUnicorn {
      * Set the analog dial to a certain voltage.
      * @param voltage the touch sensor to be checked, eg: 15
      */
-    //% block="Set ADC 1 to $voltage \\%"
+    //% block="Set ADC 1 to $voltage \\volts"
     //% voltage.min=0 voltage.max=30
     export function ADC1(voltage: number) {
  
-       voltage = Math.clamp( 0, 30,voltage)
-               //Need to resolve 0-30 to 0-254
+        voltage = Math.clamp( 0, 30,voltage)
+
+        //Need to resolve 0-30 to 0-254
         let mapped = pins.map(voltage, 0, 30, 0, 254)
 
         sendMessage("X1," + mapped)
@@ -143,12 +144,13 @@ namespace RainbowSparkleUnicorn {
      * Set the analog dial to a certain voltage.
      * @param voltage the touch sensor to be checked, eg: 15
      */
-    //% block="Set ADC 2 to $voltage \\%"
+    //% block="Set ADC 2 to $voltage \\volts"
     //% voltage.min=0 voltage.max=30
     export function ADC2(voltage: number) {
  
-     voltage = Math.clamp( 0, 30,voltage)
-               //Need to resolve 0-30 to 0-254
+        voltage = Math.clamp( 0, 30,voltage)
+        
+        //Need to resolve 0-30 to 0-254
         let mapped = pins.map(voltage, 0, 30, 0, 254)
         
         sendMessage("X2," + mapped)
@@ -157,5 +159,22 @@ namespace RainbowSparkleUnicorn {
   function sendMessage(message: string): void {
         serial.writeLine(message)
     }
+
+
+           //% weight=10 help=servos/set-pulse
+        //% blockId=servoservosetpulse block="set %servo pulse to %micros μs"
+        //% micros.min=500 micros.max=2500
+        //% micros.defl=1500
+        //% servo.fieldEditor="gridpicker"
+        //% servo.fieldOptions.width=220
+        //% servo.fieldOptions.columns=2
+        //% parts=microservo trackArgs=0
+        //% group="Configuration"
+        //% blockGap=8
+        setPulse(micros: number) {
+            micros = micros | 0;
+            micros = Math.clamp(500, 2500, micros);
+            //this.internalSetPulse(micros);
+        }
 
 }
