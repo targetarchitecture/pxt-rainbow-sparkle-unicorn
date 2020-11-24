@@ -1,0 +1,21 @@
+{
+    "name": "SN4 Extension Attempt 1",
+    "description": "",
+    "dependencies": {
+        "core": "*",
+        "microphone": "*"
+    },
+    "files": [
+        "main.blocks",
+        "main.ts",
+        "README.md",
+        "custom.ts"
+    ],
+    "testFiles": [
+        "test.ts"
+    ],
+    "supportedTargets": [
+        "microbit"
+    ],
+    "preferredEditor": "tsprj"
+}
