@@ -4,6 +4,17 @@
  * Read more at https://makecode.microbit.org/blocks/custom
  */
 
+enum Servo {
+    //% block="Servo 0"
+    S0,
+    //% block="Servo 1"
+    S1,
+    //% block="Servo 2"
+    S2,
+    //% block="Servo 3"
+    S3
+}
+
 const enum TouchSensor {
     T1 = 1,
     T2 = 2,
@@ -160,21 +171,16 @@ namespace RainbowSparkleUnicorn {
         serial.writeLine(message)
     }
 
-
-           //% weight=10 help=servos/set-pulse
-        //% blockId=servoservosetpulse block="set %servo pulse to %micros μs"
+        //% block="set %servo pulse to %micros μs"
         //% micros.min=500 micros.max=2500
         //% micros.defl=1500
-        //% servo.fieldEditor="gridpicker"
-        //% servo.fieldOptions.width=220
-        //% servo.fieldOptions.columns=2
-        //% parts=microservo trackArgs=0
-        //% group="Configuration"
-        //% blockGap=8
-        setPulse(micros: number) {
+     export function   setPulse(servo: Servo, micros: number) {
             micros = micros | 0;
             micros = Math.clamp(500, 2500, micros);
             //this.internalSetPulse(micros);
         }
+
+
+        
 
 }
