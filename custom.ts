@@ -6,13 +6,13 @@
 
 enum Servo {
     //% block="Servo 0"
-    S0,
+    S0 = 0,
     //% block="Servo 1"
-    S1,
+    S1 = 1,
     //% block="Servo 2"
-    S2,
+    S2 = 2,
     //% block="Servo 3"
-    S3
+    S3 = 3
 }
 
 const enum TouchSensor {
@@ -171,13 +171,14 @@ namespace RainbowSparkleUnicorn {
         serial.writeLine(message)
     }
 
-        //% block="set %servo pulse to %micros μs"
-        //% micros.min=500 micros.max=2500
-        //% micros.defl=1500
+        //% block="set $servo pulse to %micros μs"
+        //% micros.min=0 micros.max=4096
+        //% micros.defl=250
      export function   setPulse(servo: Servo, micros: number) {
             micros = micros | 0;
-            micros = Math.clamp(500, 2500, micros);
-            //this.internalSetPulse(micros);
+            micros = Math.clamp(0, 4096, micros);       
+
+            sendMessage("V4," + servo + "," + micros);
         }
 
 
