@@ -1,12 +1,14 @@
 input.onButtonPressed(Button.A, function () {
-    serial.writeLine("Z4,3")
-})
-input.onButtonPressed(Button.AB, function () {
-    serial.writeLine("Z9")
-    RainbowSparkleUnicorn.ADC1(35)
+    ADC1voltage += -1
+      ADC1voltage = Math.clamp( 0, 30,ADC1voltage)
+    RainbowSparkleUnicorn.ADC1(ADC1voltage)
 })
 input.onButtonPressed(Button.B, function () {
-    serial.writeLine("Z5")
+    ADC1voltage += 1
+      ADC1voltage = Math.clamp( 0, 30,ADC1voltage)
+    RainbowSparkleUnicorn.ADC1(ADC1voltage)
 })
 RainbowSparkleUnicorn.start("SN4")
-serial.writeLine("Z1,15")
+let ADC1voltage = 15
+let ADC2voltage = 15
+RainbowSparkleUnicorn.ADC1(ADC1voltage)
