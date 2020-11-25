@@ -206,6 +206,30 @@ namespace RainbowSparkleUnicorn {
         }
 
 
-        
+     export      function setVolume (num: number) {
+    let   cmd = "Z1," + num
+    serial.writeLine(cmd)
+}
+
+  export function blink (pin: number, timeOn: number, timeOff: number) {
+     let  cmd = "Y1," + pin + "," + timeOn + "," + timeOff
+    serial.writeLine(cmd)
+}
+  export function playTrack (num: number) {
+   let cmd = "Z4," + num
+    serial.writeLine(cmd)
+}
+  export function breathe (pin: number, timeOn: number, timeOff: number, rise: number, fall: number) {
+     let  cmd = "Y2," + pin + "," + timeOn + "," + rise + "," + fall
+    serial.writeLine(cmd)
+}
+// input.onButtonPressed(Button.B, function () {
+//     breathe(6, 1000, 1000, 500, 500)
+// })
+
+serial.onDataReceived(serial.delimiters(Delimiters.Hash), function () {
+    basic.showString(serial.readUntil(serial.delimiters(Delimiters.Hash)))
+})
+
 
 }

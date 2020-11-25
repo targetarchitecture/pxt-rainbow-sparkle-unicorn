@@ -3,8 +3,7 @@
     "description": "",
     "dependencies": {
         "core": "*",
-        "microphone": "*",
-        "servo": "*"
+        "microphone": "*"
     },
     "files": [
         "main.blocks",
@@ -18,5 +17,5 @@
     "supportedTargets": [
         "microbit"
     ],
-    "preferredEditor": "blocksprj"
+    "preferredEditor": "tsprj"
 }
