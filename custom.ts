@@ -225,16 +225,16 @@ namespace RainbowSparkleUnicorn {
     /**
      * Increase the volume
      */
-    //% block="Up volume"
-    export function VolumeUp() {
+    //% block="Increase volume"
+    export function increaseVolume() {
         sendMessage("Z2")
     }
 
     /**
      * Decrease the volume
      */
-    //% block="Down volume"
-    export function VolumeDown() {
+    //% block="Decrease volume"
+    export function decreaseVolume() {
         sendMessage("Z3")
     }
 
@@ -282,24 +282,12 @@ namespace RainbowSparkleUnicorn {
         // );
     }
 
-    export function increaseVolume() {
-       // return composeSerialCommand(CommandCode.INCREASE_VOLUME, 0x00, 0x00);
-    }
-
-    export function decreaseVolume() {
-       // return composeSerialCommand(CommandCode.DECREASE_VOLUME, 0x00, 0x00);
-    }
-
-    export function repeatTrack(track: number) {
-     //   return composeSerialCommand(CommandCode.REPEAT_TRACK, 0x00, track);
-    }
-
     export function resume() {
-     //   return composeSerialCommand(CommandCode.RESUME, 0x00, 0x00);
+        sendMessage("Z8")
     }
 
     export function pause() {
-      //  return composeSerialCommand(CommandCode.PAUSE, 0x00, 0x00);
+      sendMessage("Z7")
     }
 
 
