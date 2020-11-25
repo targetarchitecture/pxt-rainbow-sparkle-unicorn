@@ -56,7 +56,7 @@ const enum TouchSensor {
     Any = 1 << 30
 }
 
-const enum TouchAction {  
+const enum TouchAction {
     //% block="touched"
     Touched = 0,
     //% block="released"
@@ -97,33 +97,11 @@ namespace RainbowSparkleUnicorn {
             BaudRate.BaudRate115200
         )
 
-        serialNumber = SN        
+        serialNumber = SN
         initialized = true
 
         basic.showIcon(IconNames.Heart)
     }
-
-    /**
-     * TODO: describe your function here
-     * @param n describe parameter here, eg: 5
-     * @param s describe parameter here, eg: "Hello"
-     * @param e describe parameter here
-     */
-    //% block
-    export function foo(n: number, s: string, e: MyEnum): void {
-        // Add code here
-    }
-
-    /**
-     * TODO: describe your function here
-     * @param value describe value here, eg: 5
-     */
-    //% block
-    export function fib(value: number): number {
-        return value <= 1 ? value : fib(value -1) + fib(value - 2);
-    }
-
-
 
     /**
      * Do something when a touch sensor is touched or released.
@@ -142,17 +120,15 @@ namespace RainbowSparkleUnicorn {
         handler: () => void
     ) {
 
-        // initTouchController();
-
         control.onEvent(
             action === TouchAction.Touched
                 ? MICROBIT_RAINBOW_SPARKLE_UNICORN_TOUCH_SENSOR_TOUCHED_ID
                 : MICROBIT_RAINBOW_SPARKLE_UNICORN_TOUCH_SENSOR_RELEASED_ID,
             sensor === TouchSensor.Any ? MICROBIT_EVT_ANY : sensor,
-            () => {    
+            () => {
 
                 //basic.showString(control.eventValue());
-  
+
                 // touchState.eventValue = control.eventValue();
                 handler();
             }
@@ -166,8 +142,8 @@ namespace RainbowSparkleUnicorn {
     //% block="Set ADC 1 to $voltage \\volts"
     //% voltage.min=0 voltage.max=30
     export function ADC1(voltage: number) {
- 
-        voltage = Math.clamp( 0, 30,voltage)
+
+        voltage = Math.clamp(0, 30, voltage)
 
         //Need to resolve 0-30 to 0-254
         let mapped = pins.map(voltage, 0, 30, 0, 254)
@@ -182,74 +158,154 @@ namespace RainbowSparkleUnicorn {
     //% block="Set ADC 2 to $voltage \\volts"
     //% voltage.min=0 voltage.max=30
     export function ADC2(voltage: number) {
- 
-        voltage = Math.clamp( 0, 30,voltage)
-        
+
+        voltage = Math.clamp(0, 30, voltage)
+
         //Need to resolve 0-30 to 0-254
         let mapped = pins.map(voltage, 0, 30, 0, 254)
-        
+
         sendMessage("X2," + mapped)
     }
 
-let sendQueue = [""];
+    let sendQueue = [""];
 
-  function sendMessage(message: string): void {    
-    sendQueue.push(message); 
+    function sendMessage(message: string): void {
+        sendQueue.push(message);
     }
 
 
-    basic.forever(function () {        
-        while(sendQueue.length > 0) {
-       serial.writeLine( sendQueue.pop())  ;   
-   
-         basic.pause(10);
+    basic.forever(function () {
+        while (sendQueue.length > 0) {
+            serial.writeLine(sendQueue.pop());
+
+            basic.pause(10);
         }
-     basic.pause(10);
+        basic.pause(10);
     })
 
-        //% block="set $servo pulse to %micros μs"
-        //% micros.min=0 micros.max=4096
-        //% micros.defl=250
-     export function setPulse(servo: Servo, micros: number) {
-            micros = micros | 0;
-            micros = Math.clamp(0, 4096, micros);       
+    //% block="set $servo pulse to %micros μs"
+    //% micros.min=0 micros.max=4096
+    //% micros.defl=250
+    export function setPulse(servo: Servo, micros: number) {
+        micros = micros | 0;
+        micros = Math.clamp(0, 4096, micros);
 
-            sendMessage("V4," + servo + "," + micros);
-        }
+        sendMessage("V4," + servo + "," + micros);
+    }
 
 
 
     /**
      * Set the volume
-     * @param voltage the touch sensor to be checked, eg: 15
+     * @param volume the touch sensor to be checked, eg: 15
      */
     //% block="Set volume to $volume"
-    //% voltage.min=0 voltage.max=30
-     export function setVolume (volume: number) {
-      sendMessage( "Z1," + volume)
-     }
+    //% volume.min=0 volume.max=30
+    export function setVolume(volume: number) {
+        const clippedVolume = Math.min(Math.max(volume, 0), 30);
+        sendMessage("Z1," + clippedVolume)
+    }
 
-  export function blink (pin: number, timeOn: number, timeOff: number) {
-     let  cmd = "Y1," + pin + "," + timeOn + "," + timeOff
-    serial.writeLine(cmd)
-}
 
-  export function playTrack (num: number) {
-   let cmd = "Z4," + num
-    serial.writeLine(cmd)
-}
+    export function blink(pin: number, timeOn: number, timeOff: number) {
+        let cmd = "Y1," + pin + "," + timeOn + "," + timeOff
+        serial.writeLine(cmd)
+    }
 
-  export function breathe (pin: number, timeOn: number, timeOff: number, rise: number, fall: number) {
-     let  cmd = "Y2," + pin + "," + timeOn + "," + rise + "," + fall
-    serial.writeLine(cmd)
-}
-// input.onButtonPressed(Button.B, function () {
-//     breathe(6, 1000, 1000, 500, 500)
-// })
+    /**
+     * Play a track
+     * @param track the track to play, eg: 1
+     */
+    //% block="Play track $track"
+    //% track.min=0 track.max=2999
+    export function playTrack(track: number) {
+        sendMessage("Z4," + track)
+    }
 
-serial.onDataReceived(serial.delimiters(Delimiters.Hash), function () {
-    basic.showString(serial.readUntil(serial.delimiters(Delimiters.Hash)))
-})
+    /**
+     * Increase the volume
+     */
+    //% block="Up volume"
+    export function VolumeUp() {
+        sendMessage("Z2")
+    }
+
+    /**
+     * Decrease the volume
+     */
+    //% block="Down volume"
+    export function VolumeDown() {
+        sendMessage("Z3")
+    }
+
+    export function breathe(pin: number, timeOn: number, timeOff: number, rise: number, fall: number) {
+        let cmd = "Y2," + pin + "," + timeOn + "," + rise + "," + fall
+        serial.writeLine(cmd)
+    }
+    // input.onButtonPressed(Button.B, function () {
+    //     breathe(6, 1000, 1000, 500, 500)
+    // })
+
+
+    /**
+     * Returns the index of the last MP3 track event.
+     * It could be either a track started or completed event.
+     * This block intended to be used inside of track event handlers.
+     */
+    //% subcategory="MP3"
+    //% blockId="makerbit_mp3_track"
+    //% block="MP3 track"
+    //% weight=39
+    export function mp3Track(): number {
+        return 0; //deviceState ? deviceState.lastTrackEventValue : 1;
+    }
+
+
+    /**
+   * Do something when a MP3 track is completed.
+   * @param handler body code to run when event is raised
+   */
+    //% subcategory="MP3"
+    //% blockId=makerbit_mp3_on_track_completed
+    //% block="on MP3 track completed"
+    //% weight=41
+    export function onMp3TrackCompleted(handler: () => void) {
+        // control.onEvent(
+        //     MICROBIT_MAKERBIT_MP3_TRACK_COMPLETED_ID,
+        //     EventBusValue.MICROBIT_EVT_ANY,
+        //     () => {
+        //         const value = control.eventValue();
+        //         basic.pause(10); // defer call so that the 2nd track completion event can be processed before
+        //         deviceState.lastTrackEventValue = value;
+        //         handler();
+        //     }
+        // );
+    }
+
+    export function increaseVolume() {
+       // return composeSerialCommand(CommandCode.INCREASE_VOLUME, 0x00, 0x00);
+    }
+
+    export function decreaseVolume() {
+       // return composeSerialCommand(CommandCode.DECREASE_VOLUME, 0x00, 0x00);
+    }
+
+    export function repeatTrack(track: number) {
+     //   return composeSerialCommand(CommandCode.REPEAT_TRACK, 0x00, track);
+    }
+
+    export function resume() {
+     //   return composeSerialCommand(CommandCode.RESUME, 0x00, 0x00);
+    }
+
+    export function pause() {
+      //  return composeSerialCommand(CommandCode.PAUSE, 0x00, 0x00);
+    }
+
+
+    serial.onDataReceived(serial.delimiters(Delimiters.Hash), function () {
+        basic.showString(serial.readUntil(serial.delimiters(Delimiters.Hash)))
+    })
 
 
 }

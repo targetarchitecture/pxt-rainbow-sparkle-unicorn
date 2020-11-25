@@ -3,7 +3,8 @@
     "description": "",
     "dependencies": {
         "core": "*",
-        "microphone": "*"
+        "microphone": "*",
+        "MakerBit-MP3": "github:1010technologies/pxt-makerbit-mp3#v1.0.7"
     },
     "files": [
         "main.blocks",

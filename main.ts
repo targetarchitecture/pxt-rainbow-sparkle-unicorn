@@ -11,9 +11,9 @@ input.onButtonPressed(Button.B, function () {
         basic.pause(1000)
     }
 })
-
 let ADC1voltage = 0
 RainbowSparkleUnicorn.start("SN4")
 ADC1voltage = 15
 let ADC2voltage = 15
 RainbowSparkleUnicorn.ADC1(ADC1voltage)
+RainbowSparkleUnicorn.setVolume(20)
