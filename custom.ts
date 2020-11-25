@@ -109,6 +109,7 @@ namespace RainbowSparkleUnicorn {
      * @param action the trigger action
      * @param handler body code to run when the event is raised
      */
+     //% subcategory="Touch"   
     //% blockId=makerbit_touch_on_touch_sensor
     //% block="on touch sensor | %sensor | %action"
     //% sensor.fieldEditor="gridpicker" sensor.fieldOptions.columns=6
@@ -139,6 +140,7 @@ namespace RainbowSparkleUnicorn {
      * Set the analog dial to a certain voltage.
      * @param voltage the touch sensor to be checked, eg: 15
      */
+    //% subcategory="ADC / DAC" 
     //% block="Set ADC 1 to $voltage \\volts"
     //% voltage.min=0 voltage.max=30
     export function ADC1(voltage: number) {
@@ -155,6 +157,7 @@ namespace RainbowSparkleUnicorn {
      * Set the analog dial to a certain voltage.
      * @param voltage the touch sensor to be checked, eg: 15
      */
+    //% subcategory="ADC / DAC" 
     //% block="Set ADC 2 to $voltage \\volts"
     //% voltage.min=0 voltage.max=30
     export function ADC2(voltage: number) {
@@ -183,6 +186,7 @@ namespace RainbowSparkleUnicorn {
         basic.pause(10);
     })
 
+    //% subcategory="Movement" 
     //% block="set $servo pulse to %micros μs"
     //% micros.min=0 micros.max=4096
     //% micros.defl=250
@@ -199,6 +203,7 @@ namespace RainbowSparkleUnicorn {
      * Set the volume
      * @param volume the touch sensor to be checked, eg: 15
      */
+    //% subcategory="Movement"     
     //% block="Set volume to $volume"
     //% volume.min=0 volume.max=30
     export function setVolume(volume: number) {
@@ -216,6 +221,7 @@ namespace RainbowSparkleUnicorn {
      * Play a track
      * @param track the track to play, eg: 1
      */
+    //% subcategory="Sound"     
     //% block="Play track $track"
     //% track.min=0 track.max=2999
     export function playTrack(track: number) {
@@ -225,6 +231,7 @@ namespace RainbowSparkleUnicorn {
     /**
      * Increase the volume
      */
+    //% subcategory="Sound"      
     //% block="Increase volume"
     export function increaseVolume() {
         sendMessage("Z2")
@@ -233,6 +240,7 @@ namespace RainbowSparkleUnicorn {
     /**
      * Decrease the volume
      */
+    //% subcategory="Sound"      
     //% block="Decrease volume"
     export function decreaseVolume() {
         sendMessage("Z3")
@@ -242,6 +250,7 @@ namespace RainbowSparkleUnicorn {
         let cmd = "Y2," + pin + "," + timeOn + "," + rise + "," + fall
         serial.writeLine(cmd)
     }
+
     // input.onButtonPressed(Button.B, function () {
     //     breathe(6, 1000, 1000, 500, 500)
     // })
@@ -252,7 +261,7 @@ namespace RainbowSparkleUnicorn {
      * It could be either a track started or completed event.
      * This block intended to be used inside of track event handlers.
      */
-    //% subcategory="MP3"
+    //% subcategory="Sound"
     //% blockId="makerbit_mp3_track"
     //% block="MP3 track"
     //% weight=39
@@ -265,7 +274,7 @@ namespace RainbowSparkleUnicorn {
    * Do something when a MP3 track is completed.
    * @param handler body code to run when event is raised
    */
-    //% subcategory="MP3"
+    //% subcategory="Sound"
     //% blockId=makerbit_mp3_on_track_completed
     //% block="on MP3 track completed"
     //% weight=41
@@ -282,10 +291,14 @@ namespace RainbowSparkleUnicorn {
         // );
     }
 
+    //% subcategory="Sound"
+    //% block="resume music"
     export function resume() {
         sendMessage("Z8")
     }
 
+    //% subcategory="Sound"
+    //% block="pause music"
     export function pause() {
       sendMessage("Z7")
     }
