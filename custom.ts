@@ -191,14 +191,26 @@ namespace RainbowSparkleUnicorn {
         sendMessage("X2," + mapped)
     }
 
-  function sendMessage(message: string): void {
-        serial.writeLine(message)
+let sendQueue = [""];
+
+  function sendMessage(message: string): void {    
+    sendQueue.push(message); 
     }
+
+
+    basic.forever(function () {        
+        while(sendQueue.length > 0) {
+       serial.writeLine( sendQueue.pop())  ;   
+   
+         basic.pause(10);
+        }
+     basic.pause(10);
+    })
 
         //% block="set $servo pulse to %micros μs"
         //% micros.min=0 micros.max=4096
         //% micros.defl=250
-     export function   setPulse(servo: Servo, micros: number) {
+     export function setPulse(servo: Servo, micros: number) {
             micros = micros | 0;
             micros = Math.clamp(0, 4096, micros);       
 
@@ -206,7 +218,7 @@ namespace RainbowSparkleUnicorn {
         }
 
 
-     export      function setVolume (num: number) {
+     export function setVolume (num: number) {
     let   cmd = "Z1," + num
     serial.writeLine(cmd)
 }
@@ -215,10 +227,12 @@ namespace RainbowSparkleUnicorn {
      let  cmd = "Y1," + pin + "," + timeOn + "," + timeOff
     serial.writeLine(cmd)
 }
+
   export function playTrack (num: number) {
    let cmd = "Z4," + num
     serial.writeLine(cmd)
 }
+
   export function breathe (pin: number, timeOn: number, timeOff: number, rise: number, fall: number) {
      let  cmd = "Y2," + pin + "," + timeOn + "," + rise + "," + fall
     serial.writeLine(cmd)
