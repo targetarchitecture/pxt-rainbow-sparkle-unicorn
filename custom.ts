@@ -125,7 +125,7 @@ namespace RainbowSparkleUnicorn {
 
 
 
-        /**
+    /**
      * Do something when a touch sensor is touched or released.
      * @param sensor the touch sensor to be checked, eg: TouchSensor.T5
      * @param action the trigger action
@@ -218,10 +218,16 @@ let sendQueue = [""];
         }
 
 
-     export function setVolume (num: number) {
-    let   cmd = "Z1," + num
-    serial.writeLine(cmd)
-}
+
+    /**
+     * Set the volume
+     * @param voltage the touch sensor to be checked, eg: 15
+     */
+    //% block="Set volume to $volume"
+    //% voltage.min=0 voltage.max=30
+     export function setVolume (volume: number) {
+      sendMessage( "Z1," + volume)
+     }
 
   export function blink (pin: number, timeOn: number, timeOff: number) {
      let  cmd = "Y1," + pin + "," + timeOn + "," + timeOff
