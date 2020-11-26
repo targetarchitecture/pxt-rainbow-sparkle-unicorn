@@ -1,10 +1,19 @@
 namespace RainbowSparkleUnicorn {
 
+let ADC1Enabled = false;
+let ADC2Enabled = false;
+let Encoder1Enabled = false;
+let Encoder2Enabled = false;
+let ADC1value = 0;
+let ADC2value  = 0;
+let Encoder1value  = 0;
+let Encoder2value  = 0;
+
  /**
      * Set the analog dial to a certain voltage.
      * @param voltage the touch sensor to be checked, eg: 15
      */
-    //% subcategory="ADC / DAC" 
+    //% subcategory="Sliders / Dials" 
     //% block="Set dial 1 to $voltage \\volts"
     //% voltage.min=0 voltage.max=30
     //% weight=65
@@ -22,7 +31,7 @@ namespace RainbowSparkleUnicorn {
      * Set the analog dial to a certain voltage.
      * @param voltage the touch sensor to be checked, eg: 15
      */
-    //% subcategory="ADC / DAC" 
+    //% subcategory="Sliders / Dials" 
     //% block="Set dial 2 to $voltage \\volts"
     //% voltage.min=0 voltage.max=30
     //% weight=65
@@ -40,7 +49,7 @@ namespace RainbowSparkleUnicorn {
      * Set the DAC to a certain value.
      * @value the value of the DAC output, eg: 46
      */
-    //% subcategory="ADC / DAC" 
+    //% subcategory="Expert" 
     //% block="Set DAC 2 to $value"
     //% value.min=0 value.max=255
     export function DAC2(value: number) {
@@ -64,5 +73,20 @@ namespace RainbowSparkleUnicorn {
         sendMessage("X1," + value)
     }
 
+     /**
+     * Start reading values from slider 1.
+     */
+    //% subcategory="Sliders / Dials" 
+    //% block="Start/Stop slider 1 $state"
+    export function startSlider1(state: OnOff) {
+     sendMessage("U1," + state)
+    }
 
+}
+
+enum OnOff {
+    //% block="On"
+    ON = 1,
+    //% block="Off"
+    OFF = 0
 }
