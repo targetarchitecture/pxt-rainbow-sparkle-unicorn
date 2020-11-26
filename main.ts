@@ -16,5 +16,5 @@ RainbowSparkleUnicorn.start("SN4")
 ADC1voltage = 15
 let ADC2voltage = 15
 RainbowSparkleUnicorn.ADC1(ADC1voltage)
-RainbowSparkleUnicorn.setVolume(20)
+RainbowSparkleUnicorn.setVolume(30)
 RainbowSparkleUnicorn.playTrack(1)
