@@ -11,7 +11,12 @@
         "README.md",
         "custom.ts",
         "touch.ts",
-        "ns.ts"
+        "ns.ts",
+        "sound.ts",
+        "movement.ts",
+        "light.ts",
+        "ESP32.ts",
+        "switch.ts"
     ],
     "testFiles": [
         "test.ts"
