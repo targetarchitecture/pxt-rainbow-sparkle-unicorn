@@ -1,9 +1,20 @@
 
 //% groups="['PID', `Filters', 'Behaviors']"
-//% color=#909090 weight=80 icon="\uf277"
-//namespace automation {
 
-//}
+
+
+
+
+let MICROBIT_RAINBOW_SPARKLE_UNICORN_TOUCH_SENSOR_TOUCHED_ID = 2148
+let MICROBIT_RAINBOW_SPARKLE_UNICORN_TOUCH_SENSOR_RELEASED_ID = 2149
+let MICROBIT_EVT_ANY = 0  // MICROBIT_EVT_ANY
+
+// const enum MyEnum {
+//     //% block="one"
+//     One,
+//     //% block="two"
+//     Two
+// }
 
 //% color=#FF6EC7 weight=100 icon="\uf004" block="Rainbow Sparkle Unicorn"
 namespace RainbowSparkleUnicorn {
@@ -43,6 +54,11 @@ namespace RainbowSparkleUnicorn {
             serial.writeLine(sendQueue.pop());
         }
         basic.pause(10);
+    })
+
+
+        serial.onDataReceived(serial.delimiters(Delimiters.Hash), function () {
+        basic.showString(serial.readUntil(serial.delimiters(Delimiters.Hash)))
     })
 
 }
