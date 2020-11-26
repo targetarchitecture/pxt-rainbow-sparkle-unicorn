@@ -77,64 +77,9 @@ const enum MyEnum {
 /**
  * Custom blocks
  */
-//% color=#FF6EC7 weight=100 icon="\uf004" block="Rainbow Sparkle Unicorn"
+
 namespace RainbowSparkleUnicorn {
 
-    let initialized = false
-    let serialNumber: string
-
-    /**
-     * Add into the start function to initialise the board.
-     * @param SN The serial number of the Rainbox Sparkle Unicorn board, eg: "SN4"
-     */
-    //% block="Start Rainbow Sparkle Unicorn $SN"
-    //% weight=65
-    export function start(SN: string): void {
-
-        serial.redirect(
-            SerialPin.P1,
-            SerialPin.P2,
-            BaudRate.BaudRate115200
-        )
-
-        serialNumber = SN
-        initialized = true
-
-        basic.showIcon(IconNames.Heart)
-    }
-
-    /**
-     * Do something when a touch sensor is touched or released.
-     * @param sensor the touch sensor to be checked, eg: TouchSensor.T5
-     * @param action the trigger action
-     * @param handler body code to run when the event is raised
-     */
-     //% subcategory="Touch"   
-    //% blockId=makerbit_touch_on_touch_sensor
-    //% block="on touch sensor | %sensor | %action"
-    //% sensor.fieldEditor="gridpicker" sensor.fieldOptions.columns=6
-    //% sensor.fieldOptions.tooltips="false"
-    //% weight=65
-    export function onTouch(
-        sensor: TouchSensor,
-        action: TouchAction,
-        handler: () => void
-    ) {
-
-        control.onEvent(
-            action === TouchAction.Touched
-                ? MICROBIT_RAINBOW_SPARKLE_UNICORN_TOUCH_SENSOR_TOUCHED_ID
-                : MICROBIT_RAINBOW_SPARKLE_UNICORN_TOUCH_SENSOR_RELEASED_ID,
-            sensor === TouchSensor.Any ? MICROBIT_EVT_ANY : sensor,
-            () => {
-
-                //basic.showString(control.eventValue());
-
-                // touchState.eventValue = control.eventValue();
-                handler();
-            }
-        );
-    }
 
     /**
      * Set the analog dial to a certain voltage.
@@ -170,21 +115,10 @@ namespace RainbowSparkleUnicorn {
         sendMessage("X2," + mapped)
     }
 
-    let sendQueue = [""];
-
-    function sendMessage(message: string): void {
-        sendQueue.push(message);
-    }
 
 
-    basic.forever(function () {
-        while (sendQueue.length > 0) {
-            serial.writeLine(sendQueue.pop());
 
-            basic.pause(10);
-        }
-        basic.pause(10);
-    })
+
 
     //% subcategory="Movement" 
     //% block="set $servo pulse to %micros μs"
@@ -303,10 +237,8 @@ namespace RainbowSparkleUnicorn {
       sendMessage("Z7")
     }
 
-
     serial.onDataReceived(serial.delimiters(Delimiters.Hash), function () {
         basic.showString(serial.readUntil(serial.delimiters(Delimiters.Hash)))
     })
-
 
 }
