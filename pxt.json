@@ -10,7 +10,8 @@
         "main.ts",
         "README.md",
         "custom.ts",
-        "touch.ts"
+        "touch.ts",
+        "ns.ts"
     ],
     "testFiles": [
         "test.ts"
