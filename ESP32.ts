@@ -63,7 +63,7 @@ let Encoder2value  = 0;
      * Set the DAC to a certain value.
      * @value the value of the DAC output, eg: 194
      */
-    //% subcategory="ADC / DAC" 
+    //% subcategory="Expert" 
     //% block="Set DAC 1 to $value"
     //% value.min=0 value.max=255
     export function DAC1(value: number) {
@@ -74,12 +74,23 @@ let Encoder2value  = 0;
     }
 
      /**
-     * Start reading values from slider 1.
+     * Turn slider 1 on/off.
      */
     //% subcategory="Sliders / Dials" 
-    //% block="Start/Stop slider 1 $state"
+    //% block="Turn Slider 1 $state"
+        //% weight=60
     export function startSlider1(state: OnOff) {
      sendMessage("U1," + state)
+    }
+
+     /**
+     * Turn slider 2 on/off.
+     */
+    //% subcategory="Sliders / Dials" 
+    //% block="Turn Slider 2 $state"
+        //% weight=65
+    export function startSlider2(state: OnOff) {
+     sendMessage("U2," + state)
     }
 
 }
