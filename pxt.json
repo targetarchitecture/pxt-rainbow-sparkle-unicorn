@@ -9,7 +9,6 @@
         "main.blocks",
         "main.ts",
         "README.md",
-        "custom.ts",
         "touch.ts",
         "ns.ts",
         "sound.ts",
@@ -24,5 +23,5 @@
     "supportedTargets": [
         "microbit"
     ],
-    "preferredEditor": "tsprj"
+    "preferredEditor": "blocksprj"
 }
