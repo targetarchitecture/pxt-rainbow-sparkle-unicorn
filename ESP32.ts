@@ -5,9 +5,9 @@ namespace RainbowSparkleUnicorn {
      * @param voltage the touch sensor to be checked, eg: 15
      */
     //% subcategory="ADC / DAC" 
-    //% block="Set Dial 1 to $voltage \\volts"
+    //% block="Set dial 1 to $voltage \\volts"
     //% voltage.min=0 voltage.max=30
-    export function Dial1(voltage: number) {
+    export function dial1(voltage: number) {
 
         voltage = Math.clamp(0, 30, voltage)
 
@@ -22,9 +22,9 @@ namespace RainbowSparkleUnicorn {
      * @param voltage the touch sensor to be checked, eg: 15
      */
     //% subcategory="ADC / DAC" 
-    //% block="Set Dial 2 to $voltage \\volts"
+    //% block="Set dial 2 to $voltage \\volts"
     //% voltage.min=0 voltage.max=30
-    export function Dial2(voltage: number) {
+    export function dial2(voltage: number) {
 
         voltage = Math.clamp(0, 30, voltage)
 
@@ -34,33 +34,33 @@ namespace RainbowSparkleUnicorn {
         sendMessage("X2," + mapped)
     }
 
-    /**
-     * Set the DAC to a certain value.
-     * @value the value of the DAC output, eg: 46
-     */
-    //% subcategory="ADC / DAC" 
-    //% block="Set DAC 2 to $value \\volts"
-    //% value.min=0 value.max=255
-    export function DAC2(value: number) {
+    // /**
+    //  * Set the DAC to a certain value.
+    //  * @value the value of the DAC output, eg: 46
+    //  */
+    // //% subcategory="ADC / DAC" 
+    // //% block="Set DAC 2 to $value \\volts"
+    // //% value.min=0 value.max=255
+    // export function DAC2(value: number) {
 
-        value = Math.clamp(0, 255, value)
+    //     value = Math.clamp(0, 255, value)
 
-        sendMessage("X2," + value)
-    }
+    //     sendMessage("X2," + value)
+    // }
 
-       /**
-     * Set the DAC to a certain value.
-     * @value the value of the DAC output, eg: 194
-     */
-    //% subcategory="ADC / DAC" 
-    //% block="Set DAC 1 to $value \\volts"
-    //% value.min=0 value.max=255
-    export function DAC1(value: number) {
+    //    /**
+    //  * Set the DAC to a certain value.
+    //  * @value the value of the DAC output, eg: 194
+    //  */
+    // //% subcategory="ADC / DAC" 
+    // //% block="Set DAC 1 to $value \\volts"
+    // //% value.min=0 value.max=255
+    // export function DAC1(value: number) {
 
-        value = Math.clamp(0, 255, value)
+    //     value = Math.clamp(0, 255, value)
 
-        sendMessage("X1," + value)
-    }
+    //     sendMessage("X1," + value)
+    // }
 
 
 }
