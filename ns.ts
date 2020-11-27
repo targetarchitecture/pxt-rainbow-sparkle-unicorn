@@ -121,7 +121,19 @@ namespace RainbowSparkleUnicorn {
                 control.raiseEvent(RAINBOW_SPARKLE_UNICORN_SWITCH_RELEASED, pin)
             }
         }
-    }
+        else if (message.indexOf("F1") == 0) {
+
+            const pin = parseInt(message[1]);
+
+            control.raiseEvent(RAINBOW_SPARKLE_UNICORN_MOTION_STOPPED,pin);
+       } 
+      else if (message.indexOf("F2") == 0) {
+
+            const pin = parseInt(message[1]);
+
+            control.raiseEvent(RAINBOW_SPARKLE_UNICORN_MOTION_HALTED,pin);
+       }       
+    }    
 
     export let MPR121touched = [false, false, false, false, false, false, false, false, false, false, false, false]
     export let SX1509state = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]

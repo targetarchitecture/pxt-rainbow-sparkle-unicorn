@@ -1,11 +1,11 @@
+control.onEvent(RAINBOW_SPARKLE_UNICORN_SWITCH_PRESSED, EventBusValue.MICROBIT_EVT_ANY, function () {
+    led.toggle(2, 2)
+})
 input.onButtonPressed(Button.A, function () {
     ADC1voltage += -1
     ADC1voltage = Math.clamp( 0, 30,ADC1voltage)
 RainbowSparkleUnicorn.dial1(ADC1voltage)
     RainbowSparkleUnicorn.setPulse(Servo.S14, randint(100, 505))
-})
-RainbowSparkleUnicorn.onTouch(TouchSensor.T5, TouchAction.Touched, function () {
-    led.toggle(1, 0)
 })
 function doSomething () {
     RainbowSparkleUnicorn.setVolume(30)
@@ -26,6 +26,9 @@ input.onButtonPressed(Button.B, function () {
         basic.pause(1000)
     }
 })
+control.onEvent(RAINBOW_SPARKLE_UNICORN_SWITCH_RELEASED, EventBusValue.MICROBIT_EVT_ANY, function () {
+    led.toggle(3, 2)
+})
 control.onEvent(RAINBOW_SPARKLE_UNICORN_ROTARY_TWO_ROTATING, EventBusValue.MICROBIT_EVT_ANY, function () {
     if (control.eventValue() == RainbowSparkleUnicorn.RotaryDirection.Left) {
         track += 1
@@ -36,6 +39,9 @@ control.onEvent(RAINBOW_SPARKLE_UNICORN_ROTARY_TWO_ROTATING, EventBusValue.MICRO
     }
     servoPWM = Math.constrain(servoPWM, 100, 505)
     RainbowSparkleUnicorn.setPulse(Servo.S15, servoPWM)
+})
+control.onEvent(EventBusSource.MICROBIT_ID_BUTTON_A, EventBusValue.MICROBIT_EVT_ANY, function () {
+    led.toggle(2, 2)
 })
 RainbowSparkleUnicorn.onBusyChange(function () {
     if (RainbowSparkleUnicorn.startStop()) {
