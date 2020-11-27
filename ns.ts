@@ -62,8 +62,6 @@ namespace RainbowSparkleUnicorn {
       parseRecievedMessage(msg);
     })
 
-
-
     function parseRecievedMessage(message: string){
             if (message.indexOf("A1") == 0) {
                const value = parseInt( message.split(",")[1]);
@@ -74,16 +72,21 @@ namespace RainbowSparkleUnicorn {
            else if (message.indexOf("B1") == 0) {
             const value = parseInt( message.split(",")[1]);
 
+MPR121touched[value] = true
+
                //raise touch flag EventBusSource              
             control.raiseEvent(RAINBOW_SPARKLE_UNICORN_TOUCH_SENSOR_TOUCHED, value)
             }
            else if (message.indexOf("B2") == 0) {
             const value = parseInt( message.split(",")[1]);
 
+MPR121touched[value] = false
+
                //raise touch flag EventBusSource              
             control.raiseEvent(RAINBOW_SPARKLE_UNICORN_TOUCH_SENSOR_RELEASED, value)
             }
     }
+export let MPR121touched = [false, false, false,false, false, false,false, false, false,false, false, false]
 
 
 export let A1 : boolean

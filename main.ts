@@ -4,6 +4,9 @@ input.onButtonPressed(Button.A, function () {
 RainbowSparkleUnicorn.dial1(ADC1voltage)
     RainbowSparkleUnicorn.setPulse(Servo.S14, randint(100, 505))
 })
+RainbowSparkleUnicorn.onTouch(TouchSensor.T5, TouchAction.Touched, function () {
+    led.toggle(1, 0)
+})
 function doSomething () {
     RainbowSparkleUnicorn.setVolume(30)
     ADC1voltage = 15
