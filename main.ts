@@ -23,11 +23,18 @@ input.onButtonPressed(Button.B, function () {
         basic.pause(1000)
     }
 })
-
 control.onEvent(RAINBOW_SPARKLE_UNICORN_ROTARY_TWO_ROTATING, EventBusValue.MICROBIT_EVT_ANY, function () {
-    led.toggle(0, 0)
+    if (control.eventValue() == RainbowSparkleUnicorn.RotaryDirection.Left) {
+        track += 1
+        servoPWM += -30
+    } else {
+        track += -1
+        servoPWM += 30
+    }
+    servoPWM = Math.constrain(servoPWM, 100, 505)
+    RainbowSparkleUnicorn.setPulse(Servo.S15, servoPWM)
+    RainbowSparkleUnicorn.playTrack(track)
 })
-
 RainbowSparkleUnicorn.onBusyChange(function () {
     if (RainbowSparkleUnicorn.startStop()) {
         basic.showIcon(IconNames.Yes)
@@ -35,8 +42,13 @@ RainbowSparkleUnicorn.onBusyChange(function () {
         basic.showIcon(IconNames.No)
     }
 })
+let track = 0
+let servoPWM = 0
 let ADC1voltage = 0
 RainbowSparkleUnicorn.start("SN4")
 RainbowSparkleUnicorn.setVolume(30)
 RainbowSparkleUnicorn.turnSpinner1(OnOff.ON)
 RainbowSparkleUnicorn.turnSpinner2(OnOff.ON)
+servoPWM = 250
+track = 3
+RainbowSparkleUnicorn.playTrack(track)
