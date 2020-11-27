@@ -15,6 +15,9 @@ function doSomething () {
     RainbowSparkleUnicorn.turnSlider1(OnOff.ON)
     RainbowSparkleUnicorn.turnSpinner1(OnOff.OFF)
 }
+control.onEvent(RAINBOW_SPARKLE_UNICORN_ADC_TWO, EventBusValue.MICROBIT_EVT_ANY, function () {
+    RainbowSparkleUnicorn.setPulse(Servo.S15, Math.map(control.eventValue(), 0, 100, 100, 505))
+})
 input.onButtonPressed(Button.B, function () {
     for (let index = 0; index < 50; index++) {
         RainbowSparkleUnicorn.dial2(randint(0, 30))
@@ -33,7 +36,6 @@ control.onEvent(RAINBOW_SPARKLE_UNICORN_ROTARY_TWO_ROTATING, EventBusValue.MICRO
     }
     servoPWM = Math.constrain(servoPWM, 100, 505)
     RainbowSparkleUnicorn.setPulse(Servo.S15, servoPWM)
-    RainbowSparkleUnicorn.playTrack(track)
 })
 RainbowSparkleUnicorn.onBusyChange(function () {
     if (RainbowSparkleUnicorn.startStop()) {
@@ -42,13 +44,13 @@ RainbowSparkleUnicorn.onBusyChange(function () {
         basic.showIcon(IconNames.No)
     }
 })
-let track = 0
 let servoPWM = 0
 let ADC1voltage = 0
 RainbowSparkleUnicorn.start("SN4")
 RainbowSparkleUnicorn.setVolume(30)
-RainbowSparkleUnicorn.turnSpinner1(OnOff.ON)
-RainbowSparkleUnicorn.turnSpinner2(OnOff.ON)
+RainbowSparkleUnicorn.turnSpinner1(OnOff.OFF)
+RainbowSparkleUnicorn.turnSpinner2(OnOff.OFF)
 servoPWM = 250
-track = 3
-RainbowSparkleUnicorn.playTrack(track)
+let track = 3
+RainbowSparkleUnicorn.turnSlider1(OnOff.OFF)
+RainbowSparkleUnicorn.turnSlider2(OnOff.ON)

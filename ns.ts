@@ -1,17 +1,14 @@
 
-//% groups="['PID', `Filters', 'Behaviors']"
-
-
-
-
-let MICROBIT_EVT_ANY = 0  // MICROBIT_EVT_ANY
+let MICROBIT_EVT_ANY = 0
 let RAINBOW_SPARKLE_UNICORN_TOUCH_SENSOR_TOUCHED = 2108
 let RAINBOW_SPARKLE_UNICORN_TOUCH_SENSOR_RELEASED = 2109
-let RAINBOW_SPARKLE_UNICORN_SOUND_BUSY = 2150  
+let RAINBOW_SPARKLE_UNICORN_SOUND_BUSY = 2150
 let RAINBOW_SPARKLE_UNICORN_ROTARY_ONE_ROTATING = 2151
 let RAINBOW_SPARKLE_UNICORN_ROTARY_TWO_ROTATING = 2152
-
-
+let RAINBOW_SPARKLE_UNICORN_ADC_ONE = 2153
+let RAINBOW_SPARKLE_UNICORN_ADC_TWO = 2154
+let RAINBOW_SPARKLE_UNICORN_SWITCH_PRESSED = 2155
+let RAINBOW_SPARKLE_UNICORN_SWITCH_RELEASED = 2156
 
 //% color=#FF6EC7 weight=100 icon="\uf004" block="Rainbow Sparkle Unicorn"
 namespace RainbowSparkleUnicorn {
@@ -41,7 +38,7 @@ namespace RainbowSparkleUnicorn {
 
     let sendQueue = [""];
 
-   export function sendMessage(message: string): void {
+    export function sendMessage(message: string): void {
         sendQueue.push(message);
     }
 
@@ -54,90 +51,89 @@ namespace RainbowSparkleUnicorn {
     })
 
     serial.onDataReceived(serial.delimiters(Delimiters.Hash), function () {
-      let msg = serial.readUntil(serial.delimiters(Delimiters.Hash));
-      
-      parseRecievedMessage(msg);
+        let msg = serial.readUntil(serial.delimiters(Delimiters.Hash));
+
+        parseRecievedMessage(msg);
     })
 
-    function parseRecievedMessage(message: string){
-            if (message.indexOf("A1") == 0) {
-               const value = parseInt( message.split(",")[1]);
+    function parseRecievedMessage(message: string) {
+        if (message.indexOf("A1") == 0) {
+            const value = parseInt(message.split(",")[1]);
 
-               //raise busy flag EventBusSource              
+            //raise busy flag EventBusSource              
             control.raiseEvent(RAINBOW_SPARKLE_UNICORN_SOUND_BUSY, value)
-            }
-           else if (message.indexOf("B1") == 0) {
-            const value = parseInt( message.split(",")[1]);
+        }
+        else if (message.indexOf("B1") == 0) {
+            const value = parseInt(message.split(",")[1]);
 
-                MPR121touched[value] = true
+            MPR121touched[value] = true
 
-               //raise touch flag EventBusSource              
+            //raise touch flag EventBusSource              
             control.raiseEvent(RAINBOW_SPARKLE_UNICORN_TOUCH_SENSOR_TOUCHED, value)
-            }
-           else if (message.indexOf("B2") == 0) {
-            const value = parseInt( message.split(",")[1]);
+        }
+        else if (message.indexOf("B2") == 0) {
+            const value = parseInt(message.split(",")[1]);
 
-             MPR121touched[value] = false
+            MPR121touched[value] = false
 
-               //raise touch flag EventBusSource              
+            //raise touch flag EventBusSource              
             control.raiseEvent(RAINBOW_SPARKLE_UNICORN_TOUCH_SENSOR_RELEASED, value)
-            }
-           else if (message.indexOf("D1") == 0) {
-            let direction : RotaryDirection
+        }
 
-            if (message.split(",")[1]== "+"){
+        else if (message.indexOf("C1") == 0) {
+            const value = parseInt(message.split(",")[1]);
+
+            //raise touch flag EventBusSource              
+            control.raiseEvent(RAINBOW_SPARKLE_UNICORN_ADC_ONE, value)
+        }
+
+        else if (message.indexOf("C2") == 0) {
+            const value = parseInt(message.split(",")[1]);
+
+            //raise touch flag EventBusSource              
+            control.raiseEvent(RAINBOW_SPARKLE_UNICORN_ADC_TWO, value)
+        }
+
+        else if (message.indexOf("D1") == 0) {
+            let direction: RotaryDirection
+
+            if (message.split(",")[1] == "+") {
                 direction = RotaryDirection.Right;
             } else {
-                direction = RotaryDirection.Left;  
+                direction = RotaryDirection.Left;
             }
 
-               //raise rotation event             
-               control.raiseEvent(RAINBOW_SPARKLE_UNICORN_ROTARY_ONE_ROTATING, 21)
-            }  
-            
-           else if (message.indexOf("D2") == 0) {
+            //raise rotation event             
+            control.raiseEvent(RAINBOW_SPARKLE_UNICORN_ROTARY_ONE_ROTATING, 21)
+        }
+        else if (message.indexOf("D2") == 0) {
 
-           if (message.split(",")[1]== "+"){
-           control.raiseEvent(RAINBOW_SPARKLE_UNICORN_ROTARY_TWO_ROTATING, RotaryDirection.Right)
+            if (message.split(",")[1] == "+") {
+                control.raiseEvent(RAINBOW_SPARKLE_UNICORN_ROTARY_TWO_ROTATING, RotaryDirection.Right)
             } else {
-           control.raiseEvent(RAINBOW_SPARKLE_UNICORN_ROTARY_TWO_ROTATING, RotaryDirection.Left) 
+                control.raiseEvent(RAINBOW_SPARKLE_UNICORN_ROTARY_TWO_ROTATING, RotaryDirection.Left)
             }
 
             //raise rotation event             
             //control.raiseEvent(RAINBOW_SPARKLE_UNICORN_ROTARY_TWO_ROTATING, 22)
-            }                         
+        }
+        else if (message.indexOf("E") == 0) {
+
+            const state = message.split(",")[1];
+            const pin = parseInt(message[0].slice(1));
+
+            if (state == "H") {
+                SX1509state[pin] = 1;
+                control.raiseEvent(RAINBOW_SPARKLE_UNICORN_SWITCH_PRESSED, pin)
+            } else {
+                SX1509state[pin] = 0;
+                control.raiseEvent(RAINBOW_SPARKLE_UNICORN_SWITCH_RELEASED, pin)
+            }
+        }
     }
 
-export let MPR121touched = [false, false, false,false, false, false,false, false, false,false, false, false]
+    export let MPR121touched = [false, false, false, false, false, false, false, false, false, false, false, false]
+    export let SX1509state = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
 
-
-export let A1 : boolean
-let A2
-let A3
-let B1
-let B2
-let C1
-let C2
-let D1
-let D2
-let E1
-let E2
-let E3
-let E4
-let E5
-let E6
-let E7
-let E8
-let E9
-let E10
-let E11
-let E12
-let E13
-let E14
-let E15
-let E16
-let F1
-let F2
-
-
+    export let A1: boolean
 }
