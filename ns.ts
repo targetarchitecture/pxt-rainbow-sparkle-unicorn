@@ -8,13 +8,10 @@ let MICROBIT_EVT_ANY = 0  // MICROBIT_EVT_ANY
 let RAINBOW_SPARKLE_UNICORN_TOUCH_SENSOR_TOUCHED = 2108
 let RAINBOW_SPARKLE_UNICORN_TOUCH_SENSOR_RELEASED = 2109
 let RAINBOW_SPARKLE_UNICORN_SOUND_BUSY = 2150  
+let RAINBOW_SPARKLE_UNICORN_ROTARY_ONE_ROTATING = 2151
+let RAINBOW_SPARKLE_UNICORN_ROTARY_TWO_ROTATING = 2152
 
-// const enum MyEnum {
-//     //% block="one"
-//     One,
-//     //% block="two"
-//     Two
-// }
+
 
 //% color=#FF6EC7 weight=100 icon="\uf004" block="Rainbow Sparkle Unicorn"
 namespace RainbowSparkleUnicorn {
@@ -72,7 +69,7 @@ namespace RainbowSparkleUnicorn {
            else if (message.indexOf("B1") == 0) {
             const value = parseInt( message.split(",")[1]);
 
-MPR121touched[value] = true
+                MPR121touched[value] = true
 
                //raise touch flag EventBusSource              
             control.raiseEvent(RAINBOW_SPARKLE_UNICORN_TOUCH_SENSOR_TOUCHED, value)
@@ -80,12 +77,38 @@ MPR121touched[value] = true
            else if (message.indexOf("B2") == 0) {
             const value = parseInt( message.split(",")[1]);
 
-MPR121touched[value] = false
+             MPR121touched[value] = false
 
                //raise touch flag EventBusSource              
             control.raiseEvent(RAINBOW_SPARKLE_UNICORN_TOUCH_SENSOR_RELEASED, value)
             }
+           else if (message.indexOf("D1") == 0) {
+            let direction : RotaryDirection
+
+            if (message.split(",")[1]== "+"){
+                direction = RotaryDirection.Right;
+            } else {
+                direction = RotaryDirection.Left;  
+            }
+
+            //raise rotation event             
+            control.raiseEvent(RAINBOW_SPARKLE_UNICORN_ROTARY_ONE_ROTATING, direction)
+            }  
+            
+           else if (message.indexOf("D2") == 0) {
+            let direction : RotaryDirection
+
+            if (message.split(",")[1]== "+"){
+                direction = RotaryDirection.Right;
+            } else {
+                direction = RotaryDirection.Left;  
+            }
+
+            //raise rotation event             
+            control.raiseEvent(RAINBOW_SPARKLE_UNICORN_ROTARY_TWO_ROTATING, direction)
+            }                         
     }
+
 export let MPR121touched = [false, false, false,false, false, false,false, false, false,false, false, false]
 
 
