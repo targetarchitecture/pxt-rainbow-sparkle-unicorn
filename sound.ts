@@ -57,39 +57,40 @@ namespace RainbowSparkleUnicorn {
     }
 
     /**
-     * Returns the index of the last MP3 track event.
-     * It could be either a track started or completed event.
-     * This block intended to be used inside of track event handlers.
+     * Returns the state of the player has started
+     * playing a track or stopped.
+     * This block intended to be used inside of start stop event handler.
      */
     //% subcategory="Sound"
-    //% blockId="makerbit_mp3_track"
-    //% block="MP3 track"
+    //% block="track started/stopped"
     //% weight=39
-    export function mp3Track(): number {
-        return 0; //deviceState ? deviceState.lastTrackEventValue : 1;
+    export function startStop(): boolean {
+        return A1;
     }
 
 
 
     /**
-   * Do something when a MP3 track is completed.
+   * Do something when a sound track starts/stops.
    * @param handler body code to run when event is raised
    */
     //% subcategory="Sound"
-    //% blockId=makerbit_mp3_on_track_completed
-    //% block="on MP3 track completed"
+    //% block="on sound track starts/stops"
     //% weight=41
-    export function onMp3TrackCompleted(handler: () => void) {
-        // control.onEvent(
-        //     MICROBIT_MAKERBIT_MP3_TRACK_COMPLETED_ID,
-        //     EventBusValue.MICROBIT_EVT_ANY,
-        //     () => {
-        //         const value = control.eventValue();
-        //         basic.pause(10); // defer call so that the 2nd track completion event can be processed before
-        //         deviceState.lastTrackEventValue = value;
-        //         handler();
-        //     }
-        // );
+    export function onBusyChange(handler: () => void) {
+        control.onEvent(
+           RAINBOW_SPARKLE_UNICORN_SOUND_BUSY,
+            EventBusValue.MICROBIT_EVT_ANY,
+            () => {
+                const value = control.eventValue();
+               if (value == 1){A1=false} else {A1=true};
+
+                handler();
+            }
+        );
     }
+
+
+
 
 }

@@ -13,7 +13,7 @@ let Encoder2value  = 0;
      * Set the analog dial to a certain voltage.
      * @param voltage the touch sensor to be checked, eg: 15
      */
-    //% subcategory="Sliders / Dials" 
+    //% subcategory="Sliders / Dials / Spinners" 
     //% block="Set dial 1 to $voltage \\volts"
     //% voltage.min=0 voltage.max=30
     //% weight=65
@@ -31,7 +31,7 @@ let Encoder2value  = 0;
      * Set the analog dial to a certain voltage.
      * @param voltage the touch sensor to be checked, eg: 15
      */
-    //% subcategory="Sliders / Dials" 
+    //% subcategory="Sliders / Dials / Spinners" 
     //% block="Set dial 2 to $voltage \\volts"
     //% voltage.min=0 voltage.max=30
     //% weight=65
@@ -76,21 +76,41 @@ let Encoder2value  = 0;
      /**
      * Turn slider 1 on/off.
      */
-    //% subcategory="Sliders / Dials" 
+    //% subcategory="Sliders / Dials / Spinners" 
     //% block="Turn Slider 1 $state"
         //% weight=60
-    export function startSlider1(state: OnOff) {
+    export function turnSlider1(state: OnOff) {
      sendMessage("U1," + state)
     }
 
      /**
      * Turn slider 2 on/off.
      */
-    //% subcategory="Sliders / Dials" 
+    //% subcategory="Sliders / Dials / Spinners" 
     //% block="Turn Slider 2 $state"
         //% weight=65
-    export function startSlider2(state: OnOff) {
+    export function turnSlider2(state: OnOff) {
      sendMessage("U2," + state)
+    }
+
+     /**
+     * Turn spinner 1 on/off.
+     */
+    //% subcategory="Sliders / Dials / Spinners" 
+    //% block="Turn Spinner 1 $state"
+    //% weight=70
+    export function turnSpinner1(state: OnOff) {
+     sendMessage("W1," + state)
+    }
+
+     /**
+     * Turn spinner 2 on/off.
+     */
+    //% subcategory="Sliders / Dials / Spinners" 
+    //% block="Turn Spinner 2 $state"
+        //% weight=68
+    export function turnSpinner2(state: OnOff) {
+     sendMessage("W2," + state)
     }
 
 }

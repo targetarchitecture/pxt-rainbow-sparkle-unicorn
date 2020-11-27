@@ -5,11 +5,12 @@ RainbowSparkleUnicorn.dial1(ADC1voltage)
     RainbowSparkleUnicorn.setPulse(Servo.S14, randint(100, 505))
 })
 function doSomething () {
-    ADC1voltage = 15
-    ADC2voltage = 15
-    RainbowSparkleUnicorn.dial1(ADC1voltage)
     RainbowSparkleUnicorn.setVolume(30)
+    ADC1voltage = 15
+    RainbowSparkleUnicorn.dial1(ADC1voltage)
     RainbowSparkleUnicorn.playTrack(1)
+    RainbowSparkleUnicorn.turnSlider1(OnOff.ON)
+    RainbowSparkleUnicorn.turnSpinner1(OnOff.OFF)
 }
 input.onButtonPressed(Button.B, function () {
     for (let index = 0; index < 50; index++) {
@@ -19,7 +20,14 @@ input.onButtonPressed(Button.B, function () {
         basic.pause(1000)
     }
 })
-let ADC2voltage = 0
+RainbowSparkleUnicorn.onBusyChange(function () {
+    if (RainbowSparkleUnicorn.startStop()) {
+        basic.showIcon(IconNames.Yes)
+    } else {
+        basic.showIcon(IconNames.No)
+    }
+})
 let ADC1voltage = 0
 RainbowSparkleUnicorn.start("SN4")
-RainbowSparkleUnicorn.startSlider1(OnOff.ON)
+RainbowSparkleUnicorn.setVolume(30)
+RainbowSparkleUnicorn.playTrack(1)

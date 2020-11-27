@@ -4,10 +4,10 @@
 
 
 
-
-let MICROBIT_RAINBOW_SPARKLE_UNICORN_TOUCH_SENSOR_TOUCHED_ID = 2148
-let MICROBIT_RAINBOW_SPARKLE_UNICORN_TOUCH_SENSOR_RELEASED_ID = 2149
 let MICROBIT_EVT_ANY = 0  // MICROBIT_EVT_ANY
+let RAINBOW_SPARKLE_UNICORN_TOUCH_SENSOR_TOUCHED = 2108
+let RAINBOW_SPARKLE_UNICORN_TOUCH_SENSOR_RELEASED = 2109
+let RAINBOW_SPARKLE_UNICORN_SOUND_BUSY = 2150  
 
 // const enum MyEnum {
 //     //% block="one"
@@ -56,9 +56,63 @@ namespace RainbowSparkleUnicorn {
         basic.pause(10);
     })
 
-
-        serial.onDataReceived(serial.delimiters(Delimiters.Hash), function () {
-        basic.showString(serial.readUntil(serial.delimiters(Delimiters.Hash)))
+    serial.onDataReceived(serial.delimiters(Delimiters.Hash), function () {
+      let msg = serial.readUntil(serial.delimiters(Delimiters.Hash));
+      
+      parseRecievedMessage(msg);
     })
+
+
+
+    function parseRecievedMessage(message: string){
+            if (message.indexOf("A1") == 0) {
+               const value = parseInt( message.split(",")[1]);
+
+               //raise busy flag EventBusSource              
+            control.raiseEvent(RAINBOW_SPARKLE_UNICORN_SOUND_BUSY, value)
+            }
+           else if (message.indexOf("B1") == 0) {
+            const value = parseInt( message.split(",")[1]);
+
+               //raise touch flag EventBusSource              
+            control.raiseEvent(RAINBOW_SPARKLE_UNICORN_TOUCH_SENSOR_TOUCHED, value)
+            }
+           else if (message.indexOf("B2") == 0) {
+            const value = parseInt( message.split(",")[1]);
+
+               //raise touch flag EventBusSource              
+            control.raiseEvent(RAINBOW_SPARKLE_UNICORN_TOUCH_SENSOR_RELEASED, value)
+            }
+    }
+
+
+export let A1 : boolean
+let A2
+let A3
+let B1
+let B2
+let C1
+let C2
+let D1
+let D2
+let E1
+let E2
+let E3
+let E4
+let E5
+let E6
+let E7
+let E8
+let E9
+let E10
+let E11
+let E12
+let E13
+let E14
+let E15
+let E16
+let F1
+let F2
+
 
 }
