@@ -15,7 +15,8 @@
         "movement.ts",
         "light.ts",
         "ESP32.ts",
-        "switch.ts"
+        "switch.ts",
+        "constants.ts"
     ],
     "testFiles": [
         "test.ts"
