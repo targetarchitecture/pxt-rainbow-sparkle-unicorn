@@ -91,21 +91,20 @@ namespace RainbowSparkleUnicorn {
                 direction = RotaryDirection.Left;  
             }
 
-            //raise rotation event             
-            control.raiseEvent(RAINBOW_SPARKLE_UNICORN_ROTARY_ONE_ROTATING, direction)
+               //raise rotation event             
+               control.raiseEvent(RAINBOW_SPARKLE_UNICORN_ROTARY_ONE_ROTATING, 21)
             }  
             
            else if (message.indexOf("D2") == 0) {
-            let direction : RotaryDirection
 
-            if (message.split(",")[1]== "+"){
-                direction = RotaryDirection.Right;
+           if (message.split(",")[1]== "+"){
+           control.raiseEvent(RAINBOW_SPARKLE_UNICORN_ROTARY_TWO_ROTATING, RotaryDirection.Right)
             } else {
-                direction = RotaryDirection.Left;  
+           control.raiseEvent(RAINBOW_SPARKLE_UNICORN_ROTARY_TWO_ROTATING, RotaryDirection.Left) 
             }
 
             //raise rotation event             
-            control.raiseEvent(RAINBOW_SPARKLE_UNICORN_ROTARY_TWO_ROTATING, direction)
+            //control.raiseEvent(RAINBOW_SPARKLE_UNICORN_ROTARY_TWO_ROTATING, 22)
             }                         
     }
 

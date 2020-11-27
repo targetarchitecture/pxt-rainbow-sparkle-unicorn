@@ -135,9 +135,29 @@ let Encoder2value  = 0;
     );
   }
 
-
    let  direction1 : RotaryDirection;
+    let  direction2: RotaryDirection;
 
+      /**
+   * Do something when a rotary switch is turned.
+   * @param handler body code to run when the event is raised
+   */
+  //% subcategory="Sliders / Dials / Spinners"
+  //% block="on Spinner 2 rotating"
+  //% weight=65
+  export function onRotary2Rotation(
+    handler: () => void
+  ) {
+
+    control.onEvent(
+      RAINBOW_SPARKLE_UNICORN_ROTARY_TWO_ROTATING,
+      MICROBIT_EVT_ANY,
+      () => {
+       direction2 = control.eventValue();
+        handler();
+      }
+    );
+  }
 
     /**
      * A function that returns a non-void argument
@@ -147,6 +167,16 @@ let Encoder2value  = 0;
     export function Rotary1Direction(): RotaryDirection {
         return direction1;
     }
+
+        /**
+     * A function that returns a non-void argument
+     * generates a reporter block (oval shape).
+     */
+    //% block
+    export function Rotary2Direction(): RotaryDirection {
+        return direction2;
+    }
+
 
 //     export function onTouch2(
 //     sensor: TouchSensor,
@@ -165,6 +195,23 @@ let Encoder2value  = 0;
 //       }
 //     );
 //   }
+
+
+
+export const enum RotarySensor {
+    //% block="Rotary 1"    
+    ROTARY1 = 1,
+    //% block="Rotary 2"  
+    ROTARY2 = 2
+}
+
+export const enum RotaryDirection {
+     //% block="left"
+     Left = 666,
+     //% block="right"
+     Right = 999
+ }
+
 }
 
 enum OnOff {
@@ -173,17 +220,3 @@ enum OnOff {
     //% block="Off"
     OFF = 0
 }
-
-const enum RotarySensor {
-    //% block="Rotary 1"    
-    ROTARY1 = 1,
-    //% block="Rotary 2"  
-    ROTARY2 = 2
-}
-
-const enum RotaryDirection {
-     //% block="left"
-     Left = 666,
-     //% block="right"
-    Right = 999
- }

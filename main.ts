@@ -23,9 +23,11 @@ input.onButtonPressed(Button.B, function () {
         basic.pause(1000)
     }
 })
-RainbowSparkleUnicorn.onRotary1Rotation(function () {
-	
+
+control.onEvent(RAINBOW_SPARKLE_UNICORN_ROTARY_TWO_ROTATING, EventBusValue.MICROBIT_EVT_ANY, function () {
+    led.toggle(0, 0)
 })
+
 RainbowSparkleUnicorn.onBusyChange(function () {
     if (RainbowSparkleUnicorn.startStop()) {
         basic.showIcon(IconNames.Yes)
@@ -36,3 +38,5 @@ RainbowSparkleUnicorn.onBusyChange(function () {
 let ADC1voltage = 0
 RainbowSparkleUnicorn.start("SN4")
 RainbowSparkleUnicorn.setVolume(30)
+RainbowSparkleUnicorn.turnSpinner1(OnOff.ON)
+RainbowSparkleUnicorn.turnSpinner2(OnOff.ON)
