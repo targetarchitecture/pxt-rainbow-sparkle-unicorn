@@ -1,7 +1,7 @@
 namespace RainbowSparkleUnicorn {
 
     //% subcategory="Light" 
-    //% block="blink light on pin $pin, time on $timeOn, time off $timeoff"    
+    //% block="blink light on pin $pin, time on $timeOn, time off $timeOff"    
     export function blink(pin: Blinkable, timeOn: number, timeOff: number) {
        sendMessage("Y1," + pin + "," + timeOn + "," + timeOff)
     }
@@ -14,14 +14,14 @@ namespace RainbowSparkleUnicorn {
 
     //% subcategory="Light" 
     //% block="turn off light on pin $pin"
-    export function turnOff(pin: Breathable) {
-      sendMessage("Y3,0")
+    export function turnOff(pin: Blinkable) {
+      sendMessage("Y3," + pin + ",0")
     } 
 
     //% subcategory="Light" 
     //% block="turn on light on pin $pin"
-    export function turnOn(pin: Breathable) {
-      sendMessage("Y3,1")
+    export function turnOn(pin: Blinkable) {
+      sendMessage("Y3," + pin + ",1")
     }           
 }
 

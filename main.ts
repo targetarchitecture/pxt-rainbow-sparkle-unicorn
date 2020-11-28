@@ -1,4 +1,5 @@
 input.onButtonPressed(Button.B, function () {
+    RainbowSparkleUnicorn.turnOff(Blinkable.Blinkable4)
     for (let index = 0; index < 50; index++) {
         RainbowSparkleUnicorn.dial1(randint(0, 30))
         basic.pause(1000)
