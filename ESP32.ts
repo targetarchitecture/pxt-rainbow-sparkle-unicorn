@@ -160,21 +160,19 @@ let Encoder2value  = 0;
   }
 
     /**
-     * A function that returns a non-void argument
-     * generates a reporter block (oval shape).
+     * A function that returns spinner one direction
      */
-        //% subcategory="Sliders / Dials / Spinners" 
-    //% block
+    //% subcategory="Sliders / Dials / Spinners" 
+    //% block="Spinner one direction" 
     export function Rotary1Direction(): RotaryDirection {
         return direction1;
     }
 
-        /**
-     * A function that returns a non-void argument
-     * generates a reporter block (oval shape).
+    /**
+     * A function that returns spinner two direction
      */
-        //% subcategory="Sliders / Dials / Spinners" 
-    //% block
+    //% subcategory="Sliders / Dials / Spinners" 
+    //% block="Spinner two direction" 
     export function Rotary2Direction(): RotaryDirection {
         return direction2;
     }
@@ -198,6 +196,24 @@ let Encoder2value  = 0;
 //     );
 //   }
 
+
+    /**
+     * A function that returns slider one value
+     */
+    //% subcategory="Sliders / Dials / Spinners" 
+    //% block="Slider one value" 
+    export function Slider1(): number {
+        return ADC1value;
+    }
+
+    /**
+     * A function that returns slider two value
+     */
+    //% subcategory="Sliders / Dials / Spinners" 
+    //% block="Slider two value" 
+    export function Slider2(): number {
+        return ADC2value;
+    }
 
 
 export const enum RotarySensor {
