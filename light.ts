@@ -22,7 +22,51 @@ namespace RainbowSparkleUnicorn {
     //% block="turn on light on pin $pin"
     export function turnOn(pin: Blinkable) {
       sendMessage("Y3," + pin + ",1")
-    }           
+    }          
+    
+    //% subcategory="Light" 
+    //% block="turn off all lights"
+    export function turnAllOff() {
+        sendMessage("Y3,0,0")        
+        sendMessage("Y3,1,0")
+        sendMessage("Y3,2,0")
+        sendMessage("Y3,3,0")
+        sendMessage("Y3,4,0")
+        sendMessage("Y3,5,0")
+        sendMessage("Y3,6,0")
+        sendMessage("Y3,7,0")
+        sendMessage("Y3,8,0")
+        sendMessage("Y3,9,0")
+        sendMessage("Y3,10,0")
+        sendMessage("Y3,11,0")                
+        sendMessage("Y3,12,0")
+        sendMessage("Y3,13,0")    
+        sendMessage("Y3,14,0")
+        sendMessage("Y3,15,0")            
+    } 
+
+    //% subcategory="Expert" 
+    //% block="turn off all lights"
+    export function turnAllOn() {
+        sendMessage("Y3,0,1")        
+        sendMessage("Y3,1,1")
+        sendMessage("Y3,2,1")
+        sendMessage("Y3,3,1")
+        sendMessage("Y3,4,1")
+        sendMessage("Y3,5,1")
+        sendMessage("Y3,6,1")
+        sendMessage("Y3,7,1")
+        sendMessage("Y3,8,1")
+        sendMessage("Y3,9,1")
+        sendMessage("Y3,10,1")
+        sendMessage("Y3,11,1")                
+        sendMessage("Y3,12,1")
+        sendMessage("Y3,13,1")    
+        sendMessage("Y3,14,1")
+        sendMessage("Y3,15,1")            
+    } 
+
+
 }
 
 enum Breathable {
