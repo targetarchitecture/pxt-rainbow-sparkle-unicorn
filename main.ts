@@ -20,9 +20,8 @@ control.onEvent(RAINBOW_SPARKLE_UNICORN_ADC_TWO, EventBusValue.MICROBIT_EVT_ANY,
 })
 input.onButtonPressed(Button.B, function () {
     for (let index = 0; index < 50; index++) {
-        RainbowSparkleUnicorn.dial2(randint(0, 30))
         RainbowSparkleUnicorn.dial1(randint(0, 30))
-        RainbowSparkleUnicorn.setPulse(Servo.S14, randint(100, 505))
+        RainbowSparkleUnicorn.setPulse(Servo.S15, randint(100, 505))
         basic.pause(1000)
     }
 })
