@@ -135,7 +135,7 @@ let Encoder2value  = 0;
     );
   }
 
-   let  direction1 : RotaryDirection;
+    let  direction1 : RotaryDirection;
     let  direction2: RotaryDirection;
 
       /**
@@ -163,6 +163,7 @@ let Encoder2value  = 0;
      * A function that returns a non-void argument
      * generates a reporter block (oval shape).
      */
+        //% subcategory="Sliders / Dials / Spinners" 
     //% block
     export function Rotary1Direction(): RotaryDirection {
         return direction1;
@@ -172,6 +173,7 @@ let Encoder2value  = 0;
      * A function that returns a non-void argument
      * generates a reporter block (oval shape).
      */
+        //% subcategory="Sliders / Dials / Spinners" 
     //% block
     export function Rotary2Direction(): RotaryDirection {
         return direction2;

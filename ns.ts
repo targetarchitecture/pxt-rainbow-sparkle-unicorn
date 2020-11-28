@@ -52,7 +52,7 @@ namespace RainbowSparkleUnicorn {
             const value = parseInt(message.split(",")[1]);
 
             //raise busy flag EventBusSource              
-            control.raiseEvent(RAINBOW_SPARKLE_UNICORN_SOUND_BUSY, value)
+      control.raiseEvent(RAINBOW_SPARKLE_UNICORN_SOUND_BUSY, value)
         }
         else if (message.indexOf("B1") == 0) {
             const value = parseInt(message.split(",")[1]);
@@ -60,7 +60,7 @@ namespace RainbowSparkleUnicorn {
             MPR121touched[value] = true
 
             //raise touch flag EventBusSource              
-            control.raiseEvent(RAINBOW_SPARKLE_UNICORN_TOUCH_SENSOR_TOUCHED, value)
+       control.raiseEvent(RAINBOW_SPARKLE_UNICORN_TOUCH_SENSOR_TOUCHED, value)
         }
         else if (message.indexOf("B2") == 0) {
             const value = parseInt(message.split(",")[1]);
@@ -68,21 +68,21 @@ namespace RainbowSparkleUnicorn {
             MPR121touched[value] = false
 
             //raise touch flag EventBusSource              
-            control.raiseEvent(RAINBOW_SPARKLE_UNICORN_TOUCH_SENSOR_RELEASED, value)
+    control.raiseEvent(RAINBOW_SPARKLE_UNICORN_TOUCH_SENSOR_RELEASED, value)
         }
 
         else if (message.indexOf("C1") == 0) {
             const value = parseInt(message.split(",")[1]);
 
             //raise touch flag EventBusSource              
-            control.raiseEvent(RAINBOW_SPARKLE_UNICORN_ADC_ONE, value)
+control.raiseEvent(RAINBOW_SPARKLE_UNICORN_ADC_ONE, value)
         }
 
         else if (message.indexOf("C2") == 0) {
             const value = parseInt(message.split(",")[1]);
 
             //raise touch flag EventBusSource              
-            control.raiseEvent(RAINBOW_SPARKLE_UNICORN_ADC_TWO, value)
+       control.raiseEvent(RAINBOW_SPARKLE_UNICORN_ADC_TWO, value)
         }
 
         else if (message.indexOf("D1") == 0) {
@@ -95,18 +95,16 @@ namespace RainbowSparkleUnicorn {
             }
 
             //raise rotation event             
-            control.raiseEvent(RAINBOW_SPARKLE_UNICORN_ROTARY_ONE_ROTATING, 21)
+      control.raiseEvent(RAINBOW_SPARKLE_UNICORN_ROTARY_ONE_ROTATING, 21)
         }
         else if (message.indexOf("D2") == 0) {
 
             if (message.split(",")[1] == "+") {
-                control.raiseEvent(RAINBOW_SPARKLE_UNICORN_ROTARY_TWO_ROTATING, RotaryDirection.Right)
+          control.raiseEvent(RAINBOW_SPARKLE_UNICORN_ROTARY_TWO_ROTATING, RotaryDirection.Right)
             } else {
-                control.raiseEvent(RAINBOW_SPARKLE_UNICORN_ROTARY_TWO_ROTATING, RotaryDirection.Left)
+         control.raiseEvent(RAINBOW_SPARKLE_UNICORN_ROTARY_TWO_ROTATING, RotaryDirection.Left)
             }
 
-            //raise rotation event             
-            //control.raiseEvent(RAINBOW_SPARKLE_UNICORN_ROTARY_TWO_ROTATING, 22)
         }
         else if (message.indexOf("E") == 0) {
 
@@ -115,23 +113,23 @@ namespace RainbowSparkleUnicorn {
 
             if (state == "H") {
                 SX1509state[pin] = 1;
-                control.raiseEvent(RAINBOW_SPARKLE_UNICORN_SWITCH_PRESSED, pin)
+           control.raiseEvent(RAINBOW_SPARKLE_UNICORN_SWITCH_PRESSED, pin)
             } else {
                 SX1509state[pin] = 0;
-                control.raiseEvent(RAINBOW_SPARKLE_UNICORN_SWITCH_RELEASED, pin)
+            control.raiseEvent(RAINBOW_SPARKLE_UNICORN_SWITCH_RELEASED, pin)
             }
         }
         else if (message.indexOf("F1") == 0) {
 
             const pin = parseInt(message[1]);
 
-            control.raiseEvent(RAINBOW_SPARKLE_UNICORN_MOTION_STOPPED,pin);
+         control.raiseEvent(RAINBOW_SPARKLE_UNICORN_MOTION_STOPPED,pin);
        } 
       else if (message.indexOf("F2") == 0) {
 
             const pin = parseInt(message[1]);
 
-            control.raiseEvent(RAINBOW_SPARKLE_UNICORN_MOTION_HALTED,pin);
+        control.raiseEvent(RAINBOW_SPARKLE_UNICORN_MOTION_HALTED,pin);
        }       
     }    
 
