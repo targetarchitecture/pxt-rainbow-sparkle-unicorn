@@ -1,17 +1,18 @@
 namespace RainbowSparkleUnicorn {
 
-    basic.forever(function () {
-        if (sendQueue.length > 0) {
-            serial.writeLine(sendQueue.pop());
-        }
-        basic.pause(10);
-    })
+//     basic.forever(function () {
+//         if (sendQueue.length > 0) {
+//             serial.writeLine(sendQueue.pop());
+//         }
+//         basic.pause(10);
+//     })
 
- let sendQueue = [""];
+//    let sendQueue = [""];
 
     export function sendMessage(message: string): void {
-        sendQueue.push(message);
-    }
+        //sendQueue.push(message);
+        serial.writeLine(message);
+     }
 
     serial.onDataReceived(serial.delimiters(Delimiters.Hash), function () {
         let msg = serial.readUntil(serial.delimiters(Delimiters.Hash));
@@ -87,7 +88,7 @@ control.raiseEvent(RAINBOW_SPARKLE_UNICORN_ADC_ONE, value)
                 control.raiseEvent(RAINBOW_SPARKLE_UNICORN_SWITCH_RELEASED, pin)
             }
         }
-        else if (message.indexOf("F1") == 0) {
+      else if (message.indexOf("F1") == 0) {
 
             const pin = parseInt(message[1]);
 

@@ -20,6 +20,6 @@ namespace RainbowSparkleUnicorn {
   //  export let MPR121touched = [false, false, false, false, false, false, false, false, false, false, false, false]
    // export let SX1509state = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
 
-  export let A1: boolean
+  //export let A1: boolean
 
 }

@@ -4,14 +4,11 @@ namespace RainbowSparkleUnicorn {
     //% subcategory="Movement" 
     //% block="set $servo pulse to %micros μs"
     //% micros.min=0 micros.max=4096
-    //% micros.defl=250
     export function setPulse(servo: Servo, micros: number) {
-        micros = micros | 0;
         micros = Math.clamp(0, 4096, micros);
 
         sendMessage("V4," + servo + "," + micros);
     }
-
 }
 
 enum Servo {

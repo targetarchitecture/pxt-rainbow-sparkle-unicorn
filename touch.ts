@@ -1,5 +1,8 @@
 namespace RainbowSparkleUnicorn {
 
+export let MPR121touched = [false, false, false, false, false, false, false, false, false, false, false, false]
+
+
       /**
    * Do something when a touch sensor is touched or released.
    * @param sensor the touch sensor to be checked, eg: TouchSensor.T5
@@ -29,10 +32,6 @@ namespace RainbowSparkleUnicorn {
       }
     );
   }
-
-
-
-    export let MPR121touched = [false, false, false, false, false, false, false, false, false, false, false, false]
 
 
 const enum TouchSensor {
