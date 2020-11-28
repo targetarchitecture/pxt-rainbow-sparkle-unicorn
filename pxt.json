@@ -16,7 +16,8 @@
         "light.ts",
         "ESP32.ts",
         "switch.ts",
-        "constants.ts"
+        "constants.ts",
+        "UART.ts"
     ],
     "testFiles": [
         "test.ts"
@@ -24,5 +25,5 @@
     "supportedTargets": [
         "microbit"
     ],
-    "preferredEditor": "blocksprj"
+    "preferredEditor": "tsprj"
 }
