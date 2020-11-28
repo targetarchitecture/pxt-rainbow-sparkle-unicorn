@@ -44,17 +44,15 @@ namespace RainbowSparkleUnicorn {
         }
 
         else if (message.indexOf("C1") == 0) {
-            const value = parseInt(message.split(",")[1]);
-
-            //raise touch flag EventBusSource              
-control.raiseEvent(RAINBOW_SPARKLE_UNICORN_ADC_ONE, value)
+         ADC1value = parseInt(message.split(",")[1]);
+          
+         control.raiseEvent(RAINBOW_SPARKLE_UNICORN_ADC_ONE, ADC1value)
         }
 
         else if (message.indexOf("C2") == 0) {
-            const value = parseInt(message.split(",")[1]);
+           ADC2value = parseInt(message.split(",")[1]);
 
-            //raise touch flag EventBusSource              
-       control.raiseEvent(RAINBOW_SPARKLE_UNICORN_ADC_TWO, value)
+           control.raiseEvent(RAINBOW_SPARKLE_UNICORN_ADC_TWO, ADC2value)
         }
 
         else if (message.indexOf("D1") == 0) {

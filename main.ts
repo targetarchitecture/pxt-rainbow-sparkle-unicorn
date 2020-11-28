@@ -1,3 +1,7 @@
+input.onButtonPressed(Button.A, function () {
+    RainbowSparkleUnicorn.turnAllOff()
+    RainbowSparkleUnicorn.turnAllOn()
+})
 input.onButtonPressed(Button.B, function () {
     RainbowSparkleUnicorn.turnOff(Blinkable.Blinkable4)
     RainbowSparkleUnicorn.blink(Blinkable.Blinkable8, 2000, 2000)
@@ -18,3 +22,4 @@ Breathable.Breathable4,
 100,
 100
 )
+RainbowSparkleUnicorn.turnSlider1(OnOff.ON)

@@ -45,8 +45,12 @@ namespace RainbowSparkleUnicorn {
         sendMessage("Y3,15,0")            
     } 
 
+/**
+    turn on all lights
+    Turn off all lights must be called before.
+**/
     //% subcategory="Expert" 
-    //% block="turn off all lights"
+    //% block="turn on all lights."
     export function turnAllOn() {
         sendMessage("Y3,0,1")        
         sendMessage("Y3,1,1")

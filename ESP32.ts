@@ -4,8 +4,8 @@ let ADC1Enabled = false;
 let ADC2Enabled = false;
 let Encoder1Enabled = false;
 let Encoder2Enabled = false;
-let ADC1value = 0;
-let ADC2value  = 0;
+export let ADC1value = 0;
+export let ADC2value = 0;
 let Encoder1value  = 0;
 let Encoder2value  = 0;
 
