@@ -22,9 +22,8 @@ namespace RainbowSparkleUnicorn {
     function parseRecievedMessage(message: string) {
         if (message.indexOf("A1") == 0) {
             const value = parseInt(message.split(",")[1]);
-
-            //raise busy flag EventBusSource              
-      control.raiseEvent(RAINBOW_SPARKLE_UNICORN_SOUND_BUSY, value)
+           
+            control.raiseEvent(RAINBOW_SPARKLE_UNICORN_SOUND_BUSY, value)
         }
         else if (message.indexOf("B1") == 0) {
             const value = parseInt(message.split(",")[1]);
@@ -58,16 +57,13 @@ control.raiseEvent(RAINBOW_SPARKLE_UNICORN_ADC_ONE, value)
         }
 
         else if (message.indexOf("D1") == 0) {
-            let direction: RotaryDirection
 
             if (message.split(",")[1] == "+") {
-                direction = RotaryDirection.Right;
+          control.raiseEvent(RAINBOW_SPARKLE_UNICORN_ROTARY_ONE_ROTATING, RotaryDirection.Right)
             } else {
-                direction = RotaryDirection.Left;
+         control.raiseEvent(RAINBOW_SPARKLE_UNICORN_ROTARY_ONE_ROTATING, RotaryDirection.Left)
             }
 
-            //raise rotation event             
-      control.raiseEvent(RAINBOW_SPARKLE_UNICORN_ROTARY_ONE_ROTATING, 21)
         }
         else if (message.indexOf("D2") == 0) {
 
@@ -85,10 +81,10 @@ control.raiseEvent(RAINBOW_SPARKLE_UNICORN_ADC_ONE, value)
 
             if (state == "H") {
                 SX1509state[pin] = 1;
-           control.raiseEvent(RAINBOW_SPARKLE_UNICORN_SWITCH_PRESSED, pin)
+                control.raiseEvent(RAINBOW_SPARKLE_UNICORN_SWITCH_PRESSED, pin)
             } else {
                 SX1509state[pin] = 0;
-            control.raiseEvent(RAINBOW_SPARKLE_UNICORN_SWITCH_RELEASED, pin)
+                control.raiseEvent(RAINBOW_SPARKLE_UNICORN_SWITCH_RELEASED, pin)
             }
         }
         else if (message.indexOf("F1") == 0) {
