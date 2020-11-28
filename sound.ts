@@ -65,10 +65,11 @@ namespace RainbowSparkleUnicorn {
     //% block="track started/stopped"
     //% weight=39
     export function startStop(): boolean {
-        return A1;
+        return dfplayerBusy;
     }
 
 
+  export let dfplayerBusy: boolean
 
     /**
    * Do something when a sound track starts/stops.
@@ -83,7 +84,7 @@ namespace RainbowSparkleUnicorn {
             EventBusValue.MICROBIT_EVT_ANY,
             () => {
                 const value = control.eventValue();
-               if (value == 1){A1=false} else {A1=true};
+               if (value == 1){dfplayerBusy=false} else {dfplayerBusy=true};
 
                 handler();
             }

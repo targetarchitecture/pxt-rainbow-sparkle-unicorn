@@ -22,7 +22,7 @@ input.onButtonPressed(Button.B, function () {
     for (let index = 0; index < 50; index++) {
         RainbowSparkleUnicorn.dial1(randint(0, 30))
         RainbowSparkleUnicorn.setPulse(Servo.S15, randint(100, 505))
-        basic.pause(1000)
+        basic.pause(100)
     }
 })
 control.onEvent(RAINBOW_SPARKLE_UNICORN_SWITCH_RELEASED, EventBusValue.MICROBIT_EVT_ANY, function () {
@@ -51,11 +51,7 @@ RainbowSparkleUnicorn.onBusyChange(function () {
 })
 let servoPWM = 0
 let ADC1voltage = 0
-RainbowSparkleUnicorn.start("SN4")
+RainbowSparkleUnicorn.start()
 RainbowSparkleUnicorn.setVolume(30)
-RainbowSparkleUnicorn.turnSpinner1(OnOff.OFF)
-RainbowSparkleUnicorn.turnSpinner2(OnOff.OFF)
 servoPWM = 250
 let track = 3
-RainbowSparkleUnicorn.turnSlider1(OnOff.OFF)
-RainbowSparkleUnicorn.turnSlider2(OnOff.ON)

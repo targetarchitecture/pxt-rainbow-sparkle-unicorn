@@ -29,7 +29,10 @@ namespace RainbowSparkleUnicorn {
       }
     );
   }
-}
+
+
+
+    export let MPR121touched = [false, false, false, false, false, false, false, false, false, false, false, false]
 
 
 const enum TouchSensor {
@@ -54,4 +57,6 @@ const enum TouchAction {
     Touched = 0,
     //% block="released"
     Released = 1,
+}
+
 }
