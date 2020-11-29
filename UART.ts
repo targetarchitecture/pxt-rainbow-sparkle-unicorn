@@ -30,17 +30,15 @@ namespace RainbowSparkleUnicorn {
             const value = parseInt(message.split(",")[1]);
 
             MPR121touched[value] = true
-
-            //raise touch flag EventBusSource              
+           
        control.raiseEvent(RAINBOW_SPARKLE_UNICORN_TOUCH_SENSOR_TOUCHED, value)
         }
         else if (message.indexOf("B2") == 0) {
             const value = parseInt(message.split(",")[1]);
 
             MPR121touched[value] = false
-
-            //raise touch flag EventBusSource              
-    control.raiseEvent(RAINBOW_SPARKLE_UNICORN_TOUCH_SENSOR_RELEASED, value)
+            
+            control.raiseEvent(RAINBOW_SPARKLE_UNICORN_TOUCH_SENSOR_RELEASED, value)
         }
 
         else if (message.indexOf("C1") == 0) {
@@ -62,7 +60,6 @@ namespace RainbowSparkleUnicorn {
             } else {
          control.raiseEvent(RAINBOW_SPARKLE_UNICORN_ROTARY_ONE_ROTATING, RotaryDirection.Left)
             }
-
         }
         else if (message.indexOf("D2") == 0) {
 
@@ -71,13 +68,11 @@ namespace RainbowSparkleUnicorn {
             } else {
          control.raiseEvent(RAINBOW_SPARKLE_UNICORN_ROTARY_TWO_ROTATING, RotaryDirection.Left)
             }
-
         }
         else if (message.indexOf("E") == 0) {
 
             const state = parseInt(message.split(",")[1]);
             const pin = parseInt(message[0].slice(1));
-
 
             if (state == 0) {
                 control.raiseEvent(RAINBOW_SPARKLE_UNICORN_SWITCH_PRESSED, pin)

@@ -10,7 +10,6 @@ export let MPR121touched = [false, false, false, false, false, false, false, fal
    * @param handler body code to run when the event is raised
    */
   //% subcategory="Touch"
-  //% blockId=makerbit_touch_on_touch_sensor
   //% block="touch sensor | %sensor | %action"
   //% sensor.fieldEditor="gridpicker" sensor.fieldOptions.columns=6
   //% sensor.fieldOptions.tooltips="false"
@@ -31,10 +30,10 @@ export let MPR121touched = [false, false, false, false, false, false, false, fal
         handler();
       }
     );
-  }
+  }    
 
 
-const enum TouchSensor {
+export const enum TouchSensor {
     T1 = 1,
     T2 = 2,
     T3 = 3,
@@ -51,7 +50,7 @@ const enum TouchSensor {
     Any = 1 << 30
 }
 
-const enum TouchAction {
+export const enum TouchAction {
     //% block="touched"
     Touched = 0,
     //% block="released"
