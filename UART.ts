@@ -1,16 +1,6 @@
 namespace RainbowSparkleUnicorn {
 
-//     basic.forever(function () {
-//         if (sendQueue.length > 0) {
-//             serial.writeLine(sendQueue.pop());
-//         }
-//         basic.pause(10);
-//     })
-
-//    let sendQueue = [""];
-
     export function sendMessage(message: string): void {
-        //sendQueue.push(message);
         serial.writeLine(message);
      }
 
@@ -27,32 +17,29 @@ namespace RainbowSparkleUnicorn {
             control.raiseEvent(RAINBOW_SPARKLE_UNICORN_SOUND_BUSY, value)
         }
         else if (message.indexOf("B1") == 0) {
-            const value = parseInt(message.split(",")[1]);
+            const pin = parseInt(message.split(",")[1]);
 
-            MPR121touched[value] = true
+            MPR121touched[pin] = true
            
-       control.raiseEvent(RAINBOW_SPARKLE_UNICORN_TOUCH_SENSOR_TOUCHED, value)
+            control.raiseEvent(RAINBOW_SPARKLE_UNICORN_TOUCH_SENSOR_TOUCHED, pin)
         }
         else if (message.indexOf("B2") == 0) {
-            const value = parseInt(message.split(",")[1]);
+            const pin = parseInt(message.split(",")[1]);
 
-            MPR121touched[value] = false
+            MPR121touched[pin] = false
             
-            control.raiseEvent(RAINBOW_SPARKLE_UNICORN_TOUCH_SENSOR_RELEASED, value)
+            control.raiseEvent(RAINBOW_SPARKLE_UNICORN_TOUCH_SENSOR_RELEASED, pin)
         }
-
         else if (message.indexOf("C1") == 0) {
-         ADC1value = parseInt(message.split(",")[1]);
+            ADC1value = parseInt(message.split(",")[1]);
           
-         control.raiseEvent(RAINBOW_SPARKLE_UNICORN_ADC_ONE, ADC1value)
+            control.raiseEvent(RAINBOW_SPARKLE_UNICORN_ADC_ONE, ADC1value)
         }
-
         else if (message.indexOf("C2") == 0) {
            ADC2value = parseInt(message.split(",")[1]);
 
            control.raiseEvent(RAINBOW_SPARKLE_UNICORN_ADC_TWO, ADC2value)
         }
-
         else if (message.indexOf("D1") == 0) {
 
             if (message.split(",")[1] == "+") {
@@ -86,13 +73,13 @@ namespace RainbowSparkleUnicorn {
 
             const pin = parseInt(message[1]);
 
-         control.raiseEvent(RAINBOW_SPARKLE_UNICORN_MOTION_STOPPED,pin);
+            control.raiseEvent(RAINBOW_SPARKLE_UNICORN_MOTION_STOPPED,pin);
        } 
       else if (message.indexOf("F2") == 0) {
 
             const pin = parseInt(message[1]);
 
-        control.raiseEvent(RAINBOW_SPARKLE_UNICORN_MOTION_HALTED,pin);
+            control.raiseEvent(RAINBOW_SPARKLE_UNICORN_MOTION_HALTED,pin);
        }       
     }   
 

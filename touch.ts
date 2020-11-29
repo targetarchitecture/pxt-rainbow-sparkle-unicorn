@@ -10,7 +10,7 @@ export let MPR121touched = [false, false, false, false, false, false, false, fal
    * @param handler body code to run when the event is raised
    */
   //% subcategory="Touch"
-  //% block="touch sensor | %sensor | %action"
+  //% block="touch pin | %sensor | %action"
   //% sensor.fieldEditor="gridpicker" sensor.fieldOptions.columns=6
   //% sensor.fieldOptions.tooltips="false"
   //% weight=65
@@ -32,19 +32,30 @@ export let MPR121touched = [false, false, false, false, false, false, false, fal
     );
   }    
 
-
 export const enum TouchSensor {
+    //% block="1"    
     T1 = 1,
+    //% block="2"    
     T2 = 2,
+    //% block="3" 
     T3 = 3,
+    //% block="4" 
     T4 = 4,
+    //% block="5" 
     T5 = 5,
+    //% block="6" 
     T6 = 6,
+    //% block="7" 
     T7 = 7,
+    //% block="8" 
     T8 = 8,
+    //% block="9" 
     T9 = 9,
+    //% block="10" 
     T10 = 10,
+    //% block="11" 
     T11 = 11,
+    //% block="12"     
     T12 = 12,
     //% block="any"
     Any = 1 << 30
@@ -54,7 +65,7 @@ export const enum TouchAction {
     //% block="touched"
     Touched = 0,
     //% block="released"
-    Released = 1,
+    Released = 1
 }
 
 }
