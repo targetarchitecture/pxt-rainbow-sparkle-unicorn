@@ -75,15 +75,16 @@ namespace RainbowSparkleUnicorn {
         }
         else if (message.indexOf("E") == 0) {
 
-            const state = message.split(",")[1];
+            const state = parseInt(message.split(",")[1]);
             const pin = parseInt(message[0].slice(1));
 
-            if (state == "H") {
-                SX1509state[pin] = 1;
+
+            if (state == 0) {
                 control.raiseEvent(RAINBOW_SPARKLE_UNICORN_SWITCH_PRESSED, pin)
+                SX1509state[pin] = switchState.pressed; 
             } else {
-                SX1509state[pin] = 0;
                 control.raiseEvent(RAINBOW_SPARKLE_UNICORN_SWITCH_RELEASED, pin)
+                SX1509state[pin] = switchState.released; 
             }
         }
       else if (message.indexOf("F1") == 0) {

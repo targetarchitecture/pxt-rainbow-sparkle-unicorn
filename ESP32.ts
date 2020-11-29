@@ -9,7 +9,7 @@ export let ADC2value = 0;
 let Encoder1value  = 0;
 let Encoder2value  = 0;
 
- /**
+     /**
      * Set the analog dial to a certain voltage.
      * @param voltage the touch sensor to be checked, eg: 15
      */
