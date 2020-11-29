@@ -19,9 +19,7 @@
         "constants.ts",
         "UART.ts"
     ],
-    "testFiles": [
-        "test.ts"
-    ],
+    "testFiles": [],
     "supportedTargets": [
         "microbit"
     ],
