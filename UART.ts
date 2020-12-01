@@ -5,12 +5,14 @@ namespace RainbowSparkleUnicorn {
      }
 
     serial.onDataReceived(serial.delimiters(Delimiters.Hash), function () {
+        
         let msg = serial.readUntil(serial.delimiters(Delimiters.Hash));
 
         parseRecievedMessage(msg);
     })
 
     function parseRecievedMessage(message: string) {
+    try {
         if (message.indexOf("A1") == 0) {
             const value = parseInt(message.split(",")[1]);
            
@@ -80,7 +82,10 @@ namespace RainbowSparkleUnicorn {
             const pin = parseInt(message[1]);
 
             control.raiseEvent(RAINBOW_SPARKLE_UNICORN_MOTION_HALTED,pin);
-       }       
+           
+       }   
+    }  catch(err) {   
+     sendMessage(err.message);
     }   
-
+    }
 }
