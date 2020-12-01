@@ -15,7 +15,9 @@ input.onButtonPressed(Button.B, function () {
         RainbowSparkleUnicorn.dial1(randint(0, 30))
         basic.pause(1000)
         RainbowSparkleUnicorn.playTrack(randint(1, 58))
-        RainbowSparkleUnicorn.setPulse(Servo.S15, randint(100, 505))
+        pwm = randint(100, 505)
+        RainbowSparkleUnicorn.setPulse(Servo.S15, pwm)
+        RainbowSparkleUnicorn.sendMessage("T9,Servo," + pwm);
     }
     RainbowSparkleUnicorn.dial1(0)
 })
@@ -23,8 +25,12 @@ RainbowSparkleUnicorn.onSwitch(RainbowSparkleUnicorn.switchPins.Any, RainbowSpar
     RainbowSparkleUnicorn.dial1(30)
     led.toggle(0, 0)
 })
+let pwm = 0
 RainbowSparkleUnicorn.start()
-RainbowSparkleUnicorn.setVolume(30)
+RainbowSparkleUnicorn.connectToInterWeb()
+RainbowSparkleUnicorn.turnSlider1(OnOff.ON)
+RainbowSparkleUnicorn.turnSlider2(OnOff.ON)
+RainbowSparkleUnicorn.setVolume(10)
 RainbowSparkleUnicorn.breathe(
 Breathable.Breathable4,
 600,
@@ -32,8 +38,6 @@ Breathable.Breathable4,
 500,
 300
 )
-RainbowSparkleUnicorn.turnSlider1(OnOff.ON)
-RainbowSparkleUnicorn.turnSlider2(OnOff.ON)
 basic.forever(function () {
     basic.pause(10 * RainbowSparkleUnicorn.Slider1())
     led.toggle(2, 2)

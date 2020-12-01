@@ -17,11 +17,12 @@
         "ESP32.ts",
         "switch.ts",
         "constants.ts",
-        "UART.ts"
+        "UART.ts",
+        "MQTT.ts"
     ],
     "testFiles": [],
     "supportedTargets": [
         "microbit"
     ],
-    "preferredEditor": "tsprj"
+    "preferredEditor": "blocksprj"
 }
