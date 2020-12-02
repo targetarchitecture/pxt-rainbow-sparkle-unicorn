@@ -1,4 +1,5 @@
 
+
 namespace RainbowSparkleUnicorn {
 
     /**
@@ -10,6 +11,7 @@ namespace RainbowSparkleUnicorn {
     //% volume.min=0 volume.max=30
     export function setVolume(volume: number) {
         const clippedVolume = Math.min(Math.max(volume, 0), 30);
+        dfplayerVolume = clippedVolume;
         sendMessage("Z1," + clippedVolume)
     }
 
@@ -22,6 +24,7 @@ namespace RainbowSparkleUnicorn {
     //% block="Play track $track"
     //% track.min=0 track.max=2999
     export function playTrack(track: number) {
+        dfplayerTrack = track;
         sendMessage("Z4," + track)
     }
 
@@ -31,6 +34,7 @@ namespace RainbowSparkleUnicorn {
     //% subcategory="Sound"      
     //% block="Increase volume"
     export function increaseVolume() {
+        dfplayerVolume = Math.min(Math.max(dfplayerVolume+1, 0), 30);
         sendMessage("Z2")
     }
 
@@ -40,6 +44,7 @@ namespace RainbowSparkleUnicorn {
     //% subcategory="Sound"      
     //% block="Decrease volume"
     export function decreaseVolume() {
+        dfplayerVolume = Math.min(Math.max(dfplayerVolume-1, 0), 30);
         sendMessage("Z3")
     }
 
@@ -68,8 +73,24 @@ namespace RainbowSparkleUnicorn {
         return dfplayerBusy;
     }
 
+     /**
+     * Returns the current volume
+     */
+    //% subcategory="Sound"
+    //% block="current volume"
+    export function volume(): number {
+        return dfplayerVolume;
+    }   
 
-  export let dfplayerBusy: boolean
+
+     /**
+     * Returns the current track
+     */
+    //% subcategory="Sound"
+    //% block="current track"
+    export function track(): number {
+        return dfplayerTrack;
+    }   
 
     /**
    * Do something when a sound track starts/stops.

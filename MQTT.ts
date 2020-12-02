@@ -10,6 +10,7 @@ namespace RainbowSparkleUnicorn {
 
         //TODO: improve this!
         WiFiName = WiFiName.split(' ').join('PPP');
+        WiFiPassword = WiFiPassword.split(' ').join('PPP');        
 
         sendMessage("T1," + WiFiName);
         sendMessage("T2," + WiFiPassword);
@@ -22,7 +23,7 @@ namespace RainbowSparkleUnicorn {
         sendMessage("T8");
         basic.pause(1000);        
     }
-
+    
     //% subcategory="MQTT" 
     //% block="Send MQTT message $topic, $message"
     export function sendMQTTMessage(topic: string, message: string) {
@@ -33,5 +34,18 @@ namespace RainbowSparkleUnicorn {
 
         sendMessage("T9," + topic + "," + message);
     }
+
+    //% subcategory="MQTT" 
+    //% block="Send MQTT number $topic, $message"
+    export function sendMQTTNumber(topic: string, message: number) {
+
+        //TODO: improve this!
+        //topic = topic.split(' ').join('PPP');
+        //message = message.split(' ').join('PPP');
+
+        sendMessage("T9," + topic + "," + message);
+    }   
+
+
 
 }

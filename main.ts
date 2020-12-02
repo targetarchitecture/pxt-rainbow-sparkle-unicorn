@@ -17,7 +17,7 @@ input.onButtonPressed(Button.B, function () {
         RainbowSparkleUnicorn.playTrack(randint(1, 58))
         pwm = randint(100, 505)
         RainbowSparkleUnicorn.setPulse(Servo.S15, pwm)
-        RainbowSparkleUnicorn.sendMessage("T9,PWM," + pwm)
+        RainbowSparkleUnicorn.sendMQTTNumber("PWM", pwm)
     }
     RainbowSparkleUnicorn.dial1(0)
 })
@@ -31,8 +31,8 @@ RainbowSparkleUnicorn.connectToInterWeb(
 "152 2.4GHz",
 "derwenthorpe",
 "broker.shiftr.io",
-"914bc336",
-"9c0279e562dd0e1e",
+"23bff921",
+"df50f3f27525324e",
 "SN4"
 )
 RainbowSparkleUnicorn.turnSlider1(OnOff.OFF)
@@ -45,6 +45,7 @@ Breathable.Breathable4,
 500,
 300
 )
+RainbowSparkleUnicorn.sendMQTTMessage("TEST", "Hello-World")
 basic.forever(function () {
     basic.pause(10 * RainbowSparkleUnicorn.Slider1())
     led.toggle(2, 2)

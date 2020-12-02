@@ -11,3 +11,14 @@ let RAINBOW_SPARKLE_UNICORN_SWITCH_PRESSED = 2155
 let RAINBOW_SPARKLE_UNICORN_SWITCH_RELEASED = 2156
 let RAINBOW_SPARKLE_UNICORN_MOTION_STOPPED = 2157
 let RAINBOW_SPARKLE_UNICORN_MOTION_HALTED = 2158
+let RAINBOW_SPARKLE_UNICORN_IP = 2159
+
+
+let IPAddress:string = "0.0.0.0";
+
+let dfplayerBusy: boolean = false;
+let dfplayerVolume: number = 0;
+let dfplayerTrack: number = 0;
+
+let ADC1value = 0;
+let ADC2value = 0;

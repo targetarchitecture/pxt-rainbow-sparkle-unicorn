@@ -1,6 +1,6 @@
 namespace RainbowSparkleUnicorn {
 
-    export function sendMessage(message: string): void {
+   export function sendMessage(message: string): void {
         serial.writeLine(message);
      }
 
@@ -18,6 +18,13 @@ namespace RainbowSparkleUnicorn {
            
             control.raiseEvent(RAINBOW_SPARKLE_UNICORN_SOUND_BUSY, value)
         }
+        else if (message.indexOf("A2") == 0) {
+            dfplayerVolume = parseInt(message.split(",")[1]);
+        }  
+        else if (message.indexOf("A3") == 0) {
+            dfplayerTrack = parseInt(message.split(",")[1]);
+        }  
+
         else if (message.indexOf("B1") == 0) {
             const pin = parseInt(message.split(",")[1]);
 
@@ -82,8 +89,17 @@ namespace RainbowSparkleUnicorn {
             const pin = parseInt(message[1]);
 
             control.raiseEvent(RAINBOW_SPARKLE_UNICORN_MOTION_HALTED,pin);
-           
        }   
+      else if (message.indexOf("G1") == 0) {
+
+            IPAddress = message[1];
+
+            //https://gist.github.com/jppommet/5708697
+            const IPasNumber = IPAddress.split('.').reduce(function(ipInt, octet) { return (ipInt<<8) + parseInt(octet, 10)}, 0) >>> 0;
+
+            control.raiseEvent(RAINBOW_SPARKLE_UNICORN_IP,IPasNumber);           
+       }   
+
     }  catch(err) {   
      sendMessage(err.message);
     }   
