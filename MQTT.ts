@@ -15,6 +15,6 @@ namespace RainbowSparkleUnicorn {
         sendMessage("T6,914bc336"); 
         sendMessage("T7,9c0279e562dd0e1e");
         sendMessage("T8");
-        sendMessage("T9,Servo,start");
+        sendMessage("T9,State,connected");
     }
 }
