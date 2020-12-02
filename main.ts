@@ -27,7 +27,14 @@ RainbowSparkleUnicorn.onSwitch(RainbowSparkleUnicorn.switchPins.Any, RainbowSpar
 })
 let pwm = 0
 RainbowSparkleUnicorn.start()
-RainbowSparkleUnicorn.connectToInterWeb()
+RainbowSparkleUnicorn.connectToInterWeb(
+"152 2.4GHz",
+"derwenthorpe",
+"broker.shiftr.io",
+"914bc336",
+"9c0279e562dd0e1e",
+"SN4"
+)
 RainbowSparkleUnicorn.turnSlider1(OnOff.OFF)
 RainbowSparkleUnicorn.turnSlider2(OnOff.OFF)
 RainbowSparkleUnicorn.setVolume(0)
