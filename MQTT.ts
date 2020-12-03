@@ -21,7 +21,14 @@ namespace RainbowSparkleUnicorn {
         sendMessage("T6," + MQTTKey); 
         sendMessage("T7," + MQTTPassword);
         sendMessage("T8");
-        basic.pause(1000);        
+
+          for (let index = 0; index < 11; index++) {
+            basic.pause(1000);
+
+            if (IPAddress() != "0.0.0.0"){
+                break;
+            }
+          }        
     }
     
     //% subcategory="MQTT" 

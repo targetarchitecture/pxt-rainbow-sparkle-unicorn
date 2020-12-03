@@ -1,7 +1,7 @@
 RainbowSparkleUnicorn.onSwitch(RainbowSparkleUnicorn.switchPins.Any, RainbowSparkleUnicorn.switchState.released, function () {
     RainbowSparkleUnicorn.dial1(0)
     led.toggle(0, 0)
-    RainbowSparkleUnicorn.sendMQTTMessage("TEST", "PIN RELEASED")
+    RainbowSparkleUnicorn.sendMQTTMessage("TEST", "RELEASED")
     RainbowSparkleUnicorn.sendMQTTMessage("IP", RainbowSparkleUnicorn.IPAddress())
 })
 input.onButtonPressed(Button.A, function () {
@@ -37,6 +37,7 @@ RainbowSparkleUnicorn.connectToInterWeb(
 "df50f3f27525324e",
 "SN4"
 )
+RainbowSparkleUnicorn.sendMQTTMessage("TEST", "Hello-World")
 RainbowSparkleUnicorn.turnSlider1(OnOff.OFF)
 RainbowSparkleUnicorn.turnSlider2(OnOff.OFF)
 RainbowSparkleUnicorn.setVolume(0)
@@ -47,7 +48,6 @@ Breathable.Breathable4,
 500,
 300
 )
-RainbowSparkleUnicorn.sendMQTTMessage("TEST", "Hello-World")
 basic.forever(function () {
     basic.pause(10 * RainbowSparkleUnicorn.Slider1())
     led.toggle(2, 2)
