@@ -1,16 +1,15 @@
 namespace RainbowSparkleUnicorn {
 
    export function sendMessage(message: string): void {
-        //serial.writeLine(message);
         serial.writeString(message + "\r\n");
      }
 
-    serial.onDataReceived(serial.delimiters(Delimiters.Hash), function () {
+     serial.onDataReceived(serial.delimiters(Delimiters.Hash), function () {
         
-        let msg = serial.readUntil(serial.delimiters(Delimiters.Hash));
+         let msg = serial.readUntil(serial.delimiters(Delimiters.Hash));
 
-        parseRecievedMessage(msg);
-    })
+         parseRecievedMessage(msg);
+     })
 
     function parseRecievedMessage(message: string) {
     try {
@@ -90,22 +89,7 @@ namespace RainbowSparkleUnicorn {
             const pin = parseInt(message[1]);
 
             control.raiseEvent(RAINBOW_SPARKLE_UNICORN_MOTION_HALTED,pin);
-       }   
-      else if (message.indexOf("G1") == 0) {
-
-            MQTTIPAddress = message.split(",")[1];
-
-            //https://gist.github.com/jppommet/5708697
-            const IPasNumber = MQTTIPAddress.split('.').reduce(function(ipInt, octet) { return (ipInt<<8) + parseInt(octet, 10)}, 0) >>> 0;
-
-            control.raiseEvent(RAINBOW_SPARKLE_UNICORN_IP_ADDRESS, IPasNumber);           
-       }   
-      else if (message.indexOf("G2") == 0) {
-
-            const MQTTConnected = parseInt(message.split(",")[1]);
-
-           control.raiseEvent(RAINBOW_SPARKLE_UNICORN_MQTT_CONNECTED,MQTTConnected);           
-       }          
+       } 
 
     }  catch(err) {   
      sendMessage(err.message);

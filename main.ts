@@ -11,6 +11,14 @@ input.onButtonPressed(Button.A, function () {
 RainbowSparkleUnicorn.onTouch(RainbowSparkleUnicorn.TouchSensor.T1, RainbowSparkleUnicorn.TouchAction.Touched, function () {
     RainbowSparkleUnicorn.playTrack(randint(1, 58))
 })
+RainbowSparkleUnicorn.onTouch(RainbowSparkleUnicorn.TouchSensor.T12, RainbowSparkleUnicorn.TouchAction.Touched, function () {
+    RainbowSparkleUnicorn.setServoAngle(
+    Servo.S15,
+    45,
+    100,
+    500
+    )
+})
 input.onButtonPressed(Button.B, function () {
     RainbowSparkleUnicorn.blink(Blinkable.Blinkable8, 2000, 2000)
     for (let index = 0; index < 50; index++) {
@@ -18,7 +26,7 @@ input.onButtonPressed(Button.B, function () {
         basic.pause(1000)
         RainbowSparkleUnicorn.playTrack(randint(1, 58))
         pwm = randint(100, 505)
-        RainbowSparkleUnicorn.setPulse(Servo.S15, pwm)
+        RainbowSparkleUnicorn.setServoPulse(Servo.S15, pwm)
         RainbowSparkleUnicorn.sendMQTTNumber("PWM", pwm)
     }
     RainbowSparkleUnicorn.dial1(0)

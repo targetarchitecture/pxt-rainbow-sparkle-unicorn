@@ -8,10 +8,6 @@ namespace RainbowSparkleUnicorn {
     //% block="Connect to MQTT server $WiFiName,$WiFiPassword,$MQTTServer,$MQTTKey,$MQTTPassword,$MQTTClient"
     export function connectToInterWeb(WiFiName: string, WiFiPassword: string,MQTTServer: string,MQTTKey: string,MQTTPassword: string,MQTTClient: string) {
 
-        //TODO: improve this!
-        WiFiName = WiFiName.split(' ').join('PPP');
-        WiFiPassword = WiFiPassword.split(' ').join('PPP');        
-
         sendMessage("T1," + WiFiName);
         sendMessage("T2," + WiFiPassword);
         sendMessage("T3");
@@ -34,10 +30,6 @@ namespace RainbowSparkleUnicorn {
     //% subcategory="MQTT" 
     //% block="Send MQTT message $topic, $message"
     export function sendMQTTMessage(topic: string, message: string) {
-
-        //TODO: improve this!
-        //topic = topic.split(' ').join('PPP');
-        //message = message.split(' ').join('PPP');
 
         sendMessage("T9," + topic + "," + message);
     }
@@ -63,20 +55,5 @@ namespace RainbowSparkleUnicorn {
     }   
 
 
-   /**
-   * Do something when your connected to MQTT
-   * @param handler body code to run when event is raised
-   */
-    //% subcategory="MQTT"
-    //% block="on connected"
-    export function onMQTTConnected(handler: () => void) {
-        control.onEvent(
-           RAINBOW_SPARKLE_UNICORN_IP_ADDRESS,
-            MICROBIT_EVT_ANY,
-            () => {
-                handler();
-            }
-        );
-    }
 
 }

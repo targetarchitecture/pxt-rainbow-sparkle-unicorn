@@ -1,14 +1,71 @@
 
 namespace RainbowSparkleUnicorn {
 
-    //% subcategory="Movement" 
+    //% subcategory="Expert" 
     //% block="set $servo pulse to %micros μs"
     //% micros.min=0 micros.max=4096
-    export function setPulse(servo: Servo, micros: number) {
+    export function setServoPulse(servo: Servo, micros: number) {
         micros = Math.clamp(0, 4096, micros);
 
-        sendMessage("V4," + servo + "," + micros);
+        sendMessage("V6," + servo + "," + micros);
     }
+
+    //% subcategory="Movement" 
+    //% block="set $servo angle to %angle between %minPulse and %maxPulse %%"
+    //% angle.min=0 angle.max=180
+    export function setServoAngle(servo: Servo, angle: number,minPulse: number, maxPulse: number) {
+        angle = Math.clamp(0, 180, angle);
+        minPulse = Math.clamp(0, 4096, minPulse);
+        maxPulse = Math.clamp(0, 4096, maxPulse);
+
+        sendMessage("V2," + servo + "," + angle + "," + minPulse + "," + maxPulse);
+    }
+ 
+        //% subcategory="Movement" 
+    //% block="move $servo linear from %fromAngle to %toAngle in %duration seconds (%minPulse and %maxPulse)"
+    //% toAngle.min=0 toAngle.max=180
+    //% fromAngle.min=0 fromAngle.max=180
+    //% duration.min=0 
+    export function moveServoLinear(servo: Servo, fromAngle: number, toAngle: number, duration:number, minPulse: number, maxPulse: number) {
+        fromAngle = Math.clamp(0, 180, fromAngle);
+        toAngle = Math.clamp(0, 180, toAngle);
+        duration = Math.min(0, duration);
+        minPulse = Math.clamp(0, 4096, minPulse);
+        maxPulse = Math.clamp(0, 4096, maxPulse);
+
+        sendMessage("V3," + servo + "," + fromAngle + "," + toAngle +"," + duration +"," + minPulse + "," + maxPulse);
+    }
+
+        //% subcategory="Movement" 
+    //% block="move $servo bouncy from %fromAngle to %toAngle in %duration seconds (%minPulse and %maxPulse)"
+    //% toAngle.min=0 toAngle.max=180
+    //% fromAngle.min=0 fromAngle.max=180
+    //% duration.min=0 
+    export function moveServoBouncy(servo: Servo, fromAngle: number, toAngle: number, duration:number, minPulse: number, maxPulse: number) {
+        fromAngle = Math.clamp(0, 180, fromAngle);
+        toAngle = Math.clamp(0, 180, toAngle);
+        duration = Math.min(0, duration);
+        minPulse = Math.clamp(0, 4096, minPulse);
+        maxPulse = Math.clamp(0, 4096, maxPulse);
+
+        sendMessage("V4," + servo + "," + fromAngle + "," + toAngle +"," + duration +"," + minPulse + "," + maxPulse);
+    }
+
+            //% subcategory="Movement" 
+    //% block="move $servo smoothly from %fromAngle to %toAngle in %duration seconds (%minPulse and %maxPulse)"
+    //% toAngle.min=0 toAngle.max=180
+    //% fromAngle.min=0 fromAngle.max=180
+    //% duration.min=0 
+    export function moveServoSmoothly(servo: Servo, fromAngle: number, toAngle: number, duration:number, minPulse: number, maxPulse: number) {
+        fromAngle = Math.clamp(0, 180, fromAngle);
+        toAngle = Math.clamp(0, 180, toAngle);
+        duration = Math.min(0, duration);
+        minPulse = Math.clamp(0, 4096, minPulse);
+        maxPulse = Math.clamp(0, 4096, maxPulse);
+
+        sendMessage("V5," + servo + "," + fromAngle + "," + toAngle +"," + duration +"," + minPulse + "," + maxPulse);
+    }
+
 }
 
 enum Servo {
