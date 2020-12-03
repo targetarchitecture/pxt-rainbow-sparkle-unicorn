@@ -12,7 +12,7 @@ let RAINBOW_SPARKLE_UNICORN_SWITCH_RELEASED = 2156
 let RAINBOW_SPARKLE_UNICORN_MOTION_STOPPED = 2157
 let RAINBOW_SPARKLE_UNICORN_MOTION_HALTED = 2158
 
-let MQTTIPAddress:string = "0.0.0.0";
+let MQTTIPAddress: string = "0.0.0.0";
 
 let dfplayerBusy: boolean = false;
 let dfplayerVolume: number = 0;

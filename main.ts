@@ -12,14 +12,13 @@ RainbowSparkleUnicorn.onSwitch(RainbowSparkleUnicorn.switchPins.Any, RainbowSpar
     RainbowSparkleUnicorn.dial1(0)
     led.toggle(0, 0)
     RainbowSparkleUnicorn.sendMQTTMessage("TEST", "RELEASED")
-    RainbowSparkleUnicorn.sendMQTTMessage("IP", RainbowSparkleUnicorn.IPAddress())
 })
 input.onButtonPressed(Button.A, function () {
     RainbowSparkleUnicorn.turnAllOff()
     RainbowSparkleUnicorn.turnAllOn()
 })
 input.onButtonPressed(Button.B, function () {
-    RainbowSparkleUnicorn.blink(Blinkable.Blinkable8, 2000, 2000)
+    RainbowSparkleUnicorn.blink(Blinkable.Blinkable15, 2000, 2000)
     for (let index = 0; index < 50; index++) {
         RainbowSparkleUnicorn.dial1(randint(0, 30))
         basic.pause(1000)
@@ -33,6 +32,7 @@ input.onButtonPressed(Button.B, function () {
 RainbowSparkleUnicorn.onSwitch(RainbowSparkleUnicorn.switchPins.Any, RainbowSparkleUnicorn.switchState.pressed, function () {
     RainbowSparkleUnicorn.dial1(30)
     led.toggle(0, 0)
+    RainbowSparkleUnicorn.sendMQTTMessage("TEST", "PRESSED")
 })
 let pwm = 0
 RainbowSparkleUnicorn.start()
@@ -47,7 +47,7 @@ RainbowSparkleUnicorn.connectToInterWeb(
 RainbowSparkleUnicorn.sendMQTTMessage("TEST", "Hello-World")
 RainbowSparkleUnicorn.turnSlider1(OnOff.OFF)
 RainbowSparkleUnicorn.turnSlider2(OnOff.OFF)
-RainbowSparkleUnicorn.setVolume(0)
+RainbowSparkleUnicorn.setVolume(20)
 RainbowSparkleUnicorn.breathe(
 Breathable.Breathable4,
 600,
@@ -55,6 +55,7 @@ Breathable.Breathable4,
 500,
 300
 )
+RainbowSparkleUnicorn.sendMQTTMessage("IP", RainbowSparkleUnicorn.IPAddress())
 basic.forever(function () {
-    flashWithSlider()
+	
 })

@@ -90,6 +90,10 @@ namespace RainbowSparkleUnicorn {
 
             control.raiseEvent(RAINBOW_SPARKLE_UNICORN_MOTION_HALTED,pin);
        } 
+      else if (message.indexOf("G1") == 0) {
+//store ip address
+           MQTTIPAddress = message.split(",")[1];
+       }        
 
     }  catch(err) {   
      sendMessage(err.message);
