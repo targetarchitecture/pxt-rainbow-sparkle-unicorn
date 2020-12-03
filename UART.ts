@@ -1,7 +1,8 @@
 namespace RainbowSparkleUnicorn {
 
    export function sendMessage(message: string): void {
-        serial.writeLine(message);
+        //serial.writeLine(message);
+        serial.writeString(message + "\r\n");
      }
 
     serial.onDataReceived(serial.delimiters(Delimiters.Hash), function () {

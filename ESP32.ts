@@ -48,7 +48,7 @@ let Encoder2value  = 0;
      * @value the value of the DAC output, eg: 46
      */
     //% subcategory="Expert" 
-    //% block="Set DAC 2 to $value"
+    //% block="Set DAC 2 to $value" advanced=true
     //% value.min=0 value.max=255
     export function DAC2(value: number) {
 
@@ -62,7 +62,7 @@ let Encoder2value  = 0;
      * @value the value of the DAC output, eg: 194
      */
     //% subcategory="Expert" 
-    //% block="Set DAC 1 to $value"
+    //% block="Set DAC 1 to $value" advanced=true
     //% value.min=0 value.max=255
     export function DAC1(value: number) {
 
