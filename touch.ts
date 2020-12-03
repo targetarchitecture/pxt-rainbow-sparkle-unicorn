@@ -9,28 +9,53 @@ export let MPR121touched = [false, false, false, false, false, false, false, fal
    * @param action the trigger action
    * @param handler body code to run when the event is raised
    */
+//   //% subcategory="Touch"
+//   //% block="touch pin | %sensor | %action"
+//   //% sensor.fieldEditor="gridpicker" sensor.fieldOptions.columns=6
+//   //% sensor.fieldOptions.tooltips="false"
+//   //% weight=65
+//   export function onTouch(
+//     sensor: TouchSensor,
+//     action: TouchAction,
+//     handler: () => void
+//   ) {
+
+//     control.onEvent(
+//       action === TouchAction.Touched
+//         ? RAINBOW_SPARKLE_UNICORN_TOUCH_SENSOR_TOUCHED
+//         : RAINBOW_SPARKLE_UNICORN_TOUCH_SENSOR_RELEASED,
+//       sensor === TouchSensor.Any ? EventBusValue.MICROBIT_EVT_ANY : sensor,
+//       () => {
+//         //touchState.eventValue = control.eventValue();
+//         handler();
+//       }
+//     );
+//   }    
+
+      /**
+   * Do something when a touch sensor is touched or released.
+   * @param sensor the touch sensor to be checked, eg: TouchSensor.T5
+   * @param action the trigger action
+   * @param handler body code to run when the event is raised
+   */
   //% subcategory="Touch"
-  //% block="touch pin | %sensor | %action"
+  //% block="button touched | %sensor"
   //% sensor.fieldEditor="gridpicker" sensor.fieldOptions.columns=6
   //% sensor.fieldOptions.tooltips="false"
   //% weight=65
-  export function onTouch(
+  export function onButtonTouched(
     sensor: TouchSensor,
-    action: TouchAction,
     handler: () => void
   ) {
-
     control.onEvent(
-      action === TouchAction.Touched
-        ? RAINBOW_SPARKLE_UNICORN_TOUCH_SENSOR_TOUCHED
-        : RAINBOW_SPARKLE_UNICORN_TOUCH_SENSOR_RELEASED,
+      RAINBOW_SPARKLE_UNICORN_TOUCH_SENSOR_TOUCHED,
       sensor === TouchSensor.Any ? EventBusValue.MICROBIT_EVT_ANY : sensor,
       () => {
         //touchState.eventValue = control.eventValue();
         handler();
       }
     );
-  }    
+  }      
 
 export const enum TouchSensor {
     //% block="1"    

@@ -23,7 +23,7 @@ namespace RainbowSparkleUnicorn {
         }  
         else if (message.indexOf("A3") == 0) {
             dfplayerTrack = parseInt(message.split(",")[1]);
-        }  
+        } 
 
         else if (message.indexOf("B1") == 0) {
             const pin = parseInt(message.split(",")[1]);

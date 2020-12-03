@@ -1,3 +1,13 @@
+control.onEvent(RAINBOW_SPARKLE_UNICORN_TOUCH_SENSOR_TOUCHED, 8, function () {
+    RainbowSparkleUnicorn.playTrack(randint(1, 58))
+})
+function flashWithSlider () {
+    basic.pause(10 * RainbowSparkleUnicorn.Slider1())
+    led.toggle(2, 2)
+}
+control.onEvent(RAINBOW_SPARKLE_UNICORN_TOUCH_SENSOR_TOUCHED, 1, function () {
+    RainbowSparkleUnicorn.playTrack(randint(1, 58))
+})
 RainbowSparkleUnicorn.onSwitch(RainbowSparkleUnicorn.switchPins.Any, RainbowSparkleUnicorn.switchState.released, function () {
     RainbowSparkleUnicorn.dial1(0)
     led.toggle(0, 0)
@@ -7,17 +17,6 @@ RainbowSparkleUnicorn.onSwitch(RainbowSparkleUnicorn.switchPins.Any, RainbowSpar
 input.onButtonPressed(Button.A, function () {
     RainbowSparkleUnicorn.turnAllOff()
     RainbowSparkleUnicorn.turnAllOn()
-})
-RainbowSparkleUnicorn.onTouch(RainbowSparkleUnicorn.TouchSensor.T1, RainbowSparkleUnicorn.TouchAction.Touched, function () {
-    RainbowSparkleUnicorn.playTrack(randint(1, 58))
-})
-RainbowSparkleUnicorn.onTouch(RainbowSparkleUnicorn.TouchSensor.T12, RainbowSparkleUnicorn.TouchAction.Touched, function () {
-    RainbowSparkleUnicorn.setServoAngle(
-    Servo.S15,
-    45,
-    100,
-    500
-    )
 })
 input.onButtonPressed(Button.B, function () {
     RainbowSparkleUnicorn.blink(Blinkable.Blinkable8, 2000, 2000)
@@ -57,6 +56,5 @@ Breathable.Breathable4,
 300
 )
 basic.forever(function () {
-    basic.pause(10 * RainbowSparkleUnicorn.Slider1())
-    led.toggle(2, 2)
+    flashWithSlider()
 })
