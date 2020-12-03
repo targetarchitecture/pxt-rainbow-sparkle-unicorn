@@ -46,6 +46,30 @@ namespace RainbowSparkleUnicorn {
         sendMessage("T9," + topic + "," + message);
     }   
 
+     /**
+     * Returns the current IP address
+     */
+    //% subcategory="MQTT" 
+    //% block="current IP address"
+    export function IPAddress(): string {
+        return MQTTIPAddress;
+    }   
 
+
+   /**
+   * Do something when your connected to MQTT
+   * @param handler body code to run when event is raised
+   */
+    //% subcategory="MQTT"
+    //% block="on connected"
+    export function onMQTTConnected(handler: () => void) {
+        control.onEvent(
+           RAINBOW_SPARKLE_UNICORN_IP_ADDRESS,
+            MICROBIT_EVT_ANY,
+            () => {
+                handler();
+            }
+        );
+    }
 
 }

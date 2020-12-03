@@ -1,6 +1,8 @@
 RainbowSparkleUnicorn.onSwitch(RainbowSparkleUnicorn.switchPins.Any, RainbowSparkleUnicorn.switchState.released, function () {
     RainbowSparkleUnicorn.dial1(0)
     led.toggle(0, 0)
+    RainbowSparkleUnicorn.sendMQTTMessage("TEST", "PIN RELEASED")
+    RainbowSparkleUnicorn.sendMQTTMessage("IP", RainbowSparkleUnicorn.IPAddress())
 })
 input.onButtonPressed(Button.A, function () {
     RainbowSparkleUnicorn.turnAllOff()
