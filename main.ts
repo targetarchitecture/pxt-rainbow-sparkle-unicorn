@@ -13,6 +13,12 @@ RainbowSparkleUnicorn.onSwitchPressed(RainbowSparkleUnicorn.switchPins.Any, func
 input.onButtonPressed(Button.A, function () {
     RainbowSparkleUnicorn.turnAllOff()
     RainbowSparkleUnicorn.turnAllOn()
+    RainbowSparkleUnicorn.moveServoBouncy(
+    Servo.S15,
+    0,
+    180,
+    10
+    )
 })
 input.onButtonPressed(Button.B, function () {
     RainbowSparkleUnicorn.blink(Blinkable.Blinkable15, 2000, 2000)
@@ -56,4 +62,5 @@ Breathable.Breathable4,
 500,
 300
 )
+RainbowSparkleUnicorn.setServoRange(Servo.S15, 105, 550)
 basic.showIcon(IconNames.StickFigure)

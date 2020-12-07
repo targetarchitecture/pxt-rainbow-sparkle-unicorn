@@ -31,7 +31,7 @@ for(let i = 0; i < 15; i++) {
     //% block="set $servo range from %minimumPulse to %maximumPulse"
     //% minimumPulse.min=0 minimumPulse.max=4096
     //% maximumPulse.min=0 maximumPulse.max=4096
-    export function setServoRange(servo: Servo, minimumPulse: number, maximumPulse:number) {
+    export function setServoRange(servo: Servo, minimumPulse=100, maximumPulse=500) {
         minimumPulse = Math.clamp(0, 4096, minimumPulse);
         maximumPulse = Math.clamp(0, 4096, maximumPulse);
 
@@ -49,7 +49,7 @@ for(let i = 0; i < 15; i++) {
     //% subcategory="Movement" 
     //% block="set $servo angle to %angle"
     //% angle.min=0 angle.max=180
-    export function setServoAngle(servo: Servo, angle: number) {
+    export function setServoAngle(servo: Servo, angle=90) {
         angle = Math.clamp(0, 180, angle);
         const minPulse = _minPulse[servo];
         const maxPulse = _maxPulse[servo];
@@ -62,7 +62,7 @@ for(let i = 0; i < 15; i++) {
     //% toAngle.min=0 toAngle.max=180
     //% fromAngle.min=0 fromAngle.max=180
     //% duration.min=0 
-    export function moveServoLinear(servo: Servo, fromAngle: number, toAngle: number, duration:number) {
+    export function moveServoLinear(servo: Servo, fromAngle=0, toAngle=180, duration=10) {
         fromAngle = Math.clamp(0, 180, fromAngle);
         toAngle = Math.clamp(0, 180, toAngle);
         duration = Math.min(0, duration);
