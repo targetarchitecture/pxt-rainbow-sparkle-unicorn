@@ -1,5 +1,7 @@
 namespace RainbowSparkleUnicorn {
 
+let MQTTIPAddress: string = "0.0.0.0";
+
      /**
      * Setup MQTT 
      * Example connectToInterWeb("152 2.4GHz","derwenthorpe","broker.shiftr.io","914bc336","9c0279e562dd0e1e","SN4")
@@ -12,13 +14,15 @@ namespace RainbowSparkleUnicorn {
         sendMessage("T2," + WiFiPassword);
         sendMessage("T3");
 
-        for (let index = 0; index < 11; index++) {
-            basic.pause(1000);
+        control.waitForEvent(RAINBOW_SPARKLE_UNICORN_IP_RECEIVED, 1);
 
-            if (MQTTIPAddress.indexOf("0.0.0.0") == -1){
-                break;
-            }
-        } 
+        // for (let index = 0; index < 11; index++) {
+        //     basic.pause(1000);
+
+        //     if (MQTTIPAddress.indexOf("0.0.0.0") == -1){
+        //         break;
+        //     }
+        // } 
 
         //connect to MQTT server
         sendMessage("T4," + MQTTServer);
@@ -49,5 +53,9 @@ namespace RainbowSparkleUnicorn {
     //% block="current IP address"
     export function IPAddress(): string {
         return MQTTIPAddress;
+    }   
+
+    export function setIPAddress(IP: string)  {
+         MQTTIPAddress = IP;
     }   
 }

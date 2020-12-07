@@ -33,14 +33,8 @@ RainbowSparkleUnicorn.onSwitchReleased(RainbowSparkleUnicorn.switchPins.Any, fun
 })
 RainbowSparkleUnicorn.onButtonTouched(RainbowSparkleUnicorn.TouchSensor.T8, function () {
     RainbowSparkleUnicorn.playTrack(randint(1, 58))
-    RainbowSparkleUnicorn.moveServoSmoothly(
-    Servo.S15,
-    0,
-    180,
-    5,
-    100,
-    505
-    )
+    pwm = randint(100, 505)
+    RainbowSparkleUnicorn.setServoPulse(Servo.S15, pwm)
 })
 let pwm = 0
 basic.showIcon(IconNames.Happy)
@@ -54,7 +48,7 @@ RainbowSparkleUnicorn.connectToInterWeb(
 "SN4"
 )
 RainbowSparkleUnicorn.sendMQTTMessage("IP", RainbowSparkleUnicorn.IPAddress())
-RainbowSparkleUnicorn.setVolume(15)
+RainbowSparkleUnicorn.setVolume(20)
 RainbowSparkleUnicorn.breathe(
 Breathable.Breathable4,
 600,

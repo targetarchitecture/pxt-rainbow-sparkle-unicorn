@@ -91,9 +91,17 @@ namespace RainbowSparkleUnicorn {
        } 
       else if (message.indexOf("G1") == 0) {
             //store ip address
-            MQTTIPAddress = message.split(",")[1];
-          
-       }        
+            const IP = message.split(",")[1];
+            setIPAddress(IP);
+
+            control.raiseEvent(RAINBOW_SPARKLE_UNICORN_IP_RECEIVED,1);            
+       } 
+      else if (message.indexOf("G2") == 0) {
+
+            const connected = parseInt(message[1]);
+
+            control.raiseEvent(RAINBOW_SPARKLE_UNICORN_MQTT_CONNECTED,connected);            
+       }     
 
     }  catch(err) {   
      sendMessage(err.message);
