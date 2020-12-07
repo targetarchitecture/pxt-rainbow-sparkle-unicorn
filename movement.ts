@@ -3,19 +3,19 @@ namespace RainbowSparkleUnicorn {
 
 enum ServoType {
     //% block="Normal"
-    ST0 = 0,
+    Normal = 0,
     //% block="Rotating"
-    ST1 = 1
+    Rotating = 1
 }       
 
-let _minPulse = [100];
-let _maxPulse = [500];
-let _servoType = [ServoType.ST0];
+let minPulse = pins.createBuffer(16);
+let maxPulse = pins.createBuffer(16);
+let servoType = pins.createBuffer(16);
 
-for(let i = 0; i < 15; i++) {
-    _minPulse.push(_minPulse[0]);
-    _maxPulse.push(_maxPulse[0]);
-   _servoType.push(_servoType[0]);    
+for(let i = 0; i < 16; i++) {
+   maxPulse[i] = 500;
+    minPulse[i] = 100;
+   servoType[i] = 0;   
 }
 
     //% subcategory="Expert" 
@@ -29,21 +29,21 @@ for(let i = 0; i < 15; i++) {
 
     //% subcategory="Movement" 
     //% block="set $servo range from %minimumPulse to %maximumPulse"
-    //% minimumPulse.min=0 minimumPulse.max=4096
+    //% minimumPulse.min=0 minimumPulse.max=4096 miniumPulse.default=100
     //% maximumPulse.min=0 maximumPulse.max=4096
     export function setServoRange(servo: Servo, minimumPulse=100, maximumPulse=500) {
         minimumPulse = Math.clamp(0, 4096, minimumPulse);
         maximumPulse = Math.clamp(0, 4096, maximumPulse);
 
         //make sure they are right way around
-        _minPulse[servo] = Math.min(minimumPulse,maximumPulse);
-        _maxPulse[servo] = Math.max(minimumPulse,maximumPulse);
+        minPulse[servo] = Math.min(minimumPulse,maximumPulse);
+       maxPulse[servo] = Math.max(minimumPulse,maximumPulse);
     }    
 
     //% subcategory="Movement" 
     //% block="set $servo type $servoType"
-    export function setServoType(servo: Servo, servoType: ServoType) {
-        _servoType[servo] = servoType;
+    export function setServoType(servo: Servo, sType: ServoType) {
+     servoType[servo] = sType;
     }        
 
     //% subcategory="Movement" 
@@ -51,10 +51,10 @@ for(let i = 0; i < 15; i++) {
     //% angle.min=0 angle.max=180
     export function setServoAngle(servo: Servo, angle=90) {
         angle = Math.clamp(0, 180, angle);
-        const minPulse = _minPulse[servo];
-        const maxPulse = _maxPulse[servo];
+        const minP = minPulse[servo];
+        const maxP = maxPulse[servo];
 
-        sendMessage("V2," + servo + "," + angle + "," + minPulse + "," + maxPulse);
+        sendMessage("V2," + servo + "," + angle + "," + minP + "," + maxP);
     }
  
    //% subcategory="Movement" 
@@ -67,10 +67,10 @@ for(let i = 0; i < 15; i++) {
         toAngle = Math.clamp(0, 180, toAngle);
         duration = Math.min(0, duration);
 
-        const minPulse = _minPulse[servo];
-        const maxPulse = _maxPulse[servo];
+        const minP = minPulse[servo];
+        const maxP = maxPulse[servo];
 
-        sendMessage("V3," + servo + "," + fromAngle + "," + toAngle +"," + duration +"," + minPulse + "," + maxPulse);
+        sendMessage("V3," + servo + "," + fromAngle + "," + toAngle +"," + duration +"," + minP + "," + maxP);
     }
 
     //% subcategory="Movement" 
@@ -83,10 +83,10 @@ for(let i = 0; i < 15; i++) {
         toAngle = Math.clamp(0, 180, toAngle);
         duration = Math.min(0, duration);
 
-        const minPulse = _minPulse[servo];
-        const maxPulse = _maxPulse[servo];
+        const minP = minPulse[servo];
+        const maxP=maxPulse[servo];
 
-        sendMessage("V4," + servo + "," + fromAngle + "," + toAngle +"," + duration +"," + minPulse + "," + maxPulse);
+        sendMessage("V4," + servo + "," + fromAngle + "," + toAngle +"," + duration +"," + minP + "," + maxP);
     }
 
     //% subcategory="Movement" 
@@ -99,10 +99,10 @@ for(let i = 0; i < 15; i++) {
         toAngle = Math.clamp(0, 180, toAngle);
         duration = Math.min(0, duration);
 
-        const minPulse = _minPulse[servo];
-        const maxPulse = _maxPulse[servo];
+        const minP = minPulse[servo];
+        const maxP =maxPulse[servo];
 
-        sendMessage("V5," + servo + "," + fromAngle + "," + toAngle +"," + duration +"," + minPulse + "," + maxPulse);
+        sendMessage("V5," + servo + "," + fromAngle + "," + toAngle +"," + duration +"," + minP + "," + maxP);
     }
 }
 

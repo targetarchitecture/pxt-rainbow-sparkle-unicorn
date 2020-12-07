@@ -62,5 +62,5 @@ Breathable.Breathable4,
 500,
 300
 )
-RainbowSparkleUnicorn.setServoRange(Servo.S15, 105, 550)
+RainbowSparkleUnicorn.setServoRange(Servo.S15, 100, 500)
 basic.showIcon(IconNames.StickFigure)
