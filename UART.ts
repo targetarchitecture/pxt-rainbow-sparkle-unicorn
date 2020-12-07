@@ -1,5 +1,6 @@
 namespace RainbowSparkleUnicorn {
 
+
    export function sendMessage(message: string): void {
         serial.writeString(message + "\r\n");
      }
@@ -12,6 +13,7 @@ namespace RainbowSparkleUnicorn {
      })
 
     function parseRecievedMessage(message: string) {
+
     try {
         if (message.indexOf("A1") == 0) {
             const value = parseInt(message.split(",")[1]);
@@ -90,6 +92,7 @@ namespace RainbowSparkleUnicorn {
       else if (message.indexOf("G1") == 0) {
             //store ip address
             MQTTIPAddress = message.split(",")[1];
+          
        }        
 
     }  catch(err) {   

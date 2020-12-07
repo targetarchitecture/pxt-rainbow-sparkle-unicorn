@@ -12,19 +12,13 @@ namespace RainbowSparkleUnicorn {
         sendMessage("T2," + WiFiPassword);
         sendMessage("T3");
 
-
-music.setBuiltInSpeakerEnabled(true)
-     
-
-          for (let index = 0; index < 11; index++) {
+        for (let index = 0; index < 11; index++) {
             basic.pause(1000);
-              // soundExpression.giggle.play()
-            //music.playTone(Note.C, music.beat())
 
-            if (MQTTIPAddress != "0.0.0.0"){
+            if (MQTTIPAddress.indexOf("0.0.0.0") == -1){
                 break;
             }
-          } 
+        } 
 
         //connect to MQTT server
         sendMessage("T4," + MQTTServer);
