@@ -2,6 +2,10 @@
 
 namespace RainbowSparkleUnicorn {
 
+let dfplayerBusy: boolean = false;
+let dfplayerVolume: number = 0;
+let dfplayerTrack: number = 0;
+
     /**
      * Set the volume
      * @param volume the touch sensor to be checked, eg: 15
@@ -12,9 +16,13 @@ namespace RainbowSparkleUnicorn {
     export function setVolume(volume: number) {
         const clippedVolume = Math.min(Math.max(volume, 0), 30);
         dfplayerVolume = clippedVolume;
-        sendMessage("Z1," + clippedVolume)
+        sendMessage("Z1," + clippedVolume);
     }
 
+//write back the actual volume reported by dfplayer
+control.onEvent(RAINBOW_SPARKLE_UNICORN_SOUND_SET_VOLUME, EventBusValue.MICROBIT_EVT_ANY, function () {
+     dfplayerVolume = control.eventValue();  
+})
 
     /**
      * Play a track
@@ -27,6 +35,11 @@ namespace RainbowSparkleUnicorn {
         dfplayerTrack = track;
         sendMessage("Z4," + track)
     }
+
+//write back the actual track reported by dfplayer
+control.onEvent(RAINBOW_SPARKLE_UNICORN_SOUND_SET_TRACK, EventBusValue.MICROBIT_EVT_ANY, function () {
+     dfplayerTrack = control.eventValue();  
+})
 
     /**
      * Increase the volume

@@ -13,14 +13,13 @@ namespace RainbowSparkleUnicorn {
             BaudRate.BaudRate115200
         )
 
-        basic.pause(10);
+        basic.pause(50);
 
-        //TODO: keeps crashing...I suspect due to chaos on the UART
-        //sendMessage("START");
-
-        //   for (let index = 0; index < 11; index++) {
-        //     basic.pause(100);
-        //   }   
+        RainbowSparkleUnicorn.turnSlider1(OnOff.OFF);
+        RainbowSparkleUnicorn.turnSlider2(OnOff.OFF);
+        RainbowSparkleUnicorn.turnSpinner1(OnOff.OFF);
+        RainbowSparkleUnicorn.turnSpinner2(OnOff.OFF);
+        RainbowSparkleUnicorn.setVolume(0);        
 
         basic.showIcon(IconNames.Heart)
     }

@@ -11,20 +11,27 @@ namespace RainbowSparkleUnicorn {
         sendMessage("T1," + WiFiName);
         sendMessage("T2," + WiFiPassword);
         sendMessage("T3");
-        basic.pause(1000);
+
+
+music.setBuiltInSpeakerEnabled(true)
+     
+
+          for (let index = 0; index < 11; index++) {
+            basic.pause(1000);
+              // soundExpression.giggle.play()
+            //music.playTone(Note.C, music.beat())
+
+            if (MQTTIPAddress != "0.0.0.0"){
+                break;
+            }
+          } 
+
+        //connect to MQTT server
         sendMessage("T4," + MQTTServer);
         sendMessage("T5," + MQTTClient);
         sendMessage("T6," + MQTTKey); 
         sendMessage("T7," + MQTTPassword);
-        sendMessage("T8");
-
-          for (let index = 0; index < 11; index++) {
-            basic.pause(1000);
-
-            if (IPAddress() != "0.0.0.0"){
-                break;
-            }
-          }        
+        sendMessage("T8");       
     }
     
     //% subcategory="MQTT" 
@@ -38,10 +45,6 @@ namespace RainbowSparkleUnicorn {
     //% block="Send MQTT number $topic, $message"
     export function sendMQTTNumber(topic: string, message: number) {
 
-        //TODO: improve this!
-        //topic = topic.split(' ').join('PPP');
-        //message = message.split(' ').join('PPP');
-
         sendMessage("T9," + topic + "," + message);
     }   
 
@@ -53,7 +56,4 @@ namespace RainbowSparkleUnicorn {
     export function IPAddress(): string {
         return MQTTIPAddress;
     }   
-
-
-
 }

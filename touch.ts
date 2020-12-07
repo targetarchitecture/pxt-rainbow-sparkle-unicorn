@@ -1,6 +1,6 @@
 namespace RainbowSparkleUnicorn {
 
-export let MPR121touched = [false, false, false, false, false, false, false, false, false, false, false, false]
+let MPR121touched = [false, false, false, false, false, false, false, false, false, false, false, false]
 
 
       /**
@@ -39,23 +39,59 @@ export let MPR121touched = [false, false, false, false, false, false, false, fal
    * @param handler body code to run when the event is raised
    */
   //% subcategory="Touch"
-  //% block="button touched | %sensor"
+  //% block="button touched on pin %pin"
   //% sensor.fieldEditor="gridpicker" sensor.fieldOptions.columns=6
   //% sensor.fieldOptions.tooltips="false"
   //% weight=65
   export function onButtonTouched(
-    sensor: TouchSensor,
+    pin: TouchSensor,
     handler: () => void
   ) {
     control.onEvent(
       RAINBOW_SPARKLE_UNICORN_TOUCH_SENSOR_TOUCHED,
-      sensor === TouchSensor.Any ? EventBusValue.MICROBIT_EVT_ANY : sensor,
+      pin === TouchSensor.Any ? EventBusValue.MICROBIT_EVT_ANY : pin,
       () => {
         //touchState.eventValue = control.eventValue();
+        //MPR121touched[pin] = true
+
+        if (pin != TouchSensor.Any){
+            MPR121touched[pin] = true;   
+        }
+
         handler();
       }
     );
-  }      
+  }     
+
+       /**
+   * Do something when a touch sensor is released.
+   * @param sensor the touch sensor to be checked, eg: TouchSensor.T5
+   * @param action the trigger action
+   * @param handler body code to run when the event is raised
+   */
+  //% subcategory="Touch"
+  //% block="button released on pin | %pin"
+  //% sensor.fieldEditor="gridpicker" sensor.fieldOptions.columns=6
+  //% sensor.fieldOptions.tooltips="false"
+  //% weight=65
+  export function onButtonReleased(
+    pin: TouchSensor,
+    handler: () => void
+  ) {
+    control.onEvent(
+      RAINBOW_SPARKLE_UNICORN_TOUCH_SENSOR_RELEASED,
+      pin === TouchSensor.Any ? EventBusValue.MICROBIT_EVT_ANY : pin,
+      () => {
+
+        if (pin != TouchSensor.Any){
+            MPR121touched[pin] = false;   
+        }
+
+        handler();
+      }
+    );
+  }     
+
 
 export const enum TouchSensor {
     //% block="1"    

@@ -8,30 +8,58 @@ namespace RainbowSparkleUnicorn {
    * @param handler body code to run when the event is raised
    */
   //% subcategory="Switch"
-  //% block="switch pin | %sensor | %action"
-  //% sensor.fieldEditor="gridpicker" sensor.fieldOptions.columns=6
+  //% block="Switch Pressed on pin | %switchPin"
+  //% sensor.fieldEditor="gridpicker" switchPin.fieldOptions.columns=6
   //% sensor.fieldOptions.tooltips="false"
   //% weight=65
-  export function onSwitch(
-    sensor: switchPins,
-    action: switchState,
+  export function onSwitchPressed(
+    switchPin: switchPins,
     handler: () => void
   ) {
 
-    control.onEvent(
-      action === switchState.pressed
-        ? RAINBOW_SPARKLE_UNICORN_SWITCH_PRESSED
-        : RAINBOW_SPARKLE_UNICORN_SWITCH_RELEASED,
-      sensor === switchPins.Any ? EventBusValue.MICROBIT_EVT_ANY : sensor,
+    control.onEvent(RAINBOW_SPARKLE_UNICORN_SWITCH_PRESSED,
+      switchPin === switchPins.Any ? EventBusValue.MICROBIT_EVT_ANY : switchPin,
       () => {
-        //touchState.eventValue = control.eventValue();
+
+        if (switchPin != switchPins.Any){
+                SX1509state[switchPin] = switchState.pressed;   
+        }
+
         handler();
       }
     );
   }    
 
-let RAINBOW_SPARKLE_UNICORN_SWITCH_PRESSED = 2155
-let RAINBOW_SPARKLE_UNICORN_SWITCH_RELEASED = 2156
+
+   /**
+   * Do something when a switch is released.
+   * @param sensor the pin to be checked, eg: switchPins.SP8
+   * @param action the switch action
+   * @param handler body code to run when the event is raised
+   */
+  //% subcategory="Switch"
+  //% block="Switch Released on pin | %switchPin"
+  //% sensor.fieldEditor="gridpicker" switchPin.fieldOptions.columns=6
+  //% sensor.fieldOptions.tooltips="false"
+  //% weight=65
+  export function onSwitchReleased(
+    switchPin: switchPins,
+    handler: () => void
+  ) {
+
+    control.onEvent(RAINBOW_SPARKLE_UNICORN_SWITCH_RELEASED,
+      switchPin === switchPins.Any ? EventBusValue.MICROBIT_EVT_ANY : switchPin,
+      () => {
+
+        if (switchPin != switchPins.Any){
+                SX1509state[switchPin] = switchState.released;   
+        }
+
+        handler();
+      }
+    );
+  }    
+
 
 export enum switchState {
     //% block="pressed"

@@ -2,10 +2,15 @@ namespace RainbowSparkleUnicorn {
 
 let ADC1Enabled = false;
 let ADC2Enabled = false;
+let ADC1value = 0;
+let ADC2value = 0;
+
 let Encoder1Enabled = false;
 let Encoder2Enabled = false;
-let Encoder1value  = 0;
-let Encoder2value  = 0;
+let Encoder1value = 0;
+let Encoder2value = 0;
+let direction1: RotaryDirection;
+let direction2: RotaryDirection;
 
      /**
      * Set the analog dial to a certain voltage.
@@ -133,8 +138,7 @@ let Encoder2value  = 0;
     );
   }
 
-    let  direction1 : RotaryDirection;
-    let  direction2: RotaryDirection;
+
 
       /**
    * Do something when a rotary switch is turned.
