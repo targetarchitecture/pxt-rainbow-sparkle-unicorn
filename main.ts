@@ -1,1 +1,1 @@
-
+basic.showIcon(IconNames.Cow)
