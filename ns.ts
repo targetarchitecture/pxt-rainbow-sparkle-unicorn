@@ -15,12 +15,13 @@ namespace RainbowSparkleUnicorn {
 
         basic.pause(50);
 
+        RainbowSparkleUnicorn.sendMessage("START");
         RainbowSparkleUnicorn.turnSlider1(OnOff.OFF);
         RainbowSparkleUnicorn.turnSlider2(OnOff.OFF);
         RainbowSparkleUnicorn.turnSpinner1(OnOff.OFF);
         RainbowSparkleUnicorn.turnSpinner2(OnOff.OFF);
         RainbowSparkleUnicorn.setVolume(0);        
 
-        basic.showIcon(IconNames.Heart)
+        //basic.showIcon(IconNames.Heart)
     }
 }
