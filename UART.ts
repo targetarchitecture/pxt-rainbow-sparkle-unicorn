@@ -18,8 +18,8 @@ namespace RainbowSparkleUnicorn {
             parseRecievedMessage(msg);
         } else {
             //led.toggle(4,4)
-             sendMessage("error checking message");
-        }    
+             sendMessage("error checking message.");
+        }        
      })
 
      function checkMessage(message: string): boolean

@@ -19,6 +19,12 @@ input.onButtonPressed(Button.A, function () {
     180,
     10
     )
+    RainbowSparkleUnicorn.moveServoSmoothly(
+    Servo.S0,
+    0,
+    134,
+    60
+    )
 })
 function www () {
     RainbowSparkleUnicorn.connectToInterWeb(
