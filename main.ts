@@ -56,7 +56,7 @@ RainbowSparkleUnicorn.onButtonTouched(RainbowSparkleUnicorn.TouchSensor.T8, func
 let pwm = 0
 basic.showIcon(IconNames.Happy)
 RainbowSparkleUnicorn.start()
-RainbowSparkleUnicorn.setVolume(20)
+RainbowSparkleUnicorn.setVolume(0)
 RainbowSparkleUnicorn.breathe(
 Breathable.Breathable4,
 600,
@@ -65,4 +65,5 @@ Breathable.Breathable4,
 300
 )
 RainbowSparkleUnicorn.setServoRange(Servo.S15, 100, 500)
+www()
 basic.showIcon(IconNames.StickFigure)

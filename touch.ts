@@ -39,7 +39,7 @@ let MPR121touched = [false, false, false, false, false, false, false, false, fal
    * @param handler body code to run when the event is raised
    */
   //% subcategory="Touch"
-  //% block="button touched on pin %pin"
+  //% block="when touching on pin %pin"
   //% sensor.fieldEditor="gridpicker" sensor.fieldOptions.columns=6
   //% sensor.fieldOptions.tooltips="false"
   //% weight=65
@@ -63,14 +63,14 @@ let MPR121touched = [false, false, false, false, false, false, false, false, fal
     );
   }     
 
-       /**
+  /**
    * Do something when a touch sensor is released.
    * @param sensor the touch sensor to be checked, eg: TouchSensor.T5
    * @param action the trigger action
    * @param handler body code to run when the event is raised
    */
   //% subcategory="Touch"
-  //% block="button released on pin | %pin"
+  //% block="when touch stopped on pin | %pin"
   //% sensor.fieldEditor="gridpicker" sensor.fieldOptions.columns=6
   //% sensor.fieldOptions.tooltips="false"
   //% weight=65
