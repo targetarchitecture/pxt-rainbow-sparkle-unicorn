@@ -2,11 +2,20 @@ Open this page at [https://targetarchitecture.github.io/Rainbow-Sparkle-Unicorn/
 
 My first BBC Microbit PXT Makecode extension to drive Ada's project board, affectionately called "Rainbow Sparkle Unicorn"
 
-![1](https://github.com/targetarchitecture/Rainbow-Sparkle-Unicorn/blob/master/images/IMG_20201125_002825078.jpg?raw=true)
-![1](https://github.com/targetarchitecture/Rainbow-Sparkle-Unicorn/blob/master/images/20201121_183850-ANIMATION.gif?raw=true)
-![1](https://github.com/targetarchitecture/Rainbow-Sparkle-Unicorn/blob/master/images/DAC%20Example.gif?raw=true)
+Ada dreaming of what to make next...
 ![1](https://github.com/targetarchitecture/Rainbow-Sparkle-Unicorn/blob/master/images/IMG_20201124_183548804.jpg?raw=true)
+
+Rainbow Sparkle Unicorn board with servo and dial
+![1](https://github.com/targetarchitecture/Rainbow-Sparkle-Unicorn/blob/master/images/IMG_20201125_002825078.jpg?raw=true)
+
+Lots of servo being tested
+![1](https://github.com/targetarchitecture/Rainbow-Sparkle-Unicorn/blob/master/images/20201121_183850-ANIMATION.gif?raw=true)
+
+Flashing lights!
 ![1](https://github.com/targetarchitecture/Rainbow-Sparkle-Unicorn/blob/master/images/IMG_20201130_002311794_BURST000_COVER-ANIMATION.gif?raw=true)
+
+DAC example
+![1](https://github.com/targetarchitecture/Rainbow-Sparkle-Unicorn/blob/master/images/DAC%20Example.gif?raw=true)
 
 
 ## Use as Extension
