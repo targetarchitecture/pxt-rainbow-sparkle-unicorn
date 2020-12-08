@@ -20,7 +20,6 @@ input.onButtonPressed(Button.A, function () {
     10
     )
 })
-
 function www () {
     RainbowSparkleUnicorn.connectToInterWeb(
     "152 2.4GHz",
