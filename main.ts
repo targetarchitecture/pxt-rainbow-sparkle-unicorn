@@ -27,7 +27,7 @@ input.onButtonPressed(Button.B, function () {
         basic.pause(1000)
         RainbowSparkleUnicorn.playTrack(randint(1, 58))
         pwm = randint(100, 505)
-        RainbowSparkleUnicorn.setServoPulse(Servo.S4, pwm)
+        RainbowSparkleUnicorn.setServoPulse(Servo.S15, pwm)
         RainbowSparkleUnicorn.sendMQTTNumber("PWM", pwm)
     }
     RainbowSparkleUnicorn.dial1(0)
@@ -53,6 +53,7 @@ RainbowSparkleUnicorn.connectToInterWeb(
 "df50f3f27525324e",
 "SN4"
 )
+basic.showIcon(IconNames.TShirt)
 RainbowSparkleUnicorn.sendMQTTMessage("IP", RainbowSparkleUnicorn.IPAddress())
 RainbowSparkleUnicorn.setVolume(20)
 RainbowSparkleUnicorn.breathe(

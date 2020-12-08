@@ -29,7 +29,9 @@ let MQTTIPAddress: string = "0.0.0.0";
         sendMessage("T5," + MQTTClient);
         sendMessage("T6," + MQTTKey); 
         sendMessage("T7," + MQTTPassword);
-        sendMessage("T8");       
+        sendMessage("T8"); 
+
+        control.waitForEvent(RAINBOW_SPARKLE_UNICORN_MQTT_CONNECTED, EventBusValue.MICROBIT_EVT_ANY);      
     }
     
     //% subcategory="MQTT" 

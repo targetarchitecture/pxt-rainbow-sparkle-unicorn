@@ -7,17 +7,7 @@ enum ServoType {
     //% block="Rotating"
     Rotating = 1
 }       
-let servoList = ["{100,100,0}","{100,100,0}","{100,100,0}","{100,100,0}","{100,100,0}","{100,100,0}","{100,100,0}","{100,100,0}","{100,100,0}","{100,100,0}","{100,100,0}","{100,100,0}","{100,100,0}","{100,100,0}","{100,100,0}","{100,100,0}"];
-
-let minPulse = pins.createBuffer(16);
-let maxPulse = pins.createBuffer(16);
-let servoType = pins.createBuffer(16);
-
-for(let i = 0; i < 16; i++) {
-   maxPulse[i] = 500;
-    minPulse[i] = 100;
-   servoType[i] = 0;   
-}
+let servoList = ["100,500,0","100,500,0","100,500,0","100,500,0","100,500,0","100,500,0","100,500,0","100,500,0","100,500,0","100,500,0","100,500,0","100,500,0","100,500,0","100,500,0","100,500,0","100,500,0"];
 
     //% subcategory="Expert" 
     //% block="set $servo pulse to %micros μs"
@@ -30,21 +20,28 @@ for(let i = 0; i < 16; i++) {
 
     //% subcategory="Movement" 
     //% block="set $servo range from %minimumPulse to %maximumPulse"
-    //% minimumPulse.min=0 minimumPulse.max=4096 miniumPulse.default=100
+    //% minimumPulse.min=0 minimumPulse.max=4096
     //% maximumPulse.min=0 maximumPulse.max=4096
-    export function setServoRange(servo: Servo, minimumPulse=100, maximumPulse=500) {
+    export function setServoRange(servo: Servo, minimumPulse: number, maximumPulse: number) {
         minimumPulse = Math.clamp(0, 4096, minimumPulse);
         maximumPulse = Math.clamp(0, 4096, maximumPulse);
 
         //make sure they are right way around
-        minPulse[servo] = Math.min(minimumPulse,maximumPulse);
-       maxPulse[servo] = Math.max(minimumPulse,maximumPulse);
+        let msg = servoList[servo].split(",");
+        msg[0] = Math.min(minimumPulse,maximumPulse).toString();
+        msg[1] = Math.max(minimumPulse,maximumPulse).toString();
+
+        servoList[servo] = msg[0] + "," + msg[1] + "," + msg[2];
     }    
 
     //% subcategory="Movement" 
     //% block="set $servo type $servoType"
     export function setServoType(servo: Servo, sType: ServoType) {
-     servoType[servo] = sType;
+
+        let msg = servoList[servo].split(",");
+        msg[2] = sType.toString();
+
+        servoList[servo] = msg[0] + "," + msg[1] + "," + msg[2];
     }        
 
     //% subcategory="Movement" 
@@ -52,26 +49,32 @@ for(let i = 0; i < 16; i++) {
     //% angle.min=0 angle.max=180
     export function setServoAngle(servo: Servo, angle=90) {
         angle = Math.clamp(0, 180, angle);
-        const minP = minPulse[servo];
-        const maxP = maxPulse[servo];
+
+        let msg = servoList[servo].split(",");
+
+        const minP = msg[0];
+        const maxP = msg[1];
 
         sendMessage("V2," + servo + "," + angle + "," + minP + "," + maxP);
     }
  
-   //% subcategory="Movement" 
+    //% subcategory="Movement" 
     //% block="move $servo linear from %fromAngle to %toAngle in %duration seconds"
     //% toAngle.min=0 toAngle.max=180
     //% fromAngle.min=0 fromAngle.max=180
     //% duration.min=0 
-    export function moveServoLinear(servo: Servo, fromAngle=0, toAngle=180, duration=10) {
+    export function moveServoLinear(servo: Servo, fromAngle: number, toAngle: number, duration: number) {
         fromAngle = Math.clamp(0, 180, fromAngle);
         toAngle = Math.clamp(0, 180, toAngle);
-        duration = Math.min(0, duration);
 
-        const minP = minPulse[servo];
-        const maxP = maxPulse[servo];
+        if (duration < 0){ duration = 0; }
+ 
+        let msg = servoList[servo].split(",");
 
-        sendMessage("V3," + servo + "," + fromAngle + "," + toAngle +"," + duration +"," + minP + "," + maxP);
+        const minP = msg[0];
+        const maxP = msg[1];
+
+        sendMessage("V3," + servo + "," + fromAngle + "," + toAngle +"," + duration + "," + minP + "," + maxP);
     }
 
     //% subcategory="Movement" 
@@ -79,15 +82,17 @@ for(let i = 0; i < 16; i++) {
     //% toAngle.min=0 toAngle.max=180
     //% fromAngle.min=0 fromAngle.max=180
     //% duration.min=0 
-    export function moveServoBouncy(servo: Servo, fromAngle: number, toAngle: number, duration:number) {
+    export function moveServoBouncy(servo: Servo, fromAngle: number, toAngle: number, duration: number) {
         fromAngle = Math.clamp(0, 180, fromAngle);
         toAngle = Math.clamp(0, 180, toAngle);
-        duration = Math.min(0, duration);
+        if (duration < 0){ duration = 0; }
 
-        const minP = minPulse[servo];
-        const maxP=maxPulse[servo];
+        let msg = servoList[servo].split(",");
 
-        sendMessage("V4," + servo + "," + fromAngle + "," + toAngle +"," + duration +"," + minP + "," + maxP);
+        const minP = msg[0];
+        const maxP = msg[1];
+
+      sendMessage("V4," + servo + "," + fromAngle + "," + toAngle +"," + duration + "," + minP + "," + maxP);
     }
 
     //% subcategory="Movement" 
@@ -98,12 +103,14 @@ for(let i = 0; i < 16; i++) {
     export function moveServoSmoothly(servo: Servo, fromAngle: number, toAngle: number, duration:number) {
         fromAngle = Math.clamp(0, 180, fromAngle);
         toAngle = Math.clamp(0, 180, toAngle);
-        duration = Math.min(0, duration);
+        if (duration < 0){ duration = 0; }
 
-        const minP = minPulse[servo];
-        const maxP =maxPulse[servo];
+        let msg = servoList[servo].split(",");
 
-        sendMessage("V5," + servo + "," + fromAngle + "," + toAngle +"," + duration +"," + minP + "," + maxP);
+        const minP = msg[0];
+        const maxP = msg[1];
+
+       sendMessage("V5," + servo + "," + fromAngle + "," + toAngle +"," + duration + "," + minP + "," + maxP);
     }
 }
 
