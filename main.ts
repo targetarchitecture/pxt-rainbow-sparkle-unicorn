@@ -1,10 +1,11 @@
+function playSound () {
+    track = randint(1, 60)
+    RainbowSparkleUnicorn.playTrack(track)
+}
 function flashWithSlider () {
     basic.pause(10 * RainbowSparkleUnicorn.Slider1())
     led.toggle(2, 2)
 }
-RainbowSparkleUnicorn.onButtonReleased(RainbowSparkleUnicorn.TouchSensor.T1, function () {
-    RainbowSparkleUnicorn.playTrack(randint(1, 58))
-})
 RainbowSparkleUnicorn.onSwitchPressed(RainbowSparkleUnicorn.switchPins.Any, function () {
     RainbowSparkleUnicorn.dial1(30)
     led.toggle(0, 0)
@@ -37,6 +38,12 @@ function www () {
     )
     RainbowSparkleUnicorn.sendMQTTMessage("IP", RainbowSparkleUnicorn.IPAddress())
 }
+RainbowSparkleUnicorn.onButtonTouched(RainbowSparkleUnicorn.TouchSensor.T1, function () {
+    playSound()
+})
+RainbowSparkleUnicorn.onButtonTouched(RainbowSparkleUnicorn.TouchSensor.T3, function () {
+    playSound()
+})
 input.onButtonPressed(Button.B, function () {
     RainbowSparkleUnicorn.blink(Blinkable.Blinkable15, 2000, 2000)
     for (let index = 0; index < 10; index++) {
@@ -59,7 +66,11 @@ RainbowSparkleUnicorn.onButtonTouched(RainbowSparkleUnicorn.TouchSensor.T8, func
     pwm = randint(100, 505)
     RainbowSparkleUnicorn.setServoPulse(Servo.S15, pwm)
 })
+RainbowSparkleUnicorn.onButtonTouched(RainbowSparkleUnicorn.TouchSensor.T2, function () {
+    playSound()
+})
 let pwm = 0
+let track = 0
 basic.showIcon(IconNames.Happy)
 RainbowSparkleUnicorn.start()
 RainbowSparkleUnicorn.setVolume(0)
