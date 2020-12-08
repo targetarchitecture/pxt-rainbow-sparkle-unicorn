@@ -2,6 +2,7 @@ namespace RainbowSparkleUnicorn {
 
 
    export function sendMessage(message: string): void {
+       serial.setTxBufferSize(64);
         serial.writeString(message + "\r\n");
      }
 

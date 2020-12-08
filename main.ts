@@ -20,6 +20,17 @@ input.onButtonPressed(Button.A, function () {
     10
     )
 })
+function www () {
+    RainbowSparkleUnicorn.connectToInterWeb(
+    "152 2.4GHz",
+    "derwenthorpe",
+    "broker.shiftr.io",
+    "23bff921",
+    "df50f3f27525324e",
+    "SN4"
+    )
+    RainbowSparkleUnicorn.sendMQTTMessage("IP", RainbowSparkleUnicorn.IPAddress())
+}
 input.onButtonPressed(Button.B, function () {
     RainbowSparkleUnicorn.blink(Blinkable.Blinkable15, 2000, 2000)
     for (let index = 0; index < 10; index++) {
@@ -45,16 +56,6 @@ RainbowSparkleUnicorn.onButtonTouched(RainbowSparkleUnicorn.TouchSensor.T8, func
 let pwm = 0
 basic.showIcon(IconNames.Happy)
 RainbowSparkleUnicorn.start()
-RainbowSparkleUnicorn.connectToInterWeb(
-"152 2.4GHz",
-"derwenthorpe",
-"broker.shiftr.io",
-"23bff921",
-"df50f3f27525324e",
-"SN4"
-)
-basic.showIcon(IconNames.TShirt)
-RainbowSparkleUnicorn.sendMQTTMessage("IP", RainbowSparkleUnicorn.IPAddress())
 RainbowSparkleUnicorn.setVolume(20)
 RainbowSparkleUnicorn.breathe(
 Breathable.Breathable4,

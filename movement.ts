@@ -91,8 +91,10 @@ let servoList = ["100,500,0","100,500,0","100,500,0","100,500,0","100,500,0","10
 
         const minP = msg[0];
         const maxP = msg[1];
+        
+       // basic.showString(minP);
 
-      sendMessage("V4," + servo + "," + fromAngle + "," + toAngle +"," + duration + "," + minP + "," + maxP);
+      sendMessage("V4," + servo + "," + fromAngle + "," + toAngle + "," + duration + "," + minP + "," + maxP);
     }
 
     //% subcategory="Movement" 
