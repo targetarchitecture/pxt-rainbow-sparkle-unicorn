@@ -1,9 +1,6 @@
+Open this page at [https://targetarchitecture.github.io/Rainbow-Sparkle-Unicorn/](https://targetarchitecture.github.io/Rainbow-Sparkle-Unicorn/)
 
-> Open this page at [https://targetarchitecture.github.io/sn4-extension-attempt-1/](https://targetarchitecture.github.io/sn4-extension-attempt-1/)
-
-https://www.dfrobot.com/blog-1145.html
-https://github.com/1010Technologies/pxt-makerbit
-
+My first BBC Microbit PXT Makecode extension to drive Ada's project board, affectionately called "Rainbow Sparkle Unicorn"
 
 ## Use as Extension
 
@@ -12,22 +9,22 @@ This repository can be added as an **extension** in MakeCode.
 * open [https://makecode.microbit.org/](https://makecode.microbit.org/)
 * click on **New Project**
 * click on **Extensions** under the gearwheel menu
-* search for **https://github.com/targetarchitecture/sn4-extension-attempt-1** and import
+* search for **https://github.com/targetarchitecture/Rainbow-Sparkle-Unicorn** and import
 
-## Edit this project ![Build status badge](https://github.com/targetarchitecture/sn4-extension-attempt-1/workflows/MakeCode/badge.svg)
+## Edit this project ![Build status badge](https://github.com/targetarchitecture/Rainbow-Sparkle-Unicorn/workflows/MakeCode/badge.svg)
 
 To edit this repository in MakeCode.
 
 * open [https://makecode.microbit.org/](https://makecode.microbit.org/)
 * click on **Import** then click on **Import URL**
-* paste **https://github.com/targetarchitecture/sn4-extension-attempt-1** and click import
+* paste **https://github.com/targetarchitecture/Rainbow-Sparkle-Unicorn** and click import
 
 ## Blocks preview
 
 This image shows the blocks code from the last commit in master.
 This image may take a few minutes to refresh.
 
-![A rendered view of the blocks](https://github.com/targetarchitecture/sn4-extension-attempt-1/raw/master/.github/makecode/blocks.png)
+![A rendered view of the blocks](https://github.com/targetarchitecture/Rainbow-Sparkle-Unicorn/raw/master/.github/makecode/blocks.png)
 
 #### Metadata (used for search, rendering)
 
