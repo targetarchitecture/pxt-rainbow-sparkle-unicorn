@@ -9,13 +9,36 @@ namespace RainbowSparkleUnicorn {
 
      serial.onDataReceived(serial.delimiters(Delimiters.Hash), function () {
         
-         let msg = serial.readUntil(serial.delimiters(Delimiters.Hash));
+        let msg = serial.readUntil(serial.delimiters(Delimiters.Hash));
 
-         parseRecievedMessage(msg);
+        //trim out any whitespace
+        msg = msg.trim();
+
+        if (checkMessage(msg) == true){
+            parseRecievedMessage(msg);
+        } else {
+            basic.showIcon(IconNames.Ghost);
+        }    
      })
 
-    function parseRecievedMessage(message: string) {
+     function checkMessage(message: string): boolean
+     {
+        if (message.isEmpty() == true){
+            return false;
+        }
 
+        if (message.length < 3) {
+            return false;
+        }
+
+        if (message.split(",").length <= 2){
+            return false;
+        }
+
+        return true;
+     }
+
+    function parseRecievedMessage(message: string) {
     try {
         if (message.indexOf("A1") == 0) {
             const value = parseInt(message.split(",")[1]);
@@ -37,21 +60,25 @@ namespace RainbowSparkleUnicorn {
            
             control.raiseEvent(RAINBOW_SPARKLE_UNICORN_TOUCH_SENSOR_TOUCHED, pin)
         }
+
         else if (message.indexOf("B2") == 0) {
             const pin = parseInt(message.split(",")[1]);
             
             control.raiseEvent(RAINBOW_SPARKLE_UNICORN_TOUCH_SENSOR_RELEASED, pin)
         }
+
         else if (message.indexOf("C1") == 0) {
            const ADC = parseInt(message.split(",")[1]);
           
             control.raiseEvent(RAINBOW_SPARKLE_UNICORN_ADC_ONE, ADC)
         }
+
         else if (message.indexOf("C2") == 0) {
            const ADC = parseInt(message.split(",")[1]);
 
            control.raiseEvent(RAINBOW_SPARKLE_UNICORN_ADC_TWO, ADC)
         }
+
         else if (message.indexOf("D1") == 0) {
 
             if (message.split(",")[1] == "+") {
@@ -60,6 +87,7 @@ namespace RainbowSparkleUnicorn {
                 control.raiseEvent(RAINBOW_SPARKLE_UNICORN_ROTARY_ONE_ROTATING, RotaryDirection.Left)
             }
         }
+
         else if (message.indexOf("D2") == 0) {
 
             if (message.split(",")[1] == "+") {
@@ -68,6 +96,7 @@ namespace RainbowSparkleUnicorn {
                 control.raiseEvent(RAINBOW_SPARKLE_UNICORN_ROTARY_TWO_ROTATING, RotaryDirection.Left)
             }
         }
+
         else if (message.indexOf("E") == 0) {
 
             const state = parseInt(message.split(",")[1]);
@@ -79,18 +108,21 @@ namespace RainbowSparkleUnicorn {
                 control.raiseEvent(RAINBOW_SPARKLE_UNICORN_SWITCH_RELEASED, pin)
             }
         }
+
       else if (message.indexOf("F1") == 0) {
 
             const pin = parseInt(message[1]);
 
             control.raiseEvent(RAINBOW_SPARKLE_UNICORN_MOTION_STOPPED,pin);
        } 
+
       else if (message.indexOf("F2") == 0) {
 
             const pin = parseInt(message[1]);
 
             control.raiseEvent(RAINBOW_SPARKLE_UNICORN_MOTION_HALTED,pin);
        } 
+
       else if (message.indexOf("G1") == 0) {
             //store ip address
             const IP = message.split(",")[1];
@@ -98,15 +130,15 @@ namespace RainbowSparkleUnicorn {
 
             control.raiseEvent(RAINBOW_SPARKLE_UNICORN_IP_RECEIVED,1);            
        } 
+
       else if (message.indexOf("G2") == 0) {
 
             const connected = parseInt(message[1]);
 
             control.raiseEvent(RAINBOW_SPARKLE_UNICORN_MQTT_CONNECTED,connected);            
-       }     
-
+       }
     }  catch(err) {   
-     sendMessage(err.message);
+        basic.showString(err.message)
     }   
     }
 
