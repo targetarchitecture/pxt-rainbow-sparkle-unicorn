@@ -17,7 +17,8 @@ namespace RainbowSparkleUnicorn {
         if (checkMessage(msg) == true){
             parseRecievedMessage(msg);
         } else {
-            led.toggle(4,4)
+            //led.toggle(4,4)
+             sendMessage("error checking message");
         }    
      })
 
