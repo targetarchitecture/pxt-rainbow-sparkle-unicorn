@@ -17,7 +17,7 @@ namespace RainbowSparkleUnicorn {
         if (checkMessage(msg) == true){
             parseRecievedMessage(msg);
         } else {
-            basic.showIcon(IconNames.Ghost);
+            led.toggle(4,4)
         }    
      })
 
@@ -31,7 +31,10 @@ namespace RainbowSparkleUnicorn {
             return false;
         }
 
-        if (message.split(",").length <= 2){
+        let X = message.split(",");
+        let Y = X.length;
+
+         if (Y < 2){
             return false;
         }
 
@@ -138,7 +141,7 @@ namespace RainbowSparkleUnicorn {
             control.raiseEvent(RAINBOW_SPARKLE_UNICORN_MQTT_CONNECTED,connected);            
        }
     }  catch(err) {   
-        basic.showString(err.message)
+        sendMessage(err.message)
     }   
     }
 
