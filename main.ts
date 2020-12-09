@@ -1,1 +1,1 @@
-basic.showIcon(IconNames.Cow)
+basic.showIcon(IconNames.EigthNote)
