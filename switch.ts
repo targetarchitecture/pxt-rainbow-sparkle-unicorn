@@ -16,14 +16,9 @@ namespace RainbowSparkleUnicorn {
     switchPin: switchPins,
     handler: () => void
   ) {
+    control.onEvent(RAINBOW_SPARKLE_UNICORN_SWITCH_PRESSED, switchPin,  () => {
 
-    control.onEvent(RAINBOW_SPARKLE_UNICORN_SWITCH_PRESSED,
-      switchPin === switchPins.Any ? EventBusValue.MICROBIT_EVT_ANY : switchPin,
-      () => {
-
-        if (switchPin != switchPins.Any){
-                SX1509state[switchPin] = switchState.pressed;   
-        }
+        SX1509state[switchPin] = switchState.pressed;   
 
         handler();
       }
@@ -46,14 +41,9 @@ namespace RainbowSparkleUnicorn {
     switchPin: switchPins,
     handler: () => void
   ) {
+    control.onEvent(RAINBOW_SPARKLE_UNICORN_SWITCH_RELEASED, switchPin , () => {
 
-    control.onEvent(RAINBOW_SPARKLE_UNICORN_SWITCH_RELEASED,
-      switchPin === switchPins.Any ? EventBusValue.MICROBIT_EVT_ANY : switchPin,
-      () => {
-
-        if (switchPin != switchPins.Any){
-                SX1509state[switchPin] = switchState.released;   
-        }
+        SX1509state[switchPin] = switchState.released;   
 
         handler();
       }
@@ -61,7 +51,7 @@ namespace RainbowSparkleUnicorn {
   }    
 
 
-export enum switchState {
+export const enum switchState {
     //% block="pressed"
     pressed = 1,
     //% block="released"
@@ -69,32 +59,38 @@ export enum switchState {
 }    
 
 export const enum switchPins {
-    //% block="1"    
-    SP1 = 1,
-    //% block="2"    
-    SP2 = 2,
-    //% block="3" 
-    SP3 = 3,
-    //% block="4" 
-    SP4 = 4,
-    //% block="5" 
-    SP5 = 5,
-    //% block="6" 
-    SP6 = 6,
-    //% block="7" 
-    SP7 = 7,
-    //% block="8" 
-    SP8 = 8,
-    //% block="9" 
-    SP9 = 9,
-    //% block="10" 
-    SP10 = 10,
-    //% block="11" 
-    SP11 = 11,
-    //% block="12"     
-    SP12 = 12,
-    //% block="any"
-    Any = 1 << 30
+    //% block="Pin 0"
+    Switch0 = 0,      
+    //% block="Pin 1"
+    Switch1 = 1,
+    //% block="Pin 2"
+    Switch2 = 2,
+    //% block="Pin 3"
+    Switch3 = 3,  
+    //% block="Pin 4"
+    Switch4 = 4,
+    //% block="Pin 5"
+    Switch5 = 5,
+    //% block="Pin 6"
+    Switch6 = 6,
+    //% block="Pin 7"
+    Switch7 = 7,
+    //% block="Pin 8"
+    Switch8 = 8,
+    //% block="Pin 9"
+    Switch9 = 9,
+    //% block="Pin 10"
+    Switch10 = 10,
+    //% block="Pin 11"
+    Switch11 = 11,
+    //% block="Pin 12"
+    Switch12 = 12,
+    //% block="Pin 13"
+    Switch13 = 13,
+    //% block="Pin 14"
+    Switch14 = 14,
+    //% block="Pin 15"
+    Switch15 = 15
 }
 
 

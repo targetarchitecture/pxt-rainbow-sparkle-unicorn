@@ -1,1 +1,1 @@
-basic.showIcon(IconNames.EigthNote)
+basic.showIcon(IconNames.Triangle)
