@@ -5,44 +5,57 @@ namespace RainbowSparkleUnicorn {
         //led.toggle(0,0)
      }
 
-    // serial.onDataReceived(serial.delimiters(Delimiters.Hash), function () {
+    //  serial.onDataReceived(serial.delimiters(Delimiters.Hash), function () {
 
-    //         let msg = serial.readUntil(serial.delimiters(Delimiters.Hash));
+    //        let msg = serial.readUntil(serial.delimiters(Delimiters.Hash));
 
     //         //trim out any whitespace
     //         msg = msg.trim();
 
     //         if (checkMessage(msg) == true){
-    //             parseRecievedMessage(msg);
+    //             led.toggle(3,3)
+    //           //  parseRecievedMessage(msg);
     //         } else {
     //             //led.toggle(4,4)
-    //             sendMessage("error checking message.");
+    //             //sendMessage("error checking message.");
     //         }         
         
-    //  })
+    //         //sendMessage("00");
 
+    //   })
+
+// control.inBackground(function () {
+//     basic.pause(10);
+//      if (initialised == true){
+//     sendMessage("00");
+//      }
+//  })
 
     basic.forever(function () {
 
-            basic.pause(10);
-            sendMessage("00");
+    basic.pause(10);
 
-            let msg = serial.readUntil(serial.delimiters(Delimiters.Hash));
+ if (initialised == true){
+        
+//             sendMessage("00");
 
-            led.toggle(1,1)
+        let msg2 = serial.readUntil(serial.delimiters(Delimiters.Hash));
+//basic.showNumber(msg2.length())
+//             //led.toggle(1,1)
 
-            //trim out any whitespace
-            msg = msg.trim();
+//             //trim out any whitespace
+//            let trimmedMsg = msg.trim();
 
-            //echo
-            //sendMessage("$" + msg);
+//             //echo
+            // sendMessage("ECHO! " + msg);
 
-            if (checkMessage(msg) == true){
-                parseRecievedMessage(msg);
-            } else {
-                sendMessage("error checking message.");
-            }   
-    })
+//             if (checkMessage(trimmedMsg) == true){
+//                 parseRecievedMessage(trimmedMsg);
+//             } else {
+//                 sendMessage("error checking message.");
+//             }   
+ }    
+   })
 
      function checkMessage(message: string): boolean
      {

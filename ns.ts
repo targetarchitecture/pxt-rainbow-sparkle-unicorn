@@ -1,6 +1,8 @@
 //% color=#FF6EC7 weight=100 icon="\uf004" block="Rainbow Sparkle Unicorn"
 namespace RainbowSparkleUnicorn {
 
+export let initialised =false;
+
     /**
      * Add into the start function to initialise the board.
      */
@@ -29,5 +31,7 @@ namespace RainbowSparkleUnicorn {
         //RainbowSparkleUnicorn.setVolume(0);        
 
         //basic.showIcon(IconNames.Heart)
+
+        initialised = true;
     }
 }
