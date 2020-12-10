@@ -5,8 +5,24 @@ namespace RainbowSparkleUnicorn {
         //led.toggle(0,0)
      }
 
-    serial.onDataReceived(serial.delimiters(Delimiters.Hash), function () {
+    // serial.onDataReceived(serial.delimiters(Delimiters.Hash), function () {
 
+    //         let msg = serial.readUntil(serial.delimiters(Delimiters.Hash));
+
+    //         //trim out any whitespace
+    //         msg = msg.trim();
+
+    //         if (checkMessage(msg) == true){
+    //             parseRecievedMessage(msg);
+    //         } else {
+    //             //led.toggle(4,4)
+    //             sendMessage("error checking message.");
+    //         }         
+        
+    //  })
+
+
+    basic.forever(function () {
             let msg = serial.readUntil(serial.delimiters(Delimiters.Hash));
 
             //trim out any whitespace
@@ -17,9 +33,8 @@ namespace RainbowSparkleUnicorn {
             } else {
                 //led.toggle(4,4)
                 sendMessage("error checking message.");
-            }         
-        
-     })
+            }   
+    })
 
      function checkMessage(message: string): boolean
      {
