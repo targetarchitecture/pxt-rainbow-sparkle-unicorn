@@ -49,14 +49,12 @@ let MPR121touched = [false, false, false, false, false, false, false, false, fal
   ) {
     control.onEvent(
       RAINBOW_SPARKLE_UNICORN_TOUCH_SENSOR_TOUCHED,
-      pin === TouchSensor.Any ? EventBusValue.MICROBIT_EVT_ANY : pin,
+      pin,
       () => {
         //touchState.eventValue = control.eventValue();
         //MPR121touched[pin] = true
 
-        if (pin != TouchSensor.Any){
-            MPR121touched[pin] = true;   
-        }
+        MPR121touched[pin] = true;  
 
         handler();
       }
@@ -80,12 +78,10 @@ let MPR121touched = [false, false, false, false, false, false, false, false, fal
   ) {
     control.onEvent(
       RAINBOW_SPARKLE_UNICORN_TOUCH_SENSOR_RELEASED,
-      pin === TouchSensor.Any ? EventBusValue.MICROBIT_EVT_ANY : pin,
+      pin,
       () => {
 
-        if (pin != TouchSensor.Any){
-            MPR121touched[pin] = false;   
-        }
+        MPR121touched[pin] = false;   
 
         handler();
       }
@@ -94,6 +90,8 @@ let MPR121touched = [false, false, false, false, false, false, false, false, fal
 
 
 export const enum TouchSensor {
+    //% block="0"    
+    T0 = 0,    
     //% block="1"    
     T1 = 1,
     //% block="2"    
@@ -115,11 +113,7 @@ export const enum TouchSensor {
     //% block="10" 
     T10 = 10,
     //% block="11" 
-    T11 = 11,
-    //% block="12"     
-    T12 = 12,
-    //% block="any"
-    Any = 1 << 30
+    T11 = 11
 }
 
 export const enum TouchAction {

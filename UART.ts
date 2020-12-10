@@ -23,15 +23,23 @@ namespace RainbowSparkleUnicorn {
 
 
     basic.forever(function () {
+
+            basic.pause(10);
+            sendMessage("00");
+
             let msg = serial.readUntil(serial.delimiters(Delimiters.Hash));
+
+            led.toggle(1,1)
 
             //trim out any whitespace
             msg = msg.trim();
 
+            //echo
+            //sendMessage("$" + msg);
+
             if (checkMessage(msg) == true){
                 parseRecievedMessage(msg);
             } else {
-                //led.toggle(4,4)
                 sendMessage("error checking message.");
             }   
     })
@@ -76,12 +84,16 @@ namespace RainbowSparkleUnicorn {
         else if (message.indexOf("B1") == 0) {
             const pin = parseInt(message.split(",")[1]);
            
+led.toggle(1,3)
+
             control.raiseEvent(RAINBOW_SPARKLE_UNICORN_TOUCH_SENSOR_TOUCHED, pin)
         }
 
         else if (message.indexOf("B2") == 0) {
             const pin = parseInt(message.split(",")[1]);
             
+led.toggle(1,2)
+
             control.raiseEvent(RAINBOW_SPARKLE_UNICORN_TOUCH_SENSOR_RELEASED, pin)
         }
 
