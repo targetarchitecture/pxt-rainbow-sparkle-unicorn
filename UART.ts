@@ -1,31 +1,24 @@
 namespace RainbowSparkleUnicorn {
 
    export function sendMessage(message: string): void {
-        try
-        {
         serial.writeString(message + "\r\n");
-        }  catch(err) {   
-            basic.pause(100);
-        }   
+        //led.toggle(0,0)
      }
 
     serial.onDataReceived(serial.delimiters(Delimiters.Hash), function () {
-        try
-        {
+
             let msg = serial.readUntil(serial.delimiters(Delimiters.Hash));
 
             //trim out any whitespace
             msg = msg.trim();
 
             if (checkMessage(msg) == true){
-            parseRecievedMessage(msg);
+                parseRecievedMessage(msg);
             } else {
-            //led.toggle(4,4)
-            sendMessage("error checking message.");
-            }          
-        }  catch(err) {   
-            basic.pause(100);
-        }        
+                //led.toggle(4,4)
+                sendMessage("error checking message.");
+            }         
+        
      })
 
      function checkMessage(message: string): boolean

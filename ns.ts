@@ -15,7 +15,7 @@ namespace RainbowSparkleUnicorn {
 
         // Enforce initialization of serial RX buffers to prevent hang
         serial.setTxBufferSize(64);
-        serial.setRxBufferSize(64); 
+        serial.setRxBufferSize(64);
 
         basic.pause(50);
 
