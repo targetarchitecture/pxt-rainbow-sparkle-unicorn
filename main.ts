@@ -1,2 +1,1 @@
-RainbowSparkleUnicorn.start()
-basic.showIcon(IconNames.Triangle)
+basic.showIcon(IconNames.Yes)
