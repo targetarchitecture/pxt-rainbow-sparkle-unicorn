@@ -34,4 +34,15 @@ export let initialised =false;
 
         initialised = true;
     }
+
+
+        /**
+     * Write a comment
+     * @param theComment eg:'write comment here'
+     */
+    //% subcategory="Expert" 
+    //% block=comment|%theComment
+    export function comment(theComment: string): void {
+        // do nothing
+    }
 }

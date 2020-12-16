@@ -36,11 +36,11 @@ RainbowSparkleUnicorn.onBusyChange(function () {
     }
 })
 let pwm = 0
+let track = 0
 RainbowSparkleUnicorn.start()
 RainbowSparkleUnicorn.setVolume(0)
 RainbowSparkleUnicorn.turnOn(Blinkable.Blinkable0)
 RainbowSparkleUnicorn.playTrack(1)
 RainbowSparkleUnicorn.dial1(0)
 RainbowSparkleUnicorn.dial1(10)
-let track = 0
 basic.showIcon(IconNames.Yes)
