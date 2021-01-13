@@ -9,16 +9,6 @@ export let initialised =false;
     //% block="Start Rainbow Sparkle Unicorn"
     export function start(): void {
 
-        serial.redirect(
-            SerialPin.P1,
-            SerialPin.P2,
-            BaudRate.BaudRate115200
-        )
-
-        // Enforce initialization of serial RX buffers to prevent hang
-        serial.setTxBufferSize(64);
-        serial.setRxBufferSize(64);
-
         basic.pause(50);
 
         RainbowSparkleUnicorn.sendMessage("STARTING");
