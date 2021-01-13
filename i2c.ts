@@ -1,45 +1,35 @@
 namespace RainbowSparkleUnicorn {
 
-let msg = ""
-let a4 = 0
-let a3 = 0
-let startIndex = 0
-let a1 = 0
-let asr_txt = ""
-let num = 0
-let a2 = 0
-let I2C_ADDR = 4
-let DELAY = 150
+let currentRecievedMessage = "";
+let ESP32_I2C_ADDR = 4;
+
+//let DELAY = 150
+
 pins.digitalWritePin(DigitalPin.P8, 0)
 
-
-if (initialised == true){
-}
-
    export function sendMessage(message: string): void {
+
         pins.digitalWritePin(DigitalPin.P8, 1)
         basic.pause(1)
-        asr_txt = message
-        num = asr_txt.length
+//let asr_txt = ""
+       // asr_txt = message
+        let num = 0;
+        num = message.length
         let buf2 = pins.createBuffer(num+4);
         let crcbuf = pins.createBuffer(num);
         buf2[0] = 2
         buf2[1] = num + 4
         for (let j = 0; j <= num - 1; j++) {
-            buf2[j + 2] = asr_txt.charCodeAt(j)
-            crcbuf[j] = asr_txt.charCodeAt(j)
+            buf2[j + 2] = message.charCodeAt(j)
+            crcbuf[j] = message.charCodeAt(j)
         }
         buf2[num + 2] = calcCRC8(crcbuf,num)
         buf2[num + 3] = 4
-        pins.i2cWriteBuffer(I2C_ADDR, buf2, false);
-        let i2cBuffer = pins.i2cReadBuffer(I2C_ADDR, 32, false);
-        for (let k = 0; k <= 32; k++) {
-            // find packet start
-            if (i2cBuffer[k] == 2) {
-                startIndex = k
-            }
-        }
-        readMsgV2(i2cBuffer,startIndex);
+
+        pins.i2cWriteBuffer(ESP32_I2C_ADDR, buf2, false);
+
+        readI2CMessage();
+
         pins.digitalWritePin(DigitalPin.P8, 0)
     }
 
@@ -63,34 +53,52 @@ if (initialised == true){
         return true;
      }
 
-    function readMsgV2 (rxBuf: Buffer,startIndex:number ) {
-        a1 = rxBuf[startIndex];
-        let contentLength = rxBuf[startIndex+1]-4;
+    function readI2CMessage ( ) {
+
+        let startIndex = 0;
+        let i2cBuffer = pins.i2cReadBuffer(ESP32_I2C_ADDR, 32, false);
+
+        for (let k = 0; k <= 32; k++) {
+            // find packet start
+            if (i2cBuffer[k] == 2) {
+                startIndex = k
+            }
+        }
+
+        let a4 = 0;
+        let a3 = 0;
+        let a1 = 0;
+        let a2 = 0;
+
+        a1 = i2cBuffer[startIndex];
+        let contentLength = i2cBuffer[startIndex+1]-4;
 
         if (contentLength > 0){
 
-        msg = ""
+        currentRecievedMessage = ""
 
             for (let l = 0; l < contentLength ; l++) {
-                a2 =  rxBuf[l+2] ;
+                a2 =  i2cBuffer[l+2] ;
 
                 if (a2 != 255 && a2 != 0){
-                    msg = msg + String.fromCharCode(a2);
+                    currentRecievedMessage = currentRecievedMessage + String.fromCharCode(a2);
                 }
             }
 
-            msg = msg.trim();
+            currentRecievedMessage = currentRecievedMessage.trim();
 
-        if (msg.length > 0){
-            control.raiseEvent(1001, msg.length);
+        if (currentRecievedMessage.length > 0){
+            control.raiseEvent(RAINBOW_SPARKLE_UNICORN_I2C_EVENT, currentRecievedMessage.length);
         }}
     }
 
-
     control.inBackground(function () {
         while (true) {
-            sendMessage("00," + input.runningTime())
-            basic.pause(50)
+            if (initialised == true){
+
+                sendMessage("00," + input.runningTime())
+                basic.pause(50)
+            }
         }
     })
 
@@ -115,10 +123,10 @@ if (initialised == true){
         return crc;
     }
 
-    control.onEvent(1001, EventBusValue.MICROBIT_EVT_ANY, function () {
+    control.onEvent(RAINBOW_SPARKLE_UNICORN_I2C_EVENT, EventBusValue.MICROBIT_EVT_ANY, function () {
 
        // serial.writeLine(msg);
-        parseRecievedMessage(msg);
+        parseRecievedMessage(currentRecievedMessage);
         led.toggle(0, 0);
     })
 
