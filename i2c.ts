@@ -1,6 +1,6 @@
 namespace RainbowSparkleUnicorn {
 
-let msg = ""
+export let msg = ""
 let a4 = 0
 let a3 = 0
 let startIndex = 0
@@ -19,7 +19,7 @@ if (initialised == true){
    export function sendMessage(message: string): void {
         pins.digitalWritePin(DigitalPin.P8, 1)
         basic.pause(1)
-        asr_txt = str
+        asr_txt = message
         num = asr_txt.length
         let buf2 = pins.createBuffer(num+4);
         let crcbuf = pins.createBuffer(num);
@@ -94,6 +94,32 @@ if (initialised == true){
         }
     })
 
+    function calcCRC8(data :Buffer, length :number) :number {
+        let crc = 0;
+        let extract;
+        let sum;
 
+        for (let n = 0; n < length; n++) {
+            extract = data[n];
+
+            for (let o = 8; o; o--) {
+                sum = (crc ^ extract) & 0x01;
+                crc >>= 1;
+                if (sum) {
+                    crc ^= 0x8C;
+                }
+                extract >>= 1;
+            }
+        }
+
+        return crc;
+    }
+
+    control.onEvent(1001, EventBusValue.MICROBIT_EVT_ANY, function () {
+
+       // serial.writeLine(msg);
+        parseRecievedMessage(msg);
+        led.toggle(0, 0);
+    })
 
 }

@@ -1,12 +1,6 @@
 namespace RainbowSparkleUnicorn {
 
-    control.onEvent(1001, EventBusValue.MICROBIT_EVT_ANY, function () {
-        //serial.writeValue("contentLength", msg.length);
-        serial.writeLine(msg);
-        led.toggle(0, 0);
-    })
-
-    function parseRecievedMessage(message: string) {
+  export function parseRecievedMessage(message: string) {
         try {
             if (message.indexOf("A1") == 0) {
                 const value = parseInt(message.split(",")[1]);
@@ -26,7 +20,7 @@ namespace RainbowSparkleUnicorn {
             else if (message.indexOf("B1") == 0) {
                 const pin = parseInt(message.split(",")[1]);
             
-    led.toggle(1,3)
+            led.toggle(1,3)
 
                 control.raiseEvent(RAINBOW_SPARKLE_UNICORN_TOUCH_SENSOR_TOUCHED, pin)
             }
@@ -34,7 +28,7 @@ namespace RainbowSparkleUnicorn {
             else if (message.indexOf("B2") == 0) {
                 const pin = parseInt(message.split(",")[1]);
                 
-    led.toggle(1,2)
+            led.toggle(1,2)
 
                 control.raiseEvent(RAINBOW_SPARKLE_UNICORN_TOUCH_SENSOR_RELEASED, pin)
             }
