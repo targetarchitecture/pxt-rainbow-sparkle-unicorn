@@ -19,11 +19,12 @@
         "switch.ts",
         "constants.ts",
         "UART.ts",
-        "MQTT.ts"
+        "MQTT.ts",
+        "i2c.ts"
     ],
     "testFiles": [],
     "supportedTargets": [
         "microbit"
     ],
-    "preferredEditor": "blocksprj"
+    "preferredEditor": "tsprj"
 }
