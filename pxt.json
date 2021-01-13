@@ -18,9 +18,9 @@
         "ESP32.ts",
         "switch.ts",
         "constants.ts",
-        "UART.ts",
         "MQTT.ts",
-        "i2c.ts"
+        "i2c.ts",
+        "routing.ts"
     ],
     "testFiles": [],
     "supportedTargets": [
