@@ -1,6 +1,6 @@
 namespace RainbowSparkleUnicorn {
 
-export let msg = ""
+let msg = ""
 let a4 = 0
 let a3 = 0
 let startIndex = 0
