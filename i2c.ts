@@ -94,11 +94,11 @@ pins.digitalWritePin(DigitalPin.P8, 0)
 
      basic.forever(() => {
         while (true) {
-           // if (initialised == true){
+            if (initialised == true){
 
                 sendMessage("00," + input.runningTime())
                 basic.pause(50)
-          //  }
+            }
         }
     })
 
