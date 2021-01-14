@@ -92,7 +92,7 @@ pins.digitalWritePin(DigitalPin.P8, 0)
         }}
     }
 
-    control.inBackground(function () {
+     basic.forever(() => {
         while (true) {
            // if (initialised == true){
 
