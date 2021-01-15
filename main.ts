@@ -38,7 +38,7 @@ RainbowSparkleUnicorn.onBusyChange(function () {
 let pwm = 0
 let track = 0
 RainbowSparkleUnicorn.start()
-RainbowSparkleUnicorn.setVolume(0)
+RainbowSparkleUnicorn.setVolume(6)
 RainbowSparkleUnicorn.turnOn(Blinkable.Blinkable0)
 RainbowSparkleUnicorn.playTrack(1)
 RainbowSparkleUnicorn.dial1(0)

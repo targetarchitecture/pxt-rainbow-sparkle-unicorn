@@ -1,18 +1,13 @@
 namespace RainbowSparkleUnicorn {
 
-let currentRecievedMessage = "";
-let ESP32_I2C_ADDR = 4;
-
-//let DELAY = 150
-
-pins.digitalWritePin(DigitalPin.P8, 0)
+    let currentRecievedMessage = "";
+    let ESP32_I2C_ADDR = 4;
 
    export function sendMessage(message: string): void {
 
         pins.digitalWritePin(DigitalPin.P8, 1)
         basic.pause(1)
-//let asr_txt = ""
-       // asr_txt = message
+
         let num = 0;
         num = message.length
         let buf2 = pins.createBuffer(num+4);
@@ -73,6 +68,8 @@ pins.digitalWritePin(DigitalPin.P8, 0)
         a1 = i2cBuffer[startIndex];
         let contentLength = i2cBuffer[startIndex+1]-4;
 
+        //serial.writeValue("contentLength", contentLength);
+
         if (contentLength > 0){
 
         currentRecievedMessage = ""
@@ -87,20 +84,23 @@ pins.digitalWritePin(DigitalPin.P8, 0)
 
             currentRecievedMessage = currentRecievedMessage.trim();
 
+        //serial.writeLine(currentRecievedMessage);
+
+        //serial.writeValue("length", currentRecievedMessage.length );
+
+
         if (currentRecievedMessage.length > 0){
-            control.raiseEvent(RAINBOW_SPARKLE_UNICORN_I2C_EVENT, currentRecievedMessage.length);
+            parseRecievedMessage(currentRecievedMessage);
+            //control.raiseEvent(RAINBOW_SPARKLE_UNICORN_I2C_EVENT, currentRecievedMessage.length);
         }}
     }
 
      basic.forever(() => {
         while (true) {
-            if (initialised == true){
-                led.toggle(0, 0)
-
+            if (initialised == true)            
+            {
                 sendMessage("00," + input.runningTime())
                 basic.pause(50)
-                
-                led.toggle(0, 0)
             }
         }
     })
@@ -128,8 +128,12 @@ pins.digitalWritePin(DigitalPin.P8, 0)
 
     control.onEvent(RAINBOW_SPARKLE_UNICORN_I2C_EVENT, EventBusValue.MICROBIT_EVT_ANY, function () {
 
-       // serial.writeLine(msg);
-        parseRecievedMessage(currentRecievedMessage);
+        let msg = currentRecievedMessage;
+
+        serial.writeLine(msg);
+
+        parseRecievedMessage(msg);
+
         led.toggle(0, 0);
     })
 

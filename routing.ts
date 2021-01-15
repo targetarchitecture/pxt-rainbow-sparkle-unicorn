@@ -32,7 +32,6 @@ namespace RainbowSparkleUnicorn {
 
                 control.raiseEvent(RAINBOW_SPARKLE_UNICORN_TOUCH_SENSOR_RELEASED, pin)
             }
-
             else if (message.indexOf("C1") == 0) {
             const ADC = parseInt(message.split(",")[1]);
             

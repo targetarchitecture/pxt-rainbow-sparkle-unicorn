@@ -9,6 +9,9 @@ namespace RainbowSparkleUnicorn {
     //% block="Start Rainbow Sparkle Unicorn"
     export function start(): void {
 
+        pins.digitalWritePin(DigitalPin.P8, 0);
+
+        initialised = true;
         basic.pause(50);
 
         RainbowSparkleUnicorn.sendMessage("STARTING");
@@ -20,9 +23,8 @@ namespace RainbowSparkleUnicorn {
         
         //RainbowSparkleUnicorn.setVolume(0);        
 
-        //basic.showIcon(IconNames.Heart)
+        basic.showIcon(IconNames.Giraffe)
 
-        initialised = true;
     }
 
 
