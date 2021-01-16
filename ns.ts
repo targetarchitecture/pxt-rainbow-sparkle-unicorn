@@ -11,6 +11,7 @@ namespace RainbowSparkleUnicorn {
 
         pins.digitalWritePin(DigitalPin.P8, 0);
 
+
         initialised = true;
         basic.pause(50);
 
@@ -20,15 +21,10 @@ namespace RainbowSparkleUnicorn {
         RainbowSparkleUnicorn.turnSlider2(OnOff.OFF);
         RainbowSparkleUnicorn.turnSpinner1(OnOff.OFF);
         RainbowSparkleUnicorn.turnSpinner2(OnOff.OFF);
-        
-        //RainbowSparkleUnicorn.setVolume(0);        
-
-        basic.showIcon(IconNames.Giraffe)
-
     }
 
 
-        /**
+    /**
      * Write a comment
      * @param theComment eg:'write comment here'
      */

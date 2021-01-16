@@ -2,6 +2,9 @@ RainbowSparkleUnicorn.onButtonReleased(RainbowSparkleUnicorn.TouchSensor.T1, fun
     RainbowSparkleUnicorn.turnOn(Blinkable.Blinkable0)
     onSwitch()
 })
+RainbowSparkleUnicorn.onSwitchPressed(RainbowSparkleUnicorn.switchPins.Switch0, function () {
+    led.toggle(2, 2)
+})
 RainbowSparkleUnicorn.onButtonTouched(RainbowSparkleUnicorn.TouchSensor.T1, function () {
     RainbowSparkleUnicorn.dial1(randint(0, 30))
 })
@@ -40,6 +43,5 @@ RainbowSparkleUnicorn.turnOn(Blinkable.Blinkable0)
 RainbowSparkleUnicorn.playTrack(2)
 RainbowSparkleUnicorn.dial1(0)
 RainbowSparkleUnicorn.dial1(10)
-serial.redirectToUSB()
-serial.writeString("")
+serial.writeString("SN7 STARTING")
 basic.showIcon(IconNames.Yes)

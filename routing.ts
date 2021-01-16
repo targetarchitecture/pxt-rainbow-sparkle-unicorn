@@ -20,30 +20,27 @@ namespace RainbowSparkleUnicorn {
             else if (message.indexOf("B1") == 0) {
                 const pin = parseInt(message.split(",")[1]);
             
-            led.toggle(1,3)
+            //led.toggle(1,3)
 
                 control.raiseEvent(RAINBOW_SPARKLE_UNICORN_TOUCH_SENSOR_TOUCHED, pin)
             }
-
             else if (message.indexOf("B2") == 0) {
                 const pin = parseInt(message.split(",")[1]);
                 
-            led.toggle(1,2)
+            //led.toggle(1,2)
 
                 control.raiseEvent(RAINBOW_SPARKLE_UNICORN_TOUCH_SENSOR_RELEASED, pin)
             }
             else if (message.indexOf("C1") == 0) {
-            const ADC = parseInt(message.split(",")[1]);
+                const ADC = parseInt(message.split(",")[1]);
             
                 control.raiseEvent(RAINBOW_SPARKLE_UNICORN_ADC_ONE, ADC)
             }
-
             else if (message.indexOf("C2") == 0) {
-          const   ADC = parseInt(message.split(",")[1]);
+                const ADC = parseInt(message.split(",")[1]);
 
-            control.raiseEvent(RAINBOW_SPARKLE_UNICORN_ADC_TWO, ADC)
+                control.raiseEvent(RAINBOW_SPARKLE_UNICORN_ADC_TWO, ADC)
             }
-
             else if (message.indexOf("D1") == 0) {
 
                 if (message.split(",")[1] == "+") {
@@ -52,7 +49,6 @@ namespace RainbowSparkleUnicorn {
                     control.raiseEvent(RAINBOW_SPARKLE_UNICORN_ROTARY_ONE_ROTATING, RotaryDirection.Left)
                 }
             }
-
             else if (message.indexOf("D2") == 0) {
 
                 if (message.split(",")[1] == "+") {
@@ -61,15 +57,14 @@ namespace RainbowSparkleUnicorn {
                     control.raiseEvent(RAINBOW_SPARKLE_UNICORN_ROTARY_TWO_ROTATING, RotaryDirection.Left)
                 }
             }
-
             else if (message.indexOf("E") == 0) {
 
                 const state = parseInt(message.split(",")[1]);
                 const pin = parseInt(message.replaceAll("E","").split(",")[0]);
 
-            //    serial.writeValue("state", state);
-            //    serial.writeValue("pin", pin);
-            //      serial.writeLine(message);
+                serial.writeValue("state", state);
+                serial.writeValue("pin", pin);
+                  serial.writeLine(message);
 
                 if (state == 0) {
                     // led.plotBarGraph(pin, 20)
@@ -86,14 +81,12 @@ namespace RainbowSparkleUnicorn {
 
                 control.raiseEvent(RAINBOW_SPARKLE_UNICORN_MOTION_STOPPED,pin);
         } 
-
         else if (message.indexOf("F2") == 0) {
 
                 const pin = parseInt(message[1]);
 
                 control.raiseEvent(RAINBOW_SPARKLE_UNICORN_MOTION_HALTED,pin);
         } 
-
         else if (message.indexOf("G1") == 0) {
                 //store ip address
                 const IP = message.split(",")[1];
@@ -101,7 +94,6 @@ namespace RainbowSparkleUnicorn {
 
                 control.raiseEvent(RAINBOW_SPARKLE_UNICORN_IP_RECEIVED,1);            
         } 
-
         else if (message.indexOf("G2") == 0) {
 
                 const connected = parseInt(message[1]);
