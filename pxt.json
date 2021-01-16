@@ -5,7 +5,8 @@
     "dependencies": {
         "core": "*",
         "microphone": "*",
-        "neopixel": "github:microsoft/pxt-neopixel#v0.7.3"
+        "neopixel": "github:microsoft/pxt-neopixel#master",
+        "ws2812b": "github:microsoft/pxt-ws2812b#master"
     },
     "files": [
         "main.blocks",
