@@ -2,9 +2,6 @@ RainbowSparkleUnicorn.onButtonReleased(RainbowSparkleUnicorn.TouchSensor.T1, fun
     RainbowSparkleUnicorn.turnOn(Blinkable.Blinkable0)
     onSwitch()
 })
-RainbowSparkleUnicorn.onSwitchPressed(RainbowSparkleUnicorn.switchPins.Switch0, function () {
-    led.toggle(2, 2)
-})
 RainbowSparkleUnicorn.onButtonTouched(RainbowSparkleUnicorn.TouchSensor.T1, function () {
     RainbowSparkleUnicorn.dial1(randint(0, 30))
 })
@@ -40,8 +37,11 @@ let track = 0
 RainbowSparkleUnicorn.start()
 RainbowSparkleUnicorn.setVolume(1)
 RainbowSparkleUnicorn.turnOn(Blinkable.Blinkable0)
-RainbowSparkleUnicorn.playTrack(2)
+RainbowSparkleUnicorn.playTrack(1)
 RainbowSparkleUnicorn.dial1(0)
 RainbowSparkleUnicorn.dial1(10)
-serial.writeString("SN7 STARTING")
+serial.redirectToUSB()
+basic.pause(100)
+serial.writeLine("")
+serial.writeLine("SN7 STARTING")
 basic.showIcon(IconNames.Yes)

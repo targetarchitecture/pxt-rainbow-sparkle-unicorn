@@ -18,6 +18,8 @@ namespace RainbowSparkleUnicorn {
   ) {
     control.onEvent(RAINBOW_SPARKLE_UNICORN_SWITCH_PRESSED, switchPin,  () => {
 
+    serial.writeLine("RAINBOW_SPARKLE_UNICORN_SWITCH_PRESSED");
+  
         SX1509state[switchPin] = switchState.pressed;   
 
         handler();
@@ -42,6 +44,9 @@ namespace RainbowSparkleUnicorn {
     handler: () => void
   ) {
     control.onEvent(RAINBOW_SPARKLE_UNICORN_SWITCH_RELEASED, switchPin , () => {
+
+      serial.writeLine("RAINBOW_SPARKLE_UNICORN_SWITCH_RELEASED");
+  
 
         SX1509state[switchPin] = switchState.released;   
 
