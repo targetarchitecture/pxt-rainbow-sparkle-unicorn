@@ -91,6 +91,7 @@ namespace RainbowSparkleUnicorn {
 
         if (currentRecievedMessage.length > 0){
             parseRecievedMessage(currentRecievedMessage);
+            //serial.writeLine(currentRecievedMessage);
             //control.raiseEvent(RAINBOW_SPARKLE_UNICORN_I2C_EVENT, currentRecievedMessage.length);
         }}
     }

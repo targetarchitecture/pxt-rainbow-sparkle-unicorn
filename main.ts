@@ -2,9 +2,6 @@ RainbowSparkleUnicorn.onButtonReleased(RainbowSparkleUnicorn.TouchSensor.T1, fun
     RainbowSparkleUnicorn.turnOn(Blinkable.Blinkable0)
     onSwitch()
 })
-RainbowSparkleUnicorn.onSwitchPressed(RainbowSparkleUnicorn.switchPins.Switch0, function () {
-    RainbowSparkleUnicorn.blink(Blinkable.Blinkable15, 2000, 2000)
-})
 RainbowSparkleUnicorn.onButtonTouched(RainbowSparkleUnicorn.TouchSensor.T1, function () {
     RainbowSparkleUnicorn.dial1(randint(0, 30))
 })
@@ -38,17 +35,11 @@ RainbowSparkleUnicorn.onBusyChange(function () {
 let pwm = 0
 let track = 0
 RainbowSparkleUnicorn.start()
-RainbowSparkleUnicorn.setVolume(6)
+RainbowSparkleUnicorn.setVolume(1)
 RainbowSparkleUnicorn.turnOn(Blinkable.Blinkable0)
-RainbowSparkleUnicorn.playTrack(1)
+RainbowSparkleUnicorn.playTrack(2)
 RainbowSparkleUnicorn.dial1(0)
 RainbowSparkleUnicorn.dial1(10)
+serial.redirectToUSB()
+serial.writeString("")
 basic.showIcon(IconNames.Yes)
-let strip = neopixel.create(DigitalPin.P0, 15, NeoPixelMode.RGB)
-strip.showRainbow(1, 360)
-strip.show()
-basic.forever(function () {
-    strip.rotate(1)
-    strip.show()
-    basic.pause(100)
-})

@@ -39,7 +39,7 @@ namespace RainbowSparkleUnicorn {
             }
 
             else if (message.indexOf("C2") == 0) {
-            const ADC = parseInt(message.split(",")[1]);
+          const   ADC = parseInt(message.split(",")[1]);
 
             control.raiseEvent(RAINBOW_SPARKLE_UNICORN_ADC_TWO, ADC)
             }
@@ -65,12 +65,18 @@ namespace RainbowSparkleUnicorn {
             else if (message.indexOf("E") == 0) {
 
                 const state = parseInt(message.split(",")[1]);
-                const pin = parseInt(message[0].slice(1));
+                const pin = parseInt(message.replaceAll("E","").split(",")[0]);
+
+            //    serial.writeValue("state", state);
+            //    serial.writeValue("pin", pin);
+            //      serial.writeLine(message);
 
                 if (state == 0) {
+                    // led.plotBarGraph(pin, 20)
                     control.raiseEvent(RAINBOW_SPARKLE_UNICORN_SWITCH_PRESSED, pin)
                 } else {
                     control.raiseEvent(RAINBOW_SPARKLE_UNICORN_SWITCH_RELEASED, pin)
+                    // led.plotBarGraph(0, 20)
                 }
             }
 
