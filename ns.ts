@@ -3,6 +3,7 @@ namespace RainbowSparkleUnicorn {
 
     export let initialised = false;
 
+
     /**
      * Add into the start function to initialise the board.
      */
@@ -10,7 +11,6 @@ namespace RainbowSparkleUnicorn {
     export function start(): void {
 
         pins.digitalWritePin(DigitalPin.P8, 0);
-
 
         initialised = true;
         basic.pause(50);
@@ -22,6 +22,7 @@ namespace RainbowSparkleUnicorn {
         RainbowSparkleUnicorn.turnSpinner1(OnOff.OFF);
         RainbowSparkleUnicorn.turnSpinner2(OnOff.OFF);
     }
+
 
 
     /**

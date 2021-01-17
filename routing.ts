@@ -1,8 +1,21 @@
 namespace RainbowSparkleUnicorn {
 
+    let printReceivedMsgs = false;
+
+    /**
+     * Print received messages
+     */
+    //% subcategory="Expert" 
+    //% block=Print received messages
+    export function printReceivedMessages(): void {
+        printReceivedMsgs = true;
+    }
+
   export function parseRecievedMessage(message: string) {
         try {
-                serial.writeLine(message);
+                if (printReceivedMsgs == true){
+                    serial.writeLine(message);
+                }
 
                 if (message.indexOf("A1") == 0) {
                     const value = parseInt(message.split(",")[1]);
@@ -64,24 +77,14 @@ namespace RainbowSparkleUnicorn {
                     const state = parseInt(message.split(",")[1]);
                     const pin = parseInt(message.replaceAll("E","").split(",")[0]);
 
-                    //serial.writeValue("state", state);
-                //serial.writeValue("pin", pin);
-                    //serial.writeLine(message);
-
-                                           serial.writeValue("state", state);
-                        serial.writeValue("pin", pin);
-
                     if (state == 0) {
               
                         control.raiseEvent(RAINBOW_SPARKLE_UNICORN_SWITCH_PRESSED, pin)
-                               //   led.toggle(4, 4)
  
-                        serial.writeValue("RAINBOW_SPARKLE_UNICORN_SWITCH_PRESSED",RAINBOW_SPARKLE_UNICORN_SWITCH_PRESSED);
-
                     } else {
 
                         control.raiseEvent(RAINBOW_SPARKLE_UNICORN_SWITCH_RELEASED, pin)
-                         // led.toggle(4, 4)
+
                     }
                 }
 

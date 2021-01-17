@@ -7,8 +7,7 @@ namespace RainbowSparkleUnicorn {
    * @param handler body code to run when the event is raised
    */
   //% subcategory="Switch"
-  //% blockId=makerbit_switch_on_sensor
-  //% block="on switch sensor | %sensor"
+  //% block="on switch pressed on | %sensor"
   //% sensor.fieldEditor="gridpicker" sensor.fieldOptions.columns=6
   //% sensor.fieldOptions.tooltips="false"
   //% weight=65
@@ -34,27 +33,26 @@ namespace RainbowSparkleUnicorn {
    * @param handler body code to run when the event is raised
    */
   //% subcategory="Switch"
-  //% blockId=makerbit_switch_off_sensor
-  //% block="on switch released on pin | %sensor"
+  //% block="on switch released on | %sensor"
   //% sensor.fieldEditor="gridpicker" sensor.fieldOptions.columns=6
   //% sensor.fieldOptions.tooltips="false"
-  //% weight=65
-//   export function onSwitchReleased(
-//     sensor: switchPins,
-//     handler: () => void
-//   ) {
+  //% weight=70
+  export function onSwitchReleased(
+    sensor: switchPins,
+    handler: () => void
+  ) {
 
-//   control.onEvent(
-//       RAINBOW_SPARKLE_UNICORN_SWITCH_RELEASED,
-//       sensor === switchPins.Any ? EventBusValue.MICROBIT_EVT_ANY : sensor,
-//       () => {
-//         //  SX1509state[]
-//        // touchState.eventValue = control.eventValue();
-//         handler();
-//       }
-//     );
+  control.onEvent(
+      RAINBOW_SPARKLE_UNICORN_SWITCH_RELEASED,
+      sensor === switchPins.Any ? EventBusValue.MICROBIT_EVT_ANY : sensor,
+      () => {
+        //  SX1509state[]
+       // touchState.eventValue = control.eventValue();
+        handler();
+      }
+    );
 
-//   }    
+  }    
 
 
 export const enum switchPins {
