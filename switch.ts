@@ -12,20 +12,20 @@ namespace RainbowSparkleUnicorn {
   //% sensor.fieldEditor="gridpicker" switchPin.fieldOptions.columns=6
   //% sensor.fieldOptions.tooltips="false"
   //% weight=65
-  export function onSwitchPressed(
-    switchPin: switchPins,
-    handler: () => void
-  ) {
-    control.onEvent(RAINBOW_SPARKLE_UNICORN_SWITCH_PRESSED, switchPin,  () => {
+//   export function onSwitchPressed(
+//     switchPin: switchPins,
+//     handler: () => void
+//   ) {
+//     control.onEvent(RAINBOW_SPARKLE_UNICORN_SWITCH_PRESSED, switchPin,  () => {
 
-    serial.writeLine("RAINBOW_SPARKLE_UNICORN_SWITCH_PRESSED");
+//     serial.writeLine("RAINBOW_SPARKLE_UNICORN_SWITCH_PRESSED");
   
-        SX1509state[switchPin] = switchState.pressed;   
+//         SX1509state[switchPin] = switchState.pressed;   
 
-        handler();
-      }
-    );
-  }    
+//         handler();
+//       }
+//     );
+//   }    
 
 
    /**
@@ -39,21 +39,21 @@ namespace RainbowSparkleUnicorn {
   //% sensor.fieldEditor="gridpicker" switchPin.fieldOptions.columns=6
   //% sensor.fieldOptions.tooltips="false"
   //% weight=65
-  export function onSwitchReleased(
-    switchPin: switchPins,
-    handler: () => void
-  ) {
-    control.onEvent(RAINBOW_SPARKLE_UNICORN_SWITCH_RELEASED, switchPin , () => {
+//   export function onSwitchReleased(
+//     switchPin: switchPins,
+//     handler: () => void
+//   ) {
+//     control.onEvent(RAINBOW_SPARKLE_UNICORN_SWITCH_RELEASED, switchPin , () => {
 
-      serial.writeLine("RAINBOW_SPARKLE_UNICORN_SWITCH_RELEASED");
+//       serial.writeLine("RAINBOW_SPARKLE_UNICORN_SWITCH_RELEASED");
   
 
-        SX1509state[switchPin] = switchState.released;   
+//         SX1509state[switchPin] = switchState.released;   
 
-        handler();
-      }
-    );
-  }    
+//         handler();
+//       }
+//     );
+//   }    
 
 
 export const enum switchState {
