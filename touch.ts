@@ -113,7 +113,9 @@ export const enum TouchSensor {
     //% block="10" 
     T10 = 10,
     //% block="11" 
-    T11 = 11
+    T11 = 11,
+     //% block="Any" 
+    Any 
 }
 
 export const enum TouchAction {

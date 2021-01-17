@@ -2,7 +2,7 @@ namespace RainbowSparkleUnicorn {
 
   export function parseRecievedMessage(message: string) {
         try {
-                        serial.writeLine(message);
+                serial.writeLine(message);
 
                 if (message.indexOf("A1") == 0) {
                     const value = parseInt(message.split(",")[1]);
