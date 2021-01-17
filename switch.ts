@@ -39,22 +39,22 @@ namespace RainbowSparkleUnicorn {
   //% sensor.fieldEditor="gridpicker" sensor.fieldOptions.columns=6
   //% sensor.fieldOptions.tooltips="false"
   //% weight=65
-  export function onSwitchReleased(
-    sensor: switchPins,
-    handler: () => void
-  ) {
+//   export function onSwitchReleased(
+//     sensor: switchPins,
+//     handler: () => void
+//   ) {
 
-  control.onEvent(
-      RAINBOW_SPARKLE_UNICORN_SWITCH_RELEASED,
-      sensor === switchPins.Any ? EventBusValue.MICROBIT_EVT_ANY : sensor,
-      () => {
-        //  SX1509state[]
-       // touchState.eventValue = control.eventValue();
-        handler();
-      }
-    );
+//   control.onEvent(
+//       RAINBOW_SPARKLE_UNICORN_SWITCH_RELEASED,
+//       sensor === switchPins.Any ? EventBusValue.MICROBIT_EVT_ANY : sensor,
+//       () => {
+//         //  SX1509state[]
+//        // touchState.eventValue = control.eventValue();
+//         handler();
+//       }
+//     );
 
-  }    
+//   }    
 
 
 export const enum switchPins {
