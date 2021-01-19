@@ -3,7 +3,6 @@ namespace RainbowSparkleUnicorn {
 
     export let initialised = false;
 
-
     /**
      * Add into the start function to initialise the board.
      */
