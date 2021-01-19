@@ -22,7 +22,14 @@ namespace RainbowSparkleUnicorn {
         RainbowSparkleUnicorn.turnSpinner2(OnOff.OFF);
     }
 
-
+    /**
+     * Restart the ESP32 processor on the board
+     */
+    //% subcategory="Expert" 
+    //% block=Restart ESP32
+    export function restartESP32(): void {
+        RainbowSparkleUnicorn.sendMessage("RESTART");
+    }
 
     /**
      * Write a comment
