@@ -9,7 +9,7 @@ namespace RainbowSparkleUnicorn {
     //% subcategory="Light" 
     //% block="breathe light on pin $pin, time on $timeOn, time off $timeOff, rise time $rise, fall time $fall"
     export function breathe(pin: Breathable, timeOn: number, timeOff: number, rise: number, fall: number) {
-      sendMessage("Y2," + pin + "," + timeOn + "," + rise + "," + fall)
+      sendMessage("Y2," + pin + "," + timeOn + "," + timeOff + ","  + rise + "," + fall)
     }
 
     //% subcategory="Light" 
