@@ -1,4 +1,5 @@
 //% color=#FF6EC7 weight=100 icon="\uf004" block="Rainbow Sparkle Unicorn"
+//% groups="['Touch', 'Switch',Sound','Light',Movement','Sliders / Dials / Spinners','IoT','Expert']"
 namespace RainbowSparkleUnicorn {
 
     export let initialised = false;
