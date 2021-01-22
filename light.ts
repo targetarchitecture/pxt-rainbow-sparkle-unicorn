@@ -1,34 +1,64 @@
 namespace RainbowSparkleUnicorn {
 
+    //hold a value to know if we've sent a command
+    let sentLightCommand = false;
+
     //% subcategory="Light" 
     //% block="blink light on pin $pin, time on $timeOn, time off $timeOff"    
     export function blink(pin: Blinkable, timeOn: number, timeOff: number) {
+       if (sentLightCommand == false){
+           sentLightCommand = true;
+           resetSX1509();
+       } 
+
        sendMessage("Y1," + pin + "," + timeOn + "," + timeOff)
     }
 
     //% subcategory="Light" 
     //% block="breathe light on pin $pin, time on $timeOn, time off $timeOff, rise time $rise, fall time $fall"
     export function breathe(pin: Breathable, timeOn: number, timeOff: number, rise: number, fall: number) {
+      if (sentLightCommand == false){
+           sentLightCommand = true;
+           resetSX1509();
+       } 
+
       sendMessage("Y2," + pin + "," + timeOn + "," + timeOff + ","  + rise + "," + fall)
     }
 
     //% subcategory="Light" 
     //% block="turn off light on pin $pin"
     export function turnOff(pin: Blinkable) {
+       
+       if (sentLightCommand == false){
+           sentLightCommand = true;
+           resetSX1509();
+       } 
+
       sendMessage("Y3," + pin + ",0")
     } 
 
     //% subcategory="Light" 
     //% block="turn on light on pin $pin"
     export function turnOn(pin: Blinkable) {
+
+       if (sentLightCommand == false){
+           sentLightCommand = true;
+           resetSX1509();
+       } 
+
       sendMessage("Y3," + pin + ",1")
     }          
     
     //% subcategory="Light" 
     //% block="turn off all lights"
     export function turnAllOff() {
-        sendMessage("Y4")  
+        sentLightCommand = true;
+        resetSX1509();
     } 
+
+    function resetSX1509(){
+        sendMessage("Y4")     
+    }
 
 /**
     turn on all lights
