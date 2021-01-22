@@ -4,21 +4,22 @@
     "description": "",
     "dependencies": {
         "core": "*",
-        "microphone": "*"
+        "microphone": "*",
+        "tinkercademy-tinker-kit": "github:tinkertanker/pxt-tinkercademy-tinker-kit#v1.1.1"
     },
     "files": [
         "main.blocks",
         "main.ts",
         "README.md",
-        "touch.ts",
         "ns.ts",
-        "sound.ts",
-        "movement.ts",
-        "light.ts",
-        "ESP32.ts",
+        "touch.ts",
         "switch.ts",
-        "constants.ts",
+        "sound.ts",
+        "light.ts",
+        "movement.ts",
         "MQTT.ts",
+        "ESP32.ts",
+        "constants.ts",
         "i2c.ts",
         "routing.ts"
     ],
@@ -26,5 +27,5 @@
     "supportedTargets": [
         "microbit"
     ],
-    "preferredEditor": "blocksprj"
+    "preferredEditor": "tsprj"
 }
