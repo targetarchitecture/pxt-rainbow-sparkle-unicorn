@@ -1,5 +1,3 @@
-
-
 namespace RainbowSparkleUnicorn {
 
 let dfplayerBusy: boolean = false;
@@ -30,7 +28,7 @@ control.onEvent(RAINBOW_SPARKLE_UNICORN_SOUND_SET_VOLUME, EventBusValue.MICROBIT
      */
     //% subcategory="Sound"     
     //% block="Play track $track"
-    //% track.min=0 track.max=2999
+    //% track.min=0 track.max=20
     export function playTrack(track: number) {
         dfplayerTrack = track;
         sendMessage("Z4," + track)
@@ -105,7 +103,7 @@ control.onEvent(RAINBOW_SPARKLE_UNICORN_SOUND_SET_TRACK, EventBusValue.MICROBIT_
         return dfplayerTrack;
     }   
 
-    /**
+   /**
    * Do something when a sound track starts/stops.
    * @param handler body code to run when event is raised
    */
@@ -124,8 +122,4 @@ control.onEvent(RAINBOW_SPARKLE_UNICORN_SOUND_SET_TRACK, EventBusValue.MICROBIT_
             }
         );
     }
-
-
-
-
 }

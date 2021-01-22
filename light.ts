@@ -3,8 +3,13 @@ namespace RainbowSparkleUnicorn {
     //hold a value to know if we've sent a command
     let sentLightCommand = false;
 
+    /**
+     * Blink light for the specified time in milliseconds
+     * @param timeOn how long to turn on for, eg: 100, 200, 500, 1000, 2000
+     * @param timeOff how long to turn off for, eg: 100, 200, 500, 1000, 2000
+     */
     //% subcategory="Light" 
-    //% block="blink light on pin $pin, time on $timeOn, time off $timeOff"    
+    //% block="blink light on pin $pin, on (ms) $timeOn, off (ms) $timeOff"    
     export function blink(pin: Blinkable, timeOn: number, timeOff: number) {
        if (sentLightCommand == false){
            sentLightCommand = true;
@@ -14,8 +19,15 @@ namespace RainbowSparkleUnicorn {
        sendMessage("Y1," + pin + "," + timeOn + "," + timeOff)
     }
 
+    /**
+     * Blink light for the specified time in milliseconds
+     * @param timeOn how long to turn on for, eg: 100, 200, 500, 1000, 2000
+     * @param timeOff how long to turn off for, eg: 100, 200, 500, 1000, 2000
+     * @param rise how long to rise for, eg: 100, 200, 500, 1000, 2000
+     * @param fall how long to fall for, eg: 100, 200, 500, 1000, 2000 
+     */
     //% subcategory="Light" 
-    //% block="breathe light on pin $pin, time on $timeOn, time off $timeOff, rise time $rise, fall time $fall"
+    //% block="breathe light on pin $pin, on (ms) $timeOn, off (ms) $timeOff, rise (ms) $rise, fall (ms) $fall"
     export function breathe(pin: Breathable, timeOn: number, timeOff: number, rise: number, fall: number) {
       if (sentLightCommand == false){
            sentLightCommand = true;
@@ -67,42 +79,12 @@ namespace RainbowSparkleUnicorn {
     //% subcategory="Expert" 
     //% block="turn on all lights"
     export function turnAllOn() {
-        basic.pause(10)
-        sendMessage("Y3,0,1")    
-        basic.pause(10)    
-        sendMessage("Y3,1,1")
-        basic.pause(10)
-        sendMessage("Y3,2,1")
-        basic.pause(10)
-        sendMessage("Y3,3,1")
-        basic.pause(10)
-        sendMessage("Y3,4,1")
-        basic.pause(10)
-        sendMessage("Y3,5,1")
-        basic.pause(10)
-        sendMessage("Y3,6,1")
-        basic.pause(10)
-        sendMessage("Y3,7,1")
-        basic.pause(10)
-        sendMessage("Y3,8,1")
-        basic.pause(10)
-        sendMessage("Y3,9,1")
-        basic.pause(10)
-        sendMessage("Y3,10,1")
-        basic.pause(10)
-        sendMessage("Y3,11,1")
-        basic.pause(10)                
-        sendMessage("Y3,12,1")
-        basic.pause(10)
-        sendMessage("Y3,13,1")  
-        basic.pause(10)  
-        sendMessage("Y3,14,1")
-        basic.pause(10)
-        sendMessage("Y3,15,1")            
-        basic.pause(10)
+
+        for(let pin = 0; pin <= 15; pin++) {
+            sendMessage("Y3," + pin + ",1")  
+            basic.pause(10)
+        }
     } 
-
-
 }
 
 enum Breathable {

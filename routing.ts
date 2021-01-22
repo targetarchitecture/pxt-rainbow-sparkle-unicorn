@@ -6,7 +6,7 @@ namespace RainbowSparkleUnicorn {
      * Print received messages
      */
     //% subcategory="Expert" 
-    //% block=Print received messages
+    //% block="Print received messages"
     export function printReceivedMessages(): void {
         printReceivedMsgs = true;
     }
