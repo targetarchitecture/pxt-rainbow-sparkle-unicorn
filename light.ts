@@ -9,7 +9,9 @@ namespace RainbowSparkleUnicorn {
      * @param timeOff how long to turn off for, eg: 100, 200, 500, 1000, 2000
      */
     //% subcategory="Light" 
-    //% block="blink light on pin $pin, on (ms) $timeOn, off (ms) $timeOff"    
+    //% block="blink light on pin $pin, on (ms) $timeOn, off (ms) $timeOff"   
+    //% timeOn.defl=1000
+    //% timeOff.defl=1000
     export function blink(pin: Blinkable, timeOn: number, timeOff: number) {
        if (sentLightCommand == false){
            sentLightCommand = true;
@@ -28,6 +30,10 @@ namespace RainbowSparkleUnicorn {
      */
     //% subcategory="Light" 
     //% block="breathe light on pin $pin, on (ms) $timeOn, off (ms) $timeOff, rise (ms) $rise, fall (ms) $fall"
+    //% timeOn.defl=1000
+    //% timeOff.defl=1000
+    //% rise.defl=500
+    //% fall.defl=500        
     export function breathe(pin: Breathable, timeOn: number, timeOff: number, rise: number, fall: number) {
       if (sentLightCommand == false){
            sentLightCommand = true;
