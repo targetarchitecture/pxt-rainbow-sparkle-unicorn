@@ -4,8 +4,7 @@
     "description": "",
     "dependencies": {
         "core": "*",
-        "microphone": "*",
-        "tinkercademy-tinker-kit": "github:tinkertanker/pxt-tinkercademy-tinker-kit#v1.1.1"
+        "microphone": "*"
     },
     "files": [
         "main.blocks",
