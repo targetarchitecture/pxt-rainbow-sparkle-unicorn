@@ -10,7 +10,7 @@ namespace RainbowSparkleUnicorn.Switch {
   //% block="on switch pressed on | %sensor"
   //% sensor.fieldEditor="gridpicker" sensor.fieldOptions.columns=6
   //% sensor.fieldOptions.tooltips="false"
-  //% weight=75
+  //% weight=100
  export function onSwitchPressed(
     sensor: switchPins,
     handler: () => void
@@ -36,7 +36,7 @@ namespace RainbowSparkleUnicorn.Switch {
   //% block="on switch released on | %sensor"
   //% sensor.fieldEditor="gridpicker" sensor.fieldOptions.columns=6
   //% sensor.fieldOptions.tooltips="false"
-  //% weight=70
+  //% weight=90
   export function onSwitchReleased(
     sensor: switchPins,
     handler: () => void

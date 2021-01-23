@@ -1,6 +1,6 @@
 namespace RainbowSparkleUnicorn.Touch {
 
-let MPR121touched = [false, false, false, false, false, false, false, false, false, false, false, false]
+    let MPR121touched = [false, false, false, false, false, false, false, false, false, false, false, false]
 
    /**
    * Do something when a touch sensor is touched or released.
@@ -12,7 +12,7 @@ let MPR121touched = [false, false, false, false, false, false, false, false, fal
   //% block="when touching on pin %pin"
   //% sensor.fieldEditor="gridpicker" sensor.fieldOptions.columns=6
   //% sensor.fieldOptions.tooltips="false"
-  //% weight=65
+  //% weight=100
   export function onButtonTouched(
     pin: TouchPin,
     handler: () => void
@@ -38,7 +38,7 @@ let MPR121touched = [false, false, false, false, false, false, false, false, fal
   //% block="when touch stopped on pin | %pin"
   //% sensor.fieldEditor="gridpicker" sensor.fieldOptions.columns=6
   //% sensor.fieldOptions.tooltips="false"
-  //% weight=65
+  //% weight=90
   export function onButtonReleased(
     pin: TouchPin,
     handler: () => void

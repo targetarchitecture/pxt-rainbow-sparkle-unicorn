@@ -19,10 +19,10 @@ let dfplayerTrack: number = 0;
         _sendMessage("Z1," + clippedVolume);
     }
 
-//write back the actual volume reported by dfplayer
-control.onEvent(RAINBOW_SPARKLE_UNICORN_SOUND_SET_VOLUME, EventBusValue.MICROBIT_EVT_ANY, function () {
-     dfplayerVolume = control.eventValue();  
-})
+    //write back the actual volume reported by dfplayer
+    control.onEvent(RAINBOW_SPARKLE_UNICORN_SOUND_SET_VOLUME, EventBusValue.MICROBIT_EVT_ANY, function () {
+        dfplayerVolume = control.eventValue();  
+    })
 
     /**
      * Play a track
@@ -38,10 +38,10 @@ control.onEvent(RAINBOW_SPARKLE_UNICORN_SOUND_SET_VOLUME, EventBusValue.MICROBIT
         _sendMessage("Z4," + track)
     }
 
-//write back the actual track reported by dfplayer
-control.onEvent(RAINBOW_SPARKLE_UNICORN_SOUND_SET_TRACK, EventBusValue.MICROBIT_EVT_ANY, function () {
-     dfplayerTrack = control.eventValue();  
-})
+    //write back the actual track reported by dfplayer
+    control.onEvent(RAINBOW_SPARKLE_UNICORN_SOUND_SET_TRACK, EventBusValue.MICROBIT_EVT_ANY, function () {
+        dfplayerTrack = control.eventValue();  
+    })
 
     /**
      * Increase the volume
