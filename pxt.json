@@ -21,7 +21,8 @@
         "constants.ts",
         "i2c.ts",
         "routing.ts",
-        "enums.ts"
+        "enums.ts",
+        "expert.ts"
     ],
     "testFiles": [],
     "supportedTargets": [
