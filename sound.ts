@@ -9,6 +9,8 @@ let dfplayerTrack: number = 0;
      * @param volume the touch sensor to be checked, eg: 15
      */
     //% subcategory="Sound"     
+    //% group="Volume"
+    //% weight=100
     //% block="Set volume to $volume"
     //% volume.min=0 volume.max=30
     export function setVolume(volume: number) {
@@ -27,6 +29,8 @@ control.onEvent(RAINBOW_SPARKLE_UNICORN_SOUND_SET_VOLUME, EventBusValue.MICROBIT
      * @param track the track to play, eg: 1
      */
     //% subcategory="Sound"     
+    //% group="Actions"
+    //% weight=100   
     //% block="Play track $track"
     //% track.min=0 track.max=20
     export function playTrack(track: number) {
@@ -42,7 +46,9 @@ control.onEvent(RAINBOW_SPARKLE_UNICORN_SOUND_SET_TRACK, EventBusValue.MICROBIT_
     /**
      * Increase the volume
      */
-    //% subcategory="Sound"      
+    //% subcategory="Sound" 
+    //% group="Volume"   
+    //% weight=90  
     //% block="Increase volume"
     export function increaseVolume() {
         dfplayerVolume = Math.min(Math.max(dfplayerVolume+1, 0), 30);
@@ -52,7 +58,9 @@ control.onEvent(RAINBOW_SPARKLE_UNICORN_SOUND_SET_TRACK, EventBusValue.MICROBIT_
     /**
      * Decrease the volume
      */
-    //% subcategory="Sound"      
+    //% subcategory="Sound"  
+    //% group="Volume"    
+    //% weight=80
     //% block="Decrease volume"
     export function decreaseVolume() {
         dfplayerVolume = Math.min(Math.max(dfplayerVolume-1, 0), 30);
@@ -61,12 +69,16 @@ control.onEvent(RAINBOW_SPARKLE_UNICORN_SOUND_SET_TRACK, EventBusValue.MICROBIT_
 
     
     //% subcategory="Sound"
+        //% group="Actions"
+        //% weight=80
     //% block="resume music"
     export function resume() {
         _sendMessage("Z8")
     }
 
     //% subcategory="Sound"
+        //% group="Actions"
+        //% weight=90
     //% block="pause music"
     export function pause() {
       _sendMessage("Z7")
@@ -78,6 +90,7 @@ control.onEvent(RAINBOW_SPARKLE_UNICORN_SOUND_SET_TRACK, EventBusValue.MICROBIT_
      * This block intended to be used inside of start stop event handler.
      */
     //% subcategory="Sound"
+     //% group="State"
     //% block="track started/stopped"
     //% weight=39
     export function startStop(): boolean {
@@ -88,6 +101,8 @@ control.onEvent(RAINBOW_SPARKLE_UNICORN_SOUND_SET_TRACK, EventBusValue.MICROBIT_
      * Returns the current volume
      */
     //% subcategory="Sound"
+    //% group="Volume"
+    //% weight=70
     //% block="current volume"
     export function volume(): number {
         return dfplayerVolume;
@@ -98,6 +113,7 @@ control.onEvent(RAINBOW_SPARKLE_UNICORN_SOUND_SET_TRACK, EventBusValue.MICROBIT_
      * Returns the current track
      */
     //% subcategory="Sound"
+    //% group="State"
     //% block="current track"
     export function track(): number {
         return dfplayerTrack;
@@ -108,6 +124,7 @@ control.onEvent(RAINBOW_SPARKLE_UNICORN_SOUND_SET_TRACK, EventBusValue.MICROBIT_
    * @param handler body code to run when event is raised
    */
     //% subcategory="Sound"
+    //% group="State"
     //% block="on sound track starts/stops"
     //% weight=41
     export function onBusyChange(handler: () => void) {

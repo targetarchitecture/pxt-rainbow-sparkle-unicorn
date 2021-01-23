@@ -7,6 +7,13 @@ let MQTTIPAddress: string = "0.0.0.0";
      * Example connectToInterWeb("152 2.4GHz","derwenthorpe","broker.shiftr.io","914bc336","9c0279e562dd0e1e","SN4")
      */
     //% subcategory="IoT" 
+    //% weight=100
+    //% WiFiName.defl="SSID"
+    //% WiFiPassword.defl="Network Password"
+    //% MQTTServer.defl="xxx.cloud.shiftr.io"
+    //% MQTTKey.defl="MQTT Key"
+    //% MQTTPassword.defl="MQTT Password"
+    //% MQTTClient.defl="My Microbit"
     //% block="Connect to MQTT server $WiFiName,$WiFiPassword,$MQTTServer,$MQTTKey,$MQTTPassword,$MQTTClient"
     export function connectToInterWeb(WiFiName: string, WiFiPassword: string,MQTTServer: string,MQTTKey: string,MQTTPassword: string,MQTTClient: string) {
 
@@ -35,6 +42,9 @@ let MQTTIPAddress: string = "0.0.0.0";
     }
     
     //% subcategory="IoT" 
+    //% weight=90
+    //% topic.defl="Topic"
+    //% message.defl="Hello World"   
     //% block="Send MQTT message $topic, $message"
     export function sendMQTTMessage(topic: string, message: string) {
 
@@ -42,6 +52,9 @@ let MQTTIPAddress: string = "0.0.0.0";
     }
 
     //% subcategory="IoT" 
+    //% weight=80
+    //% topic.defl="Topic"
+    //% message.defl="1234567890"   
     //% block="Send MQTT number $topic, $message"
     export function sendMQTTNumber(topic: string, message: number) {
 
@@ -51,7 +64,8 @@ let MQTTIPAddress: string = "0.0.0.0";
      /**
      * Returns the current IP address
      */
-    //% subcategory="IoT" 
+    //% subcategory="IoT"
+    //% weight=10 
     //% block="current IP address"
     export function IPAddress(): string {
         return MQTTIPAddress;

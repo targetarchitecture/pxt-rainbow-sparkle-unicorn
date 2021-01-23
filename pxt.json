@@ -4,7 +4,8 @@
     "description": "",
     "dependencies": {
         "core": "*",
-        "microphone": "*"
+        "microphone": "*",
+        "pxt-comment-block": "github:IowaDave/pxt-comment-block#v0.0.4"
     },
     "files": [
         "main.blocks",
@@ -28,5 +29,15 @@
     "supportedTargets": [
         "microbit"
     ],
-    "preferredEditor": "tsprj"
+    "preferredEditor": "blocksprj",
+    "yotta": {
+        "config": {
+            "microbit-dal": {
+                "bluetooth": {
+                    "enabled": 0,
+                    "pairing_mode": 0
+                }
+            }
+        }
+    }
 }

@@ -17,6 +17,7 @@ let direction2: RotaryDirection;
      * @param voltage the touch sensor to be checked, eg: 15
      */
     //% subcategory="Sliders / Dials / Spinners" 
+    //% group="Dials"
     //% block="Set dial 1 to $voltage \\volts"
     //% voltage.min=0 voltage.max=30
     //% weight=65
@@ -35,6 +36,7 @@ let direction2: RotaryDirection;
      * @param voltage the touch sensor to be checked, eg: 15
      */
     //% subcategory="Sliders / Dials / Spinners" 
+    //% group="Dials"
     //% block="Set dial 2 to $voltage \\volts"
     //% voltage.min=0 voltage.max=30
     //% weight=65
@@ -54,8 +56,9 @@ let direction2: RotaryDirection;
      * Turn slider 1 on/off.
      */
     //% subcategory="Sliders / Dials / Spinners" 
+    //% group="Sliders"
     //% block="Turn Slider 1 $state"
-        //% weight=60
+    //% weight=60
     export function turnSlider1(state: OnOff) {
      _sendMessage("U1," + state)
     }
@@ -64,8 +67,9 @@ let direction2: RotaryDirection;
      * Turn slider 2 on/off.
      */
     //% subcategory="Sliders / Dials / Spinners" 
+    //% group="Sliders"
     //% block="Turn Slider 2 $state"
-        //% weight=65
+    //% weight=65
     export function turnSlider2(state: OnOff) {
      _sendMessage("U2," + state)
     }
@@ -74,6 +78,7 @@ let direction2: RotaryDirection;
      * Turn spinner 1 on/off.
      */
     //% subcategory="Sliders / Dials / Spinners" 
+    //% group="Spinners"
     //% block="Turn Spinner 1 $state"
     //% weight=70
     export function turnSpinner1(state: OnOff) {
@@ -84,6 +89,7 @@ let direction2: RotaryDirection;
      * Turn spinner 2 on/off.
      */
     //% subcategory="Sliders / Dials / Spinners" 
+    //% group="Spinners"
     //% block="Turn Spinner 2 $state"
         //% weight=68
     export function turnSpinner2(state: OnOff) {
@@ -96,6 +102,7 @@ let direction2: RotaryDirection;
    * @param handler body code to run when the event is raised
    */
   //% subcategory="Sliders / Dials / Spinners"
+  //% group="Spinners"
   //% block="on Spinner 1 rotating"
   //% weight=65
   export function onRotary1Rotation(
@@ -119,6 +126,7 @@ let direction2: RotaryDirection;
    * @param handler body code to run when the event is raised
    */
   //% subcategory="Sliders / Dials / Spinners"
+  //% group="Spinners"
   //% block="on Spinner 2 rotating"
   //% weight=65
   export function onRotary2Rotation(
@@ -139,6 +147,7 @@ let direction2: RotaryDirection;
      * A function that returns spinner one direction
      */
     //% subcategory="Sliders / Dials / Spinners" 
+    //% group="Spinners"
     //% block="Spinner one direction" 
     export function Rotary1Direction(): RotaryDirection {
         return direction1;
@@ -148,35 +157,18 @@ let direction2: RotaryDirection;
      * A function that returns spinner two direction
      */
     //% subcategory="Sliders / Dials / Spinners" 
+    //% group="Spinners"
     //% block="Spinner two direction" 
     export function Rotary2Direction(): RotaryDirection {
         return direction2;
     }
 
 
-//     export function onTouch2(
-//     sensor: TouchSensor,
-//     action: TouchAction,
-//     handler: () => void
-//   ) {
-
-//     control.onEvent(
-//       action === RotaryDirection.Touched
-//         ? RAINBOW_SPARKLE_UNICORN_TOUCH_SENSOR_TOUCHED
-//         : RAINBOW_SPARKLE_UNICORN_TOUCH_SENSOR_RELEASED,
-//       sensor === TouchSensor.Any ? EventBusValue.MICROBIT_EVT_ANY : sensor,
-//       () => {
-//         //touchState.eventValue = control.eventValue();
-//         handler();
-//       }
-//     );
-//   }
-
-
     /**
      * A function that returns slider one value
      */
     //% subcategory="Sliders / Dials / Spinners" 
+    //% group="Sliders"
     //% block="Slider one value" 
     export function Slider1(): number {
         return ADC1value;
@@ -185,7 +177,8 @@ let direction2: RotaryDirection;
     /**
      * A function that returns slider two value
      */
-    //% subcategory="Sliders / Dials / Spinners" 
+    //% subcategory="Sliders / Dials / Spinners"
+    //% group="Sliders" 
     //% block="Slider two value" 
     export function Slider2(): number {
         return ADC2value;
