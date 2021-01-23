@@ -20,7 +20,8 @@
         "ESP32.ts",
         "constants.ts",
         "i2c.ts",
-        "routing.ts"
+        "routing.ts",
+        "enums.ts"
     ],
     "testFiles": [],
     "supportedTargets": [

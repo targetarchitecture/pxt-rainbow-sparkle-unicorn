@@ -1,5 +1,4 @@
 //% color=#FF6EC7 weight=100 icon="\uf004" block="Rainbow Sparkle Unicorn"
-//% groups="['Touch', 'Switch',Sound','Light',Movement','Sliders / Dials / Spinners','IoT','Expert']"
 namespace RainbowSparkleUnicorn {
 
     export let initialised = false;
@@ -15,12 +14,14 @@ namespace RainbowSparkleUnicorn {
         initialised = true;
         basic.pause(50);
 
-        RainbowSparkleUnicorn.sendMessage("STARTING");
+        _sendMessage("STARTING");
 
-        RainbowSparkleUnicorn.turnSlider1(OnOff.OFF);
-        RainbowSparkleUnicorn.turnSlider2(OnOff.OFF);
-        RainbowSparkleUnicorn.turnSpinner1(OnOff.OFF);
-        RainbowSparkleUnicorn.turnSpinner2(OnOff.OFF);
+        Controls.turnSlider1(OnOff.OFF);
+        Controls.turnSlider2(OnOff.OFF);
+        Controls.turnSpinner1(OnOff.OFF);
+        Controls.turnSpinner2(OnOff.OFF);
+
+        Light.turnAllOff();
     }
 
     /**
@@ -29,7 +30,7 @@ namespace RainbowSparkleUnicorn {
     //% subcategory="Expert" 
     //% block=Restart ESP32
     export function restartESP32(): void {
-        RainbowSparkleUnicorn.sendMessage("RESTART");
+        _sendMessage("RESTART");
     }
 
     /**

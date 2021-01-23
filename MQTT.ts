@@ -1,4 +1,4 @@
-namespace RainbowSparkleUnicorn {
+namespace RainbowSparkleUnicorn.IoT {
 
 let MQTTIPAddress: string = "0.0.0.0";
 
@@ -10,9 +10,9 @@ let MQTTIPAddress: string = "0.0.0.0";
     //% block="Connect to MQTT server $WiFiName,$WiFiPassword,$MQTTServer,$MQTTKey,$MQTTPassword,$MQTTClient"
     export function connectToInterWeb(WiFiName: string, WiFiPassword: string,MQTTServer: string,MQTTKey: string,MQTTPassword: string,MQTTClient: string) {
 
-        sendMessage("T1," + WiFiName);
-        sendMessage("T2," + WiFiPassword);
-        sendMessage("T3");
+        _sendMessage("T1," + WiFiName);
+        _sendMessage("T2," + WiFiPassword);
+        _sendMessage("T3");
 
         control.waitForEvent(RAINBOW_SPARKLE_UNICORN_IP_RECEIVED, 1);
 
@@ -25,11 +25,11 @@ let MQTTIPAddress: string = "0.0.0.0";
         // } 
 
         //connect to MQTT server
-        sendMessage("T4," + MQTTServer);
-        sendMessage("T5," + MQTTClient);
-        sendMessage("T6," + MQTTKey); 
-        sendMessage("T7," + MQTTPassword);
-        sendMessage("T8"); 
+        _sendMessage("T4," + MQTTServer);
+        _sendMessage("T5," + MQTTClient);
+        _sendMessage("T6," + MQTTKey); 
+        _sendMessage("T7," + MQTTPassword);
+        _sendMessage("T8"); 
 
         control.waitForEvent(RAINBOW_SPARKLE_UNICORN_MQTT_CONNECTED, EventBusValue.MICROBIT_EVT_ANY);      
     }
@@ -38,14 +38,14 @@ let MQTTIPAddress: string = "0.0.0.0";
     //% block="Send MQTT message $topic, $message"
     export function sendMQTTMessage(topic: string, message: string) {
 
-        sendMessage("T9," + topic + "," + message);
+        _sendMessage("T9," + topic + "," + message);
     }
 
     //% subcategory="IoT" 
     //% block="Send MQTT number $topic, $message"
     export function sendMQTTNumber(topic: string, message: number) {
 
-        sendMessage("T9," + topic + "," + message);
+        _sendMessage("T9," + topic + "," + message);
     }   
 
      /**
@@ -57,7 +57,7 @@ let MQTTIPAddress: string = "0.0.0.0";
         return MQTTIPAddress;
     }   
 
-    export function setIPAddress(IP: string)  {
+    export function _setIPAddress(IP: string)  {
          MQTTIPAddress = IP;
     }   
 }

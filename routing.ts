@@ -11,7 +11,7 @@ namespace RainbowSparkleUnicorn {
         printReceivedMsgs = true;
     }
 
-  export function parseRecievedMessage(message: string) {
+  export function _parseRecievedMessage(message: string) {
         try {
                 if (printReceivedMsgs == true){
                     serial.writeLine(message);
@@ -103,7 +103,7 @@ namespace RainbowSparkleUnicorn {
             else if (message.indexOf("G1") == 0) {
                     //store ip address
                     const IP = message.split(",")[1];
-                    setIPAddress(IP);
+                    IoT._setIPAddress(IP);
 
                     control.raiseEvent(RAINBOW_SPARKLE_UNICORN_IP_RECEIVED,1);            
             } 

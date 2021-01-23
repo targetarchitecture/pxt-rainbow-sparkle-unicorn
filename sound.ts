@@ -1,4 +1,4 @@
-namespace RainbowSparkleUnicorn {
+namespace RainbowSparkleUnicorn.Sound {
 
 let dfplayerBusy: boolean = false;
 let dfplayerVolume: number = 0;
@@ -14,7 +14,7 @@ let dfplayerTrack: number = 0;
     export function setVolume(volume: number) {
         const clippedVolume = Math.min(Math.max(volume, 0), 30);
         dfplayerVolume = clippedVolume;
-        sendMessage("Z1," + clippedVolume);
+        _sendMessage("Z1," + clippedVolume);
     }
 
 //write back the actual volume reported by dfplayer
@@ -31,7 +31,7 @@ control.onEvent(RAINBOW_SPARKLE_UNICORN_SOUND_SET_VOLUME, EventBusValue.MICROBIT
     //% track.min=0 track.max=20
     export function playTrack(track: number) {
         dfplayerTrack = track;
-        sendMessage("Z4," + track)
+        _sendMessage("Z4," + track)
     }
 
 //write back the actual track reported by dfplayer
@@ -46,7 +46,7 @@ control.onEvent(RAINBOW_SPARKLE_UNICORN_SOUND_SET_TRACK, EventBusValue.MICROBIT_
     //% block="Increase volume"
     export function increaseVolume() {
         dfplayerVolume = Math.min(Math.max(dfplayerVolume+1, 0), 30);
-        sendMessage("Z2")
+        _sendMessage("Z2")
     }
 
     /**
@@ -56,20 +56,20 @@ control.onEvent(RAINBOW_SPARKLE_UNICORN_SOUND_SET_TRACK, EventBusValue.MICROBIT_
     //% block="Decrease volume"
     export function decreaseVolume() {
         dfplayerVolume = Math.min(Math.max(dfplayerVolume-1, 0), 30);
-        sendMessage("Z3")
+        _sendMessage("Z3")
     }
 
     
     //% subcategory="Sound"
     //% block="resume music"
     export function resume() {
-        sendMessage("Z8")
+        _sendMessage("Z8")
     }
 
     //% subcategory="Sound"
     //% block="pause music"
     export function pause() {
-      sendMessage("Z7")
+      _sendMessage("Z7")
     }
 
     /**

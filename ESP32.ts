@@ -1,4 +1,4 @@
-namespace RainbowSparkleUnicorn {
+namespace RainbowSparkleUnicorn.Controls {
 
 let ADC1Enabled = false;
 let ADC2Enabled = false;
@@ -27,7 +27,7 @@ let direction2: RotaryDirection;
         //Need to resolve 0-30 to 0-255
         let mapped = pins.map(voltage, 0, 30, 0, 255)
 
-        sendMessage("X1," + mapped)
+        _sendMessage("X1," + mapped)
     }
 
    /**
@@ -45,36 +45,10 @@ let direction2: RotaryDirection;
         //Need to resolve 0-30 to 0-255
         let mapped = pins.map(voltage, 0, 30, 0, 255)
 
-        sendMessage("X2," + mapped)
+        _sendMessage("X2," + mapped)
     }
 
-    /**
-     * Set the DAC to a certain value.
-     * @value the value of the DAC output, eg: 46
-     */
-    //% subcategory="Expert" 
-    //% block="Set DAC 2 to $value"
-    //% value.min=0 value.max=255
-    export function DAC2(value: number) {
 
-        value = Math.clamp(0, 255, value)
-
-        sendMessage("X2," + value)
-    }
-
-     /**
-     * Set the DAC to a certain value.
-     * @value the value of the DAC output, eg: 194
-     */
-    //% subcategory="Expert" 
-    //% block="Set DAC 1 to $value" 
-    //% value.min=0 value.max=255
-    export function DAC1(value: number) {
-
-        value = Math.clamp(0, 255, value)
-
-        sendMessage("X1," + value)
-    }
 
      /**
      * Turn slider 1 on/off.
@@ -83,7 +57,7 @@ let direction2: RotaryDirection;
     //% block="Turn Slider 1 $state"
         //% weight=60
     export function turnSlider1(state: OnOff) {
-     sendMessage("U1," + state)
+     _sendMessage("U1," + state)
     }
 
      /**
@@ -93,7 +67,7 @@ let direction2: RotaryDirection;
     //% block="Turn Slider 2 $state"
         //% weight=65
     export function turnSlider2(state: OnOff) {
-     sendMessage("U2," + state)
+     _sendMessage("U2," + state)
     }
 
      /**
@@ -103,7 +77,7 @@ let direction2: RotaryDirection;
     //% block="Turn Spinner 1 $state"
     //% weight=70
     export function turnSpinner1(state: OnOff) {
-     sendMessage("W1," + state)
+     _sendMessage("W1," + state)
     }
 
      /**
@@ -113,7 +87,7 @@ let direction2: RotaryDirection;
     //% block="Turn Spinner 2 $state"
         //% weight=68
     export function turnSpinner2(state: OnOff) {
-     sendMessage("W2," + state)
+     _sendMessage("W2," + state)
     }
 
 
@@ -217,26 +191,34 @@ let direction2: RotaryDirection;
         return ADC2value;
     }
 
-
-export const enum RotarySensor {
-    //% block="Rotary 1"    
-    ROTARY1 = 1,
-    //% block="Rotary 2"  
-    ROTARY2 = 2
 }
 
-export const enum RotaryDirection {
-     //% block="left"
-     Left = 666,
-     //% block="right"
-     Right = 999
- }
+namespace RainbowSparkleUnicorn.Expert {
+    /**
+     * Set the DAC to a certain value.
+     * @value the value of the DAC output, eg: 46
+     */
+    //% subcategory="Expert" 
+    //% block="Set DAC 2 to $value"
+    //% value.min=0 value.max=255
+    export function DAC2(value: number) {
 
-}
+        value = Math.clamp(0, 255, value)
 
-enum OnOff {
-    //% block="On"
-    ON = 1,
-    //% block="Off"
-    OFF = 0
+        _sendMessage("X2," + value)
+    }
+
+     /**
+     * Set the DAC to a certain value.
+     * @value the value of the DAC output, eg: 194
+     */
+    //% subcategory="Expert" 
+    //% block="Set DAC 1 to $value" 
+    //% value.min=0 value.max=255
+    export function DAC1(value: number) {
+
+        value = Math.clamp(0, 255, value)
+
+        _sendMessage("X1," + value)
+    }
 }

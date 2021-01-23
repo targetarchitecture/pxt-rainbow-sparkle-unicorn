@@ -3,7 +3,7 @@ namespace RainbowSparkleUnicorn {
     let currentRecievedMessage = "";
     let ESP32_I2C_ADDR = 4;
 
-   export function sendMessage(message: string): void {
+   export function _sendMessage(message: string): void {
 
         pins.digitalWritePin(DigitalPin.P8, 1)
         basic.pause(1)
@@ -90,7 +90,7 @@ namespace RainbowSparkleUnicorn {
 
 
         if (currentRecievedMessage.length > 0){
-            parseRecievedMessage(currentRecievedMessage);
+            _parseRecievedMessage(currentRecievedMessage);
             //serial.writeLine(currentRecievedMessage);
             //control.raiseEvent(RAINBOW_SPARKLE_UNICORN_I2C_EVENT, currentRecievedMessage.length);
         }}
@@ -100,7 +100,7 @@ namespace RainbowSparkleUnicorn {
         while (true) {
             if (initialised == true)            
             {
-                sendMessage("00," + input.runningTime())
+                _sendMessage("00," + input.runningTime())
                 basic.pause(50)
             }
         }
@@ -133,7 +133,7 @@ namespace RainbowSparkleUnicorn {
 
         serial.writeLine(msg);
 
-        parseRecievedMessage(msg);
+        _parseRecievedMessage(msg);
 
         led.toggle(0, 0);
     })

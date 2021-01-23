@@ -1,15 +1,10 @@
 input.onLogoEvent(TouchButtonEvent.Touched, function () {
-    RainbowSparkleUnicorn.playTrack(24)
-    RainbowSparkleUnicorn.turnAllOff()
+    RainbowSparkleUnicorn.Sound.playTrack(24)
+    RainbowSparkleUnicorn.Light.turnAllOff()
 })
+// RainbowSparkleUnicorn.parseRecievedMessage("")
 RainbowSparkleUnicorn.start()
-RainbowSparkleUnicorn.setVolume(15)
+RainbowSparkleUnicorn.Sound.setVolume(15)
 basic.pause(100)
-RainbowSparkleUnicorn.breathe(
-Breathable.Breathable7,
-0,
-0,
-0,
-0
-)
-RainbowSparkleUnicorn.blink(Blinkable.Blinkable0, 0, 0)
+RainbowSparkleUnicorn.Light.turnAllOn()
+RainbowSparkleUnicorn._parseRecievedMessage("")
