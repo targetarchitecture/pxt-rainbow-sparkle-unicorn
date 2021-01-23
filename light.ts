@@ -75,7 +75,7 @@ namespace RainbowSparkleUnicorn.Light {
     } 
 
     function resetSX1509(){
-        _sendMessage("Y4")     
+        _sendMessage("Y4");     
     }
 
 /**

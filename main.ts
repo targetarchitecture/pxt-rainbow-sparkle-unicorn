@@ -1,10 +1,10 @@
 input.onLogoEvent(TouchButtonEvent.Touched, function () {
-    RainbowSparkleUnicorn.Sound.playTrack(24)
     RainbowSparkleUnicorn.Light.turnAllOff()
+    RainbowSparkleUnicorn.Sound.playTrack(24)
 })
-// RainbowSparkleUnicorn.parseRecievedMessage("")
 RainbowSparkleUnicorn.start()
+RainbowSparkleUnicorn.printReceivedMessages()
+RainbowSparkleUnicorn.comment("set volume")
 RainbowSparkleUnicorn.Sound.setVolume(15)
 basic.pause(100)
 RainbowSparkleUnicorn.Light.turnAllOn()
-RainbowSparkleUnicorn._parseRecievedMessage("")
