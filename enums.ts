@@ -1,6 +1,6 @@
 
 
-declare const enum TouchPins {
+declare const enum touchPins {
     //% block="Pin 0"    
     P0 = 0,    
     //% block="Pin 1"    
@@ -38,7 +38,7 @@ declare const enum TouchPins {
 
 
 
-declare const enum  Servo {
+declare const enum Servo {
     //% block="Servo 0"
     P0 = 0,
     //% block="Servo 1"

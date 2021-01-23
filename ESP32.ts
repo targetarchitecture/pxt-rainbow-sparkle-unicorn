@@ -18,15 +18,15 @@ let direction2: RotaryDirection;
      */
     //% subcategory="Sliders / Dials / Spinners" 
     //% group="Dials"
-    //% block="Set dial 1 to $voltage \\volts"
-    //% voltage.min=0 voltage.max=30
+    //% block="Set dial 1 to $value"
+    //% value.min=0 value.max=30
     //% weight=65
-    export function dial1(voltage: number) {
+    export function dial1(value: number) {
 
-        voltage = Math.clamp(0, 30, voltage)
+        value = Math.clamp(0, 30, value)
 
         //Need to resolve 0-30 to 0-255
-        let mapped = pins.map(voltage, 0, 30, 0, 255)
+        let mapped = pins.map(value, 0, 30, 0, 255)
 
         _sendMessage("X1," + mapped)
     }
@@ -37,15 +37,15 @@ let direction2: RotaryDirection;
      */
     //% subcategory="Sliders / Dials / Spinners" 
     //% group="Dials"
-    //% block="Set dial 2 to $voltage \\volts"
-    //% voltage.min=0 voltage.max=30
+    //% block="Set dial 2 to $value"
+    //% value.min=0 value.max=30
     //% weight=65
-    export function dial2(voltage: number) {
+    export function dial2(value: number) {
 
-        voltage = Math.clamp(0, 30, voltage)
+        value = Math.clamp(0, 30, value)
 
         //Need to resolve 0-30 to 0-255
-        let mapped = pins.map(voltage, 0, 30, 0, 255)
+        let mapped = pins.map(value, 0, 30, 0, 255)
 
         _sendMessage("X2," + mapped)
     }
@@ -192,6 +192,7 @@ namespace RainbowSparkleUnicorn.Expert {
      * @value the value of the DAC output, eg: 46
      */
     //% subcategory="Expert" 
+      //% group="Dials"      
     //% block="Set DAC 2 to $value"
     //% value.min=0 value.max=255
     export function DAC2(value: number) {
@@ -206,6 +207,7 @@ namespace RainbowSparkleUnicorn.Expert {
      * @value the value of the DAC output, eg: 194
      */
     //% subcategory="Expert" 
+     //% group="Dials"   
     //% block="Set DAC 1 to $value" 
     //% value.min=0 value.max=255
     export function DAC1(value: number) {

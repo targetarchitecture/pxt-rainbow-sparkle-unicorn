@@ -6,12 +6,13 @@ namespace RainbowSparkleUnicorn {
      * Print received messages
      */
     //% subcategory="Expert" 
+    //% group="Debug"   
     //% block="Print received messages"
     export function printReceivedMessages(): void {
         printReceivedMsgs = true;
     }
 
-  export function _parseRecievedMessage(message: string) {
+    export function _parseRecievedMessage(message: string) {
         try {
                 if (printReceivedMsgs == true){
                     serial.writeLine(message);

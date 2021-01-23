@@ -1,6 +1,6 @@
 namespace RainbowSparkleUnicorn.IoT {
 
-let MQTTIPAddress: string = "0.0.0.0";
+    let MQTTIPAddress: string = "0.0.0.0";
 
      /**
      * Setup MQTT 

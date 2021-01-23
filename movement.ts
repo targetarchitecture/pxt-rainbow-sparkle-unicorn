@@ -1,26 +1,29 @@
 namespace RainbowSparkleUnicorn.Movement {
 
-let servoList = [
-"100,500,0",
-"100,500,0",
-"100,500,0",
-"100,500,0",
-"100,500,0",
-"100,500,0",
-"100,500,0",
-"100,500,0",
-"100,500,0",
-"100,500,0",
-"100,500,0",
-"100,500,0",
-"100,500,0",
-"100,500,0",
-"100,500,0",
-"100,500,0",
-"100,500,0"];
+    let servoList = [
+    "100,500,0",
+    "100,500,0",
+    "100,500,0",
+    "100,500,0",
+    "100,500,0",
+    "100,500,0",
+    "100,500,0",
+    "100,500,0",
+    "100,500,0",
+    "100,500,0",
+    "100,500,0",
+    "100,500,0",
+    "100,500,0",
+    "100,500,0",
+    "100,500,0",
+    "100,500,0",
+    "100,500,0"];
 
     //% subcategory="Expert" 
+    //% group="Movement"    
     //% block="set $servo pulse to %micros μs"
+    //% servo.fieldEditor="gridpicker" servo.fieldOptions.columns=6
+    //% servo.fieldOptions.tooltips="false"   
     //% micros.min=0 micros.max=4096
     export function setServoPulse(servo: Servo, micros: number) {
         micros = Math.clamp(0, 4096, micros);
@@ -30,6 +33,8 @@ let servoList = [
 
     //% subcategory="Movement" 
     //% block="set $servo range from %minimumPulse to %maximumPulse"
+    //% servo.fieldEditor="gridpicker" servo.fieldOptions.columns=6
+    //% servo.fieldOptions.tooltips="false"       
     //% minimumPulse.min=0 minimumPulse.max=4096
     //% maximumPulse.min=0 maximumPulse.max=4096
     export function setServoRange(servo: Servo, minimumPulse: number, maximumPulse: number) {
@@ -45,6 +50,8 @@ let servoList = [
     }    
 
     //% subcategory="Movement" 
+    //% servo.fieldEditor="gridpicker" servo.fieldOptions.columns=6
+    //% servo.fieldOptions.tooltips="false"       
     //% block="set $servo type $servoType"
     export function setServoType(servo: Servo, sType: ServoType) {
 
@@ -55,6 +62,8 @@ let servoList = [
     }        
 
     //% subcategory="Movement" 
+    //% servo.fieldEditor="gridpicker" servo.fieldOptions.columns=6
+    //% servo.fieldOptions.tooltips="false"       
     //% block="set $servo angle to %angle"
     //% angle.min=0 angle.max=180
     export function setServoAngle(servo: Servo, angle=90) {
@@ -70,6 +79,8 @@ let servoList = [
  
     //% subcategory="Movement" 
     //% block="move $servo linear from %fromAngle to %toAngle in %duration seconds"
+    //% servo.fieldEditor="gridpicker" servo.fieldOptions.columns=6
+    //% servo.fieldOptions.tooltips="false"       
     //% toAngle.min=0 toAngle.max=180
     //% fromAngle.min=0 fromAngle.max=180
     //% duration.min=0 
@@ -89,6 +100,8 @@ let servoList = [
 
     //% subcategory="Movement" 
     //% block="move $servo bouncy from %fromAngle to %toAngle in %duration seconds"
+    //% servo.fieldEditor="gridpicker" servo.fieldOptions.columns=6
+    //% servo.fieldOptions.tooltips="false"       
     //% toAngle.min=0 toAngle.max=180
     //% fromAngle.min=0 fromAngle.max=180
     //% duration.min=0 
@@ -109,6 +122,8 @@ let servoList = [
 
     //% subcategory="Movement" 
     //% block="move $servo smoothly from %fromAngle to %toAngle in %duration seconds"
+    //% servo.fieldEditor="gridpicker" servo.fieldOptions.columns=6
+    //% servo.fieldOptions.tooltips="false"       
     //% toAngle.min=0 toAngle.max=180
     //% fromAngle.min=0 fromAngle.max=180
     //% duration.min=0 
