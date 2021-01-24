@@ -61,6 +61,25 @@ namespace RainbowSparkleUnicorn.IoT {
         _sendMessage("T9," + topic + "," + message);
     }   
 
+
+    //% subcategory="IoT" 
+    //% weight=70
+    //% block="Start receiving messages on topic $topic"
+    export function startReceivingMessages(topic: string) {
+
+        _sendMessage("T10," + topic);
+    }   
+
+
+        //% subcategory="IoT" 
+        //% weight=60
+    //% block="Stop receiving messages on topic $topic"
+    export function stopReceivingMessages(topic: string) {
+
+        _sendMessage("T11," + topic);
+    }   
+
+
      /**
      * Returns the current IP address
      */
