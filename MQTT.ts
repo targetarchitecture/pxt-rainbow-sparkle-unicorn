@@ -57,7 +57,6 @@ namespace RainbowSparkleUnicorn.IoT {
     //% message.defl="1234567890"   
     //% block="Send MQTT number $topic, $message"
     export function sendMQTTNumber(topic: string, message: number) {
-
         _sendMessage("T9," + topic + "," + message);
     }   
 
@@ -66,16 +65,14 @@ namespace RainbowSparkleUnicorn.IoT {
     //% weight=70
     //% block="Start receiving messages on topic $topic"
     export function startReceivingMessages(topic: string) {
-
         _sendMessage("T10," + topic);
     }   
 
 
-        //% subcategory="IoT" 
-        //% weight=60
+    //% subcategory="IoT" 
+    //% weight=60
     //% block="Stop receiving messages on topic $topic"
     export function stopReceivingMessages(topic: string) {
-
         _sendMessage("T11," + topic);
     }   
 
