@@ -23,7 +23,7 @@ namespace RainbowSparkleUnicorn {
 
         pins.i2cWriteBuffer(ESP32_I2C_ADDR, buf2, false);
 
-        serial.writeLine(message);
+        //serial.writeLine(message);
 
         readI2CMessage();
 

@@ -24,6 +24,8 @@ namespace RainbowSparkleUnicorn {
         Controls.turnSpinner2(OnOff.OFF);
 
         Light.turnAllOff();
+
+        IoT.stopWifi();
     }
 
 }

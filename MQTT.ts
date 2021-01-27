@@ -91,18 +91,22 @@ namespace RainbowSparkleUnicorn.IoT {
          MQTTIPAddress = IP;
     }  
 
-    //% subcategory="IoT" 
+     /**
+     * Turns off the Wifi on the ESP32
+     */
+    //% subcategory="Expert" 
     //% weight=50
     //% block="Stop/Reset Wifi"
     export function stopWifi() {
         _sendMessage("T12");
     }   
 
+/*
    export type EvtMsg = (topic: string, data: string) => void;
    export let mqttmessage: EvtMsg = null;
    export let mqttEvtRecFlag: boolean = false;
 
-   //% block="On MQTT received"
+    //% block="On MQTT received"
     //%subcategory=IoT   
     //% weight=20
     //% draggableParameters
@@ -111,5 +115,6 @@ namespace RainbowSparkleUnicorn.IoT {
         mqttEvtRecFlag = true;
         mqttmessage = body;
     }    
+*/
 
 }

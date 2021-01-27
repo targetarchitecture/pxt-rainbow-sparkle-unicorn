@@ -122,7 +122,7 @@ namespace RainbowSparkleUnicorn {
                 serial.writeLine(payload);
 
                 //control.raiseEvent(RAINBOW_SPARKLE_UNICORN_MQTT_CONNECTED,connected);            
-               IoT.mqttmessage(topic, payload);
+               //IoT.mqttmessage(topic, payload);
             }
         }  catch(err) {   
             serial.writeLine(err.message)
