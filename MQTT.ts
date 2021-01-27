@@ -76,6 +76,15 @@ namespace RainbowSparkleUnicorn.IoT {
         _sendMessage("T11," + topic);
     }   
 
+     /**
+     * Turns off the Wifi on the ESP32
+     */
+    //% subcategory="Expert" 
+    //% weight=50
+    //% block="Stop Wifi"
+    export function stopWifi() {
+        _sendMessage("T12");
+    }   
 
      /**
      * Returns the current IP address
@@ -91,15 +100,7 @@ namespace RainbowSparkleUnicorn.IoT {
          MQTTIPAddress = IP;
     }  
 
-     /**
-     * Turns off the Wifi on the ESP32
-     */
-    //% subcategory="Expert" 
-    //% weight=50
-    //% block="Stop/Reset Wifi"
-    export function stopWifi() {
-        _sendMessage("T12");
-    }   
+
 
 /*
    export type EvtMsg = (topic: string, data: string) => void;
