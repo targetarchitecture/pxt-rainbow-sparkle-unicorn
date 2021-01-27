@@ -114,6 +114,14 @@ namespace RainbowSparkleUnicorn {
 
                     control.raiseEvent(RAINBOW_SPARKLE_UNICORN_MQTT_CONNECTED,connected);            
             }
+            else if (message.indexOf("G3") == 0) {
+
+                const topic = message.split(",")[1];
+                const payload = message.split(",")[2];
+
+                //control.raiseEvent(RAINBOW_SPARKLE_UNICORN_MQTT_CONNECTED,connected);            
+                IoT. mqttmessage(topic, payload);
+            }
         }  catch(err) {   
             serial.writeLine(err.message)
         }   

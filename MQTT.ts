@@ -89,5 +89,21 @@ namespace RainbowSparkleUnicorn.IoT {
 
     export function _setIPAddress(IP: string)  {
          MQTTIPAddress = IP;
-    }   
+    }  
+
+
+
+   export type EvtMsg = (topic: string, data: string) => void;
+   export let mqttmessage: EvtMsg = null;
+   export let mqttEvtRecFlag: boolean = false;
+
+   //% block="On MQTT received"
+    //%subcategory=IoT   
+    //% weight=20
+    //% draggableParameters
+    export function OnMQTTReceived(body: (topic: string, ReceivedMQTTMessage: string) => void): void {
+        mqttEvtRecFlag = true;
+        mqttmessage = body;
+    }    
+
 }

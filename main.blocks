@@ -1,1 +1,1 @@
-<xml xmlns="https://developers.google.com/blockly/xml"><block type="pxt-on-start" id="/)FCa/b6rIWRR2=FT)S5" x="0" y="0"/></xml>
+<xml xmlns="https://developers.google.com/blockly/xml"><variables><variable id="YK2kbPyI.pnU21j7u)B#">topic</variable><variable id="6s?Br5Qel[YpX@4$^HoA">ReceivedMQTTMessage</variable></variables><block type="pxt-on-start" id="/)FCa/b6rIWRR2=FT)S5" x="0" y="0"/></xml>
