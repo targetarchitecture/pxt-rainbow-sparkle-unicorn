@@ -120,7 +120,7 @@ namespace RainbowSparkleUnicorn {
                 const payload = message.split(",")[2];
 
                 //control.raiseEvent(RAINBOW_SPARKLE_UNICORN_MQTT_CONNECTED,connected);            
-                IoT. mqttmessage(topic, payload);
+               IoT.mqttmessage(topic, payload);
             }
         }  catch(err) {   
             serial.writeLine(err.message)
