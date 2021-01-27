@@ -91,7 +91,12 @@ namespace RainbowSparkleUnicorn.IoT {
          MQTTIPAddress = IP;
     }  
 
-
+    //% subcategory="IoT" 
+    //% weight=50
+    //% block="Stop/Reset Wifi"
+    export function stopWifi() {
+        _sendMessage("T12");
+    }   
 
    export type EvtMsg = (topic: string, data: string) => void;
    export let mqttmessage: EvtMsg = null;
@@ -102,6 +107,7 @@ namespace RainbowSparkleUnicorn.IoT {
     //% weight=20
     //% draggableParameters
     export function OnMQTTReceived(body: (topic: string, ReceivedMQTTMessage: string) => void): void {
+        serial.writeLine("OnMQTTReceived");
         mqttEvtRecFlag = true;
         mqttmessage = body;
     }    
