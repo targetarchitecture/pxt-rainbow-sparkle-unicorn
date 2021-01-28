@@ -1,14 +1,14 @@
+let x = 0
 RainbowSparkleUnicorn.start()
-let messageQueue = ["HELLO"]
+music.playTone(262, music.beat(BeatFraction.Breve))
 basic.showIcon(IconNames.StickFigure)
-music.playTone(262, music.beat(BeatFraction.Whole))
-RainbowSparkleUnicorn.Light.turnAllOff()
-RainbowSparkleUnicorn.Light.turnAllOn()
-RainbowSparkleUnicorn.Light.blink(lightPins.P15, 1000, 1000)
-
-
-
-
-for(let i = 0; i < 1000; i++) {
-    messageQueue.push("T4,targetarchitecture.cloud.shiftr.io")
-}
+basic.forever(function () {
+    if (x == 0) {
+        RainbowSparkleUnicorn.Light.turnAllOff()
+        x = 1
+    } else {
+        RainbowSparkleUnicorn.Light.turnAllOn()
+        x = 0
+    }
+    basic.pause(1000)
+})

@@ -8,7 +8,9 @@ namespace RainbowSparkleUnicorn {
    export function _sendMessage(message: string): void {       
 
         messageQueue.push(message);
+   }
 
+function _sendi2cMessage(message: string): void { 
         sendingMessage = true;
 
         pins.digitalWritePin(DigitalPin.P8, 1)
@@ -35,8 +37,8 @@ namespace RainbowSparkleUnicorn {
 
         pins.digitalWritePin(DigitalPin.P8, 0);
 
-        sendingMessage = false;
-    }
+        sendingMessage = false;    
+   }
 
     function checkMessage(message: string): boolean
      {
@@ -110,12 +112,14 @@ namespace RainbowSparkleUnicorn {
             if (initialised == true)            
             {
                 if (sendingMessage == false){
-                    _sendMessage("00," + input.runningTime());
+                    //_sendMessage("00," + input.runningTime());
                     messageQueue.push("00," + input.runningTime());
                 }
 
                 if (messageQueue.length > 0){ 
                     const message = messageQueue.shift();
+                    _sendi2cMessage(message);
+                    //serial.writeLine(message);
                 }
             }
             basic.pause(50);
@@ -142,7 +146,8 @@ namespace RainbowSparkleUnicorn {
         return crc;
     }
 
-//TODO: understand if this should be an event or inline
+//now inline
+/*
     control.onEvent(RAINBOW_SPARKLE_UNICORN_I2C_EVENT, EventBusValue.MICROBIT_EVT_ANY, function () {
 
         let msg = currentRecievedMessage;
@@ -153,5 +158,6 @@ namespace RainbowSparkleUnicorn {
 
         //led.toggle(0, 0);
     })
+*/
 
 }
