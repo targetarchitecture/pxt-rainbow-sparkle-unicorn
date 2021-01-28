@@ -1,17 +1,18 @@
 namespace RainbowSparkleUnicorn {
 
+    //i2c freq=100000
+
     let currentRecievedMessage = "";
     let ESP32_I2C_ADDR = 4;
-    let sendingMessage = false;
-    let messageQueue = ["HELLO"];
+    export let messageQueue = ["HELLO"];
+    const i2cGapMessageTimeMs = 50;
+    const i2cTXrateMs = 50; 
 
-   export function _sendMessage(message: string): void {       
-
+   export function _sendMessage(message: string): void {  
         messageQueue.push(message);
    }
 
-function _sendi2cMessage(message: string): void { 
-        sendingMessage = true;
+    function _sendi2cMessage(message: string): void { 
 
         pins.digitalWritePin(DigitalPin.P8, 1)
         basic.pause(1)
@@ -31,13 +32,9 @@ function _sendi2cMessage(message: string): void {
 
         pins.i2cWriteBuffer(ESP32_I2C_ADDR, buf2, false);
 
-        //serial.writeLine(message);
-
         readI2CMessage();
 
         pins.digitalWritePin(DigitalPin.P8, 0);
-
-        sendingMessage = false;    
    }
 
     function checkMessage(message: string): boolean
@@ -96,33 +93,32 @@ function _sendi2cMessage(message: string): void {
 
             currentRecievedMessage = currentRecievedMessage.trim();
 
-        //serial.writeLine(currentRecievedMessage);
-
-        //serial.writeValue("length", currentRecievedMessage.length );
-
-
         if (currentRecievedMessage.length > 0){
             _parseRecievedMessage(currentRecievedMessage);
-            //serial.writeLine(currentRecievedMessage);
-            //control.raiseEvent(RAINBOW_SPARKLE_UNICORN_I2C_EVENT, currentRecievedMessage.length);
         }}
     }
 
+    //this loop takes off the queue (array) and sends it down the i2c line
     basic.forever(() => {
-            if (initialised == true)            
-            {
-                if (sendingMessage == false){
-                    //_sendMessage("00," + input.runningTime());
-                    messageQueue.push("00," + input.runningTime());
-                }
-
-                if (messageQueue.length > 0){ 
-                    const message = messageQueue.shift();
-                    _sendi2cMessage(message);
-                    //serial.writeLine(message);
-                }
+        if (initialised == true)            
+        {  
+            if (messageQueue.length > 0){ 
+                const message = messageQueue.shift();
+                _sendi2cMessage(message);
             }
-            basic.pause(50);
+        }
+        basic.pause(i2cTXrateMs);
+    })
+
+    //this loop just adds a i2c message pull request every 50 milliseconds if not already something in the queue
+    basic.forever(() => {
+        if (initialised == true)            
+        {
+            if (messageQueue.length == 0){
+                messageQueue.push("00," + input.runningTime());
+            }    
+        }
+        basic.pause(i2cGapMessageTimeMs);
     })
 
     function calcCRC8(data :Buffer, length :number) :number {
@@ -145,19 +141,4 @@ function _sendi2cMessage(message: string): void {
 
         return crc;
     }
-
-//now inline
-/*
-    control.onEvent(RAINBOW_SPARKLE_UNICORN_I2C_EVENT, EventBusValue.MICROBIT_EVT_ANY, function () {
-
-        let msg = currentRecievedMessage;
-
-        //serial.writeLine(msg);
-
-        _parseRecievedMessage(msg);
-
-        //led.toggle(0, 0);
-    })
-*/
-
 }
