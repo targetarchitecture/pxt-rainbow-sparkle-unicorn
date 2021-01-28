@@ -30,14 +30,5 @@
         "microbit"
     ],
     "preferredEditor": "tsprj",
-    "yotta": {
-        "config": {
-            "microbit-dal": {
-                "bluetooth": {
-                    "enabled": 0,
-                    "pairing_mode": 0
-                }
-            }
-        }
-    }
+    "yotta": {}
 }

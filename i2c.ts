@@ -2,8 +2,11 @@ namespace RainbowSparkleUnicorn {
 
     let currentRecievedMessage = "";
     let ESP32_I2C_ADDR = 4;
+    let sendingMessage = false;
 
    export function _sendMessage(message: string): void {
+
+        sendingMessage = true;
 
         pins.digitalWritePin(DigitalPin.P8, 1)
         basic.pause(1)
@@ -27,7 +30,9 @@ namespace RainbowSparkleUnicorn {
 
         readI2CMessage();
 
-        pins.digitalWritePin(DigitalPin.P8, 0)
+        pins.digitalWritePin(DigitalPin.P8, 0);
+
+        sendingMessage = false;
     }
 
     function checkMessage(message: string): boolean
@@ -74,7 +79,7 @@ namespace RainbowSparkleUnicorn {
 
         if (contentLength > 0){
 
-        currentRecievedMessage = ""
+            currentRecievedMessage = ""
 
             for (let l = 0; l < contentLength ; l++) {
                 a2 =  i2cBuffer[l+2] ;
@@ -98,14 +103,14 @@ namespace RainbowSparkleUnicorn {
         }}
     }
 
-     basic.forever(() => {
-        while (true) {
+    basic.forever(() => {
             if (initialised == true)            
             {
-                _sendMessage("00," + input.runningTime())
-                basic.pause(50)
+                if (sendingMessage == false){
+                    _sendMessage("00," + input.runningTime());
+                }
             }
-        }
+            basic.pause(50);
     })
 
     function calcCRC8(data :Buffer, length :number) :number {
@@ -129,15 +134,16 @@ namespace RainbowSparkleUnicorn {
         return crc;
     }
 
+//TODO: understand if this should be an event or inline
     control.onEvent(RAINBOW_SPARKLE_UNICORN_I2C_EVENT, EventBusValue.MICROBIT_EVT_ANY, function () {
 
         let msg = currentRecievedMessage;
 
-        serial.writeLine(msg);
+        //serial.writeLine(msg);
 
         _parseRecievedMessage(msg);
 
-        led.toggle(0, 0);
+        //led.toggle(0, 0);
     })
 
 }

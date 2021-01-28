@@ -1,19 +1,14 @@
+RainbowSparkleUnicorn.start()
+let messageQueue = ["HELLO"]
+basic.showIcon(IconNames.StickFigure)
+music.playTone(262, music.beat(BeatFraction.Whole))
+RainbowSparkleUnicorn.Light.turnAllOff()
+RainbowSparkleUnicorn.Light.turnAllOn()
+RainbowSparkleUnicorn.Light.blink(lightPins.P15, 1000, 1000)
 
-serial.writeNumber(666)
-music.playTone(Math.random()*350, music.beat(BeatFraction.Whole))
 
-//RainbowSparkleUnicorn.start()
-// RainbowSparkleUnicorn.printReceivedMessages()
-// RainbowSparkleUnicorn.IoT.stopWifi()
 
-// RainbowSparkleUnicorn.IoT.connectToInterWeb(
-// "152 2.4GHz",
-// "derwenthorpe",
-// "targetarchitecture.cloud.shiftr.io",
-// "targetarchitecture",
-// "qdDjMxAzLvQPRk6u",
-// "BBC Microbit"
-// )
-// RainbowSparkleUnicorn.IoT.sendMQTTNumber("SN7", control.millis())
-// RainbowSparkleUnicorn.IoT.startReceivingMessages("Hi")
-// RainbowSparkleUnicorn.IoT.sendMQTTNumber("Hi", control.millis())
+
+for(let i = 0; i < 1000; i++) {
+    messageQueue.push("T4,targetarchitecture.cloud.shiftr.io")
+}

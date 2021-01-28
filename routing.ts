@@ -104,25 +104,23 @@ namespace RainbowSparkleUnicorn {
             else if (message.indexOf("G1") == 0) {
                     //store ip address
                     const IP = message.split(",")[1];
+
                     IoT._setIPAddress(IP);
 
                     control.raiseEvent(RAINBOW_SPARKLE_UNICORN_IP_RECEIVED,1);            
             } 
             else if (message.indexOf("G2") == 0) {
 
-                    const connected = parseInt(message.split(",")[1]);
+                    IoT._MQTTConnected = parseInt(message.split(",")[1]);
 
-                    control.raiseEvent(RAINBOW_SPARKLE_UNICORN_MQTT_CONNECTED,connected);            
+                    control.raiseEvent(RAINBOW_SPARKLE_UNICORN_MQTT_STATE,IoT._MQTTConnected);            
             }
             else if (message.indexOf("G3") == 0) {
 
                 const topic = message.split(",")[1];
                 const payload = message.split(",")[2];
 
-               // serial.writeLine(payload);
-
-                //control.raiseEvent(RAINBOW_SPARKLE_UNICORN_MQTT_CONNECTED,connected);            
-               //IoT.mqttmessage(topic, payload);
+               IoT.mqttmessage(topic, payload);
             }
         }  catch(err) {   
             serial.writeLine(err.message)

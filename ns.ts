@@ -14,7 +14,7 @@ namespace RainbowSparkleUnicorn {
         pins.digitalWritePin(DigitalPin.P8, 0);
 
         initialised = true;
-        basic.pause(50);
+        basic.pause(100);
 
         _sendMessage("STARTING");
 
@@ -25,7 +25,9 @@ namespace RainbowSparkleUnicorn {
 
         Light.turnAllOff();
 
-        //IoT.stopWifi();
+        IoT.stopWifi();
+
+        basic.pause(100);
     }
 
 }

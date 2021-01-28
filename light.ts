@@ -80,16 +80,11 @@ namespace RainbowSparkleUnicorn.Light {
 
 /**
     turn on all lights
-    Turn off all lights must be called before.
 **/
     //% subcategory="Light" 
     //% block="turn on all lights"
     export function turnAllOn() {
-
-        for(let pin = 0; pin <= 15; pin++) {
-            _sendMessage("Y3," + pin + ",1")  
-            basic.pause(10)
-        }
+        _sendMessage("Y5");  
     } 
 }
 
