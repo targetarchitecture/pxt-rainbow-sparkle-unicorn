@@ -3,8 +3,11 @@ namespace RainbowSparkleUnicorn {
     let currentRecievedMessage = "";
     let ESP32_I2C_ADDR = 4;
     let sendingMessage = false;
+    let messageQueue = ["HELLO"];
 
-   export function _sendMessage(message: string): void {
+   export function _sendMessage(message: string): void {       
+
+        messageQueue.push(message);
 
         sendingMessage = true;
 
@@ -108,6 +111,11 @@ namespace RainbowSparkleUnicorn {
             {
                 if (sendingMessage == false){
                     _sendMessage("00," + input.runningTime());
+                    messageQueue.push("00," + input.runningTime());
+                }
+
+                if (messageQueue.length > 0){ 
+                    const message = messageQueue.shift();
                 }
             }
             basic.pause(50);
