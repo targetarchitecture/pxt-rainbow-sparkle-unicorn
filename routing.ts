@@ -117,10 +117,14 @@ namespace RainbowSparkleUnicorn {
             }
             else if (message.indexOf("G3") == 0) {
 
-                const topic = message.split(",")[1];
-                const payload = message.split(",")[2];
+                const topic = message.replaceAll("'","").split(",")[1];
+                const payload = message.replaceAll("'","").split(",")[2];
 
-                IoT.MQTTmessages.push(topic + "," + payload);
+               // IoT.MQTTmessages.push(topic + "," + payload);
+
+                let myObj = {topic: topic, payload: payload};
+
+                IoT.MQTTmessages.push(myObj);
 
                 control.raiseEvent(RAINBOW_SPARKLE_UNICORN_I2C_EVENT,1); 
 
@@ -131,4 +135,5 @@ namespace RainbowSparkleUnicorn {
         }   
     }
     
+
 }

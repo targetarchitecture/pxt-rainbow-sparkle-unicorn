@@ -4,7 +4,8 @@ namespace RainbowSparkleUnicorn {
 
     let currentRecievedMessage = "";
     let ESP32_I2C_ADDR = 4;
-    export let messageQueue = ["HELLO"];
+    //export let messageQueue = ["HELLO"];
+    export let messageQueue: string[] = [];
     const i2cGapMessageTimeMs = 50;
     const i2cTXrateMs = 50; 
 

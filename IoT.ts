@@ -1,8 +1,14 @@
 namespace RainbowSparkleUnicorn.IoT {
 
+    export interface MQTTmessage {
+        topic: string;
+        payload: string;
+    }
+
     let _IPAddress: string = "0.0.0.0";
     export let _MQTTConnected: number = -1;
-    export let MQTTmessages: string[] = [];
+    //export let MQTTmessages: string[] = [];
+    export let MQTTmessages: MQTTmessage[] = [];
 
      /**
      * Setup MQTT 
