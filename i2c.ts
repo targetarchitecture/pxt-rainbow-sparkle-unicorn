@@ -8,9 +8,9 @@ namespace RainbowSparkleUnicorn {
     const i2cGapMessageTimeMs = 50;
     const i2cTXrateMs = 50; 
 
-   export function _sendMessage(message: string): void {  
-        messageQueue.push(message);
-   }
+    export function _sendMessage(message: string): void {  
+            messageQueue.push(message);
+    }
 
     function _sendi2cMessage(message: string): void { 
 
@@ -100,7 +100,7 @@ namespace RainbowSparkleUnicorn {
 
     //this loop takes off the queue (array) and sends it down the i2c line
     basic.forever(() => {
-        if (initialised == true)            
+        if (_initialised == true)            
         {  
             if (messageQueue.length > 0){ 
                 const message = messageQueue.shift();
@@ -112,7 +112,7 @@ namespace RainbowSparkleUnicorn {
 
     //this loop just adds a i2c message pull request every 50 milliseconds if not already something in the queue
     basic.forever(() => {
-        if (initialised == true)            
+        if (_initialised == true)            
         {
             if (messageQueue.length == 0){
                 messageQueue.push("00," + input.runningTime());
