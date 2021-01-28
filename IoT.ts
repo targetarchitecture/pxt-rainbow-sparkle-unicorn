@@ -110,7 +110,7 @@ namespace RainbowSparkleUnicorn.IoT {
 
 
   /**
-   * Do something when a switch is pushed.
+   * Do something when an MQTT message is received.
    * @param handler body code to run when the event is raised
    */
   //% subcategory="IoT"
@@ -127,7 +127,18 @@ namespace RainbowSparkleUnicorn.IoT {
     );
   }
 
-    
+
+    //% subcategory="IoT" 
+    //% weight=10
+    //% block="get MQTT message"
+    export function getMQTTMessage() : RainbowSparkleUnicorn.IoT.MQTTmessage {
+
+        let msg = RainbowSparkleUnicorn.IoT.MQTTmessages.shift();
+
+        return msg;
+    }   
+
+
 /*
    export type EvtMsg = (topic: string, data: string) => void;
    export let mqttmessage: EvtMsg = null;
