@@ -2,6 +2,7 @@ namespace RainbowSparkleUnicorn.IoT {
 
     let _IPAddress: string = "0.0.0.0";
     export let _MQTTConnected: number = -1;
+    export let MQTTmessages: string[] = [];
 
      /**
      * Setup MQTT 
@@ -102,8 +103,26 @@ namespace RainbowSparkleUnicorn.IoT {
     }   
 
 
-    
+  /**
+   * Do something when a switch is pushed.
+   * @param handler body code to run when the event is raised
+   */
+  //% subcategory="IoT"
+  //% block="on MQTT recieved "
+  //% weight=20
+ export function onMQTTReceived(
+    handler: () => void
+  ) {
+    control.onEvent(
+      RAINBOW_SPARKLE_UNICORN_I2C_EVENT, 1,
+      () => {
+        handler();
+      }
+    );
+  }
 
+    
+/*
    export type EvtMsg = (topic: string, data: string) => void;
    export let mqttmessage: EvtMsg = null;
    export let mqttEvtRecFlag: boolean = false;
@@ -114,10 +133,10 @@ namespace RainbowSparkleUnicorn.IoT {
     //% draggableParameters
     export function OnMQTTReceived(body: (topic: string, ReceivedMQTTMessage: string) => void): void {
        // serial.writeLine("OnMQTTReceived");
-        mqttEvtRecFlag = true;
-        mqttmessage = body;
+      //  mqttEvtRecFlag = true;
+       // mqttmessage = body;
     }    
-
+*/
  
 
      /**

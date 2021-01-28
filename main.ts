@@ -1,22 +1,20 @@
-let x = 0
+
 RainbowSparkleUnicorn.start()
-//music.playTone(262, music.beat(BeatFraction.Breve))
-basic.showIcon(IconNames.StickFigure)
-basic.forever(function () {
-    if (x == 0) {
-        RainbowSparkleUnicorn.Light.turnAllOff()
-        x = 1
-    } else {
-        RainbowSparkleUnicorn.Light.turnAllOn()
-        x = 0
-    }
-    basic.pause(100)
-})
-basic.forever(function () {
-	
-    const l = RainbowSparkleUnicorn.messageQueue.length;
+RainbowSparkleUnicorn.printReceivedMessages()
+RainbowSparkleUnicorn.IoT.connectToInterWeb(
+"152 2.4GHz",
+"derwenthorpe",
+"targetarchitecture.cloud.shiftr.io",
+"targetarchitecture",
+"qdDjMxAzLvQPRk6u",
+"BBC Microbit"
+)
 
-    basic.showNumber(l)
-
-    //basic.pause(500)
+RainbowSparkleUnicorn.IoT.onMQTTReceived(function () {
+  let msg = RainbowSparkleUnicorn.IoT.MQTTmessages.shift();
 })
+
+RainbowSparkleUnicorn.IoT.sendMQTTNumber("SN7", control.millis())
+RainbowSparkleUnicorn.IoT.startReceivingMessages("Hi")
+RainbowSparkleUnicorn.IoT.sendMQTTNumber("Hi", control.millis())
+
