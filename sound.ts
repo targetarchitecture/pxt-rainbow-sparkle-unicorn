@@ -77,8 +77,8 @@ let dfplayerTrack: number = 0;
     }
 
     //% subcategory="Sound"
-        //% group="Actions"
-        //% weight=90
+    //% group="Actions"
+    //% weight=90
     //% block="pause music"
     export function pause() {
       _sendMessage("Z7")

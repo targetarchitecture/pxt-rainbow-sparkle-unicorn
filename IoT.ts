@@ -37,15 +37,15 @@ namespace RainbowSparkleUnicorn.IoT {
         //connect to MQTT server
         for (let index = 0; index <= 10; index++) {
 
-            basic.pause(10);
+            basic.pause(50);
             _sendMessage("T4," + MQTTServer);
-            basic.pause(10);
+            basic.pause(50);
             _sendMessage("T5," + MQTTClient);
-            basic.pause(10);
+            basic.pause(50);
             _sendMessage("T6," + MQTTKey);
-            basic.pause(10);         
+            basic.pause(50);         
             _sendMessage("T7," + MQTTPassword);
-            basic.pause(10);
+            basic.pause(50);
             _sendMessage("T8"); 
 
             //wait a second to see if we have a positive response
@@ -66,12 +66,8 @@ namespace RainbowSparkleUnicorn.IoT {
     //% message.defl="Hello World"   
     //% block="Send MQTT message $topic, $message"
     export function sendMQTTMessage(topic: string, message: string) {
-
         _sendMessage("T9," + topic + "," + message);
 
-        //TODO: see if this pause really is needed
-        //need to add some delay in to get this to be more reliable
-        basic.pause(150);
     }
 
     //% subcategory="IoT" 
@@ -81,11 +77,7 @@ namespace RainbowSparkleUnicorn.IoT {
     //% block="Send MQTT number $topic, $message"
     export function sendMQTTNumber(topic: string, message: number) {
 
-        _sendMessage("T9," + topic + "," + message);
-
-        //TODO: see if this pause really is needed
-        //need to add some delay in to get this to be more reliable
-        basic.pause(150);        
+        _sendMessage("T9," + topic + "," + message);      
     }   
 
 
@@ -139,23 +131,6 @@ namespace RainbowSparkleUnicorn.IoT {
 
         return msg;
     }   
-
-
-/*
-   export type EvtMsg = (topic: string, data: string) => void;
-   export let mqttmessage: EvtMsg = null;
-   export let mqttEvtRecFlag: boolean = false;
-    //% block="On MQTT received"
-    //%subcategory=IoT   
-    //% weight=20
-    //% draggableParameters
-    export function OnMQTTReceived(body: (topic: string, ReceivedMQTTMessage: string) => void): void {
-       // serial.writeLine("OnMQTTReceived");
-      //  mqttEvtRecFlag = true;
-       // mqttmessage = body;
-    }    
-*/
- 
 
      /**
      * Returns the current IP address

@@ -6,8 +6,23 @@ namespace RainbowSparkleUnicorn {
     let ESP32_I2C_ADDR = 4;
     //export let messageQueue = ["HELLO"];
     export let messageQueue: string[] = [];
-    const i2cGapMessageTimeMs = 50;
-    const i2cTXrateMs = 50; 
+    let i2cGapMessageTimeMs = 50;
+    let i2cTXrateMs = 50; 
+
+    /**
+     * Set i2c timings
+     * @GapMessageTimeMs time to send i2c message if no messages in queue
+     * @TXrateMs time between each i2c message being sent
+     */
+    //% subcategory="Expert" 
+    //% group="Wifi" 
+    //% block="seti2ctimings gap message (ms) $GapMessageTimeMs, TX rate (ms) $TXrateMs"   
+    //% GapMessageTimeMs.defl=50
+    //% TXrateMs.defl=50
+    export function seti2ctimings( GapMessageTimeMs: number, TXrateMs: number) {
+       i2cGapMessageTimeMs = GapMessageTimeMs;
+       i2cTXrateMs = TXrateMs;
+    }    
 
     export function _sendMessage(message: string): void {  
             messageQueue.push(message);
