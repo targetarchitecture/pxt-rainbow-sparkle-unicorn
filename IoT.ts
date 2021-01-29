@@ -69,6 +69,7 @@ namespace RainbowSparkleUnicorn.IoT {
 
         _sendMessage("T9," + topic + "," + message);
 
+        //TODO: see if this pause really is needed
         //need to add some delay in to get this to be more reliable
         basic.pause(150);
     }
@@ -82,6 +83,7 @@ namespace RainbowSparkleUnicorn.IoT {
 
         _sendMessage("T9," + topic + "," + message);
 
+        //TODO: see if this pause really is needed
         //need to add some delay in to get this to be more reliable
         basic.pause(150);        
     }   
