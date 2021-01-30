@@ -12,6 +12,7 @@ let dfplayerTrack: number = 0;
     //% group="Volume"
     //% weight=100
     //% block="Set volume to $volume"
+    //% volume.defl=20
     //% volume.min=0 volume.max=30
     export function setVolume(volume: number) {
         const clippedVolume = Math.min(Math.max(volume, 0), 30);
@@ -31,8 +32,9 @@ let dfplayerTrack: number = 0;
     //% subcategory="Sound"     
     //% group="Actions"
     //% weight=100   
+    //% track.defl=1
     //% block="Play track $track"
-    //% track.min=0 track.max=20
+    //% track.min=1 track.max=20
     export function playTrack(track: number) {
         dfplayerTrack = track;
         _sendMessage("Z4," + track)
@@ -69,8 +71,8 @@ let dfplayerTrack: number = 0;
 
     
     //% subcategory="Sound"
-        //% group="Actions"
-        //% weight=80
+    //% group="Actions"
+    //% weight=80
     //% block="resume music"
     export function resume() {
         _sendMessage("Z8")
