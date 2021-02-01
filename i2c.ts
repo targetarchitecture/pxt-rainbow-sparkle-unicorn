@@ -15,7 +15,8 @@ namespace RainbowSparkleUnicorn {
      * @TXrateMs time between each i2c message being sent
      */
     //% subcategory="Expert" 
-    //% group="Wifi" 
+    //% group="i2c" 
+    //% inlineInputMode=inline
     //% block="set i2c timings: gap message (ms) $GapMessageTimeMs, TX rate (ms) $TXrateMs"   
     //% GapMessageTimeMs.defl=50
     //% TXrateMs.defl=50

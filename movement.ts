@@ -21,7 +21,8 @@ namespace RainbowSparkleUnicorn.Movement {
 
     //% subcategory="Movement" 
     //% weight=10
-    //% block="set $servo range from %minimumPulse to %maximumPulse"
+    //% inlineInputMode=inline
+    //% block="set $servo range from $minimumPulse to $maximumPulse"
     //% servo.fieldEditor="gridpicker" servo.fieldOptions.columns=6
     //% servo.fieldOptions.tooltips="false"           
     //% minimumPulse.min=0 minimumPulse.max=4096
@@ -40,6 +41,7 @@ namespace RainbowSparkleUnicorn.Movement {
 
     //% subcategory="Movement" 
     //% weight=20    
+    //% inlineInputMode=inline
     //% servo.fieldEditor="gridpicker" servo.fieldOptions.columns=6
     //% servo.fieldOptions.tooltips="false"       
     //% block="set $servo type $sType"
@@ -52,11 +54,12 @@ namespace RainbowSparkleUnicorn.Movement {
     }        
 
     //% subcategory="Movement" 
-    //% weight=90        
+    //% weight=90  
+    //% inlineInputMode=inline      
     //% servo.fieldEditor="gridpicker" servo.fieldOptions.columns=6
     //% servo.fieldOptions.tooltips="false"       
-    //% block="set $servo angle to %angle"
-    //% angle.min=0 angle.max=180
+    //% block="set $servo angle to $angle"
+    //% angle.min=0 angle.max=180    
     export function setServoAngle(servo: Servo, angle=90) {
         angle = Math.clamp(0, 180, angle);
 
@@ -69,13 +72,15 @@ namespace RainbowSparkleUnicorn.Movement {
     }
  
     //% subcategory="Movement" 
-    //% weight=80            
-    //% block="move $servo linear from %fromAngle to %toAngle in %duration seconds"
+    //% weight=80  
+    //% inlineInputMode=inline          
+    //% block="move|$servo|linear from|$fromAngle|to|$toAngle in|$duration|seconds"
     //% servo.fieldEditor="gridpicker" servo.fieldOptions.columns=6
     //% servo.fieldOptions.tooltips="false"       
     //% toAngle.min=0 toAngle.max=180
     //% fromAngle.min=0 fromAngle.max=180
     //% duration.min=0 
+    //% duration.defl=20     
     export function moveServoLinear(servo: Servo, fromAngle: number, toAngle: number, duration: number) {
         fromAngle = Math.clamp(0, 180, fromAngle);
         toAngle = Math.clamp(0, 180, toAngle);
@@ -91,13 +96,15 @@ namespace RainbowSparkleUnicorn.Movement {
     }
 
     //% subcategory="Movement" 
-    //% weight=60            
-    //% block="move $servo bouncy from %fromAngle to %toAngle in %duration seconds"
+    //% weight=60   
+    //% inlineInputMode=inline         
+    //% block="move|$servo|bouncy from|$fromAngle|to|$toAngle in|$duration|seconds"
     //% servo.fieldEditor="gridpicker" servo.fieldOptions.columns=6
     //% servo.fieldOptions.tooltips="false"       
     //% toAngle.min=0 toAngle.max=180
     //% fromAngle.min=0 fromAngle.max=180
     //% duration.min=0 
+    //% duration.defl=20         
     export function moveServoBouncy(servo: Servo, fromAngle: number, toAngle: number, duration: number) {
         fromAngle = Math.clamp(0, 180, fromAngle);
         toAngle = Math.clamp(0, 180, toAngle);
@@ -110,18 +117,20 @@ namespace RainbowSparkleUnicorn.Movement {
         
        // basic.showString(minP);
 
-      _sendMessage("V4," + servo + "," + fromAngle + "," + toAngle + "," + duration + "," + minP + "," + maxP);
+      _sendMessage("V5," + servo + "," + fromAngle + "," + toAngle + "," + duration + "," + minP + "," + maxP);
     }
 
     //% subcategory="Movement" 
-    //% weight=70            
-    //% block="move $servo smoothly from %fromAngle to %toAngle in %duration seconds"
+    //% weight=70      
+    //% inlineInputMode=inline      
+    //% block="move|$servo|smoothly from|$fromAngle|to|$toAngle in|$duration|seconds"
     //% servo.fieldEditor="gridpicker" servo.fieldOptions.columns=6
     //% servo.fieldOptions.tooltips="false"       
     //% toAngle.min=0 toAngle.max=180
     //% fromAngle.min=0 fromAngle.max=180
     //% duration.min=0 
-    export function moveServoSmoothly(servo: Servo, fromAngle: number, toAngle: number, duration:number) {
+    //% duration.defl=20         
+    export function moveServoSmoothly(servo: Servo, fromAngle: number, toAngle: number, duration: number) {
         fromAngle = Math.clamp(0, 180, fromAngle);
         toAngle = Math.clamp(0, 180, toAngle);
         if (duration < 0){ duration = 0; }
@@ -131,10 +140,11 @@ namespace RainbowSparkleUnicorn.Movement {
         const minP = servoDetails[0];
         const maxP = servoDetails[1];
 
-       _sendMessage("V5," + servo + "," + fromAngle + "," + toAngle +"," + duration + "," + minP + "," + maxP);
+       _sendMessage("V4," + servo + "," + fromAngle + "," + toAngle +"," + duration + "," + minP + "," + maxP);
     }
 
     //% weight=50   
+    //% inlineInputMode=inline
     //% subcategory="Movement" 
     //% block="stop $servo"
     //% servo.fieldEditor="gridpicker" servo.fieldOptions.columns=6
@@ -144,8 +154,9 @@ namespace RainbowSparkleUnicorn.Movement {
     }        
 
     //% subcategory="Expert" 
-    //% group="Movement"    
-    //% block="set $servo pulse to %micros μs"
+    //% group="Movement" 
+    //% inlineInputMode=inline   
+    //% block="set $servo pulse to $micros μs"
     //% servo.fieldEditor="gridpicker" servo.fieldOptions.columns=6
     //% servo.fieldOptions.tooltips="false"   
     //% micros.min=0 micros.max=4096
