@@ -77,8 +77,8 @@ namespace RainbowSparkleUnicorn.Movement {
     //% block="move|$servo|linear from|$fromAngle|to|$toAngle in|$duration|seconds"
     //% servo.fieldEditor="gridpicker" servo.fieldOptions.columns=6
     //% servo.fieldOptions.tooltips="false"       
-    //% toAngle.min=0 toAngle.max=180
-    //% fromAngle.min=0 fromAngle.max=180
+    //% toAngle.min=0 toAngle.max=180 toAngle.defl=180
+    //% fromAngle.min=0 fromAngle.max=180 fromAngle.defl=0
     //% duration.min=0 
     //% duration.defl=20     
     export function moveServoLinear(servo: Servo, fromAngle: number, toAngle: number, duration: number) {
@@ -101,8 +101,8 @@ namespace RainbowSparkleUnicorn.Movement {
     //% block="move|$servo|bouncy from|$fromAngle|to|$toAngle in|$duration|seconds"
     //% servo.fieldEditor="gridpicker" servo.fieldOptions.columns=6
     //% servo.fieldOptions.tooltips="false"       
-    //% toAngle.min=0 toAngle.max=180
-    //% fromAngle.min=0 fromAngle.max=180
+    //% toAngle.min=0 toAngle.max=180 toAngle.defl=180
+    //% fromAngle.min=0 fromAngle.max=180 fromAngle.defl=0
     //% duration.min=0 
     //% duration.defl=20         
     export function moveServoBouncy(servo: Servo, fromAngle: number, toAngle: number, duration: number) {
@@ -126,8 +126,8 @@ namespace RainbowSparkleUnicorn.Movement {
     //% block="move|$servo|smoothly from|$fromAngle|to|$toAngle in|$duration|seconds"
     //% servo.fieldEditor="gridpicker" servo.fieldOptions.columns=6
     //% servo.fieldOptions.tooltips="false"       
-    //% toAngle.min=0 toAngle.max=180
-    //% fromAngle.min=0 fromAngle.max=180
+    //% toAngle.min=0 toAngle.max=180 toAngle.defl=180
+    //% fromAngle.min=0 fromAngle.max=180 fromAngle.defl=0
     //% duration.min=0 
     //% duration.defl=20         
     export function moveServoSmoothly(servo: Servo, fromAngle: number, toAngle: number, duration: number) {
