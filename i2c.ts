@@ -16,7 +16,7 @@ namespace RainbowSparkleUnicorn {
      */
     //% subcategory="Expert" 
     //% group="Wifi" 
-    //% block="seti2ctimings gap message (ms) $GapMessageTimeMs, TX rate (ms) $TXrateMs"   
+    //% block="set i2c timings: gap message (ms) $GapMessageTimeMs, TX rate (ms) $TXrateMs"   
     //% GapMessageTimeMs.defl=50
     //% TXrateMs.defl=50
     export function seti2ctimings( GapMessageTimeMs: number, TXrateMs: number) {

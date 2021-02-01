@@ -42,7 +42,7 @@ namespace RainbowSparkleUnicorn.Movement {
     //% weight=20    
     //% servo.fieldEditor="gridpicker" servo.fieldOptions.columns=6
     //% servo.fieldOptions.tooltips="false"       
-    //% block="set $servo type $servoType"
+    //% block="set $servo type $sType"
     export function setServoType(servo: Servo, sType: ServoType) {
 
         let servoDetails = servoList[servo].split(",");

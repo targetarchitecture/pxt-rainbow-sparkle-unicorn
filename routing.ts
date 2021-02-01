@@ -73,19 +73,16 @@ namespace RainbowSparkleUnicorn {
                         control.raiseEvent(RAINBOW_SPARKLE_UNICORN_ROTARY_TWO_ROTATING, RotaryDirection.Left)
                     }
                 }
-                else if (message.indexOf("E") == 0) {
+                else if (message.indexOf("E1") == 0) {
 
-                    const state = parseInt(message.split(",")[1]);
-                    const pin = parseInt(message.replaceAll("E","").split(",")[0]);
+                    const pin = parseInt(message.split(",")[1]);
+                    const state = parseInt(message.split(",")[2]);
+                    const loopTime = message.split(",")[3];                   
 
-                    if (state == 0) {
-              
+                    if (state == 0) {              
                         control.raiseEvent(RAINBOW_SPARKLE_UNICORN_SWITCH_PRESSED, pin)
- 
-                    } else {
-
+                     } else {
                         control.raiseEvent(RAINBOW_SPARKLE_UNICORN_SWITCH_RELEASED, pin)
-
                     }
                 }
 
@@ -101,6 +98,12 @@ namespace RainbowSparkleUnicorn {
 
                     control.raiseEvent(RAINBOW_SPARKLE_UNICORN_MOTION_HALTED,pin);
             } 
+            else if (message.indexOf("F3") == 0) {
+
+                    const pin = parseInt(message.split(",")[1]);
+
+                    control.raiseEvent(RAINBOW_SPARKLE_UNICORN_MOTION_STARTED,pin);
+            }             
             else if (message.indexOf("G1") == 0) {
                     //store ip address
                     const IP = message.split(",")[1];
