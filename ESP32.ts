@@ -28,7 +28,7 @@ let direction2: RotaryDirection;
         //Need to resolve 0-30 to 0-255
         let mapped = pins.map(value, 0, 30, 0, 255)
 
-        _sendMessage("X1," + mapped)
+        _sendMessage("X2," + mapped)
     }
 
    /**
@@ -47,7 +47,7 @@ let direction2: RotaryDirection;
         //Need to resolve 0-30 to 0-255
         let mapped = pins.map(value, 0, 30, 0, 255)
 
-        _sendMessage("X2," + mapped)
+        _sendMessage("X1," + mapped)
     }
 
 
