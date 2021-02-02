@@ -16,15 +16,22 @@ namespace RainbowSparkleUnicorn.Touch {
         pin: touchPins,
         handler: () => void
     ) {
+        // control.onEvent(
+        // RAINBOW_SPARKLE_UNICORN_TOUCH_SENSOR_TOUCHED,
+        // pin,
+        // () => {
+        //     //MPR121touched[pin] = true;  
+        //     handler();
+        //   }
+        // );
+
         control.onEvent(
         RAINBOW_SPARKLE_UNICORN_TOUCH_SENSOR_TOUCHED,
-        pin,
+        pin === touchPins.Any ? EventBusValue.MICROBIT_EVT_ANY : pin,
         () => {
-            //MPR121touched[pin] = true;  
-
             handler();
-          }
-        );
+        }
+        ); 
     }     
 
   /**
@@ -41,16 +48,22 @@ namespace RainbowSparkleUnicorn.Touch {
     pin: touchPins,
     handler: () => void
   ) {
-    control.onEvent(
-      RAINBOW_SPARKLE_UNICORN_TOUCH_SENSOR_RELEASED,
-      pin,
-      () => {
+    // control.onEvent(
+    //   RAINBOW_SPARKLE_UNICORN_TOUCH_SENSOR_RELEASED,
+    //   pin,
+    //   () => {
+    //     //MPR121touched[pin] = false;   
+    //     handler();
+    //   }
+    // );
 
-        //MPR121touched[pin] = false;   
-
-        handler();
-      }
-    );
+         control.onEvent(
+        RAINBOW_SPARKLE_UNICORN_TOUCH_SENSOR_RELEASED,
+        pin === touchPins.Any ? EventBusValue.MICROBIT_EVT_ANY : pin,
+        () => {
+            handler();
+        }
+        );    
   }   
 
 

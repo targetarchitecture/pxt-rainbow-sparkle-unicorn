@@ -22,7 +22,9 @@ declare const enum touchPins {
     //% block="Pin 10" 
     P10 = 10,
     //% block="Pin 11" 
-    P11 = 11
+    P11 = 11,
+    //% block="Any" 
+    Any       
 }
 
 declare const enum Servo {
