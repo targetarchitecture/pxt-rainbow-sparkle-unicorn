@@ -55,11 +55,8 @@ namespace RainbowSparkleUnicorn.Touch {
 
 
 
-      /**
+    /**
      * Set the touch and release thresholds for all 13 channels on the
-     * device to the passed values. The threshold is defined as a
-     * deviation value from the baseline value, so it remains constant
-     * even baseline value changes
      * @param touchThreshold the touch threshold value from 0 to 255.
      * @param releaseThreshold the release threshold value from 0 to 255.
      */
@@ -71,6 +68,10 @@ namespace RainbowSparkleUnicorn.Touch {
         _sendMessage("S1," + touchThreshold + "," +releaseThreshold );
     } 
     
+     /**
+     * Set the debounce timing
+     * @param timing 
+     */   
     //% subcategory="Expert"     
     //% group="Touch"
     //% timing.min=0 timing.max=100 timing.defl=50
