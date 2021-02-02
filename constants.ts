@@ -1,6 +1,6 @@
 namespace RainbowSparkleUnicorn {
 
-export const  MICROBIT_EVT_ANY = 0;
+//export const  MICROBIT_EVT_ANY = 0;
 
 export const  RAINBOW_SPARKLE_UNICORN_TOUCH_SENSOR_TOUCHED = 5051;
 export const  RAINBOW_SPARKLE_UNICORN_TOUCH_SENSOR_RELEASED = 5052;

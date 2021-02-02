@@ -111,13 +111,14 @@ let direction2: RotaryDirection;
 
     control.onEvent(
       RAINBOW_SPARKLE_UNICORN_ROTARY_ONE_ROTATING,
-      MICROBIT_EVT_ANY,
+      EventBusValue.MICROBIT_EVT_ANY,
       () => {
        direction1 = control.eventValue();
         handler();
       }
     );
   }
+
 
 
 
@@ -135,7 +136,7 @@ let direction2: RotaryDirection;
 
     control.onEvent(
       RAINBOW_SPARKLE_UNICORN_ROTARY_TWO_ROTATING,
-      MICROBIT_EVT_ANY,
+      EventBusValue.MICROBIT_EVT_ANY,
       () => {
        direction2 = control.eventValue();
         handler();

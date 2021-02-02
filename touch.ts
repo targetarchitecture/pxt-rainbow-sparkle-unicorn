@@ -16,6 +16,8 @@ namespace RainbowSparkleUnicorn.Touch {
         pin: touchPins,
         handler: () => void
     ) {
+        serial.writeLine("@" + pin);
+
         // control.onEvent(
         // RAINBOW_SPARKLE_UNICORN_TOUCH_SENSOR_TOUCHED,
         // pin,
@@ -25,12 +27,14 @@ namespace RainbowSparkleUnicorn.Touch {
         //   }
         // );
 
+
+
         control.onEvent(
         RAINBOW_SPARKLE_UNICORN_TOUCH_SENSOR_TOUCHED,
         pin === touchPins.Any ? EventBusValue.MICROBIT_EVT_ANY : pin,
         () => {
             handler();
-        }
+            }
         ); 
     }     
 
@@ -62,7 +66,7 @@ namespace RainbowSparkleUnicorn.Touch {
         pin === touchPins.Any ? EventBusValue.MICROBIT_EVT_ANY : pin,
         () => {
             handler();
-        }
+             }
         );    
   }   
 
