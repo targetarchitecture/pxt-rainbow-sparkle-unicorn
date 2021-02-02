@@ -16,7 +16,7 @@ namespace RainbowSparkleUnicorn.Touch {
         pin: touchPins,
         handler: () => void
     ) {
-        serial.writeLine("@" + pin);
+        //serial.writeLine("@" + pin);
 
         // control.onEvent(
         // RAINBOW_SPARKLE_UNICORN_TOUCH_SENSOR_TOUCHED,

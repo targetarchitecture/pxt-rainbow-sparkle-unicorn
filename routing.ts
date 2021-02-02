@@ -34,7 +34,7 @@ namespace RainbowSparkleUnicorn {
                 } 
                 else if (message.indexOf("B1") == 0) {
                     const pin = parseInt(message.split(",")[1]);
-                    serial.writeLine("~" + pin);
+                    //serial.writeLine("~" + pin);
                     control.raiseEvent(RAINBOW_SPARKLE_UNICORN_TOUCH_SENSOR_TOUCHED, pin)
                 }
                 else if (message.indexOf("B2") == 0) {
