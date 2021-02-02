@@ -1,5 +1,3 @@
-
-
 declare const enum touchPins {
     //% block="Pin 0"    
     P0 = 0,    
@@ -24,19 +22,8 @@ declare const enum touchPins {
     //% block="Pin 10" 
     P10 = 10,
     //% block="Pin 11" 
-    P11 = 11,
-    //% block="Any" 
-    Any 
+    P11 = 11
 }
-
-// const enum TouchAction {
-//     //% block="touched"
-//     Touched = 0,
-//     //% block="released"
-//     Released = 1
-// }
-
-
 
 declare const enum Servo {
     //% block="Servo 0"
@@ -106,7 +93,7 @@ declare const enum switchPins {
     P14 = 14,
     //% block="Pin 15"
     P15 = 15,
-     //% block="Any" 
+    //% block="Any" 
     Any     
 }
 

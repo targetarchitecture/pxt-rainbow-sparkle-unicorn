@@ -35,15 +35,11 @@ namespace RainbowSparkleUnicorn {
 
                 else if (message.indexOf("B1") == 0) {
                     const pin = parseInt(message.split(",")[1]);
-                
-                //led.toggle(1,3)
 
                     control.raiseEvent(RAINBOW_SPARKLE_UNICORN_TOUCH_SENSOR_TOUCHED, pin)
                 }
                 else if (message.indexOf("B2") == 0) {
                     const pin = parseInt(message.split(",")[1]);
-                    
-                //led.toggle(1,2)
 
                     control.raiseEvent(RAINBOW_SPARKLE_UNICORN_TOUCH_SENSOR_RELEASED, pin)
                 }

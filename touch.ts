@@ -1,6 +1,6 @@
 namespace RainbowSparkleUnicorn.Touch {
 
-    let MPR121touched = [false, false, false, false, false, false, false, false, false, false, false, false]
+    //let MPR121touched = [false, false, false, false, false, false, false, false, false, false, false, false]
 
     /**
      * Do something when a touch sensor is touched or released.
@@ -20,10 +20,10 @@ namespace RainbowSparkleUnicorn.Touch {
         RAINBOW_SPARKLE_UNICORN_TOUCH_SENSOR_TOUCHED,
         pin,
         () => {
-            MPR121touched[pin] = true;  
+            //MPR121touched[pin] = true;  
 
             handler();
-        }
+          }
         );
     }     
 
@@ -46,10 +46,36 @@ namespace RainbowSparkleUnicorn.Touch {
       pin,
       () => {
 
-        MPR121touched[pin] = false;   
+        //MPR121touched[pin] = false;   
 
         handler();
       }
     );
-  }    
+  }   
+
+
+
+      /**
+     * Set the touch and release thresholds for all 13 channels on the
+     * device to the passed values. The threshold is defined as a
+     * deviation value from the baseline value, so it remains constant
+     * even baseline value changes
+     * @param touchThreshold the touch threshold value from 0 to 255.
+     * @param releaseThreshold the release threshold value from 0 to 255.
+     */
+    //% subcategory="Expert"     
+    //% group="Touch"
+    //% releaseThreshold.min=0 releaseThreshold.max=255 releaseThreshold.defl=6
+    //% touchThreshold.min=0 touchThreshold.max=255 touchThreshold.defl=12
+    export function setTouchThresholds(touchThreshold: number,releaseThreshold: number) {
+        _sendMessage("S1," + touchThreshold + "," +releaseThreshold );
+    } 
+    
+    //% subcategory="Expert"     
+    //% group="Touch"
+    //% timing.min=0 timing.max=100 timing.defl=50
+    export function setDebounceDelay(timing: number) {
+        _sendMessage("S2," + timing );
+    } 
+
 }
