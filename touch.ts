@@ -62,6 +62,7 @@ namespace RainbowSparkleUnicorn.Touch {
      */
     //% subcategory="Expert"     
     //% group="Touch"
+    //% block="Set the touch and release thresholds $touchThreshold , $releaseThreshold"
     //% releaseThreshold.min=0 releaseThreshold.max=255 releaseThreshold.defl=6
     //% touchThreshold.min=0 touchThreshold.max=255 touchThreshold.defl=12
     export function setTouchThresholds(touchThreshold: number,releaseThreshold: number) {
@@ -74,6 +75,7 @@ namespace RainbowSparkleUnicorn.Touch {
      */   
     //% subcategory="Expert"     
     //% group="Touch"
+    //% block="Set the debounce timing $timing"
     //% timing.min=0 timing.max=100 timing.defl=50
     export function setDebounceDelay(timing: number) {
         _sendMessage("S2," + timing );
