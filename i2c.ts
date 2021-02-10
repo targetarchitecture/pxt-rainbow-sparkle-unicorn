@@ -8,6 +8,7 @@ namespace RainbowSparkleUnicorn {
     export let messageQueue: string[] = [];
     let i2cGapMessageTimeMs = 50;
     let i2cTXrateMs = 50; 
+    let readBufferLength = 40; //32;
 
     /**
      * Set i2c timings
@@ -77,9 +78,9 @@ namespace RainbowSparkleUnicorn {
     function readI2CMessage ( ) {
 
         let startIndex = 0;
-        let i2cBuffer = pins.i2cReadBuffer(ESP32_I2C_ADDR, 32, false);
+        let i2cBuffer = pins.i2cReadBuffer(ESP32_I2C_ADDR, readBufferLength, false);
 
-        for (let k = 0; k <= 32; k++) {
+        for (let k = 0; k <= readBufferLength; k++) {
             // find packet start
             if (i2cBuffer[k] == 2) {
                 startIndex = k

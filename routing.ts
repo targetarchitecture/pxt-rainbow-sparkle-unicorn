@@ -74,25 +74,30 @@ namespace RainbowSparkleUnicorn {
                     const state = parseInt(message.split(",")[2]);
                     const loopTime = message.split(",")[3];                   
 
+                    //update pin state array
+                   Switch.switchStates[pin] = state;
+
                     if (state == 0) {              
                         control.raiseEvent(RAINBOW_SPARKLE_UNICORN_SWITCH_PRESSED, pin)
                      } else {
                         control.raiseEvent(RAINBOW_SPARKLE_UNICORN_SWITCH_RELEASED, pin)
                     }
                 }
+                else if (message.indexOf("E2") == 0) {
+                    Switch._setSwitchStates("message");
+                }
+                else if (message.indexOf("F1") == 0) {
 
-            else if (message.indexOf("F1") == 0) {
+                        const pin = parseInt(message.split(",")[1]);
 
-                    const pin = parseInt(message.split(",")[1]);
+                        control.raiseEvent(RAINBOW_SPARKLE_UNICORN_MOTION_STOPPED,pin);
+                } 
+                else if (message.indexOf("F2") == 0) {
 
-                    control.raiseEvent(RAINBOW_SPARKLE_UNICORN_MOTION_STOPPED,pin);
-            } 
-            else if (message.indexOf("F2") == 0) {
+                        const pin = parseInt(message.split(",")[1]);
 
-                    const pin = parseInt(message.split(",")[1]);
-
-                    control.raiseEvent(RAINBOW_SPARKLE_UNICORN_MOTION_HALTED,pin);
-            } 
+                        control.raiseEvent(RAINBOW_SPARKLE_UNICORN_MOTION_HALTED,pin);
+                } 
             else if (message.indexOf("F3") == 0) {
 
                     const pin = parseInt(message.split(",")[1]);

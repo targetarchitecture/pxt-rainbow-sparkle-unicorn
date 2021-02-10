@@ -1,6 +1,5 @@
 namespace RainbowSparkleUnicorn.Switch {
-    //export let SX1509state = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0];
-
+   
   /**
    * Do something when a switch is pushed.
    * @param pin the switch pin to be checked
@@ -51,5 +50,18 @@ namespace RainbowSparkleUnicorn.Switch {
         handler();
       }
     );
-  }    
+  }  
+
+  export let switchStates: number[] = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0];
+
+  export function _setSwitchStates(states : string){
+
+    for (let pin = 0; pin <= 15; pin++) {
+        //needs to be offset by one for the identifier
+      const state = parseInt(states.split(",")[pin+1]); 
+
+      switchStates[pin] = state;
+    }  
+  }
+
 }

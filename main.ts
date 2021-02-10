@@ -1,1 +1,5 @@
-
+serial.writeLine("hello world")
+RainbowSparkleUnicorn.start()
+RainbowSparkleUnicorn.printReceivedMessages()
+RainbowSparkleUnicorn.printDebugMessages()
+RainbowSparkleUnicorn.restartESP32()
