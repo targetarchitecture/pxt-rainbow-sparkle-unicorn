@@ -60,8 +60,35 @@ namespace RainbowSparkleUnicorn.Switch {
         //needs to be offset by one for the identifier
       const state = parseInt(states.split(",")[pin+1]); 
 
-      switchStates[pin] = state;
+      switchStates.set(pin, state);
+
+      serial.writeLine("pin " + pin + " state " + state);
     }  
   }
+
+     /**
+     * Get a switch state
+     * @param pin 
+     */   
+    //% subcategory="Switch" 
+    //% weight=80        
+    //% block="Get the switch state on pin $pin"
+  //% pin.fieldEditor="gridpicker" pin.fieldOptions.columns=6
+  //% pin.fieldOptions.tooltips="false"    
+    export function getSwitchState(pin: switchPins) {
+        return switchStates.get(pin);
+    } 
+
+
+     /**
+     * Updates all switch states
+     */   
+    //% subcategory="Expert" 
+    //% group="Switch"     
+    //% block="Updates all of the switch states"
+    export function updateSwitchState() {
+          _sendMessage("R1");
+    } 
+
 
 }

@@ -29,6 +29,10 @@ namespace RainbowSparkleUnicorn {
         IoT.stopWifi();
 
         basic.pause(100);
+
+        Switch.updateSwitchState();
+
+        basic.pause(100);
     }
 
     /**
