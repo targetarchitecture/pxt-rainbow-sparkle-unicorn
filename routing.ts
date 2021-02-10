@@ -21,6 +21,12 @@ namespace RainbowSparkleUnicorn {
                 if (message.indexOf("A1") == 0) {
                     const value = parseInt(message.split(",")[1]);
                 
+                    if (value == 1){
+                        Sound._dfplayerBusy = false;
+                    } else {
+                        Sound._dfplayerBusy = true;
+                    };
+
                     control.raiseEvent(RAINBOW_SPARKLE_UNICORN_SOUND_BUSY, value)
                 }
                 else if (message.indexOf("A2") == 0) {

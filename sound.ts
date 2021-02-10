@@ -1,6 +1,6 @@
 namespace RainbowSparkleUnicorn.Sound {
 
-let dfplayerBusy: boolean = false;
+export let _dfplayerBusy: boolean = false;
 let dfplayerVolume: number = 0;
 let dfplayerTrack: number = 0;
 
@@ -87,16 +87,15 @@ let dfplayerTrack: number = 0;
     }
 
     /**
-     * Returns the state of the player has started
-     * playing a track or stopped.
+     * Returns the state of the player has started playing a track or stopped.
      * This block intended to be used inside of start stop event handler.
      */
     //% subcategory="Sound"
-     //% group="State"
-    //% block="track started/stopped"
+    //% group="State"
+    //% block="sound playing"
     //% weight=39
-    export function startStop(): boolean {
-        return dfplayerBusy;
+    export function playingSound(): boolean {
+        return _dfplayerBusy;
     }
 
      /**
@@ -134,8 +133,6 @@ let dfplayerTrack: number = 0;
            RAINBOW_SPARKLE_UNICORN_SOUND_BUSY,
             EventBusValue.MICROBIT_EVT_ANY,
             () => {
-                const value = control.eventValue();
-               if (value == 1){dfplayerBusy=false} else {dfplayerBusy=true};
 
                 handler();
             }
