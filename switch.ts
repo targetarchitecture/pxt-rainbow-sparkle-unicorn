@@ -54,16 +54,19 @@ namespace RainbowSparkleUnicorn.Switch {
 
   export let switchStates: number[] = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0];
 
-  export function _setSwitchStates(states : string){
+  export function _setSwitchStates(states : string)
+  {
+      //needs to be offset by one for the identifier
+      states = states.replaceAll("E2,", "");
 
-    for (let pin = 0; pin <= 15; pin++) {
-        //needs to be offset by one for the identifier
-      const state = parseInt(states.split(",")[pin+1]); 
+        for (let pin = 0; pin <= 15; pin++) {
+            
+        const state = parseInt(states.split(",")[pin]); 
 
-      switchStates.set(pin, state);
+        switchStates.set(pin, state);
 
-      serial.writeLine("pin " + pin + " state " + state);
-    }  
+        serial.writeLine("pin " + pin + " state " + state);
+        }  
   }
 
      /**

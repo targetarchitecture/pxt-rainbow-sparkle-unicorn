@@ -84,7 +84,7 @@ namespace RainbowSparkleUnicorn {
                     }
                 }
                 else if (message.indexOf("E2") == 0) {
-                    Switch._setSwitchStates("message");
+                    Switch._setSwitchStates(message);
                 }
                 else if (message.indexOf("F1") == 0) {
 
