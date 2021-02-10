@@ -19,6 +19,8 @@ namespace RainbowSparkleUnicorn {
 
         _sendMessage("STARTING");
 
+        basic.pause(100);
+
         Controls.turnSlider1(OnOff.OFF);
         Controls.turnSlider2(OnOff.OFF);
         Controls.turnSpinner1(OnOff.OFF);

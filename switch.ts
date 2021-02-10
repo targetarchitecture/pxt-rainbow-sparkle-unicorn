@@ -65,7 +65,7 @@ namespace RainbowSparkleUnicorn.Switch {
 
         switchStates.set(pin, state);
 
-        serial.writeLine("pin " + pin + " state " + state);
+        //serial.writeLine("pin " + pin + " state " + state);
         }  
   }
 
