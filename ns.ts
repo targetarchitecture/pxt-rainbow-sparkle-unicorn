@@ -3,7 +3,8 @@
 //% subcategories='["Touch", "Switch", "Sound", "Light", "Sliders / Dials / Spinners" ,"Movement", "IoT", "Expert"]'
 namespace RainbowSparkleUnicorn {
 
-    export let _initialised = false;
+    export let _readyToUseI2C = false;
+    export let _readyToReadQueue = false;
     export let _printDebugMsgs = false;
 
     /**
@@ -14,13 +15,15 @@ namespace RainbowSparkleUnicorn {
 
         pins.digitalWritePin(DigitalPin.P8, 0);
 
-        _initialised = true;
+        _readyToUseI2C = true;
 
         basic.pause(100);
 
         _sendMessage("STARTING");
 
         basic.pause(100);
+
+        _readyToReadQueue = true;
 
         Controls.turnSlider1(OnOff.OFF);
         Controls.turnSlider2(OnOff.OFF);

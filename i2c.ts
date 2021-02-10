@@ -118,7 +118,7 @@ namespace RainbowSparkleUnicorn {
 
     //this loop takes off the queue (array) and sends it down the i2c line
     basic.forever(() => {
-        if (_initialised == true)            
+        if (_readyToUseI2C == true)            
         {  
             if (messageQueue.length > 0){ 
                 const message = messageQueue.shift();
@@ -130,7 +130,7 @@ namespace RainbowSparkleUnicorn {
 
     //this loop just adds a i2c message pull request every 50 milliseconds if not already something in the queue
     basic.forever(() => {
-        if (_initialised == true)            
+        if (_readyToUseI2C == true)            
         {
             if (messageQueue.length == 0){
                 messageQueue.push("00," + input.runningTime());

@@ -18,6 +18,13 @@ namespace RainbowSparkleUnicorn {
                     serial.writeLine(message);
                 }
 
+                if (_readyToReadQueue == false){
+                    if (_printDebugMsgs == false){
+                        serial.writeLine("NOT READING: " + message);
+                    }
+                    return;
+                }
+
                 if (message.indexOf("A1") == 0) {
                     const value = parseInt(message.split(",")[1]);
                 

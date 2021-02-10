@@ -133,7 +133,6 @@ let dfplayerTrack: number = 0;
            RAINBOW_SPARKLE_UNICORN_SOUND_BUSY,
             EventBusValue.MICROBIT_EVT_ANY,
             () => {
-
                 handler();
             }
         );
