@@ -25,7 +25,7 @@ namespace RainbowSparkleUnicorn {
 
         _readyToReadQueue = true;
 
-//make sure stuff has stopped
+        //make sure stuff has stopped
         Sound.pause();
         Movement.stopServo(Servo.P0);
         Movement.stopServo(Servo.P1);
@@ -55,7 +55,7 @@ namespace RainbowSparkleUnicorn {
 
         IoT.stopWifi();
 
-        basic.pause(100);
+        basic.pause(200);
     }
 
     /**
