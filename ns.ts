@@ -25,6 +25,25 @@ namespace RainbowSparkleUnicorn {
 
         _readyToReadQueue = true;
 
+//make sure stuff has stopped
+        Sound.pause();
+        Movement.stopServo(Servo.P0);
+        Movement.stopServo(Servo.P1);
+        Movement.stopServo(Servo.P2);
+        Movement.stopServo(Servo.P3);
+        Movement.stopServo(Servo.P4);
+        Movement.stopServo(Servo.P5);
+        Movement.stopServo(Servo.P6);
+        Movement.stopServo(Servo.P7);
+        Movement.stopServo(Servo.P8);
+        Movement.stopServo(Servo.P9);
+        Movement.stopServo(Servo.P10);
+        Movement.stopServo(Servo.P11);
+        Movement.stopServo(Servo.P12);
+        Movement.stopServo(Servo.P13);
+        Movement.stopServo(Servo.P14);
+        Movement.stopServo(Servo.P15);
+
         Controls.turnSlider1(OnOff.OFF);
         Controls.turnSlider2(OnOff.OFF);
         Controls.turnSpinner1(OnOff.OFF);
