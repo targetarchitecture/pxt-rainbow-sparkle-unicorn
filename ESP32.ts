@@ -5,6 +5,10 @@ let ADC2Enabled = false;
 let ADC1value = 0;
 let ADC2value = 0;
 
+//store previous value so it's only sending changes
+let previousDAC1value = 0;
+let previousDAC2value = 0;
+
 let Encoder1Enabled = false;
 let Encoder2Enabled = false;
 let Encoder1value = 0;
@@ -28,7 +32,12 @@ let direction2: RotaryDirection;
         //Need to resolve 0-30 to 0-255
         let mapped = pins.map(value, 0, 30, 0, 255)
 
-        _sendMessage("X2," + mapped)
+        if (mapped != previousDAC1value){
+            _sendMessage("X2," + mapped)
+        }
+
+        //remember previous value
+        previousDAC1value = mapped
     }
 
    /**
@@ -47,7 +56,12 @@ let direction2: RotaryDirection;
         //Need to resolve 0-30 to 0-255
         let mapped = pins.map(value, 0, 30, 0, 255)
 
-        _sendMessage("X1," + mapped)
+        if (mapped != previousDAC2value){
+            _sendMessage("X1," + mapped)
+        }
+
+        //remember previous value
+        previousDAC2value = mapped
     }
 
 

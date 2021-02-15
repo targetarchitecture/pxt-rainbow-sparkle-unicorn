@@ -75,7 +75,10 @@ namespace RainbowSparkleUnicorn.Light {
     } 
 
     function resetSX1509(){
-        _sendMessage("Y4");     
+        _sendMessage("Y4"); 
+
+        //see if the pause is needed as sometime the LEDs don't come on when powered up
+        basic.pause(50);
     }
 
 /**
