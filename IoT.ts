@@ -31,43 +31,74 @@ namespace RainbowSparkleUnicorn.IoT {
       // _sendMessage("T2," + WiFiPassword);
       //  basic.pause(10)        
 
+       if ( connectToWiFi(WiFiName, WiFiPassword) == true){
+
+            //control.waitForEvent(RAINBOW_SPARKLE_UNICORN_IP_RECEIVED, 1);
+
+            printDebugMsgs("IP:" + _IPAddress);
+
+            //connect to MQTT server
+            for (let index = 0; index <= 20; index++) {
+
+                printDebugMsgs("Connecting to MQTT (loop " + index + ")");
+
+                basic.pause(50);
+                _sendMessage("T4," + MQTTServer);
+                basic.pause(50);
+                _sendMessage("T5," + MQTTClient);
+                basic.pause(50);
+                _sendMessage("T6," + MQTTKey);
+                basic.pause(50);         
+                _sendMessage("T7," + MQTTPassword);
+                basic.pause(50);
+                _sendMessage("T8"); 
+
+                printDebugMsgs("Waiting for MQTT connection");
+
+                //wait a second to see if we have a positive response
+                basic.pause(1000);
+
+                if (_MQTTConnected != 1){
+                    printDebugMsgs("MQTT Connected!");
+                    break;
+                } else {
+                    printDebugMsgs("MQTT NOT Connected :(");  
+                }
+            }
+       }
+        //removed to allow resending of variables
+       // control.waitForEvent(_MQTTConnected, EventBusValue.MICROBIT_EVT_ANY);      
+    }
+
+    function connectToWiFi(WiFiName: string, WiFiPassword: string): boolean{
+
         printDebugMsgs("Connecting to Wifi");
 
         _sendMessage("T3," + WiFiName + "," + WiFiPassword);
 
-        control.waitForEvent(RAINBOW_SPARKLE_UNICORN_IP_RECEIVED, 1);
-
-        printDebugMsgs("IP:" + _IPAddress);
-
-        //connect to MQTT server
-        for (let index = 0; index <= 10; index++) {
-
-            printDebugMsgs("Connecting to MQTT (loop " + index + ")");
-
-            basic.pause(50);
-            _sendMessage("T4," + MQTTServer);
-            basic.pause(50);
-            _sendMessage("T5," + MQTTClient);
-            basic.pause(50);
-            _sendMessage("T6," + MQTTKey);
-            basic.pause(50);         
-            _sendMessage("T7," + MQTTPassword);
-            basic.pause(50);
-            _sendMessage("T8"); 
-
-            printDebugMsgs("Waiting for result");
-
-            //wait a second to see if we have a positive response
+        //try waiting 1 second and try 5 times        
+        for (let index = 0; index <= 5; index++) {
             basic.pause(1000);
-
-            if (_MQTTConnected != 1){
-                printDebugMsgs("MQTT Connected!");
-                break;
+            if (_IPAddress != "0.0.0.0"){
+                return true;
             }
+            printDebugMsgs("Wifi loop " + index);
         }
 
-        //removed to allow resending of variables
-       // control.waitForEvent(_MQTTConnected, EventBusValue.MICROBIT_EVT_ANY);      
+        //reset wifi 
+        printDebugMsgs("Reset Wifi");
+        stopWifi();
+
+        for (let index = 0; index <= 30; index++) {
+            basic.pause(1000);
+            if (_IPAddress != "0.0.0.0"){
+                return true;
+            }
+
+              printDebugMsgs("Wifi loop " + index);
+        }
+
+        return false;
     }
 
     function printDebugMsgs(message: string) {

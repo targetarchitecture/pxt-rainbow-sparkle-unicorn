@@ -123,13 +123,13 @@ namespace RainbowSparkleUnicorn {
 
                     IoT._setIPAddress(IP);
 
-                    control.raiseEvent(RAINBOW_SPARKLE_UNICORN_IP_RECEIVED,1);            
+                    //control.raiseEvent(RAINBOW_SPARKLE_UNICORN_IP_RECEIVED,1);            
             } 
             else if (message.indexOf("G2") == 0) {
 
                     IoT._MQTTConnected = parseInt(message.split(",")[1]);
 
-                    control.raiseEvent(RAINBOW_SPARKLE_UNICORN_MQTT_STATE,IoT._MQTTConnected);            
+                    //control.raiseEvent(RAINBOW_SPARKLE_UNICORN_MQTT_STATE,IoT._MQTTConnected);            
             }
             else if (message.indexOf("G3") == 0) {
 
