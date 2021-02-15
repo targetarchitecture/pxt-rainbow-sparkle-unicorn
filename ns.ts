@@ -13,6 +13,8 @@ namespace RainbowSparkleUnicorn {
     //% block="Start Rainbow Sparkle Unicorn"
     export function start(): void {
 
+        basic.pause(100);
+
         pins.digitalWritePin(DigitalPin.P8, 0);
 
         _readyToUseI2C = true;
@@ -26,6 +28,7 @@ namespace RainbowSparkleUnicorn {
         _readyToReadQueue = true;
 
         //make sure stuff has stopped
+        IoT.stopWifi();
         Sound.pause();
         Movement.stopServo(Servo.P0);
         Movement.stopServo(Servo.P1);
@@ -52,8 +55,6 @@ namespace RainbowSparkleUnicorn {
         Switch.updateSwitchState();
 
         Light.turnAllOff();
-
-        IoT.stopWifi();
 
         basic.pause(200);
     }

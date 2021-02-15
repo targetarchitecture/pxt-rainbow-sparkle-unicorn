@@ -30,12 +30,19 @@ namespace RainbowSparkleUnicorn.IoT {
       //  basic.pause(10)     
       // _sendMessage("T2," + WiFiPassword);
       //  basic.pause(10)        
+
+        printDebugMsgs("Connecting to Wifi");
+
         _sendMessage("T3," + WiFiName + "," + WiFiPassword);
 
         control.waitForEvent(RAINBOW_SPARKLE_UNICORN_IP_RECEIVED, 1);
 
+        printDebugMsgs("IP:" + _IPAddress);
+
         //connect to MQTT server
         for (let index = 0; index <= 10; index++) {
+
+            printDebugMsgs("Connecting to MQTT (loop " + index + ")");
 
             basic.pause(50);
             _sendMessage("T4," + MQTTServer);
@@ -48,16 +55,25 @@ namespace RainbowSparkleUnicorn.IoT {
             basic.pause(50);
             _sendMessage("T8"); 
 
+            printDebugMsgs("Waiting for result");
+
             //wait a second to see if we have a positive response
             basic.pause(1000);
 
             if (_MQTTConnected != 1){
+                printDebugMsgs("MQTT Connected!");
                 break;
             }
         }
 
         //removed to allow resending of variables
        // control.waitForEvent(_MQTTConnected, EventBusValue.MICROBIT_EVT_ANY);      
+    }
+
+    function printDebugMsgs(message: string) {
+       if (_printDebugMsgs == true){
+        serial.writeLine(message);
+       }
     }
     
     //% subcategory="IoT" 
