@@ -72,9 +72,16 @@ namespace RainbowSparkleUnicorn.IoT {
 
     function connectToWiFi(WiFiName: string, WiFiPassword: string): boolean{
 
+        //reset wifi 
+        printDebugMsgs("Reset Wifi");
+        stopWifi();
+
         printDebugMsgs("Connecting to Wifi");
 
-        _sendMessage("T3," + WiFiName + "," + WiFiPassword);
+        for (let index = 0; index <= 5; index++) {
+            basic.pause(1000);
+            _sendMessage("T3," + WiFiName + "," + WiFiPassword);
+        }    
 
         //try waiting 1 second and try 5 times        
         for (let index = 0; index <= 5; index++) {
@@ -83,6 +90,7 @@ namespace RainbowSparkleUnicorn.IoT {
                 return true;
             }
             printDebugMsgs("Wifi loop " + index);
+            _sendMessage("T3," + WiFiName + "," + WiFiPassword);
         }
 
         //reset wifi 
@@ -95,7 +103,8 @@ namespace RainbowSparkleUnicorn.IoT {
                 return true;
             }
 
-              printDebugMsgs("Wifi loop " + index);
+            printDebugMsgs("Wifi loop " + index);
+            _sendMessage("T3," + WiFiName + "," + WiFiPassword);
         }
 
         return false;

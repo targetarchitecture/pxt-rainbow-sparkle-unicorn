@@ -11,3 +11,4 @@ RainbowSparkleUnicorn.IoT.connectToInterWeb(
 "" + keyA + keyB,
 "Spaceship Console"
 )
+music.playTone(262, music.beat(BeatFraction.Whole))
