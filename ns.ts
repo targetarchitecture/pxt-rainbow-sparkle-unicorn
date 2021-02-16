@@ -75,7 +75,6 @@ namespace RainbowSparkleUnicorn {
      */
     //% subcategory="Expert" 
     //% group="Debug"       
-    //% block="Restart ESP32"    
     //% block=comment|%theComment
     export function comment(theComment: string): void {
         // do nothing
