@@ -1,20 +1,20 @@
 namespace RainbowSparkleUnicorn.Controls {
 
-let ADC1Enabled = false;
-let ADC2Enabled = false;
-let ADC1value = 0;
-let ADC2value = 0;
+    let ADC1Enabled = false;
+    let ADC2Enabled = false;
+    let ADC1value = 0;
+    let ADC2value = 0;
 
-//store previous value so it's only sending changes
-let previousDAC1value = 0;
-let previousDAC2value = 0;
+    //store previous value so it's only sending changes
+    let previousDAC1value = 0;
+    let previousDAC2value = 0;
 
-let Encoder1Enabled = false;
-let Encoder2Enabled = false;
-let Encoder1value = 0;
-let Encoder2value = 0;
-let direction1: RotaryDirection;
-let direction2: RotaryDirection;
+    let Encoder1Enabled = false;
+    let Encoder2Enabled = false;
+    let Encoder1value = 0;
+    let Encoder2value = 0;
+    let direction1: RotaryDirection;
+    let direction2: RotaryDirection;
 
      /**
      * Set the analog dial to a certain voltage.
@@ -23,21 +23,21 @@ let direction2: RotaryDirection;
     //% subcategory="Sliders / Dials / Spinners" 
     //% group="Dials"
     //% block="Set dial 1 to $value"
-    //% value.min=0 value.max=30
+    //% value.min=0 value.max=255
     //% weight=65
     export function dial1(value: number) {
 
-        value = Math.clamp(0, 30, value)
+        value = Math.clamp(0, 255, value)
 
         //Need to resolve 0-30 to 0-255
-        let mapped = pins.map(value, 0, 30, 0, 255)
+        //let mapped = pins.map(value, 0, 30, 0, 255)
 
-        if (mapped != previousDAC1value){
-            _sendMessage("X2," + mapped)
+        if (value != previousDAC1value){
+            _sendMessage("X2," + value)
         }
 
         //remember previous value
-        previousDAC1value = mapped
+        previousDAC1value = value
     }
 
    /**
@@ -47,21 +47,21 @@ let direction2: RotaryDirection;
     //% subcategory="Sliders / Dials / Spinners" 
     //% group="Dials"
     //% block="Set dial 2 to $value"
-    //% value.min=0 value.max=30
+    //% value.min=0 value.max=255
     //% weight=65
     export function dial2(value: number) {
 
-        value = Math.clamp(0, 30, value)
+        value = Math.clamp(0, 255, value)
 
         //Need to resolve 0-30 to 0-255
-        let mapped = pins.map(value, 0, 30, 0, 255)
+        //let mapped = pins.map(value, 0, 30, 0, 255)
 
-        if (mapped != previousDAC2value){
-            _sendMessage("X1," + mapped)
+        if (value != previousDAC2value){
+            _sendMessage("X1," + value)
         }
 
         //remember previous value
-        previousDAC2value = mapped
+        previousDAC2value = value
     }
 
 
