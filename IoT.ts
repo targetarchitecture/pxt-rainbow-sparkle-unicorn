@@ -6,7 +6,7 @@ namespace RainbowSparkleUnicorn.IoT {
     }
 
     let _IPAddress: string = "0.0.0.0";
-    export let _MQTTConnected: number = -1;
+    export let _MQTTConnected: number = 0;
     //export let MQTTmessages: string[] = [];
     export let MQTTmessages: MQTTmessage[] = [];
 
@@ -58,7 +58,7 @@ namespace RainbowSparkleUnicorn.IoT {
                 //wait a second to see if we have a positive response
                 basic.pause(1000);
 
-                if (_MQTTConnected != 1){
+                if (_MQTTConnected == 1){
                     printDebugMsgs("MQTT Connected!");
                     break;
                 } else {
