@@ -2,8 +2,8 @@ namespace RainbowSparkleUnicorn.Controls {
 
     let ADC1Enabled = false;
     let ADC2Enabled = false;
-    let ADC1value = 0;
-    let ADC2value = 0;
+   export let _Slider1 = 0;
+   export let _Slider2 = 0;
 
     //store previous value so it's only sending changes
     let previousDAC1value = 0;
@@ -186,7 +186,7 @@ namespace RainbowSparkleUnicorn.Controls {
     //% group="Sliders"
     //% block="Slider one value" 
     export function Slider1(): number {
-        return ADC1value;
+        return _Slider1;
     }
 
     /**
@@ -196,7 +196,7 @@ namespace RainbowSparkleUnicorn.Controls {
     //% group="Sliders" 
     //% block="Slider two value" 
     export function Slider2(): number {
-        return ADC2value;
+        return _Slider2;
     }
 
 }

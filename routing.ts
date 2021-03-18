@@ -57,13 +57,15 @@ namespace RainbowSparkleUnicorn {
                 }
                 else if (message.indexOf("C1") == 0) {
                     const ADC = parseInt(message.split(",")[1]);
-                
-                    control.raiseEvent(RAINBOW_SPARKLE_UNICORN_ADC_ONE, ADC)
+                    RainbowSparkleUnicorn.Controls._Slider1 = ADC;
+
+                    control.raiseEvent(RAINBOW_SPARKLE_UNICORN_ADC_ONE, ADC);
                 }
                 else if (message.indexOf("C2") == 0) {
                     const ADC = parseInt(message.split(",")[1]);
+                    RainbowSparkleUnicorn.Controls._Slider2 = ADC;
 
-                    control.raiseEvent(RAINBOW_SPARKLE_UNICORN_ADC_TWO, ADC)
+                    control.raiseEvent(RAINBOW_SPARKLE_UNICORN_ADC_TWO, ADC);
                 }
                 else if (message.indexOf("D1") == 0) {
 
