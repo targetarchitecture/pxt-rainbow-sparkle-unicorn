@@ -21,7 +21,7 @@ namespace RainbowSparkleUnicorn.Switch {
       () => {
         //  SX1509state[]
        // touchState.eventValue = control.eventValue();
-    console.log("RAINBOW_SPARKLE_UNICORN_SWITCH_PRESSED");
+    //console.log("RAINBOW_SPARKLE_UNICORN_SWITCH_PRESSED");
 
         handler();
       }
@@ -48,7 +48,7 @@ namespace RainbowSparkleUnicorn.Switch {
       pin === switchPins.Any ? EventBusValue.MICROBIT_EVT_ANY : pin,
       () => {
 
- console.log("RAINBOW_SPARKLE_UNICORN_SWITCH_RELEASED");
+ //console.log("RAINBOW_SPARKLE_UNICORN_SWITCH_RELEASED");
 
         //  SX1509state[]
        // touchState.eventValue = control.eventValue();
