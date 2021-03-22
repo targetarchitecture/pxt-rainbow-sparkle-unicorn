@@ -92,9 +92,13 @@ namespace RainbowSparkleUnicorn {
                     //update pin state array
                    Switch.switchStates[pin] = state;
 
-                    if (state == 0) {              
+                    //console.log(state);
+
+                    if (state == 1) { 
+                        //console.log("RAINBOW_SPARKLE_UNICORN_SWITCH_PRESSED");             
                         control.raiseEvent(RAINBOW_SPARKLE_UNICORN_SWITCH_PRESSED, pin)
                      } else {
+                        //console.log("RAINBOW_SPARKLE_UNICORN_SWITCH_RELEASED");
                         control.raiseEvent(RAINBOW_SPARKLE_UNICORN_SWITCH_RELEASED, pin)
                     }
                 }
