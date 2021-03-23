@@ -88,33 +88,38 @@ namespace RainbowSparkleUnicorn {
                         control.raiseEvent(RAINBOW_SPARKLE_UNICORN_ROTARY_TWO_ROTATING, RotaryDirection.Left)
                     }
                 }
-                else if (message.indexOf("E1") == 0) {
+                // else if (message.indexOf("E1") == 0) {
 
-                    const pin = parseInt(message.split(",")[1]);
-                    const state = parseInt(message.split(",")[2]);
-                    const loopTime = message.split(",")[3];                   
+                //     const pin = parseInt(message.split(",")[1]);
+                //     const state = parseInt(message.split(",")[2]);
+                //     const loopTime = message.split(",")[3];                   
 
-                    //update pin state array
-                   Switch.switchStates.set(pin, state);
+                //     //update pin state array
+                //    Switch.switchStates.set(pin, state);
 
-                   console.log(pin + "=" + state);
+                //    console.log(pin + "=" + state);
 
-                    if (state == 1) { 
-                        //console.log("RAINBOW_SPARKLE_UNICORN_SWITCH_PRESSED");             
-                        control.raiseEvent(RAINBOW_SPARKLE_UNICORN_SWITCH_PRESSED, pin)
-                     } else {
-                        //console.log("RAINBOW_SPARKLE_UNICORN_SWITCH_RELEASED");
-                        control.raiseEvent(RAINBOW_SPARKLE_UNICORN_SWITCH_RELEASED, pin)
-                    }
-                }
-                else if (message.indexOf("E2") == 0) {
-                    Switch._setSwitchStates(message);
+                //     if (state == 1) { 
+                //         //console.log("RAINBOW_SPARKLE_UNICORN_SWITCH_PRESSED");             
+                //         control.raiseEvent(RAINBOW_SPARKLE_UNICORN_SWITCH_PRESSED, pin)
+                //      } else {
+                //         //console.log("RAINBOW_SPARKLE_UNICORN_SWITCH_RELEASED");
+                //         control.raiseEvent(RAINBOW_SPARKLE_UNICORN_SWITCH_RELEASED, pin)
+                //     }
+                // }
+                // else if (message.indexOf("E2") == 0) {
+                //     Switch._setSwitchStates(message);
+                // }
+                else if (message.indexOf("E3") == 0) {
+
+                    RainbowSparkleUnicorn.Switch._onStateChange(message.split(",")[1]);
+                    
                 }
                 else if (message.indexOf("F1") == 0) {
 
-                        const pin = parseInt(message.split(",")[1]);
+                    const pin = parseInt(message.split(",")[1]);
 
-                        control.raiseEvent(RAINBOW_SPARKLE_UNICORN_MOTION_STOPPED,pin);
+                    control.raiseEvent(RAINBOW_SPARKLE_UNICORN_MOTION_STOPPED,pin);
                 } 
                 else if (message.indexOf("F2") == 0) {
 

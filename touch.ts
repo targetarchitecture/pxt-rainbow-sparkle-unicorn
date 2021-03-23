@@ -7,24 +7,26 @@ namespace RainbowSparkleUnicorn.Touch {
 
 export function _onStateChange(touchStates :string){
 
-    for (let index2 = 0; index2 <= 12; index2++) {
+    if (touchStates != previousTouchStates){
 
-       const pinState = touchStates.charAt(index2);
-       const previousPinState = previousTouchStates.charAt(index2);
+        for (let index2 = 0; index2 <= 12; index2++) {
 
-        if (pinState != previousPinState){
-            
+        const pinState = touchStates.charAt(index2);
+        const previousPinState = previousTouchStates.charAt(index2);
+
+            if (pinState != previousPinState){
+                if (pinState == "H"){
+                    control.raiseEvent(RAINBOW_SPARKLE_UNICORN_TOUCH_SENSOR_TOUCHED, index2)
+                }
+
+                if (pinState == "L"){
+                    control.raiseEvent(RAINBOW_SPARKLE_UNICORN_TOUCH_SENSOR_RELEASED, index2)
+                }         
+            }
         }
 
-//         state = RainbowSparkleUnicorn.Switch.switchStates.get(index2);
-// if (state == 1) {
-//             control.raiseEvent(
-//             578321,
-//             index2
-//             )
-//         }
+        previousTouchStates = touchStates;
     }
-
 }
 
 
@@ -42,19 +44,6 @@ export function _onStateChange(touchStates :string){
         pin: touchPins,
         handler: () => void
     ) {
-        //serial.writeLine("@" + pin);
-
-        // control.onEvent(
-        // RAINBOW_SPARKLE_UNICORN_TOUCH_SENSOR_TOUCHED,
-        // pin,
-        // () => {
-        //     //MPR121touched[pin] = true;  
-        //     handler();
-        //   }
-        // );
-
-
-
         control.onEvent(
         RAINBOW_SPARKLE_UNICORN_TOUCH_SENSOR_TOUCHED,
         pin === touchPins.Any ? EventBusValue.MICROBIT_EVT_ANY : pin,

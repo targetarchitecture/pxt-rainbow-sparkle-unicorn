@@ -1,5 +1,33 @@
 namespace RainbowSparkleUnicorn.Switch {
-   
+
+ let previousSwitchStates = "";
+
+export function _onStateChange(switchStates :string){
+
+    if (switchStates != previousSwitchStates){
+
+        for (let index2 = 0; index2 <= 12; index2++) {
+
+        const pinState = switchStates.charAt(index2);
+        const previousPinState = previousSwitchStates.charAt(index2);
+
+            if (pinState != previousPinState){
+                if (pinState == "H"){
+                    control.raiseEvent(RAINBOW_SPARKLE_UNICORN_SWITCH_PRESSED, index2)
+                }
+
+                if (pinState == "L"){
+                    control.raiseEvent(RAINBOW_SPARKLE_UNICORN_SWITCH_RELEASED, index2)
+                }         
+            }
+        }
+
+        previousSwitchStates = switchStates;
+    }
+}
+
+
+
   /**
    * Do something when a switch is pushed.
    * @param pin the switch pin to be checked
@@ -58,46 +86,35 @@ namespace RainbowSparkleUnicorn.Switch {
     );
   }  
 
-  export let switchStates: number[] = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0];
+  //let switchStates: number[] = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0];
+//   let switchStates = "";
 
-  export function _setSwitchStates(states : string)
-  {
-      //needs to be offset by one for the identifier
-      states = states.replaceAll("E2,", "");
+//   function setSwitchStates(states : string)
+//   {
+//       //needs to be offset by one for the identifier
+//       states = states.replaceAll("E2,", "");
 
-        for (let pin = 0; pin <= 15; pin++) {
+//         for (let pin = 0; pin <= 15; pin++) {
             
-        const state = parseInt(states.split(",")[pin]); 
+//         const state = parseInt(states.split(",")[pin]); 
 
-        switchStates.set(pin, state);
+//         switchStates.set(pin, state);
 
-        //serial.writeLine("pin " + pin + " state " + state);
-        }  
-  }
+//         //serial.writeLine("pin " + pin + " state " + state);
+//         }  
+//   }
 
-     /**
+    /**
      * Get a switch state
      * @param pin 
      */   
     //% subcategory="Switch" 
     //% weight=80        
     //% block="Get the switch state on pin $pin"
-  //% pin.fieldEditor="gridpicker" pin.fieldOptions.columns=6
-  //% pin.fieldOptions.tooltips="false"    
+    //% pin.fieldEditor="gridpicker" pin.fieldOptions.columns=6
+    //% pin.fieldOptions.tooltips="false"    
     export function getSwitchState(pin: switchPins) {
-        return switchStates.get(pin);
+        return previousSwitchStates.charAt(pin);
     } 
-
-
-     /**
-     * Updates all switch states
-     */   
-    //% subcategory="Expert" 
-    //% group="Switch"     
-    //% block="Updates all of the switch states"
-    export function updateSwitchState() {
-          _sendMessage("R1");
-    } 
-
 
 }

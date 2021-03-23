@@ -52,7 +52,7 @@ namespace RainbowSparkleUnicorn {
         Controls.turnSpinner1(OnOff.OFF);
         Controls.turnSpinner2(OnOff.OFF);
 
-        Switch.updateSwitchState();
+        //Switch.updateSwitchState();
 
         Light.turnAllOff();
 
