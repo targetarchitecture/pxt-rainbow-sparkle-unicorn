@@ -4,6 +4,8 @@ namespace RainbowSparkleUnicorn.Switch {
 
 export function _onStateChange(switchStates :string){
 
+serial.writeLine(switchStates);
+
     if (switchStates != previousSwitchStates){
 
         for (let index2 = 0; index2 <= 12; index2++) {
