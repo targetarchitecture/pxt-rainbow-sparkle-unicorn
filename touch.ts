@@ -2,6 +2,32 @@ namespace RainbowSparkleUnicorn.Touch {
 
     //let MPR121touched = [false, false, false, false, false, false, false, false, false, false, false, false]
 
+ //export let _touchStates = "";
+ let previousTouchStates = "";
+
+export function _onStateChange(touchStates :string){
+
+    for (let index2 = 0; index2 <= 12; index2++) {
+
+       const pinState = touchStates.charAt(index2);
+       const previousPinState = previousTouchStates.charAt(index2);
+
+        if (pinState != previousPinState){
+            
+        }
+
+//         state = RainbowSparkleUnicorn.Switch.switchStates.get(index2);
+// if (state == 1) {
+//             control.raiseEvent(
+//             578321,
+//             index2
+//             )
+//         }
+    }
+
+}
+
+
     /**
      * Do something when a touch sensor is touched or released.
      * @param pin the pin which is the touch button on 

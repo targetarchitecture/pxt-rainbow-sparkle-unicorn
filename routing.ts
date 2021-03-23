@@ -45,16 +45,21 @@ namespace RainbowSparkleUnicorn {
                     const track = parseInt(message.split(",")[1]);
                     control.raiseEvent(RAINBOW_SPARKLE_UNICORN_SOUND_SET_TRACK, track)
                 } 
-                else if (message.indexOf("B1") == 0) {
-                    const pin = parseInt(message.split(",")[1]);
-                    //serial.writeLine("~" + pin);
-                    control.raiseEvent(RAINBOW_SPARKLE_UNICORN_TOUCH_SENSOR_TOUCHED, pin)
-                }
-                else if (message.indexOf("B2") == 0) {
-                    const pin = parseInt(message.split(",")[1]);
+                // else if (message.indexOf("B1") == 0) {
+                //     const pin = parseInt(message.split(",")[1]);
+                //     //serial.writeLine("~" + pin);
+                //     control.raiseEvent(RAINBOW_SPARKLE_UNICORN_TOUCH_SENSOR_TOUCHED, pin)
+                // }
+                // else if (message.indexOf("B2") == 0) {
+                //     const pin = parseInt(message.split(",")[1]);
 
-                    control.raiseEvent(RAINBOW_SPARKLE_UNICORN_TOUCH_SENSOR_RELEASED, pin)
-                }
+                //     control.raiseEvent(RAINBOW_SPARKLE_UNICORN_TOUCH_SENSOR_RELEASED, pin)
+                // }
+
+                else if (message.indexOf("B3") == 0) {
+                    RainbowSparkleUnicorn.Touch._onStateChange( message.split(",")[1]);
+                }                
+
                 else if (message.indexOf("C1") == 0) {
                     const ADC = parseInt(message.split(",")[1]);
                     RainbowSparkleUnicorn.Controls._Slider1 = ADC;
