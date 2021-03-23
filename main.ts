@@ -1,6 +1,1 @@
-RainbowSparkleUnicorn.start()
-RainbowSparkleUnicorn.printReceivedMessages()
-RainbowSparkleUnicorn.printDebugMessages()
-serial.writeLine("hello world")
-RainbowSparkleUnicorn.Light.turnAllOn()
-basic.showIcon(IconNames.Heart)
+

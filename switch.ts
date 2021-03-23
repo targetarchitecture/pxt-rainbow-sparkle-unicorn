@@ -4,22 +4,22 @@ namespace RainbowSparkleUnicorn.Switch {
 
 export function _onStateChange(switchStates :string){
 
-serial.writeLine(switchStates);
+    serial.writeLine(switchStates);
 
     if (switchStates != previousSwitchStates){
 
-        for (let index2 = 0; index2 <= 12; index2++) {
+        for (let index = 0; index <= 12; index++) {
 
-        const pinState = switchStates.charAt(index2);
-        const previousPinState = previousSwitchStates.charAt(index2);
+        const pinState = switchStates.charAt(index);
+        const previousPinState = previousSwitchStates.charAt(index);
 
             if (pinState != previousPinState){
-                if (pinState == "H"){
-                    control.raiseEvent(RAINBOW_SPARKLE_UNICORN_SWITCH_PRESSED, index2)
+                if (pinState == "L"){
+                    control.raiseEvent(RAINBOW_SPARKLE_UNICORN_SWITCH_PRESSED, index)
                 }
 
-                if (pinState == "L"){
-                    control.raiseEvent(RAINBOW_SPARKLE_UNICORN_SWITCH_RELEASED, index2)
+                if (pinState == "H"){
+                    control.raiseEvent(RAINBOW_SPARKLE_UNICORN_SWITCH_RELEASED, index)
                 }         
             }
         }
