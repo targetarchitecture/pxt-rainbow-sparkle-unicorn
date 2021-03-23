@@ -9,18 +9,40 @@ export function _onStateChange(touchStates :string){
 
     if (touchStates != previousTouchStates){
 
-        for (let index2 = 0; index2 <= 12; index2++) {
+        for (let index = 0; index < 12; index++) {
 
-        const pinState = touchStates.charAt(index2);
-        const previousPinState = previousTouchStates.charAt(index2);
+            const pinState = touchStates.charAt(index);
+            const previousPinState = previousTouchStates.charAt(index);
 
             if (pinState != previousPinState){
                 if (pinState == "H"){
-                    control.raiseEvent(RAINBOW_SPARKLE_UNICORN_TOUCH_SENSOR_TOUCHED, index2)
+                    if (index == 0){control.raiseEvent(RAINBOW_SPARKLE_UNICORN_TOUCH_SENSOR_TOUCHED, touchPins.P0);}
+                    if (index == 1){control.raiseEvent(RAINBOW_SPARKLE_UNICORN_TOUCH_SENSOR_TOUCHED, touchPins.P1);}
+                    if (index == 2){control.raiseEvent(RAINBOW_SPARKLE_UNICORN_TOUCH_SENSOR_TOUCHED, touchPins.P2);}
+                    if (index == 3){control.raiseEvent(RAINBOW_SPARKLE_UNICORN_TOUCH_SENSOR_TOUCHED, touchPins.P3);}
+                    if (index == 4){control.raiseEvent(RAINBOW_SPARKLE_UNICORN_TOUCH_SENSOR_TOUCHED, touchPins.P4);}
+                    if (index == 5){control.raiseEvent(RAINBOW_SPARKLE_UNICORN_TOUCH_SENSOR_TOUCHED, touchPins.P5);}
+                    if (index == 6){control.raiseEvent(RAINBOW_SPARKLE_UNICORN_TOUCH_SENSOR_TOUCHED, touchPins.P6);}
+                    if (index == 7){control.raiseEvent(RAINBOW_SPARKLE_UNICORN_TOUCH_SENSOR_TOUCHED, touchPins.P7);}
+                    if (index == 8){control.raiseEvent(RAINBOW_SPARKLE_UNICORN_TOUCH_SENSOR_TOUCHED, touchPins.P8);}
+                    if (index == 9){control.raiseEvent(RAINBOW_SPARKLE_UNICORN_TOUCH_SENSOR_TOUCHED, touchPins.P9);}
+                    if (index == 10){control.raiseEvent(RAINBOW_SPARKLE_UNICORN_TOUCH_SENSOR_TOUCHED, touchPins.P10);}
+                    if (index == 11){control.raiseEvent(RAINBOW_SPARKLE_UNICORN_TOUCH_SENSOR_TOUCHED, touchPins.P11);}              
                 }
 
                 if (pinState == "L"){
-                    control.raiseEvent(RAINBOW_SPARKLE_UNICORN_TOUCH_SENSOR_RELEASED, index2)
+                    if (index == 0){control.raiseEvent(RAINBOW_SPARKLE_UNICORN_TOUCH_SENSOR_RELEASED, touchPins.P0);}
+                    if (index == 1){control.raiseEvent(RAINBOW_SPARKLE_UNICORN_TOUCH_SENSOR_RELEASED, touchPins.P1);}
+                    if (index == 2){control.raiseEvent(RAINBOW_SPARKLE_UNICORN_TOUCH_SENSOR_RELEASED, touchPins.P2);}
+                    if (index == 3){control.raiseEvent(RAINBOW_SPARKLE_UNICORN_TOUCH_SENSOR_RELEASED, touchPins.P3);}
+                    if (index == 4){control.raiseEvent(RAINBOW_SPARKLE_UNICORN_TOUCH_SENSOR_RELEASED, touchPins.P4);}
+                    if (index == 5){control.raiseEvent(RAINBOW_SPARKLE_UNICORN_TOUCH_SENSOR_RELEASED, touchPins.P5);}
+                    if (index == 6){control.raiseEvent(RAINBOW_SPARKLE_UNICORN_TOUCH_SENSOR_RELEASED, touchPins.P6);}
+                    if (index == 7){control.raiseEvent(RAINBOW_SPARKLE_UNICORN_TOUCH_SENSOR_RELEASED, touchPins.P7);}
+                    if (index == 8){control.raiseEvent(RAINBOW_SPARKLE_UNICORN_TOUCH_SENSOR_RELEASED, touchPins.P8);}
+                    if (index == 9){control.raiseEvent(RAINBOW_SPARKLE_UNICORN_TOUCH_SENSOR_RELEASED, touchPins.P9);}
+                    if (index == 10){control.raiseEvent(RAINBOW_SPARKLE_UNICORN_TOUCH_SENSOR_RELEASED, touchPins.P10);}
+                    if (index == 11){control.raiseEvent(RAINBOW_SPARKLE_UNICORN_TOUCH_SENSOR_RELEASED, touchPins.P11);}              
                 }         
             }
         }
