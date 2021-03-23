@@ -1,9 +1,6 @@
 namespace RainbowSparkleUnicorn.Touch {
 
-    //let MPR121touched = [false, false, false, false, false, false, false, false, false, false, false, false]
-
- //export let _touchStates = "";
- let previousTouchStates = "";
+let previousTouchStates = "";
 
 export function _onStateChange(touchStates :string){
 
@@ -16,33 +13,9 @@ export function _onStateChange(touchStates :string){
 
             if (pinState != previousPinState){
                 if (pinState == "H"){
-                    if (index == 0){control.raiseEvent(RAINBOW_SPARKLE_UNICORN_TOUCH_SENSOR_TOUCHED, touchPins.P0);}
-                    if (index == 1){control.raiseEvent(RAINBOW_SPARKLE_UNICORN_TOUCH_SENSOR_TOUCHED, touchPins.P1);}
-                    if (index == 2){control.raiseEvent(RAINBOW_SPARKLE_UNICORN_TOUCH_SENSOR_TOUCHED, touchPins.P2);}
-                    if (index == 3){control.raiseEvent(RAINBOW_SPARKLE_UNICORN_TOUCH_SENSOR_TOUCHED, touchPins.P3);}
-                    if (index == 4){control.raiseEvent(RAINBOW_SPARKLE_UNICORN_TOUCH_SENSOR_TOUCHED, touchPins.P4);}
-                    if (index == 5){control.raiseEvent(RAINBOW_SPARKLE_UNICORN_TOUCH_SENSOR_TOUCHED, touchPins.P5);}
-                    if (index == 6){control.raiseEvent(RAINBOW_SPARKLE_UNICORN_TOUCH_SENSOR_TOUCHED, touchPins.P6);}
-                    if (index == 7){control.raiseEvent(RAINBOW_SPARKLE_UNICORN_TOUCH_SENSOR_TOUCHED, touchPins.P7);}
-                    if (index == 8){control.raiseEvent(RAINBOW_SPARKLE_UNICORN_TOUCH_SENSOR_TOUCHED, touchPins.P8);}
-                    if (index == 9){control.raiseEvent(RAINBOW_SPARKLE_UNICORN_TOUCH_SENSOR_TOUCHED, touchPins.P9);}
-                    if (index == 10){control.raiseEvent(RAINBOW_SPARKLE_UNICORN_TOUCH_SENSOR_TOUCHED, touchPins.P10);}
-                    if (index == 11){control.raiseEvent(RAINBOW_SPARKLE_UNICORN_TOUCH_SENSOR_TOUCHED, touchPins.P11);}              
-                }
-
-                if (pinState == "L"){
-                    if (index == 0){control.raiseEvent(RAINBOW_SPARKLE_UNICORN_TOUCH_SENSOR_RELEASED, touchPins.P0);}
-                    if (index == 1){control.raiseEvent(RAINBOW_SPARKLE_UNICORN_TOUCH_SENSOR_RELEASED, touchPins.P1);}
-                    if (index == 2){control.raiseEvent(RAINBOW_SPARKLE_UNICORN_TOUCH_SENSOR_RELEASED, touchPins.P2);}
-                    if (index == 3){control.raiseEvent(RAINBOW_SPARKLE_UNICORN_TOUCH_SENSOR_RELEASED, touchPins.P3);}
-                    if (index == 4){control.raiseEvent(RAINBOW_SPARKLE_UNICORN_TOUCH_SENSOR_RELEASED, touchPins.P4);}
-                    if (index == 5){control.raiseEvent(RAINBOW_SPARKLE_UNICORN_TOUCH_SENSOR_RELEASED, touchPins.P5);}
-                    if (index == 6){control.raiseEvent(RAINBOW_SPARKLE_UNICORN_TOUCH_SENSOR_RELEASED, touchPins.P6);}
-                    if (index == 7){control.raiseEvent(RAINBOW_SPARKLE_UNICORN_TOUCH_SENSOR_RELEASED, touchPins.P7);}
-                    if (index == 8){control.raiseEvent(RAINBOW_SPARKLE_UNICORN_TOUCH_SENSOR_RELEASED, touchPins.P8);}
-                    if (index == 9){control.raiseEvent(RAINBOW_SPARKLE_UNICORN_TOUCH_SENSOR_RELEASED, touchPins.P9);}
-                    if (index == 10){control.raiseEvent(RAINBOW_SPARKLE_UNICORN_TOUCH_SENSOR_RELEASED, touchPins.P10);}
-                    if (index == 11){control.raiseEvent(RAINBOW_SPARKLE_UNICORN_TOUCH_SENSOR_RELEASED, touchPins.P11);}              
+                    control.raiseEvent(RAINBOW_SPARKLE_UNICORN_TOUCH_SENSOR_TOUCHED, index+1);
+                } else if (pinState == "L"){
+                    control.raiseEvent(RAINBOW_SPARKLE_UNICORN_TOUCH_SENSOR_RELEASED, index+1);
                 }         
             }
         }
@@ -89,14 +62,6 @@ export function _onStateChange(touchStates :string){
     pin: touchPins,
     handler: () => void
   ) {
-    // control.onEvent(
-    //   RAINBOW_SPARKLE_UNICORN_TOUCH_SENSOR_RELEASED,
-    //   pin,
-    //   () => {
-    //     //MPR121touched[pin] = false;   
-    //     handler();
-    //   }
-    // );
 
          control.onEvent(
         RAINBOW_SPARKLE_UNICORN_TOUCH_SENSOR_RELEASED,
