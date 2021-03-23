@@ -52,6 +52,7 @@ namespace RainbowSparkleUnicorn.Switch {
 
         //  SX1509state[]
        // touchState.eventValue = control.eventValue();
+
         handler();
       }
     );

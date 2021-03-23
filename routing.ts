@@ -90,9 +90,9 @@ namespace RainbowSparkleUnicorn {
                     const loopTime = message.split(",")[3];                   
 
                     //update pin state array
-                   Switch.switchStates[pin] = state;
+                   Switch.switchStates.set(pin, state);
 
-                    //console.log(state);
+                   console.log(pin + "=" + state);
 
                     if (state == 1) { 
                         //console.log("RAINBOW_SPARKLE_UNICORN_SWITCH_PRESSED");             
