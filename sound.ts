@@ -75,7 +75,7 @@ let dfplayerTrack: number = 0;
     //% weight=80
     //% block="resume music"
     export function resume() {
-        _sendMessage("Z8")
+        _sendMessage("Z8");
     }
 
     //% subcategory="Sound"
@@ -83,7 +83,7 @@ let dfplayerTrack: number = 0;
     //% weight=90
     //% block="pause music"
     export function pause() {
-      _sendMessage("Z7")
+      _sendMessage("Z7");
     }
 
     /**
@@ -96,16 +96,15 @@ let dfplayerTrack: number = 0;
     //% weight=39
     export function playingSound(): boolean {
 
-        const value = parseInt(message.split(",")[1]);
+        const value = parseInt(_readMessage("ZO").split(",")[1]);
 
         if (value == 1) {
-            Sound._dfplayerBusy = false;
+           dfplayerBusy = false;
         } else {
-            Sound._dfplayerBusy = true;
+            dfplayerBusy = true;
         };
 
-        control.raiseEvent(RAINBOW_SPARKLE_UNICORN_SOUND_BUSY, value)
-
+        control.raiseEvent(RAINBOW_SPARKLE_UNICORN_SOUND_BUSY, value);
 
         return dfplayerBusy;
     }

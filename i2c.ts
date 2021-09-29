@@ -1,14 +1,14 @@
 namespace RainbowSparkleUnicorn {
 
-    //i2c freq=100000
-
-    //let currentRecievedMessage = "";
     const ESP32_I2C_ADDR = 4;
+    const readBufferLength = 40; //32;
+
+    //i2c freq=100000
+    //let currentRecievedMessage = "";
     //export let messageQueue = ["HELLO"];
-    export let messageQueue: string[] = [];
+    //export let messageQueue: string[] = [];
     //let i2cGapMessageTimeMs = 50;
     //let i2cTXrateMs = 50; 
-    let readBufferLength = 40; //32;
 
     /**
      * Set i2c timings
@@ -50,27 +50,23 @@ namespace RainbowSparkleUnicorn {
         basic.pause(1);
    }
 
-    function checkMessageTOBEREMOVED(message: string): boolean
-     {
-        if (message.isEmpty() == true){
-            return false;
-        }
+    // function checkMessageTOBEREMOVED(message: string): boolean
+    //  {
+    //     if (message.isEmpty() == true){
+    //         return false;
+    //     }
+    //     if (message.length < 3) {
+    //         return false;
+    //     }
+    //     let X = message.split(",");
+    //     let Y = X.length;
+    //      if (Y < 2){
+    //         return false;
+    //     }
+    //     return true;
+    //  }
 
-        if (message.length < 3) {
-            return false;
-        }
-
-        let X = message.split(",");
-        let Y = X.length;
-
-         if (Y < 2){
-            return false;
-        }
-
-        return true;
-     }
-
-    export function _readMessage(message: string): string {   {
+    export function _readMessage(message: string): string {   
 
         //send first
         _sendMessage(message);
@@ -88,8 +84,8 @@ namespace RainbowSparkleUnicorn {
             }
         }
 
-        let a4 = 0;
-        let a3 = 0;
+        //let a4 = 0;
+        //let a3 = 0;
         let a1 = 0;
         let a2 = 0;
 
@@ -115,6 +111,7 @@ namespace RainbowSparkleUnicorn {
         // if (currentRecievedMessage.length > 0){
         //     _parseRecievedMessage(currentRecievedMessage);
         // }
+
         }
 
         return currentRecievedMessage;
