@@ -28,10 +28,10 @@ let dfplayerTrack: number = 0;
     //% weight=100   
     //% track.defl=1
     //% block="Play track $track"
-    //% track.min=1 track.max=20
+    //% track.min=1 track.max=50
     export function playTrack(track: number) {
         dfplayerTrack = track;
-        _sendMessage("SPLY," + track)
+        _sendMessage("SPLAY," + track)
     }
 
     /**
