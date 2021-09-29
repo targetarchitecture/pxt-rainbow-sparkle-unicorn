@@ -116,7 +116,7 @@ declare const enum  RotaryDirection {
 
 
 
-declare const enum OnOff {
+declare const enum OnOff2 {
     //% block="On"
     ON = 1,
     //% block="Off"

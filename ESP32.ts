@@ -1,13 +1,13 @@
 namespace RainbowSparkleUnicorn.Controls {
 
-    let ADC1Enabled = false;
-    let ADC2Enabled = false;
-   export let _Slider1 = 0;
-   export let _Slider2 = 0;
+    // let ADC1Enabled = false;
+    // let ADC2Enabled = false;
+//    export let _Slider1 = 0;
+//    export let _Slider2 = 0;
 
     //store previous value so it's only sending changes
-    let previousDAC1value = 0;
-    let previousDAC2value = 0;
+    // let previousDAC1value = 0;
+    // let previousDAC2value = 0;
 
     let Encoder1Enabled = false;
     let Encoder2Enabled = false;
@@ -32,12 +32,12 @@ namespace RainbowSparkleUnicorn.Controls {
         //Need to resolve 0-30 to 0-255
         //let mapped = pins.map(value, 0, 30, 0, 255)
 
-        if (value != previousDAC1value){
+        //if (value != previousDAC1value){
             _sendMessage("X2," + value)
-        }
+        //}
 
         //remember previous value
-        previousDAC1value = value
+        //previousDAC1value = value
     }
 
    /**
@@ -56,12 +56,12 @@ namespace RainbowSparkleUnicorn.Controls {
         //Need to resolve 0-30 to 0-255
         //let mapped = pins.map(value, 0, 30, 0, 255)
 
-        if (value != previousDAC2value){
+        //if (value != previousDAC2value){
             _sendMessage("X1," + value)
-        }
+        //}
 
         //remember previous value
-        previousDAC2value = value
+        //previousDAC2value = value
     }
 
 
@@ -73,9 +73,9 @@ namespace RainbowSparkleUnicorn.Controls {
     //% group="Sliders"
     //% block="Turn Slider 1 $state"
     //% weight=60
-    export function turnSlider1(state: OnOff) {
-     _sendMessage("U1," + state)
-    }
+    // export function Slider1(state: OnOff) {
+    //    sendMessage("U1," + state)
+    // }
 
      /**
      * Turn slider 2 on/off.
@@ -84,9 +84,9 @@ namespace RainbowSparkleUnicorn.Controls {
     //% group="Sliders"
     //% block="Turn Slider 2 $state"
     //% weight=65
-    export function turnSlider2(state: OnOff) {
-     _sendMessage("U2," + state)
-    }
+    // export function turnSlider2(state: OnOff) {
+    //  _sendMessage("U2," + state)
+    // }
 
      /**
      * Turn spinner 1 on/off.
@@ -186,7 +186,7 @@ namespace RainbowSparkleUnicorn.Controls {
     //% group="Sliders"
     //% block="Slider one value" 
     export function Slider1(): number {
-        return _Slider1;
+        return parseInt( _readMessage("U1"));
     }
 
     /**
@@ -196,7 +196,7 @@ namespace RainbowSparkleUnicorn.Controls {
     //% group="Sliders" 
     //% block="Slider two value" 
     export function Slider2(): number {
-        return _Slider2;
+        return parseInt(_readMessage("U2"));
     }
 
 }
