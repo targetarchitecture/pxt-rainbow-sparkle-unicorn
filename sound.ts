@@ -1,6 +1,6 @@
 namespace RainbowSparkleUnicorn.Sound {
 
-export let _dfplayerBusy: boolean = false;
+let dfplayerBusy: boolean = false;
 let dfplayerVolume: number = 0;
 let dfplayerTrack: number = 0;
 
@@ -21,9 +21,9 @@ let dfplayerTrack: number = 0;
     }
 
     //write back the actual volume reported by dfplayer
-    control.onEvent(RAINBOW_SPARKLE_UNICORN_SOUND_SET_VOLUME, EventBusValue.MICROBIT_EVT_ANY, function () {
-        dfplayerVolume = control.eventValue();  
-    })
+    // control.onEvent(RAINBOW_SPARKLE_UNICORN_SOUND_SET_VOLUME, EventBusValue.MICROBIT_EVT_ANY, function () {
+    //     dfplayerVolume = control.eventValue();  
+    // })
 
     /**
      * Play a track
@@ -41,9 +41,9 @@ let dfplayerTrack: number = 0;
     }
 
     //write back the actual track reported by dfplayer
-    control.onEvent(RAINBOW_SPARKLE_UNICORN_SOUND_SET_TRACK, EventBusValue.MICROBIT_EVT_ANY, function () {
-        dfplayerTrack = control.eventValue();  
-    })
+    // control.onEvent(RAINBOW_SPARKLE_UNICORN_SOUND_SET_TRACK, EventBusValue.MICROBIT_EVT_ANY, function () {
+    //     dfplayerTrack = control.eventValue();  
+    // })
 
     /**
      * Increase the volume
@@ -95,7 +95,19 @@ let dfplayerTrack: number = 0;
     //% block="sound playing"
     //% weight=39
     export function playingSound(): boolean {
-        return _dfplayerBusy;
+
+        const value = parseInt(message.split(",")[1]);
+
+        if (value == 1) {
+            Sound._dfplayerBusy = false;
+        } else {
+            Sound._dfplayerBusy = true;
+        };
+
+        control.raiseEvent(RAINBOW_SPARKLE_UNICORN_SOUND_BUSY, value)
+
+
+        return dfplayerBusy;
     }
 
      /**
@@ -129,12 +141,24 @@ let dfplayerTrack: number = 0;
     //% block="on sound track starts/stops"
     //% weight=41
     export function onBusyChange(handler: () => void) {
-        control.onEvent(
-           RAINBOW_SPARKLE_UNICORN_SOUND_BUSY,
-            EventBusValue.MICROBIT_EVT_ANY,
-            () => {
-                handler();
-            }
-        );
+
+        if (dfplayerBusy == true) {
+            control.onEvent(
+                RAINBOW_SPARKLE_UNICORN_SOUND_BUSY,
+                1,
+                () => {
+                    handler();
+                }
+            );
+        } else {
+            control.onEvent(
+                RAINBOW_SPARKLE_UNICORN_SOUND_BUSY,
+                0,
+                () => {
+                    handler();
+                }
+            );
+        };
     }
+
 }

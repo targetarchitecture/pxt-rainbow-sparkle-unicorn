@@ -25,26 +25,27 @@ namespace RainbowSparkleUnicorn {
                     return;
                 }
 
-                if (message.indexOf("A1") == 0) {
-                    const value = parseInt(message.split(",")[1]);
+                // if (message.indexOf("A1") == 0) {
+                //     const value = parseInt(message.split(",")[1]);
                 
-                    if (value == 1){
-                        Sound._dfplayerBusy = false;
-                    } else {
-                        Sound._dfplayerBusy = true;
-                    };
+                //     if (value == 1){
+                //         Sound._dfplayerBusy = false;
+                //     } else {
+                //         Sound._dfplayerBusy = true;
+                //     };
 
-                    control.raiseEvent(RAINBOW_SPARKLE_UNICORN_SOUND_BUSY, value)
-                }
-                else if (message.indexOf("A2") == 0) {
-                    const volume = parseInt(message.split(",")[1]);
-                    control.raiseEvent(RAINBOW_SPARKLE_UNICORN_SOUND_SET_VOLUME, volume)
-                } 
+                //     control.raiseEvent(RAINBOW_SPARKLE_UNICORN_SOUND_BUSY, value)
+                // }
                 
-                else if (message.indexOf("A3") == 0) {
-                    const track = parseInt(message.split(",")[1]);
-                    control.raiseEvent(RAINBOW_SPARKLE_UNICORN_SOUND_SET_TRACK, track)
-                } 
+                // else if (message.indexOf("A2") == 0) {
+                //     const volume = parseInt(message.split(",")[1]);
+                //     control.raiseEvent(RAINBOW_SPARKLE_UNICORN_SOUND_SET_VOLUME, volume)
+                // } 
+                
+                // else if (message.indexOf("A3") == 0) {
+                //     const track = parseInt(message.split(",")[1]);
+                //     control.raiseEvent(RAINBOW_SPARKLE_UNICORN_SOUND_SET_TRACK, track)
+                // } 
                 // else if (message.indexOf("B1") == 0) {
                 //     const pin = parseInt(message.split(",")[1]);
                 //     //serial.writeLine("~" + pin);
