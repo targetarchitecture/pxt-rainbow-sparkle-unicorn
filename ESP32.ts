@@ -1,20 +1,60 @@
 namespace RainbowSparkleUnicorn.Controls {
 
-    // let ADC1Enabled = false;
-    // let ADC2Enabled = false;
-//    export let _Slider1 = 0;
-//    export let _Slider2 = 0;
-
-    //store previous value so it's only sending changes
-    // let previousDAC1value = 0;
-    // let previousDAC2value = 0;
-
-    let Encoder1Enabled = false;
-    let Encoder2Enabled = false;
     let Encoder1value = 0;
     let Encoder2value = 0;
     let direction1: RotaryDirection;
     let direction2: RotaryDirection;
+
+    /**
+     * Get the rotary encoder value
+    */
+    //% subcategory="Sliders / Dials / Spinners" 
+    //% group="Spinners"
+    //% block="Get spinner 2 value"
+    //% weight=65
+    export function encoder2value(): number {
+
+        const value = parseInt(_readMessage("W2"));
+
+        if (value < Encoder2value){
+            direction2 = RotaryDirection.Left;
+            control.raiseEvent(RAINBOW_SPARKLE_UNICORN_ROTARY_TWO_ROTATING, RotaryDirection.Left)
+        }
+        if (value > Encoder2value) {
+            direction2 = RotaryDirection.Right;
+            control.raiseEvent(RAINBOW_SPARKLE_UNICORN_ROTARY_TWO_ROTATING, RotaryDirection.Right)
+        }
+
+        Encoder2value=value;
+
+        return Encoder2value;
+    }
+
+    /**
+ * Get the rotary encoder value
+*/
+    //% subcategory="Sliders / Dials / Spinners" 
+    //% group="Spinners"
+    //% block="Get spinner 1 value"
+    //% weight=65
+    export function encoder1value(): number {
+
+        const value = parseInt(_readMessage("W1"));
+
+        if (value < Encoder1value) {
+            direction1 = RotaryDirection.Left;
+            control.raiseEvent(RAINBOW_SPARKLE_UNICORN_ROTARY_ONE_ROTATING, RotaryDirection.Left)
+        }
+        if (value > Encoder1value) {
+            direction1 = RotaryDirection.Right;
+            control.raiseEvent(RAINBOW_SPARKLE_UNICORN_ROTARY_ONE_ROTATING, RotaryDirection.Right)
+        }
+
+        Encoder1value = value;
+
+        return Encoder1value;
+    }
+
 
      /**
      * Set the analog dial to a certain voltage.
@@ -27,17 +67,7 @@ namespace RainbowSparkleUnicorn.Controls {
     //% weight=65
     export function dial1(value: number) {
 
-        value = Math.clamp(0, 255, value)
-
-        //Need to resolve 0-30 to 0-255
-        //let mapped = pins.map(value, 0, 30, 0, 255)
-
-        //if (value != previousDAC1value){
-            _sendMessage("X2," + value)
-        //}
-
-        //remember previous value
-        //previousDAC1value = value
+        _sendMessage("X2," + Math.clamp(0, 255, value))
     }
 
    /**
@@ -51,67 +81,10 @@ namespace RainbowSparkleUnicorn.Controls {
     //% weight=65
     export function dial2(value: number) {
 
-        value = Math.clamp(0, 255, value)
-
-        //Need to resolve 0-30 to 0-255
-        //let mapped = pins.map(value, 0, 30, 0, 255)
-
-        //if (value != previousDAC2value){
-            _sendMessage("X1," + value)
-        //}
-
-        //remember previous value
-        //previousDAC2value = value
+        _sendMessage("X1," + Math.clamp(0, 255, value))
     }
 
-
-
-     /**
-     * Turn slider 1 on/off.
-     */
-    //% subcategory="Sliders / Dials / Spinners" 
-    //% group="Sliders"
-    //% block="Turn Slider 1 $state"
-    //% weight=60
-    // export function Slider1(state: OnOff) {
-    //    sendMessage("U1," + state)
-    // }
-
-     /**
-     * Turn slider 2 on/off.
-     */
-    //% subcategory="Sliders / Dials / Spinners" 
-    //% group="Sliders"
-    //% block="Turn Slider 2 $state"
-    //% weight=65
-    // export function turnSlider2(state: OnOff) {
-    //  _sendMessage("U2," + state)
-    // }
-
-     /**
-     * Turn spinner 1 on/off.
-     */
-    //% subcategory="Sliders / Dials / Spinners" 
-    //% group="Spinners"
-    //% block="Turn Spinner 1 $state"
-    //% weight=70
-    export function turnSpinner1(state: OnOff) {
-     _sendMessage("W1," + state)
-    }
-
-     /**
-     * Turn spinner 2 on/off.
-     */
-    //% subcategory="Sliders / Dials / Spinners" 
-    //% group="Spinners"
-    //% block="Turn Spinner 2 $state"
-        //% weight=68
-    export function turnSpinner2(state: OnOff) {
-     _sendMessage("W2," + state)
-    }
-
-
-      /**
+   /**
    * Do something when a rotary switch is turned.
    * @param handler body code to run when the event is raised
    */
@@ -122,21 +95,17 @@ namespace RainbowSparkleUnicorn.Controls {
   export function onRotary1Rotation(
     handler: () => void
   ) {
-
     control.onEvent(
       RAINBOW_SPARKLE_UNICORN_ROTARY_ONE_ROTATING,
       EventBusValue.MICROBIT_EVT_ANY,
       () => {
-       direction1 = control.eventValue();
         handler();
       }
     );
   }
 
 
-
-
-      /**
+  /**
    * Do something when a rotary switch is turned.
    * @param handler body code to run when the event is raised
    */
@@ -147,12 +116,10 @@ namespace RainbowSparkleUnicorn.Controls {
   export function onRotary2Rotation(
     handler: () => void
   ) {
-
     control.onEvent(
       RAINBOW_SPARKLE_UNICORN_ROTARY_TWO_ROTATING,
       EventBusValue.MICROBIT_EVT_ANY,
       () => {
-       direction2 = control.eventValue();
         handler();
       }
     );
@@ -197,38 +164,5 @@ namespace RainbowSparkleUnicorn.Controls {
     //% block="Slider two value" 
     export function Slider2(): number {
         return parseInt(_readMessage("U2"));
-    }
-
-}
-
-namespace RainbowSparkleUnicorn.Expert {
-    /**
-     * Set the DAC to a certain value.
-     * @value the value of the DAC output, eg: 46
-     */
-    //% subcategory="Expert" 
-      //% group="Dials"      
-    //% block="Set DAC 2 to $value"
-    //% value.min=0 value.max=255
-    export function DAC2(value: number) {
-
-        value = Math.clamp(0, 255, value)
-
-        _sendMessage("X2," + value)
-    }
-
-     /**
-     * Set the DAC to a certain value.
-     * @value the value of the DAC output, eg: 194
-     */
-    //% subcategory="Expert" 
-     //% group="Dials"   
-    //% block="Set DAC 1 to $value" 
-    //% value.min=0 value.max=255
-    export function DAC1(value: number) {
-
-        value = Math.clamp(0, 255, value)
-
-        _sendMessage("X1," + value)
     }
 }
