@@ -25,9 +25,13 @@
         "IoT.ts"
     ],
     "testFiles": [],
+    "targetVersions": {
+        "target": "4.0.11",
+        "targetId": "microbit"
+    },
     "supportedTargets": [
         "microbit"
     ],
-    "preferredEditor": "tsprj",
+    "preferredEditor": "blocksprj",
     "yotta": {}
 }

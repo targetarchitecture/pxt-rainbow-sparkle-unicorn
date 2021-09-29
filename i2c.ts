@@ -80,6 +80,7 @@ namespace RainbowSparkleUnicorn {
         let startIndex = 0;
         let i2cBuffer = pins.i2cReadBuffer(ESP32_I2C_ADDR, readBufferLength, false);
 
+
         for (let k = 0; k <= readBufferLength; k++) {
             // find packet start
             if (i2cBuffer[k] == 2) {
