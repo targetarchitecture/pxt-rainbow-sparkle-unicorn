@@ -12,7 +12,7 @@ namespace RainbowSparkleUnicorn {
         printReceivedMsgs = true;
     }
 
-    export function _parseRecievedMessage(message: string) {
+    export function _parseRecievedMessageTOBEREMOVED(message: string) {
         try {
                 if (printReceivedMsgs == true){
                     serial.writeLine(message);
