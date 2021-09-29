@@ -1,4 +1,4 @@
-namespace RainbowSparkleUnicorn {
+namespace RainbowSparkleUnicorn.Expert {
     
     /**
      * Restart the ESP32 processor on the board, pauses for 1 second afterwards

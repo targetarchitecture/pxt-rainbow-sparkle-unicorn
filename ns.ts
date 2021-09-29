@@ -13,17 +13,9 @@ namespace RainbowSparkleUnicorn {
     //% block="Start Rainbow Sparkle Unicorn"
     export function start(): void {
 
-        basic.pause(100);
-
         pins.digitalWritePin(DigitalPin.P8, 0);
 
-        //_readyToUseI2C = true;
-
-        basic.pause(100);
-
-        _sendMessage("STARTING");
-
-        basic.pause(100);
+        basic.pause(1);
 
         //_readyToReadQueue = true;
 
@@ -57,7 +49,7 @@ namespace RainbowSparkleUnicorn {
 
        // Light.turnAllOff();
 
-        basic.pause(200);
+       // basic.pause(200);
     }
 
     /**

@@ -14,7 +14,7 @@ namespace RainbowSparkleUnicorn.Controls {
     //% weight=65
     export function encoder2value(): number {
 
-        const value = parseInt(_readMessage("W2"));
+        const value = parseInt(_readMessage("ROTARY2"));
 
         if (value < Encoder2value){
             direction2 = RotaryDirection.Left;
@@ -39,7 +39,7 @@ namespace RainbowSparkleUnicorn.Controls {
     //% weight=65
     export function encoder1value(): number {
 
-        const value = parseInt(_readMessage("W1"));
+        const value = parseInt(_readMessage("ROTARY1"));
 
         if (value < Encoder1value) {
             direction1 = RotaryDirection.Left;
@@ -66,8 +66,7 @@ namespace RainbowSparkleUnicorn.Controls {
     //% value.min=0 value.max=255
     //% weight=65
     export function dial1(value: number) {
-
-        _sendMessage("X2," + Math.clamp(0, 255, value))
+        _sendMessage("DIAL1," + Math.clamp(0, 255, value))
     }
 
    /**
@@ -80,8 +79,7 @@ namespace RainbowSparkleUnicorn.Controls {
     //% value.min=0 value.max=255
     //% weight=65
     export function dial2(value: number) {
-
-        _sendMessage("X1," + Math.clamp(0, 255, value))
+        _sendMessage("DIAL2," + Math.clamp(0, 255, value))
     }
 
    /**
@@ -153,7 +151,7 @@ namespace RainbowSparkleUnicorn.Controls {
     //% group="Sliders"
     //% block="Slider one value" 
     export function Slider1(): number {
-        return parseInt( _readMessage("U1"));
+        return parseInt(_readMessage("SLIDER1"));
     }
 
     /**
@@ -163,6 +161,6 @@ namespace RainbowSparkleUnicorn.Controls {
     //% group="Sliders" 
     //% block="Slider two value" 
     export function Slider2(): number {
-        return parseInt(_readMessage("U2"));
+        return parseInt(_readMessage("SLIDER2"));
     }
 }

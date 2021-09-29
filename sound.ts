@@ -15,15 +15,9 @@ let dfplayerTrack: number = 0;
     //% volume.defl=20
     //% volume.min=0 volume.max=30
     export function setVolume(volume: number) {
-        const clippedVolume = Math.min(Math.max(volume, 0), 30);
-        dfplayerVolume = clippedVolume;
-        _sendMessage("Z1," + clippedVolume);
+        dfplayerVolume = Math.min(Math.max(volume, 0), 30);
+        _sendMessage("SVOL," + dfplayerVolume);
     }
-
-    //write back the actual volume reported by dfplayer
-    // control.onEvent(RAINBOW_SPARKLE_UNICORN_SOUND_SET_VOLUME, EventBusValue.MICROBIT_EVT_ANY, function () {
-    //     dfplayerVolume = control.eventValue();  
-    // })
 
     /**
      * Play a track
@@ -37,13 +31,8 @@ let dfplayerTrack: number = 0;
     //% track.min=1 track.max=20
     export function playTrack(track: number) {
         dfplayerTrack = track;
-        _sendMessage("Z4," + track)
+        _sendMessage("SPLY," + track)
     }
-
-    //write back the actual track reported by dfplayer
-    // control.onEvent(RAINBOW_SPARKLE_UNICORN_SOUND_SET_TRACK, EventBusValue.MICROBIT_EVT_ANY, function () {
-    //     dfplayerTrack = control.eventValue();  
-    // })
 
     /**
      * Increase the volume
@@ -73,7 +62,7 @@ let dfplayerTrack: number = 0;
     //% weight=80
     //% block="resume music"
     export function resume() {
-        _sendMessage("Z8");
+        _sendMessage("SRESUME");
     }
 
     //% subcategory="Sound"
@@ -81,7 +70,15 @@ let dfplayerTrack: number = 0;
     //% weight=90
     //% block="pause music"
     export function pause() {
-      _sendMessage("Z7");
+      _sendMessage("SPAUSE");
+    }
+
+    //% subcategory="Sound"
+    //% group="Actions"
+    //% weight=90
+    //% block="stop music"
+    export function stop() {
+        _sendMessage("SSTOP");
     }
 
     /**
@@ -94,7 +91,7 @@ let dfplayerTrack: number = 0;
     //% weight=39
     export function playingSound(): boolean {
 
-        const value = parseInt(_readMessage("ZO").split(",")[1]);
+        const value = parseInt(_readMessage("SBUSY").split(",")[1]);
 
         if (value == 1) {
            dfplayerBusy = false;
