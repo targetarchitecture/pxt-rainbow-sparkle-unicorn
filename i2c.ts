@@ -68,6 +68,9 @@ namespace RainbowSparkleUnicorn {
 
     export function _readMessage(message: string): string {   
 
+        pins.digitalWritePin(DigitalPin.P8, 1);
+        basic.pause(1);
+
         //send first
         _sendMessage(message);
 
@@ -113,6 +116,9 @@ namespace RainbowSparkleUnicorn {
         // }
 
         }
+
+        pins.digitalWritePin(DigitalPin.P8, 0);
+        basic.pause(1);
 
         return currentRecievedMessage;
     }

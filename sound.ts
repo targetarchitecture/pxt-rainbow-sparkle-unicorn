@@ -53,8 +53,7 @@ let dfplayerTrack: number = 0;
     //% weight=90  
     //% block="Increase volume"
     export function increaseVolume() {
-        dfplayerVolume = Math.min(Math.max(dfplayerVolume+1, 0), 30);
-        _sendMessage("Z2")
+        setVolume(Math.min(Math.max(dfplayerVolume + 1, 0), 30))
     }
 
     /**
@@ -65,8 +64,7 @@ let dfplayerTrack: number = 0;
     //% weight=80
     //% block="Decrease volume"
     export function decreaseVolume() {
-        dfplayerVolume = Math.min(Math.max(dfplayerVolume-1, 0), 30);
-        _sendMessage("Z3")
+        setVolume(Math.min(Math.max(dfplayerVolume - 1, 0), 30))
     }
 
     

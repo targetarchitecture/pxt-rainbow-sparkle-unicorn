@@ -3,9 +3,9 @@
 //% subcategories='["Touch", "Switch", "Sound", "Light", "Sliders / Dials / Spinners" ,"Movement", "IoT", "Expert"]'
 namespace RainbowSparkleUnicorn {
 
-    export let _readyToUseI2C = false;
-    export let _readyToReadQueue = false;
-    export let _printDebugMsgs = false;
+    //export let _readyToUseI2C = false;
+    //export let _readyToReadQueue = false;
+    //export let _printDebugMsgs = false;
 
     /**
      * Add into the start function to initialise the board.
@@ -17,7 +17,7 @@ namespace RainbowSparkleUnicorn {
 
         pins.digitalWritePin(DigitalPin.P8, 0);
 
-        _readyToUseI2C = true;
+        //_readyToUseI2C = true;
 
         basic.pause(100);
 
@@ -25,11 +25,11 @@ namespace RainbowSparkleUnicorn {
 
         basic.pause(100);
 
-        _readyToReadQueue = true;
+        //_readyToReadQueue = true;
 
         //make sure stuff has stopped
-        IoT.stopWifi();
-        Sound.pause();
+        //IoT.stopWifi();
+        //Sound.pause();
         
         // Movement.stopServo(Servo.P0);
         // Movement.stopServo(Servo.P1);
@@ -48,14 +48,14 @@ namespace RainbowSparkleUnicorn {
         // Movement.stopServo(Servo.P14);
         // Movement.stopServo(Servo.P15);
 
-        Controls.turnSlider1(OnOff.OFF);
-        Controls.turnSlider2(OnOff.OFF);
-        Controls.turnSpinner1(OnOff.OFF);
-        Controls.turnSpinner2(OnOff.OFF);
+       // Controls.turnSlider1(OnOff.OFF);
+       // Controls.turnSlider2(OnOff.OFF);
+      //  Controls.turnSpinner1(OnOff.OFF);
+      //  Controls.turnSpinner2(OnOff.OFF);
 
         //Switch.updateSwitchState();
 
-        Light.turnAllOff();
+       // Light.turnAllOff();
 
         basic.pause(200);
     }
@@ -66,9 +66,9 @@ namespace RainbowSparkleUnicorn {
     //% subcategory="Expert" 
     //% group="Debug"   
     //% block="Print debug messages"
-    export function printDebugMessages(): void {
-        _printDebugMsgs = true;
-    }
+    // export function printDebugMessages(): void {
+    //     _printDebugMsgs = true;
+    // }
 
     /**
      * Write a comment

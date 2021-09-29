@@ -19,10 +19,8 @@
         "ESP32.ts",
         "constants.ts",
         "i2c.ts",
-        "routing.ts",
         "enums.ts",
-        "expert.ts",
-        "IoT.ts"
+        "expert.ts"
     ],
     "testFiles": [],
     "targetVersions": {
