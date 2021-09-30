@@ -10,7 +10,6 @@
         "main.blocks",
         "main.ts",
         "README.md",
-        "ns.ts",
         "touch.ts",
         "switch.ts",
         "sound.ts",
@@ -20,7 +19,8 @@
         "constants.ts",
         "i2c.ts",
         "enums.ts",
-        "expert.ts"
+        "expert.ts",
+        "start.ts"
     ],
     "testFiles": [],
     "targetVersions": {
