@@ -68,7 +68,7 @@ namespace RainbowSparkleUnicorn.Movement {
         const minP = servoDetails[0];
         const maxP = servoDetails[1];
 
-        _sendMessage("V2," + servo + "," + angle + "," + minP + "," + maxP);
+        _sendMessage("MANGLE," + servo + "," + angle + "," + minP + "," + maxP);
     }
  
     //% subcategory="Movement" 
@@ -92,7 +92,7 @@ namespace RainbowSparkleUnicorn.Movement {
         const minP = servoDetails[0];
         const maxP = servoDetails[1];
 
-        _sendMessage("V3," + servo + "," + fromAngle + "," + toAngle +"," + duration + "," + minP + "," + maxP);
+        _sendMessage("MLINEAR," + servo + "," + fromAngle + "," + toAngle +"," + duration + "," + minP + "," + maxP);
     }
 
     //% subcategory="Movement" 
@@ -117,7 +117,7 @@ namespace RainbowSparkleUnicorn.Movement {
         
        // basic.showString(minP);
 
-      _sendMessage("V5," + servo + "," + fromAngle + "," + toAngle + "," + duration + "," + minP + "," + maxP);
+      _sendMessage("MBOUNCY," + servo + "," + fromAngle + "," + toAngle + "," + duration + "," + minP + "," + maxP);
     }
 
     //% subcategory="Movement" 
@@ -140,7 +140,7 @@ namespace RainbowSparkleUnicorn.Movement {
         const minP = servoDetails[0];
         const maxP = servoDetails[1];
 
-       _sendMessage("V4," + servo + "," + fromAngle + "," + toAngle +"," + duration + "," + minP + "," + maxP);
+       _sendMessage("MSMOOTH," + servo + "," + fromAngle + "," + toAngle +"," + duration + "," + minP + "," + maxP);
     }
 
     //% weight=50   
@@ -150,7 +150,7 @@ namespace RainbowSparkleUnicorn.Movement {
     //% servo.fieldEditor="gridpicker" servo.fieldOptions.columns=6
     //% servo.fieldOptions.tooltips="false" 
     export function stopServo(servo: Servo) {
-        _sendMessage("V1," + servo);
+        _sendMessage("MSTOP," + servo);
     }        
 
     //% subcategory="Expert" 
@@ -161,8 +161,6 @@ namespace RainbowSparkleUnicorn.Movement {
     //% servo.fieldOptions.tooltips="false"   
     //% micros.min=0 micros.max=4096
     export function setServoPulse(servo: Servo, micros: number) {
-        micros = Math.clamp(0, 4096, micros);
-
-        _sendMessage("V6," + servo + "," + micros);
+        _sendMessage("MPWM," + servo + "," + Math.clamp(0, 4096, micros));
     }
 }

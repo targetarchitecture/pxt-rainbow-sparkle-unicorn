@@ -1,14 +1,14 @@
 namespace RainbowSparkleUnicorn {
 
-    //i2c freq=100000
+    const ESP32_I2C_ADDR = 4;
+    const readBufferLength = 40; //32;
 
-    let currentRecievedMessage = "";
-    let ESP32_I2C_ADDR = 4;
+    //i2c freq=100000
+    //let currentRecievedMessage = "";
     //export let messageQueue = ["HELLO"];
-    export let messageQueue: string[] = [];
-    let i2cGapMessageTimeMs = 50;
-    let i2cTXrateMs = 50; 
-    let readBufferLength = 40; //32;
+    //export let messageQueue: string[] = [];
+    //let i2cGapMessageTimeMs = 50;
+    //let i2cTXrateMs = 50; 
 
     /**
      * Set i2c timings
@@ -21,19 +21,15 @@ namespace RainbowSparkleUnicorn {
     //% block="set i2c timings: gap message (ms) $GapMessageTimeMs, TX rate (ms) $TXrateMs"   
     //% GapMessageTimeMs.defl=50
     //% TXrateMs.defl=50
-    export function seti2ctimings( GapMessageTimeMs: number, TXrateMs: number) {
-       i2cGapMessageTimeMs = GapMessageTimeMs;
-       i2cTXrateMs = TXrateMs;
-    }    
+    // export function seti2ctimings( GapMessageTimeMs: number, TXrateMs: number) {
+    //    i2cGapMessageTimeMs = GapMessageTimeMs;
+    //    i2cTXrateMs = TXrateMs;
+    // }    
 
     export function _sendMessage(message: string): void {  
-            messageQueue.push(message);
-    }
-
-    function _sendi2cMessage(message: string): void { 
-
-        pins.digitalWritePin(DigitalPin.P8, 1)
-        basic.pause(1)
+           
+        pins.digitalWritePin(DigitalPin.P8, 1);
+        basic.pause(1);
 
         let num = 0;
         num = message.length
@@ -50,32 +46,36 @@ namespace RainbowSparkleUnicorn {
 
         pins.i2cWriteBuffer(ESP32_I2C_ADDR, buf2, false);
 
-        readI2CMessage();
-
         pins.digitalWritePin(DigitalPin.P8, 0);
+        basic.pause(1);
    }
 
-    function checkMessage(message: string): boolean
-     {
-        if (message.isEmpty() == true){
-            return false;
-        }
+    // function checkMessageTOBEREMOVED(message: string): boolean
+    //  {
+    //     if (message.isEmpty() == true){
+    //         return false;
+    //     }
+    //     if (message.length < 3) {
+    //         return false;
+    //     }
+    //     let X = message.split(",");
+    //     let Y = X.length;
+    //      if (Y < 2){
+    //         return false;
+    //     }
+    //     return true;
+    //  }
 
-        if (message.length < 3) {
-            return false;
-        }
+    export function _readMessage(message: string): string {   
 
-        let X = message.split(",");
-        let Y = X.length;
+        pins.digitalWritePin(DigitalPin.P8, 1);
+        basic.pause(1);
 
-         if (Y < 2){
-            return false;
-        }
+        //send first
+        _sendMessage(message);
 
-        return true;
-     }
-
-    function readI2CMessage ( ) {
+        //pause
+        basic.pause(1);
 
         let startIndex = 0;
         let i2cBuffer = pins.i2cReadBuffer(ESP32_I2C_ADDR, readBufferLength, false);
@@ -87,8 +87,8 @@ namespace RainbowSparkleUnicorn {
             }
         }
 
-        let a4 = 0;
-        let a3 = 0;
+        //let a4 = 0;
+        //let a3 = 0;
         let a1 = 0;
         let a2 = 0;
 
@@ -97,9 +97,9 @@ namespace RainbowSparkleUnicorn {
 
         //serial.writeValue("contentLength", contentLength);
 
-        if (contentLength > 0){
+        let currentRecievedMessage = "";
 
-            currentRecievedMessage = ""
+        if (contentLength > 0){
 
             for (let l = 0; l < contentLength ; l++) {
                 a2 =  i2cBuffer[l+2] ;
@@ -111,33 +111,40 @@ namespace RainbowSparkleUnicorn {
 
             currentRecievedMessage = currentRecievedMessage.trim();
 
-        if (currentRecievedMessage.length > 0){
-            _parseRecievedMessage(currentRecievedMessage);
-        }}
+        // if (currentRecievedMessage.length > 0){
+        //     _parseRecievedMessage(currentRecievedMessage);
+        // }
+
+        }
+
+        pins.digitalWritePin(DigitalPin.P8, 0);
+        basic.pause(1);
+
+        return currentRecievedMessage;
     }
 
     //this loop takes off the queue (array) and sends it down the i2c line
-    basic.forever(() => {
-        if (_readyToUseI2C == true)            
-        {  
-            if (messageQueue.length > 0){ 
-                const message = messageQueue.shift();
-                _sendi2cMessage(message);
-            }
-        }
-        basic.pause(i2cTXrateMs);
-    })
+    // basic.forever(() => {
+    //     if (_readyToUseI2C == true)            
+    //     {  
+    //         if (messageQueue.length > 0){ 
+    //             const message = messageQueue.shift();
+    //             _sendi2cMessage(message);
+    //         }
+    //     }
+    //     basic.pause(i2cTXrateMs);
+    // })
 
     //this loop just adds a i2c message pull request every 50 milliseconds if not already something in the queue
-    basic.forever(() => {
-        if (_readyToUseI2C == true)            
-        {
-            if (messageQueue.length == 0){
-                messageQueue.push("00," + input.runningTime());
-            }    
-        }
-        basic.pause(i2cGapMessageTimeMs);
-    })
+    // basic.forever(() => {
+    //     if (_readyToUseI2C == true)            
+    //     {
+    //         if (messageQueue.length == 0){
+    //             messageQueue.push("00," + input.runningTime());
+    //         }    
+    //     }
+    //     basic.pause(i2cGapMessageTimeMs);
+    // })
 
     function calcCRC8(data :Buffer, length :number) :number {
         let crc = 0;

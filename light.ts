@@ -18,7 +18,7 @@ namespace RainbowSparkleUnicorn.Light {
            resetSX1509();
        } 
 
-       _sendMessage("Y1," + pin + "," + timeOn + "," + timeOff)
+       _sendMessage("LBLINK," + pin + "," + timeOn + "," + timeOff)
     }
 
     /**
@@ -40,7 +40,7 @@ namespace RainbowSparkleUnicorn.Light {
            resetSX1509();
        } 
 
-      _sendMessage("Y2," + pin + "," + timeOn + "," + timeOff + ","  + rise + "," + fall)
+      _sendMessage("LBREATHE," + pin + "," + timeOn + "," + timeOff + ","  + rise + "," + fall)
     }
 
     //% subcategory="Light" 
@@ -52,7 +52,7 @@ namespace RainbowSparkleUnicorn.Light {
            resetSX1509();
        } 
 
-      _sendMessage("Y3," + pin + ",0")
+      _sendMessage("LLEDONOFF," + pin + ",0")
     } 
 
     //% subcategory="Light" 
@@ -64,7 +64,7 @@ namespace RainbowSparkleUnicorn.Light {
            resetSX1509();
        } 
 
-      _sendMessage("Y3," + pin + ",1")
+        _sendMessage("LLEDONOFF," + pin + ",1")
     }          
     
     //% subcategory="Light" 
@@ -75,7 +75,7 @@ namespace RainbowSparkleUnicorn.Light {
     } 
 
     function resetSX1509(){
-        _sendMessage("Y4"); 
+        _sendMessage("LRESET");
 
         //see if the pause is needed as sometime the LEDs don't come on when powered up
         basic.pause(50);
@@ -87,7 +87,7 @@ namespace RainbowSparkleUnicorn.Light {
     //% subcategory="Light" 
     //% block="turn on all lights"
     export function turnAllOn() {
-        _sendMessage("Y5");  
+        _sendMessage("LLEDALLON");
     } 
 }
 
