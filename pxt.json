@@ -19,7 +19,6 @@
         "constants.ts",
         "i2c.ts",
         "enums.ts",
-        "expert.ts",
         "start.ts"
     ],
     "testFiles": [],
