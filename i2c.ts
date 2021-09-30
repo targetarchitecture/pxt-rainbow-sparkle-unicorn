@@ -26,29 +26,35 @@ namespace RainbowSparkleUnicorn {
     //    i2cTXrateMs = TXrateMs;
     // }    
 
-    export function _sendMessage(message: string): void {  
-           
+    export function _sendMessage(message: string): void {             
+
         pins.digitalWritePin(DigitalPin.P8, 1);
         basic.pause(1);
 
-        let num = 0;
-        num = message.length
-        let buf2 = pins.createBuffer(num+4);
-        let crcbuf = pins.createBuffer(num);
-        buf2[0] = 2
-        buf2[1] = num + 4
-        for (let j = 0; j <= num - 1; j++) {
-            buf2[j + 2] = message.charCodeAt(j)
-            crcbuf[j] = message.charCodeAt(j)
-        }
-        buf2[num + 2] = calcCRC8(crcbuf,num)
-        buf2[num + 3] = 4
-
-        pins.i2cWriteBuffer(ESP32_I2C_ADDR, buf2, false);
+        _sendMessage(message);
 
         pins.digitalWritePin(DigitalPin.P8, 0);
         basic.pause(1);
    }
+
+     function sendMessage(message: string): void {
+
+         let num = 0;
+         num = message.length
+         let buf2 = pins.createBuffer(num + 4);
+         let crcbuf = pins.createBuffer(num);
+         buf2[0] = 2
+         buf2[1] = num + 4
+         for (let j = 0; j <= num - 1; j++) {
+             buf2[j + 2] = message.charCodeAt(j)
+             crcbuf[j] = message.charCodeAt(j)
+         }
+         buf2[num + 2] = calcCRC8(crcbuf, num)
+         buf2[num + 3] = 4
+
+         pins.i2cWriteBuffer(ESP32_I2C_ADDR, buf2, false);
+
+    }
 
     // function checkMessageTOBEREMOVED(message: string): boolean
     //  {
@@ -72,7 +78,7 @@ namespace RainbowSparkleUnicorn {
         basic.pause(1);
 
         //send first
-        _sendMessage(message);
+        sendMessage(message);
 
         //pause
         basic.pause(1);
@@ -110,10 +116,6 @@ namespace RainbowSparkleUnicorn {
             }
 
             currentRecievedMessage = currentRecievedMessage.trim();
-
-        // if (currentRecievedMessage.length > 0){
-        //     _parseRecievedMessage(currentRecievedMessage);
-        // }
 
         }
 
