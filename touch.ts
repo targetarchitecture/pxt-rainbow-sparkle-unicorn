@@ -100,4 +100,15 @@ export function _onStateChange(touchStates :string){
         _sendMessage("S2," + timing );
     } 
 
+
+    /**
+     * Get a the touch states
+     */
+    //% subcategory="Touch"
+    //% weight=80        
+    //% block="Get the touch states" 
+    export function getTouchStates() {
+        return ""
+    }
+
 }

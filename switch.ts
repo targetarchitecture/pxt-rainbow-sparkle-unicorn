@@ -92,4 +92,13 @@ export function _onStateChange(switchStates :string){
         return previousSwitchStates.charAt(pin);
     } 
 
+    /**
+     * Get a switch states
+     */
+    //% subcategory="Switch" 
+    //% weight=80        
+    //% block="Get the switch states" 
+    export function getSwitchStates() {
+        return previousSwitchStates.charAt(4);
+    }
 }
