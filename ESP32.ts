@@ -1,3 +1,4 @@
+namespace RainbowSparkleUnicorn.Controls {
 
     let Encoder1value = 0;
     let Encoder2value = 0;
@@ -15,7 +16,7 @@
 
         const value = parseInt(_readMessage("ROTARY2"));
 
-        if (value < Encoder2value){
+        if (value < Encoder2value) {
             direction2 = RotaryDirection.Left;
             control.raiseEvent(RAINBOW_SPARKLE_UNICORN_ROTARY_TWO_ROTATING, RotaryDirection.Left)
         }
@@ -24,7 +25,7 @@
             control.raiseEvent(RAINBOW_SPARKLE_UNICORN_ROTARY_TWO_ROTATING, RotaryDirection.Right)
         }
 
-        Encoder2value=value;
+        Encoder2value = value;
 
         return Encoder2value;
     }
@@ -55,10 +56,10 @@
     }
 
 
-     /**
-     * Set the analog dial to a certain voltage.
-     * @param voltage the touch sensor to be checked, eg: 15
-     */
+    /**
+    * Set the analog dial to a certain voltage.
+    * @param voltage the touch sensor to be checked, eg: 15
+    */
     //% subcategory="Sliders / Dials / Spinners" 
     //% group="Dials"
     //% block="Set dial 1 to $value"
@@ -68,10 +69,10 @@
         _sendMessage("DIAL1," + Math.clamp(0, 255, value))
     }
 
-   /**
-     * Set the analog dial to a certain voltage.
-     * @param voltage the touch sensor to be checked, eg: 15
-     */
+    /**
+      * Set the analog dial to a certain voltage.
+      * @param voltage the touch sensor to be checked, eg: 15
+      */
     //% subcategory="Sliders / Dials / Spinners" 
     //% group="Dials"
     //% block="Set dial 2 to $value"
@@ -81,46 +82,46 @@
         _sendMessage("DIAL2," + Math.clamp(0, 255, value))
     }
 
-   /**
-   * Do something when a rotary switch is turned.
-   * @param handler body code to run when the event is raised
-   */
-  //% subcategory="Sliders / Dials / Spinners"
-  //% group="Spinners"
-  //% block="on Spinner 1 rotating"
-  //% weight=65
-  export function onRotary1Rotation(
-    handler: () => void
-  ) {
-    control.onEvent(
-      RAINBOW_SPARKLE_UNICORN_ROTARY_ONE_ROTATING,
-      EventBusValue.MICROBIT_EVT_ANY,
-      () => {
-        handler();
-      }
-    );
-  }
+    /**
+    * Do something when a rotary switch is turned.
+    * @param handler body code to run when the event is raised
+    */
+    //% subcategory="Sliders / Dials / Spinners"
+    //% group="Spinners"
+    //% block="on Spinner 1 rotating"
+    //% weight=65
+    export function onRotary1Rotation(
+        handler: () => void
+    ) {
+        control.onEvent(
+            RAINBOW_SPARKLE_UNICORN_ROTARY_ONE_ROTATING,
+            EventBusValue.MICROBIT_EVT_ANY,
+            () => {
+                handler();
+            }
+        );
+    }
 
 
-  /**
-   * Do something when a rotary switch is turned.
-   * @param handler body code to run when the event is raised
-   */
-  //% subcategory="Sliders / Dials / Spinners"
-  //% group="Spinners"
-  //% block="on Spinner 2 rotating"
-  //% weight=65
-  export function onRotary2Rotation(
-    handler: () => void
-  ) {
-    control.onEvent(
-      RAINBOW_SPARKLE_UNICORN_ROTARY_TWO_ROTATING,
-      EventBusValue.MICROBIT_EVT_ANY,
-      () => {
-        handler();
-      }
-    );
-  }
+    /**
+     * Do something when a rotary switch is turned.
+     * @param handler body code to run when the event is raised
+     */
+    //% subcategory="Sliders / Dials / Spinners"
+    //% group="Spinners"
+    //% block="on Spinner 2 rotating"
+    //% weight=65
+    export function onRotary2Rotation(
+        handler: () => void
+    ) {
+        control.onEvent(
+            RAINBOW_SPARKLE_UNICORN_ROTARY_TWO_ROTATING,
+            EventBusValue.MICROBIT_EVT_ANY,
+            () => {
+                handler();
+            }
+        );
+    }
 
     /**
      * A function that returns spinner one direction
