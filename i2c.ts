@@ -1,7 +1,7 @@
 namespace RainbowSparkleUnicorn {
 
     const ESP32_I2C_ADDR = 4;
-    const readBufferLength = 40; //32;
+    const readBufferLength = 128; //40; //32;
 
     //i2c freq=100000
     //let currentRecievedMessage = "";
@@ -26,7 +26,7 @@ namespace RainbowSparkleUnicorn {
     //    i2cTXrateMs = TXrateMs;
     // }    
 
-    export function _sendMessage(message: string): void {             
+    export function _sendMessage(message: string): void {
 
         pins.digitalWritePin(DigitalPin.P8, 1);
         basic.pause(1);
@@ -35,44 +35,27 @@ namespace RainbowSparkleUnicorn {
 
         pins.digitalWritePin(DigitalPin.P8, 0);
         basic.pause(1);
-   }
-
-     function sendMessage(message: string): void {
-
-         let num = 0;
-         num = message.length
-         let buf2 = pins.createBuffer(num + 4);
-         let crcbuf = pins.createBuffer(num);
-         buf2[0] = 2
-         buf2[1] = num + 4
-         for (let j = 0; j <= num - 1; j++) {
-             buf2[j + 2] = message.charCodeAt(j)
-             crcbuf[j] = message.charCodeAt(j)
-         }
-         buf2[num + 2] = calcCRC8(crcbuf, num)
-         buf2[num + 3] = 4
-
-         pins.i2cWriteBuffer(ESP32_I2C_ADDR, buf2, false);
-
     }
 
-    // function checkMessageTOBEREMOVED(message: string): boolean
-    //  {
-    //     if (message.isEmpty() == true){
-    //         return false;
-    //     }
-    //     if (message.length < 3) {
-    //         return false;
-    //     }
-    //     let X = message.split(",");
-    //     let Y = X.length;
-    //      if (Y < 2){
-    //         return false;
-    //     }
-    //     return true;
-    //  }
+    function sendMessage(message: string): void {
 
-    export function _readMessage(message: string): string {   
+        let num = 0;
+        num = message.length
+        let buf2 = pins.createBuffer(num + 4);
+        let crcbuf = pins.createBuffer(num);
+        buf2[0] = 2
+        buf2[1] = num + 4
+        for (let j = 0; j <= num - 1; j++) {
+            buf2[j + 2] = message.charCodeAt(j)
+            crcbuf[j] = message.charCodeAt(j)
+        }
+        buf2[num + 2] = calcCRC8(crcbuf, num)
+        buf2[num + 3] = 4
+
+        pins.i2cWriteBuffer(ESP32_I2C_ADDR, buf2, false);
+    }
+
+    export function _readMessage(message: string): string {
 
         pins.digitalWritePin(DigitalPin.P8, 1);
         basic.pause(1);
@@ -80,47 +63,21 @@ namespace RainbowSparkleUnicorn {
         //send first
         sendMessage(message);
 
-        //pause
-        basic.pause(1);
-
-        let startIndex = 0;
         let i2cBuffer = pins.i2cReadBuffer(ESP32_I2C_ADDR, readBufferLength, false);
-
-        for (let k = 0; k <= readBufferLength; k++) {
-            // find packet start
-            if (i2cBuffer[k] == 2) {
-                startIndex = k
-            }
-        }
-
-        //let a4 = 0;
-        //let a3 = 0;
-        let a1 = 0;
-        let a2 = 0;
-
-        a1 = i2cBuffer[startIndex];
-        let contentLength = i2cBuffer[startIndex+1]-4;
-
-        //serial.writeValue("contentLength", contentLength);
-
-        let currentRecievedMessage = "";
-
-        if (contentLength > 0){
-
-            for (let l = 0; l < contentLength ; l++) {
-                a2 =  i2cBuffer[l+2] ;
-
-                if (a2 != 255 && a2 != 0){
-                    currentRecievedMessage = currentRecievedMessage + String.fromCharCode(a2);
-                }
-            }
-
-            currentRecievedMessage = currentRecievedMessage.trim();
-
-        }
 
         pins.digitalWritePin(DigitalPin.P8, 0);
         basic.pause(1);
+
+        let currentRecievedMessage = "";
+
+        for (let k = 0; k <= readBufferLength; k++) {
+
+            if (i2cBuffer[k] != 255 && i2cBuffer[k] != 0) {
+                currentRecievedMessage = currentRecievedMessage + String.fromCharCode(i2cBuffer[k]);
+            }
+        }
+
+        //serial.writeLine("currentRecievedMessage:" + currentRecievedMessage);
 
         return currentRecievedMessage;
     }
@@ -148,7 +105,7 @@ namespace RainbowSparkleUnicorn {
     //     basic.pause(i2cGapMessageTimeMs);
     // })
 
-    function calcCRC8(data :Buffer, length :number) :number {
+    function calcCRC8(data: Buffer, length: number): number {
         let crc = 0;
         let extract;
         let sum;
