@@ -88,7 +88,7 @@ export function _onStateChange(switchStates :string){
     //% block="Get the switch state on pin $pin"
     //% pin.fieldEditor="gridpicker" pin.fieldOptions.columns=6
     //% pin.fieldOptions.tooltips="false"    
-    export function getSwitchState(pin: switchPins) {
+    export function getSwitchState(pin: switchPins): string {
         return previousSwitchStates.charAt(pin);
     } 
 
@@ -98,7 +98,10 @@ export function _onStateChange(switchStates :string){
     //% subcategory="Switch" 
     //% weight=80        
     //% block="Get the switch states" 
-    export function getSwitchStates() {
-        return previousSwitchStates.charAt(4);
+    export function getSwitchStates():string {
+
+        switchStates = _readMessage("SUPDATE");
+
+        return switchStates
     }
 }
