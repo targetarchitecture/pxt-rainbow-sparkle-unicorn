@@ -31,7 +31,7 @@ namespace RainbowSparkleUnicorn {
         pins.digitalWritePin(DigitalPin.P8, 1);
         basic.pause(1);
 
-        _sendMessage(message);
+        sendMessage(message);
 
         pins.digitalWritePin(DigitalPin.P8, 0);
         basic.pause(1);

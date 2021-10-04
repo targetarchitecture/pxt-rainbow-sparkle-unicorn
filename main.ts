@@ -13,5 +13,6 @@ basic.forever(function () {
     soundPlaying = RainbowSparkleUnicorn.Sound.playingSound()
     touchStates = RainbowSparkleUnicorn.Touch.getTouchStates()
     switchStates = RainbowSparkleUnicorn.Switch.getSwitchStates()
+    RainbowSparkleUnicorn.Controls.dial1(randint(0, 254))
     basic.pause(50)
 })
