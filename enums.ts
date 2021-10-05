@@ -115,34 +115,6 @@ declare const enum  RotaryDirection {
  }
 
 
-
-// declare const enum OnOff2 {
-//     //% block="On"
-//     ON = 1,
-//     //% block="Off"
-//     OFF = 0
-// }
-
-
-declare const enum breathLightPins {
-    //% block="Pin 4"
-    P4 = 4,
-    //% block="Pin 5"
-    P5 = 5,
-    //% block="Pin 6"
-    P6 = 6,
-    //% block="Pin 7"
-    P7 = 7,
-    //% block="Pin 12"
-    P12 = 12,
-    //% block="Pin 13"
-    P13 = 13,
-    //% block="Pin 14"
-    P14 = 14,
-    //% block="Pin 15"
-    P15 = 15
-}
-
 declare const enum lightPins {
     //% block="Pin 0"
     P0 = 0,      

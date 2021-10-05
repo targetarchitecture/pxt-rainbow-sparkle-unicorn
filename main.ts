@@ -1,29 +1,21 @@
-let touchStates = ""
-basic.showIcon(IconNames.No)
-RainbowSparkleUnicorn.Sound.setVolume(20)
-RainbowSparkleUnicorn.Sound.playTrack(1)
-
-let jj = "@@ffff##"
-if (jj.substr(0, 2) == "@@" && jj.substr(-2, 2) == "##") {
-    jj = jj.replace("@@", "").replace("##", "");
-} else {
-    jj = ""
-}
-
-serial.writeLine("jj:" + jj);
-
-basic.forever(function () {
-    touchStates = RainbowSparkleUnicorn.Touch.getTouchStates()
-    basic.pause(100)
-})
-basic.forever(function () {
-    RainbowSparkleUnicorn.Controls.dial1(randint(0, 254))
-    RainbowSparkleUnicorn.Controls.dial2(randint(0, 254))
-    basic.pause(1000)
-})
-basic.forever(function () {
-    RainbowSparkleUnicorn.Light.turnAllOn()
-    basic.pause(500)
+input.onButtonPressed(Button.A, function () {
     RainbowSparkleUnicorn.Light.turnAllOff()
-    basic.pause(500)
 })
+function doSomething () {
+    RainbowSparkleUnicorn.Light.breathe(
+    lightPins.P15,
+    0,
+    0,
+    1000,
+    1000
+    )
+    RainbowSparkleUnicorn.Light.blink(lightPins.P0, 1000, 1000)
+    RainbowSparkleUnicorn.Light.blink(lightPins.P7, 500, 500)
+    RainbowSparkleUnicorn.Light.blink(lightPins.P8, 100, 100)
+    RainbowSparkleUnicorn.Light.blink(lightPins.P9, 10000, 10000)
+}
+input.onButtonPressed(Button.B, function () {
+    RainbowSparkleUnicorn.Light.turnAllOn()
+})
+RainbowSparkleUnicorn.start()
+doSomething()

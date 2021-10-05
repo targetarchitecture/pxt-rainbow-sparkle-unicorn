@@ -87,14 +87,15 @@ namespace RainbowSparkleUnicorn {
             }
         }
 
+        //check for header and trailer
         if (currentRecievedMessage.substr(0, 2) == "@@" &&
             currentRecievedMessage.substr(-2, 2) == "##") {
-            currentRecievedMessage = currentRecievedMessage.replace("@@", "").replace("##", "");
+            currentRecievedMessage = currentRecievedMessage.substr(2, currentRecievedMessage.length - 4);
         } else {
             currentRecievedMessage = "";
         }
 
-        serial.writeLine("currentRecievedMessage:" + currentRecievedMessage);
+        //serial.writeLine("RX:" + currentRecievedMessage);
 
         return currentRecievedMessage;
 

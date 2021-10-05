@@ -1,7 +1,7 @@
 namespace RainbowSparkleUnicorn.Touch {
 
-    let previousTouchStates = "";
-    let touchStates = "";
+    let previousTouchStates = "LLLLLLLLLLLL";
+    let touchStates = "LLLLLLLLLLLL";
 
     export function _onStateChange(touchStates: string) {
 
