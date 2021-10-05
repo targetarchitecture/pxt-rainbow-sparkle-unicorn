@@ -39,20 +39,30 @@ namespace RainbowSparkleUnicorn {
 
     function sendMessage(message: string): void {
 
-        let num = 0;
-        num = message.length
-        let buf2 = pins.createBuffer(num + 4);
-        let crcbuf = pins.createBuffer(num);
-        buf2[0] = 2
-        buf2[1] = num + 4
-        for (let j = 0; j <= num - 1; j++) {
-            buf2[j + 2] = message.charCodeAt(j)
-            crcbuf[j] = message.charCodeAt(j)
-        }
-        buf2[num + 2] = calcCRC8(crcbuf, num)
-        buf2[num + 3] = 4
+        //add the leader and trailer
+        message = "@@" + message + "##";
 
-        pins.i2cWriteBuffer(ESP32_I2C_ADDR, buf2, false);
+        let num = 0;
+        num = message.length;
+        let txBuf = pins.createBuffer(num);
+
+        // let buf2 = pins.createBuffer(num + 4);
+        // let crcbuf = pins.createBuffer(num);
+        // buf2[0] = 2
+        // buf2[1] = num + 4
+        // for (let j = 0; j <= num - 1; j++) {
+        //     buf2[j + 2] = message.charCodeAt(j)
+        //     crcbuf[j] = message.charCodeAt(j)
+        // }
+        // buf2[num + 2] = calcCRC8(crcbuf, num)
+        // buf2[num + 3] = 4
+
+        for (let j = 0; j <= num - 1; j++) {
+            txBuf[j] = message.charCodeAt(j)
+            //crcbuf[j] = message.charCodeAt(j)
+        }
+
+        pins.i2cWriteBuffer(ESP32_I2C_ADDR, txBuf, false);
     }
 
     export function _readMessage(message: string): string {
@@ -77,9 +87,17 @@ namespace RainbowSparkleUnicorn {
             }
         }
 
-        //serial.writeLine("currentRecievedMessage:" + currentRecievedMessage);
+        if (currentRecievedMessage.substr(0, 2) == "@@" &&
+            currentRecievedMessage.substr(-2, 2) == "##") {
+            currentRecievedMessage = currentRecievedMessage.replace("@@", "").replace("##", "");
+        } else {
+            currentRecievedMessage = "";
+        }
+
+        serial.writeLine("currentRecievedMessage:" + currentRecievedMessage);
 
         return currentRecievedMessage;
+
     }
 
     //this loop takes off the queue (array) and sends it down the i2c line
@@ -105,24 +123,24 @@ namespace RainbowSparkleUnicorn {
     //     basic.pause(i2cGapMessageTimeMs);
     // })
 
-    function calcCRC8(data: Buffer, length: number): number {
-        let crc = 0;
-        let extract;
-        let sum;
+    // function calcCRC8(data: Buffer, length: number): number {
+    //     let crc = 0;
+    //     let extract;
+    //     let sum;
 
-        for (let n = 0; n < length; n++) {
-            extract = data[n];
+    //     for (let n = 0; n < length; n++) {
+    //         extract = data[n];
 
-            for (let o = 8; o; o--) {
-                sum = (crc ^ extract) & 0x01;
-                crc >>= 1;
-                if (sum) {
-                    crc ^= 0x8C;
-                }
-                extract >>= 1;
-            }
-        }
+    //         for (let o = 8; o; o--) {
+    //             sum = (crc ^ extract) & 0x01;
+    //             crc >>= 1;
+    //             if (sum) {
+    //                 crc ^= 0x8C;
+    //             }
+    //             extract >>= 1;
+    //         }
+    //     }
 
-        return crc;
-    }
+    //     return crc;
+    // }
 }
