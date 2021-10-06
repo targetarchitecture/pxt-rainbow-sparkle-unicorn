@@ -165,14 +165,13 @@ namespace RainbowSparkleUnicorn.Controls {
     }
 
     /**
-     * Restart the ESP32 processor on the board, pauses for 1 second afterwards
+     * Restart the ESP32 processor on the board, ideally add a one second pause
      */
     //% subcategory="Expert" 
     //% group="Debug"       
     //% block="Restart ESP32"
     export function restartESP32(): void {
         _sendMessage("RESTART");
-        basic.pause(1000);
     }
 
 }

@@ -3,29 +3,6 @@ namespace RainbowSparkleUnicorn.Touch {
     let previousTouchStates = "LLLLLLLLLLLL";
     let touchStates = "LLLLLLLLLLLL";
 
-    export function _onStateChange(touchStates: string) {
-
-        if (touchStates != previousTouchStates) {
-
-            for (let index = 0; index < 12; index++) {
-
-                const pinState = touchStates.charAt(index);
-                const previousPinState = previousTouchStates.charAt(index);
-
-                if (pinState != previousPinState) {
-                    if (pinState == "H") {
-                        control.raiseEvent(RAINBOW_SPARKLE_UNICORN_TOUCH_SENSOR_TOUCHED, index + 1);
-                    } else if (pinState == "L") {
-                        control.raiseEvent(RAINBOW_SPARKLE_UNICORN_TOUCH_SENSOR_RELEASED, index + 1);
-                    }
-                }
-            }
-
-            previousTouchStates = touchStates;
-        }
-    }
-
-
     /**
      * Do something when a touch sensor is touched or released.
      * @param pin the pin which is the touch button on 
@@ -111,6 +88,25 @@ namespace RainbowSparkleUnicorn.Touch {
     export function getTouchStates(): string {
 
         touchStates = _readMessage("TUPDATE");
+
+        if (touchStates != previousTouchStates) {
+
+            for (let index = 0; index < 12; index++) {
+
+                const pinState = touchStates.charAt(index);
+                const previousPinState = previousTouchStates.charAt(index);
+
+                if (pinState != previousPinState) {
+                    if (pinState == "H") {
+                        control.raiseEvent(RAINBOW_SPARKLE_UNICORN_TOUCH_SENSOR_TOUCHED, index + 1);
+                    } else if (pinState == "L") {
+                        control.raiseEvent(RAINBOW_SPARKLE_UNICORN_TOUCH_SENSOR_RELEASED, index + 1);
+                    }
+                }
+            }
+
+            previousTouchStates = touchStates;
+        }
 
         return touchStates
     }

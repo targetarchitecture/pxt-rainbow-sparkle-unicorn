@@ -3,35 +3,6 @@ namespace RainbowSparkleUnicorn.Switch {
     let previousSwitchStates = "XXXXXXXXXXXXXXXX";
     let switchStates         = "XXXXXXXXXXXXXXXX";
 
-    export function _onStateChange(switchStates: string) {
-
-        //serial.writeLine(switchStates);
-
-        if (switchStates != previousSwitchStates) {
-
-            for (let index = 0; index < 16; index++) {
-
-                const pinState = switchStates.charAt(index);
-                const previousPinState = previousSwitchStates.charAt(index);
-
-                //serial.writeLine("index: " + index + " pinState: " + pinState + " previousPinState:" + previousPinState);
-
-                if (pinState != previousPinState) {
-                    if (pinState == "L") {
-                        control.raiseEvent(RAINBOW_SPARKLE_UNICORN_SWITCH_PRESSED, index + 1);
-                    } else if (pinState == "H") {
-                        control.raiseEvent(RAINBOW_SPARKLE_UNICORN_SWITCH_RELEASED, index + 1);
-                    }
-                }
-            }
-
-            previousSwitchStates = switchStates;
-
-        }
-    }
-
-
-
     /**
      * Do something when a switch is pushed.
      * @param pin the switch pin to be checked
@@ -102,6 +73,28 @@ namespace RainbowSparkleUnicorn.Switch {
     export function getSwitchStates(): string {
 
         switchStates = _readMessage("SUPDATE");
+
+        if (switchStates != previousSwitchStates) {
+
+            for (let index = 0; index < 16; index++) {
+
+                const pinState = switchStates.charAt(index);
+                const previousPinState = previousSwitchStates.charAt(index);
+
+                //serial.writeLine("index: " + index + " pinState: " + pinState + " previousPinState:" + previousPinState);
+
+                if (pinState != previousPinState) {
+                    if (pinState == "L") {
+                        control.raiseEvent(RAINBOW_SPARKLE_UNICORN_SWITCH_PRESSED, index + 1);
+                    } else if (pinState == "H") {
+                        control.raiseEvent(RAINBOW_SPARKLE_UNICORN_SWITCH_RELEASED, index + 1);
+                    }
+                }
+            }
+
+            previousSwitchStates = switchStates;
+
+        }
 
         return switchStates
     }
