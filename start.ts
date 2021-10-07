@@ -16,6 +16,8 @@ namespace RainbowSparkleUnicorn {
         pins.digitalWritePin(DigitalPin.P8, 0);
 
         basic.pause(1);
+        
+        _sendMessage("STARTING");
 
         let x = control.millis();
 
