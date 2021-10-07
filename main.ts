@@ -25,12 +25,15 @@ input.onButtonPressed(Button.B, function () {
 })
 let touch = ""
 RainbowSparkleUnicorn.start()
+RainbowSparkleUnicorn.Light.turnAllOff();
+RainbowSparkleUnicorn.Controls.dial2(0);
+RainbowSparkleUnicorn.Controls.dial1(0);
 doSomething()
 RainbowSparkleUnicorn.Controls.dial2(255)
 RainbowSparkleUnicorn.Controls.dial1(255)
+
 basic.forever(function () {
     touch = RainbowSparkleUnicorn.Touch.getTouchStates()
-    basic.pause(50)
 })
 basic.forever(function () {
     basic.pause(1000)

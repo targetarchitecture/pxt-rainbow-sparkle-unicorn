@@ -17,9 +17,14 @@ namespace RainbowSparkleUnicorn {
 
         basic.pause(1);
 
-        Controls.restartESP32();
+        let x = control.millis();
 
-        basic.pause(1000);
+        while (true) {
+            if (control.millis() - x > 100) {
+                break;
+            }
+        }
+
     }
 
     /**
