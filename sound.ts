@@ -91,7 +91,7 @@ let dfplayerTrack: number = 0;
     //% weight=39
     export function playingSound(): boolean {
 
-        const value = parseInt(_readMessage("SBUSY").split(",")[1]);
+        const value = parseInt(_readMessage("SBUSY"));
 
         if (value == 1) {
            dfplayerBusy = false;
