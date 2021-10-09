@@ -31,7 +31,7 @@ let dfplayerTrack: number = 0;
     //% track.min=1 track.max=50
     export function playTrack(track: number) {
         dfplayerTrack = track;
-        _sendMessage("SPLAY," + track)
+        _sendMessage("SPLAY," + track+ ",1");
     }
 
     /**
