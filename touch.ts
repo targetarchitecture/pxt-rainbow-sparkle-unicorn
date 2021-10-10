@@ -1,7 +1,6 @@
 namespace RainbowSparkleUnicorn.Touch {
 
-    let previousTouchStates = "LLLLLLLLLLLL";
-    let touchStates = "LLLLLLLLLLLL";
+    let previousTouchStates = "000000000000";
 
     /**
      * Do something when a touch sensor is touched or released.
@@ -86,8 +85,8 @@ namespace RainbowSparkleUnicorn.Touch {
     //% weight=80        
     //% block="Get the touch states" 
     export function getTouchStates(): string {
-
-        touchStates = _readMessage("TUPDATE");
+        
+        let touchStates = _readMessage("TUPDATE");
 
         if (touchStates != previousTouchStates) {
 
@@ -104,9 +103,9 @@ namespace RainbowSparkleUnicorn.Touch {
                     }
                 }
             }
-
-            previousTouchStates = touchStates;
         }
+
+        previousTouchStates = touchStates;
 
         return touchStates
     }

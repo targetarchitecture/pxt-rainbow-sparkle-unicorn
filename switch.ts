@@ -1,6 +1,6 @@
 namespace RainbowSparkleUnicorn.Switch {
 
-    let previousSwitchStates = "XXXXXXXXXXXXXXXX";
+    let previousSwitchStates = "0000000000000000";
     let switchStates         = "XXXXXXXXXXXXXXXX";
 
     /**
@@ -41,11 +41,10 @@ namespace RainbowSparkleUnicorn.Switch {
         pin: switchPins,
         handler: () => void
     ) {
-
         control.onEvent(
             RAINBOW_SPARKLE_UNICORN_SWITCH_RELEASED,
             pin === switchPins.Any ? EventBusValue.MICROBIT_EVT_ANY : pin,
-            () => {
+            () => {  
                 handler();
             }
         );
@@ -91,10 +90,9 @@ namespace RainbowSparkleUnicorn.Switch {
                     }
                 }
             }
-
-            previousSwitchStates = switchStates;
-
         }
+
+        previousSwitchStates = switchStates;
 
         return switchStates
     }
