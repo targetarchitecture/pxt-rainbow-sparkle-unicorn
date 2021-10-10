@@ -77,7 +77,7 @@ namespace RainbowSparkleUnicorn.Switch {
             return previousSwitchStates;
         }
 
-        if (switchStates.compare(previousSwitchStates)) {
+        if (switchStates.compare(previousSwitchStates) != 0) {
 
             for (let index = 0; index < 16; index++) {
 

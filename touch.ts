@@ -85,7 +85,7 @@ namespace RainbowSparkleUnicorn.Touch {
     //% weight=80        
     //% block="Get the touch states" 
     export function getTouchStates(): string {
-        
+
         let touchStates = _readMessage("TUPDATE");
 
         //check for bad data
@@ -93,7 +93,7 @@ namespace RainbowSparkleUnicorn.Touch {
             return previousTouchStates;
         }
 
-        if (touchStates != previousTouchStates) {
+        if (touchStates.compare(previousTouchStates) != 0) {
 
             for (let index = 0; index < 12; index++) {
 
