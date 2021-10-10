@@ -28,8 +28,9 @@ namespace RainbowSparkleUnicorn.Movement {
     //% minimumPulse.min=0 minimumPulse.max=4096
     //% maximumPulse.min=0 maximumPulse.max=4096
     export function setServoRange(servo: Servo, minimumPulse: number, maximumPulse: number) {
-        minimumPulse = Math.clamp(0, 4096, minimumPulse);
-        maximumPulse = Math.clamp(0, 4096, maximumPulse);
+        minimumPulse = Math.constrain(minimumPulse,0, 4096 );
+        maximumPulse = Math.constrain(maximumPulse,0, 4096);
+        
 
         //make sure they are right way around
         let servoDetails = servoList[servo].split(",");
@@ -61,7 +62,7 @@ namespace RainbowSparkleUnicorn.Movement {
     //% block="set $servo angle to $angle"
     //% angle.min=0 angle.max=180    
     export function setServoAngle(servo: Servo, angle=90) {
-        angle = Math.clamp(0, 180, angle);
+        angle = Math.constrain(angle,0, 180);
 
         let servoDetails = servoList[servo].split(",");
 
@@ -82,8 +83,8 @@ namespace RainbowSparkleUnicorn.Movement {
     //% duration.min=0 
     //% duration.defl=20     
     export function moveServoLinear(servo: Servo, fromAngle: number, toAngle: number, duration: number) {
-        fromAngle = Math.clamp(0, 180, fromAngle);
-        toAngle = Math.clamp(0, 180, toAngle);
+        fromAngle = Math.constrain(fromAngle, 0, 180);
+        toAngle = Math.constrain(toAngle, 0, 180);
 
         if (duration < 0){ duration = 0; }
  
@@ -106,8 +107,10 @@ namespace RainbowSparkleUnicorn.Movement {
     //% duration.min=0 
     //% duration.defl=20         
     export function moveServoBouncy(servo: Servo, fromAngle: number, toAngle: number, duration: number) {
-        fromAngle = Math.clamp(0, 180, fromAngle);
-        toAngle = Math.clamp(0, 180, toAngle);
+
+        fromAngle = Math.constrain(fromAngle, 0, 180);
+        toAngle = Math.constrain(toAngle, 0, 180);
+
         if (duration < 0){ duration = 0; }
 
         let servoDetails = servoList[servo].split(",");
@@ -131,8 +134,10 @@ namespace RainbowSparkleUnicorn.Movement {
     //% duration.min=0 
     //% duration.defl=20         
     export function moveServoSmoothly(servo: Servo, fromAngle: number, toAngle: number, duration: number) {
-        fromAngle = Math.clamp(0, 180, fromAngle);
-        toAngle = Math.clamp(0, 180, toAngle);
+
+        fromAngle = Math.constrain(fromAngle, 0, 180);
+        toAngle = Math.constrain(toAngle, 0, 180);
+
         if (duration < 0){ duration = 0; }
 
         let servoDetails = servoList[servo].split(",");
@@ -161,6 +166,7 @@ namespace RainbowSparkleUnicorn.Movement {
     //% servo.fieldOptions.tooltips="false"   
     //% micros.min=0 micros.max=4096
     export function setServoPulse(servo: Servo, micros: number) {
-        _sendMessage("MPWM," + servo + "," + Math.clamp(0, 4096, micros));
+        micros= Math.constrain(micros,0, 4096)
+        _sendMessage("MPWM," + servo + "," + micros);
     }
 }

@@ -1,8 +1,5 @@
 namespace RainbowSparkleUnicorn.Light {
 
-    //hold a value to know if we've sent a command
-    //let sentLightCommand = false;
-
     /**
      * Blink light for the specified time in milliseconds
      * @param timeOn how long to turn on for, eg: 100, 200, 500, 1000, 2000
@@ -13,11 +10,6 @@ namespace RainbowSparkleUnicorn.Light {
     //% timeOn.defl=1000
     //% timeOff.defl=1000
     export function blink(pin: lightPins, timeOn: number, timeOff: number) {
-    //    if (sentLightCommand == false){
-    //        sentLightCommand = true;
-    //        resetSX1509();
-    //    } 
-
        _sendMessage("LBLINK," + pin + "," + timeOn + "," + timeOff)
     }
 
@@ -35,40 +27,25 @@ namespace RainbowSparkleUnicorn.Light {
     //% rise.defl=500
     //% fall.defl=500        
     export function breathe(pin: lightPins, timeOn: number, timeOff: number, rise: number, fall: number) {
-    //   if (sentLightCommand == false){
-    //        sentLightCommand = true;
-    //        resetSX1509();
-    //    } 
-
       _sendMessage("LBREATHE," + pin + "," + timeOn + "," + timeOff + ","  + rise + "," + fall)
     }
 
     //% subcategory="Light" 
     //% block="turn off light on pin $pin"
     export function turnOff(pin: lightPins) {
-       
-    //    if (sentLightCommand == false){
-    //        sentLightCommand = true;
-    //        resetSX1509();
-    //    } 
-
       _sendMessage("LLEDONOFF," + pin + ",0")
     } 
 
     //% subcategory="Light" 
     //% block="turn on light on pin $pin"
     export function turnOn(pin: lightPins) {
-
-    //    if (sentLightCommand == false){
-    //        sentLightCommand = true;
-    //        resetSX1509();
-    //    } 
-
-
         _sendMessage("LLEDONOFF," + pin + ",1")
 
     }          
-    
+
+    /**
+      turn off all lights
+  **/
     //% subcategory="Light" 
     //% block="turn off all lights"
     export function turnAllOff() {
@@ -80,17 +57,8 @@ namespace RainbowSparkleUnicorn.Light {
 
         //see if the pause is needed as sometime the LEDs don't come on when powered up
         basic.pause(50);
-
-        // sentLightCommand = true;
-        // resetSX1509();
     } 
 
-    // function resetSX1509(){
-    //     _sendMessage("LRESET");
-
-    //     //see if the pause is needed as sometime the LEDs don't come on when powered up
-    //     basic.pause(50);
-    // }
 
 /**
     turn on all lights

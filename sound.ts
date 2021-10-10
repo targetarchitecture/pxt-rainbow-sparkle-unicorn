@@ -15,7 +15,7 @@ let dfplayerTrack: number = 0;
     //% volume.defl=20
     //% volume.min=0 volume.max=30
     export function setVolume(volume: number) {
-        dfplayerVolume = Math.min(Math.max(volume, 0), 30);
+        dfplayerVolume = Math.constrain(volume, 0, 30);
         _sendMessage("SVOL," + dfplayerVolume);
     }
 
@@ -42,7 +42,8 @@ let dfplayerTrack: number = 0;
     //% weight=90  
     //% block="Increase volume"
     export function increaseVolume() {
-        setVolume(Math.min(Math.max(dfplayerVolume + 1, 0), 30))
+        dfplayerVolume = Math.constrain(dfplayerVolume + 1, 0, 30);
+        _sendMessage("SVOL," + dfplayerVolume);
     }
 
     /**
@@ -53,7 +54,8 @@ let dfplayerTrack: number = 0;
     //% weight=80
     //% block="Decrease volume"
     export function decreaseVolume() {
-        setVolume(Math.min(Math.max(dfplayerVolume - 1, 0), 30))
+        dfplayerVolume = Math.constrain(dfplayerVolume -1, 0, 30);
+        _sendMessage("SVOL," + dfplayerVolume);
     }
 
     

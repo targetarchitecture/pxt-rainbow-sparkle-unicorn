@@ -66,7 +66,7 @@ namespace RainbowSparkleUnicorn.Controls {
     //% value.min=0 value.max=255
     //% weight=65
     export function dial1(value: number) {
-        _sendMessage("DIAL1," + Math.clamp(0, 255, value))
+        _sendMessage("DIAL1," + Math.constrain(value,0, 255))
     }
 
     /**
@@ -79,7 +79,7 @@ namespace RainbowSparkleUnicorn.Controls {
     //% value.min=0 value.max=255
     //% weight=65
     export function dial2(value: number) {
-        _sendMessage("DIAL2," + Math.clamp(0, 255, value))
+        _sendMessage("DIAL2," + Math.constrain(value, 0, 255))
     }
 
     /**
