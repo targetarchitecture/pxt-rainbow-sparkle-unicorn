@@ -88,6 +88,11 @@ namespace RainbowSparkleUnicorn.Touch {
         
         let touchStates = _readMessage("TUPDATE");
 
+        //check for bad data
+        if (touchStates.length < 12) {
+            return previousTouchStates;
+        }
+
         if (touchStates != previousTouchStates) {
 
             for (let index = 0; index < 12; index++) {

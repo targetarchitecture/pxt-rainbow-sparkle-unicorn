@@ -1,7 +1,6 @@
 namespace RainbowSparkleUnicorn.Switch {
 
     let previousSwitchStates = "0000000000000000";
-    let switchStates         = "XXXXXXXXXXXXXXXX";
 
     /**
      * Do something when a switch is pushed.
@@ -44,7 +43,7 @@ namespace RainbowSparkleUnicorn.Switch {
         control.onEvent(
             RAINBOW_SPARKLE_UNICORN_SWITCH_RELEASED,
             pin === switchPins.Any ? EventBusValue.MICROBIT_EVT_ANY : pin,
-            () => {  
+            () => {
                 handler();
             }
         );
@@ -71,9 +70,14 @@ namespace RainbowSparkleUnicorn.Switch {
     //% block="Get the switch states" 
     export function getSwitchStates(): string {
 
-        switchStates = _readMessage("SUPDATE");
+        let switchStates = _readMessage("SUPDATE");
 
-        if (switchStates != previousSwitchStates) {
+        //check for bad data
+        if (switchStates.length < 16) {
+            return previousSwitchStates;
+        }
+
+        if (switchStates.compare(previousSwitchStates)) {
 
             for (let index = 0; index < 16; index++) {
 
