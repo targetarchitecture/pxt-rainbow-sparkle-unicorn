@@ -1,8 +1,8 @@
 namespace RainbowSparkleUnicorn.Sound {
 
-let dfplayerBusy: boolean = false;
-let dfplayerVolume: number = 0;
-let dfplayerTrack: number = 0;
+    let dfplayerBusy: boolean = false;
+    let dfplayerVolume: number = 0;
+    let dfplayerTrack: number = 0;
 
     /**
      * Set the volume
@@ -31,7 +31,7 @@ let dfplayerTrack: number = 0;
     //% track.min=1 track.max=99
     export function playTrack(track: number) {
         dfplayerTrack = track;
-        _sendMessage("SPLAY," + track+ ",1");
+        _sendMessage("SPLAY," + track + ",1");
     }
 
     /**
@@ -54,11 +54,11 @@ let dfplayerTrack: number = 0;
     //% weight=80
     //% block="Decrease volume"
     export function decreaseVolume() {
-        dfplayerVolume = Math.constrain(dfplayerVolume -1, 0, 30);
+        dfplayerVolume = Math.constrain(dfplayerVolume - 1, 0, 30);
         _sendMessage("SVOL," + dfplayerVolume);
     }
 
-    
+
     //% subcategory="Sound"
     //% group="Actions"
     //% weight=80
@@ -72,7 +72,7 @@ let dfplayerTrack: number = 0;
     //% weight=90
     //% block="pause music"
     export function pause() {
-      _sendMessage("SPAUSE");
+        _sendMessage("SPAUSE");
     }
 
     //% subcategory="Sound"
@@ -93,45 +93,47 @@ let dfplayerTrack: number = 0;
     //% weight=39
     export function playingSound(): boolean {
 
-        const value = parseInt(_readMessage("SBUSY"));
+        let busy = parseInt(_readMessage("SBUSY"));
 
-        if (value == 1) {
-           dfplayerBusy = false;
-        } else {
+        //serial.writeNumber(busy);
+
+        if (busy == 0) {
             dfplayerBusy = true;
+        } else {
+            dfplayerBusy = false;
         };
 
-        control.raiseEvent(RAINBOW_SPARKLE_UNICORN_SOUND_BUSY, value);
+        control.raiseEvent(RAINBOW_SPARKLE_UNICORN_SOUND_BUSY, busy);
 
         return dfplayerBusy;
     }
 
-     /**
-     * Returns the current volume
-     */
+    /**
+    * Returns the current volume
+    */
     //% subcategory="Sound"
     //% group="Volume"
     //% weight=70
     //% block="current volume"
     export function volume(): number {
         return dfplayerVolume;
-    }   
+    }
 
 
-     /**
-     * Returns the current track
-     */
+    /**
+    * Returns the current track
+    */
     //% subcategory="Sound"
     //% group="State"
     //% block="current track"
     export function track(): number {
         return dfplayerTrack;
-    }   
+    }
 
-   /**
-   * Do something when a sound track starts/stops.
-   * @param handler body code to run when event is raised
-   */
+    /**
+    * Do something when a sound track starts/stops.
+    * @param handler body code to run when event is raised
+    */
     //% subcategory="Sound"
     //% group="State"
     //% block="on sound track starts/stops"
