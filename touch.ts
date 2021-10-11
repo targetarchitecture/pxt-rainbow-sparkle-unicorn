@@ -93,19 +93,16 @@ namespace RainbowSparkleUnicorn.Touch {
             return previousTouchStates;
         }
 
-        if (touchStates.compare(previousTouchStates) != 0) {
+        for (let index = 0; index < 12; index++) {
 
-            for (let index = 0; index < 12; index++) {
+            const pinState = touchStates.charAt(index);
+            const previousPinState = previousTouchStates.charAt(index);
 
-                const pinState = touchStates.charAt(index);
-                const previousPinState = previousTouchStates.charAt(index);
-
-                if (pinState != previousPinState) {
-                    if (pinState == "H") {
-                        control.raiseEvent(RAINBOW_SPARKLE_UNICORN_TOUCH_SENSOR_TOUCHED, index + 1);
-                    } else if (pinState == "L") {
-                        control.raiseEvent(RAINBOW_SPARKLE_UNICORN_TOUCH_SENSOR_RELEASED, index + 1);
-                    }
+            if (pinState != previousPinState) {
+                if (pinState == "H") {
+                    control.raiseEvent(RAINBOW_SPARKLE_UNICORN_TOUCH_SENSOR_TOUCHED, index);
+                } else if (pinState == "L") {
+                    control.raiseEvent(RAINBOW_SPARKLE_UNICORN_TOUCH_SENSOR_RELEASED, index);
                 }
             }
         }

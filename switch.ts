@@ -77,21 +77,18 @@ namespace RainbowSparkleUnicorn.Switch {
             return previousSwitchStates;
         }
 
-        if (switchStates.compare(previousSwitchStates) != 0) {
+        for (let index = 0; index < 16; index++) {
 
-            for (let index = 0; index < 16; index++) {
+            const pinState = switchStates.charAt(index);
+            const previousPinState = previousSwitchStates.charAt(index);
 
-                const pinState = switchStates.charAt(index);
-                const previousPinState = previousSwitchStates.charAt(index);
+            //serial.writeLine("index: " + index + " pinState: " + pinState + " previousPinState:" + previousPinState);
 
-                //serial.writeLine("index: " + index + " pinState: " + pinState + " previousPinState:" + previousPinState);
-
-                if (pinState != previousPinState) {
-                    if (pinState == "L") {
-                        control.raiseEvent(RAINBOW_SPARKLE_UNICORN_SWITCH_PRESSED, index + 1);
-                    } else if (pinState == "H") {
-                        control.raiseEvent(RAINBOW_SPARKLE_UNICORN_SWITCH_RELEASED, index + 1);
-                    }
+            if (pinState != previousPinState) {
+                if (pinState == "L") {
+                    control.raiseEvent(RAINBOW_SPARKLE_UNICORN_SWITCH_PRESSED, index);
+                } else if (pinState == "H") {
+                    control.raiseEvent(RAINBOW_SPARKLE_UNICORN_SWITCH_RELEASED, index);
                 }
             }
         }
