@@ -27,41 +27,6 @@ declare const enum touchPins {
     Any
 }
 
-declare const enum Servo {
-    //% block="Servo 0"
-    P0 = 1,
-    //% block="Servo 1"
-    P1 = 2,
-    //% block="Servo 2"
-    P2 = 3,
-    //% block="Servo 3"
-    P3 = 4,
-    //% block="Servo 4"
-    P4 = 5,
-    //% block="Servo 5"
-    P5 = 6,
-    //% block="Servo 6"
-    P6 = 7,
-    //% block="Servo 7"
-    P7 = 8,
-    //% block="Servo 8"
-    P8 = 9,
-    //% block="Servo 9"
-    P9 = 10,
-    //% block="Servo 10"
-    P10 = 11,
-    //% block="Servo 11"
-    P11 = 12,
-    //% block="Servo 12"
-    P12 = 13,
-    //% block="Servo 13"
-    P13 = 14,
-    //% block="Servo 14"
-    P14 = 15,
-    //% block="Servo 15"
-    P15 = 16
-}
-
 declare const enum switchPins {
     //% block="Pin 0"
     P0 = 1,
@@ -97,6 +62,41 @@ declare const enum switchPins {
     P15 = 16,
     //% block="Any" 
     Any
+}
+
+declare const enum Servo {
+    //% block="Servo 0"
+    P0 = 0,
+    //% block="Servo 1"
+    P1 = 1,
+    //% block="Servo 2"
+    P2 = 2,
+    //% block="Servo 3"
+    P3 = 3,
+    //% block="Servo 4"
+    P4 = 4,
+    //% block="Servo 5"
+    P5 = 5,
+    //% block="Servo 6"
+    P6 = 6,
+    //% block="Servo 7"
+    P7 = 7,
+    //% block="Servo 8"
+    P8 = 8,
+    //% block="Servo 9"
+    P9 = 9,
+    //% block="Servo 10"
+    P10 = 10,
+    //% block="Servo 11"
+    P11 = 11,
+    //% block="Servo 12"
+    P12 = 12,
+    //% block="Servo 13"
+    P13 = 13,
+    //% block="Servo 14"
+    P14 = 14,
+    //% block="Servo 15"
+    P15 = 15
 }
 
 declare const enum  RotarySensor {
