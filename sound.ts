@@ -1,6 +1,6 @@
 namespace RainbowSparkleUnicorn.Sound {
 
-    let dfplayerBusy: boolean = false;
+    // let dfplayerBusy: boolean = false;
     let dfplayerVolume: number = 0;
     let dfplayerTrack: number = 0;
 
@@ -98,14 +98,12 @@ namespace RainbowSparkleUnicorn.Sound {
         //serial.writeNumber(busy);
 
         if (busy == 0) {
-            dfplayerBusy = true;
+            control.raiseEvent(RAINBOW_SPARKLE_UNICORN_SOUND_BUSY, 1);
+            return true;
         } else {
-            dfplayerBusy = false;
+            control.raiseEvent(RAINBOW_SPARKLE_UNICORN_SOUND_BUSY, 0);
+            return false;
         };
-
-        control.raiseEvent(RAINBOW_SPARKLE_UNICORN_SOUND_BUSY, busy);
-
-        return dfplayerBusy;
     }
 
     /**
@@ -138,25 +136,16 @@ namespace RainbowSparkleUnicorn.Sound {
     //% group="State"
     //% block="on sound track starts/stops"
     //% weight=41
-    export function onBusyChange(handler: () => void) {
-
-        if (dfplayerBusy == true) {
-            control.onEvent(
-                RAINBOW_SPARKLE_UNICORN_SOUND_BUSY,
-                1,
-                () => {
-                    handler();
-                }
-            );
-        } else {
-            control.onEvent(
-                RAINBOW_SPARKLE_UNICORN_SOUND_BUSY,
-                0,
-                () => {
-                    handler();
-                }
-            );
-        };
+    export function onBusyChange(
+        handler: () => void
+    ) {
+        control.onEvent(
+            RAINBOW_SPARKLE_UNICORN_SOUND_BUSY,
+            EventBusValue.MICROBIT_EVT_ANY,
+            () => {
+                handler();
+            }
+        );
     }
 
 }
