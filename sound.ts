@@ -93,9 +93,11 @@ namespace RainbowSparkleUnicorn.Sound {
     //% weight=39
     export function playingSound(): boolean {
 
-        let busy = parseInt(_readMessage("SBUSY"));
+        let msg = _readMessage("SBUSY");
+        let busy = parseInt(msg);
 
         //serial.writeNumber(busy);
+        //serial.writeLine(msg);
 
         if (dfplayerpreviousBusy != busy) {
             if (busy == 0) {
@@ -103,8 +105,10 @@ namespace RainbowSparkleUnicorn.Sound {
             } else {
                 control.raiseEvent(RAINBOW_SPARKLE_UNICORN_SOUND_BUSY, 0);
             };
-            dfplayerpreviousBusy = busy;
         }
+
+        //remember for next time
+        dfplayerpreviousBusy = busy;
 
         if (busy == 0) {
             return true;
