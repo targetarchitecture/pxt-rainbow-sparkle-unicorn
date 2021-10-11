@@ -1,6 +1,6 @@
 namespace RainbowSparkleUnicorn.Sound {
 
-    // let dfplayerBusy: boolean = false;
+    let dfplayerpreviousBusy: number = 1;
     let dfplayerVolume: number = 0;
     let dfplayerTrack: number = 0;
 
@@ -97,11 +97,18 @@ namespace RainbowSparkleUnicorn.Sound {
 
         //serial.writeNumber(busy);
 
+        if (dfplayerpreviousBusy != busy) {
+            if (busy == 0) {
+                control.raiseEvent(RAINBOW_SPARKLE_UNICORN_SOUND_BUSY, 1);
+            } else {
+                control.raiseEvent(RAINBOW_SPARKLE_UNICORN_SOUND_BUSY, 0);
+            };
+            dfplayerpreviousBusy = busy;
+        }
+
         if (busy == 0) {
-            control.raiseEvent(RAINBOW_SPARKLE_UNICORN_SOUND_BUSY, 1);
             return true;
         } else {
-            control.raiseEvent(RAINBOW_SPARKLE_UNICORN_SOUND_BUSY, 0);
             return false;
         };
     }
