@@ -87,9 +87,9 @@ namespace RainbowSparkleUnicorn.Switch {
                 //serial.writeLine("index: " + index + " pinState: " + pinState + " previousPinState:" + previousPinState);
 
                 if (pinState.compare("L") == 0) {
-                    control.raiseEvent(RAINBOW_SPARKLE_UNICORN_SWITCH_PRESSED, index);
+                    control.raiseEvent(RAINBOW_SPARKLE_UNICORN_SWITCH_PRESSED, index+1);
                 } else if (pinState.compare("H") == 0) {
-                    control.raiseEvent(RAINBOW_SPARKLE_UNICORN_SWITCH_RELEASED, index);
+                    control.raiseEvent(RAINBOW_SPARKLE_UNICORN_SWITCH_RELEASED, index + 1);
                 }
             }
         }

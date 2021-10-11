@@ -1,104 +1,103 @@
 declare const enum touchPins {
     //% block="Pin 0"    
-    P0 = 0,    
+    P0 = 1,
     //% block="Pin 1"    
-    P1 = 1,
+    P1 = 2,
     //% block="Pin 2"    
-    P2 = 2,
+    P2 = 3,
     //% block="Pin 3" 
-    P3 = 3,
+    P3 = 4,
     //% block="Pin 4" 
-    P4 = 4,
+    P4 = 5,
     //% block="Pin 5" 
-    P5 = 5,
+    P5 = 6,
     //% block="Pin 6" 
-    P6 = 6,
+    P6 = 7,
     //% block="Pin 7" 
-    P7 = 7,
+    P7 = 8,
     //% block="Pin 8" 
-    P8 = 8,
+    P8 = 9,
     //% block="Pin 9" 
-    P9 = 9,
+    P9 = 10,
     //% block="Pin 10" 
-    P10 = 10,
+    P10 = 11,
     //% block="Pin 11" 
-    P11 = 11,
+    P11 = 12,
     //% block="Any" 
-    Any       
+    Any
 }
 
 declare const enum Servo {
     //% block="Servo 0"
-    P0 = 0,
+    P0 = 1,
     //% block="Servo 1"
-    P1 = 1,
+    P1 = 2,
     //% block="Servo 2"
-    P2 = 2,
+    P2 = 3,
     //% block="Servo 3"
-    P3 = 3,
+    P3 = 4,
     //% block="Servo 4"
-    P4 = 4,
+    P4 = 5,
     //% block="Servo 5"
-    P5 = 5,
+    P5 = 6,
     //% block="Servo 6"
-    P6 = 6,
+    P6 = 7,
     //% block="Servo 7"
-    P7 = 7,
+    P7 = 8,
     //% block="Servo 8"
-    P8 = 8,
+    P8 = 9,
     //% block="Servo 9"
-    P9 = 9,
+    P9 = 10,
     //% block="Servo 10"
-    P10 = 10,
+    P10 = 11,
     //% block="Servo 11"
-    P11 = 11,
+    P11 = 12,
     //% block="Servo 12"
-    P12 = 12,
+    P12 = 13,
     //% block="Servo 13"
-    P13 = 13,
+    P13 = 14,
     //% block="Servo 14"
-    P14 = 14,
+    P14 = 15,
     //% block="Servo 15"
-    P15 = 15
+    P15 = 16
 }
 
 declare const enum switchPins {
     //% block="Pin 0"
-    P0 = 0,      
+    P0 = 1,
     //% block="Pin 1"
-    P1 = 1,
+    P1 = 2,
     //% block="Pin 2"
-    P2 = 2,
+    P2 = 3,
     //% block="Pin 3"
-    P3 = 3,  
+    P3 = 4,
     //% block="Pin 4"
-    P4 = 4,
+    P4 = 5,
     //% block="Pin 5"
-    P5 = 5,
+    P5 = 6,
     //% block="Pin 6"
-    P6 = 6,
+    P6 = 7,
     //% block="Pin 7"
-    P7 = 7,
+    P7 = 8,
     //% block="Pin 8"
-    P8 = 8,
+    P8 = 9,
     //% block="Pin 9"
-    P9 = 9,
+    P9 = 10,
     //% block="Pin 10"
-    P10 = 10,
+    P10 = 11,
     //% block="Pin 11"
-    P11 = 11,
+    P11 = 12,
     //% block="Pin 12"
-    P12 = 12,
+    P12 = 13,
     //% block="Pin 13"
-    P13 = 13,
+    P13 = 14,
     //% block="Pin 14"
-    P14 = 14,
+    P14 = 15,
     //% block="Pin 15"
-    P15 = 15,
+    P15 = 16,
     //% block="Any" 
-    Any     
+    Any
 }
-
 
 declare const enum  RotarySensor {
     //% block="Rotary 1"    
