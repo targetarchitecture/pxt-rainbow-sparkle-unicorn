@@ -70,12 +70,12 @@ namespace RainbowSparkleUnicorn.Switch {
     //% block="Get the switch states" 
     export function getSwitchStates(): string {
 
-        let switchStates = _readMessage("SUPDATE");
+        let switchStates = _readMessage("SUPDATE","SUPDATE");
 
         //check for bad data
-        if (switchStates.length < 16) {
-            return previousSwitchStates;
-        }
+        // if (switchStates.length < 16) {
+        //     return previousSwitchStates;
+        // }
 
         for (let index = 0; index < 16; index++) {
 

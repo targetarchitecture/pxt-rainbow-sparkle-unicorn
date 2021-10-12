@@ -14,7 +14,7 @@ namespace RainbowSparkleUnicorn.Controls {
     //% weight=65
     export function encoder2value(): number {
 
-        const value = parseInt(_readMessage("ROTARY2"));
+        const value = parseInt(_readMessage("ROTARY2", "ROTARY2"));
 
         if (value < Encoder2value) {
             direction2 = RotaryDirection.Left;
@@ -39,7 +39,7 @@ namespace RainbowSparkleUnicorn.Controls {
     //% weight=65
     export function encoder1value(): number {
 
-        const value = parseInt(_readMessage("ROTARY1"));
+        const value = parseInt(_readMessage("ROTARY1","ROTARY1"));
 
         if (value < Encoder1value) {
             direction1 = RotaryDirection.Left;
@@ -151,7 +151,7 @@ namespace RainbowSparkleUnicorn.Controls {
     //% group="Sliders"
     //% block="Slider one value" 
     export function Slider1(): number {
-        return parseInt(_readMessage("SLIDER1"));
+        return parseInt(_readMessage("SLIDER1", "SLIDER1"));
     }
 
     /**
@@ -161,7 +161,7 @@ namespace RainbowSparkleUnicorn.Controls {
     //% group="Sliders" 
     //% block="Slider two value" 
     export function Slider2(): number {
-        return parseInt(_readMessage("SLIDER2"));
+        return parseInt(_readMessage("SLIDER2", "SLIDER2"));
     }
 
     /**

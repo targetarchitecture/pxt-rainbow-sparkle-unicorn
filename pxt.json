@@ -19,7 +19,8 @@
         "constants.ts",
         "i2c.ts",
         "enums.ts",
-        "start.ts"
+        "start.ts",
+        "testbed.md"
     ],
     "testFiles": [],
     "targetVersions": {

@@ -86,7 +86,7 @@ namespace RainbowSparkleUnicorn.Touch {
     //% block="Get the touch states" 
     export function getTouchStates(): string {
 
-        let touchStates = _readMessage("TUPDATE");
+        let touchStates = _readMessage("TUPDATE", "TUPDATE");
 
         //check for bad data
         if (touchStates.length < 12) {
