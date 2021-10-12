@@ -30,6 +30,8 @@ namespace RainbowSparkleUnicorn {
         pins.i2cWriteBuffer(ESP32_I2C_ADDR, txBuf, false);
     }
 
+    let currentRecievedMessage = "";
+
     export function _readMessage(message: string): string {
 
         pins.digitalWritePin(DigitalPin.P8, 1);
@@ -38,32 +40,57 @@ namespace RainbowSparkleUnicorn {
         //send first
         sendMessage(message);
 
-        let i2cBuffer = pins.i2cReadBuffer(ESP32_I2C_ADDR, readBufferLength, false);
-
         pins.digitalWritePin(DigitalPin.P8, 0);
         basic.pause(1);
 
-        let currentRecievedMessage = "";
+        let msg = "";
 
-        for (let k = 0; k <= readBufferLength; k++) {
+        while (true) {
+            
+            let i2cBuffer = pins.i2cReadBuffer(ESP32_I2C_ADDR, 1, false);
 
-            if (i2cBuffer[k] != 255 && i2cBuffer[k] != 0) {
-                currentRecievedMessage = currentRecievedMessage + String.fromCharCode(i2cBuffer[k]);
+            if (i2cBuffer[0] != 255 && i2cBuffer[0] != 0) {
+                currentRecievedMessage = currentRecievedMessage + String.fromCharCode(i2cBuffer[0]);
+            }
+
+            //serial.writeLine("currentRecievedMessage (0):" + currentRecievedMessage);
+
+            if (currentRecievedMessage.includes("@@") == true && currentRecievedMessage.includes("##") == true) {
+
+                //serial.writeLine("currentRecievedMessage (1):" + currentRecievedMessage);
+
+                let msgsToReturn = currentRecievedMessage.split("##");
+                msg = msgsToReturn[0].trim();
+                let headerPos = msg.indexOf("@@");
+
+                //serial.writeLine("headerPos:" + headerPos);
+
+                msg = msgsToReturn[0].substr(headerPos + 2).trim();
+
+                //serial.writeLine("msg:" + msg);
+
+                //remove any leading characters
+                if (headerPos > 0){
+
+                    //serial.writeLine("headerPos:" + headerPos);
+
+                    currentRecievedMessage = currentRecievedMessage.substr(headerPos);
+                }
+
+                //serial.writeLine("currentRecievedMessage (2):" + currentRecievedMessage);
+
+                currentRecievedMessage = currentRecievedMessage.replace("@@" + msg + "##", "");
+
+                //serial.writeLine("currentRecievedMessage (3):" + currentRecievedMessage);
+
+                if (msg.trim().length > 0) {
+                    break;
+                }
             }
         }
 
-        //check for header and trailer
-        if (currentRecievedMessage.substr(0, 2) == "@@" &&
-            currentRecievedMessage.substr(-2, 2) == "##") {
-            currentRecievedMessage = currentRecievedMessage.substr(2, currentRecievedMessage.length - 4);
-        } else {
-            currentRecievedMessage = "";
-        }
+        //serial.writeLine("ReadMessage TX:" + message + " RX:" + msg);
 
-        //serial.writeLine("RX:" + currentRecievedMessage);
-
-        return currentRecievedMessage;
-
+        return msg;
     }
-
 }

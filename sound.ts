@@ -95,8 +95,7 @@ namespace RainbowSparkleUnicorn.Sound {
 
         let busy = _readMessage("SBUSY");
 
-        //serial.writeNumber(busy);
-        //serial.writeLine(msg);
+        //serial.writeLine("SBUSY:" + busy);
 
         if (dfplayerpreviousBusy.compare(busy) != 0) {
             if (busy.compare("0") == 0) {
