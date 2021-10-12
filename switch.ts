@@ -77,12 +77,11 @@ namespace RainbowSparkleUnicorn.Switch {
 
         //check for bad data
         if (switchStates === undefined) {
-            return previousSwitchStates;
+            //serial.writeLine("undefined:" + switchStates)
+            switchStates = previousSwitchStates;
+        } else {
+            //serial.writeLine("switchStates:" + switchStates)
         }
-
-        // if (switchStates.length < 16) {
-        //     return previousSwitchStates;
-        // }
 
         for (let index = 0; index < 16; index++) {
 
@@ -94,8 +93,10 @@ namespace RainbowSparkleUnicorn.Switch {
                 //serial.writeLine("index: " + index + " pinState: " + pinState + " previousPinState:" + previousPinState);
 
                 if (pinState.compare("L") == 0) {
+                    //serial.writeLine("RAINBOW_SPARKLE_UNICORN_SWITCH_PRESSED")
                     control.raiseEvent(RAINBOW_SPARKLE_UNICORN_SWITCH_PRESSED, index + 1);
                 } else if (pinState.compare("H") == 0) {
+                    //serial.writeLine("RAINBOW_SPARKLE_UNICORN_SWITCH_RELEASED")
                     control.raiseEvent(RAINBOW_SPARKLE_UNICORN_SWITCH_RELEASED, index + 1);
                 }
             }

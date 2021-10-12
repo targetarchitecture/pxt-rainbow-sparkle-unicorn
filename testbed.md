@@ -1,4 +1,3 @@
-# testbed
 
 let consoleState = ""
 
@@ -11,7 +10,7 @@ function startUp() {
     RainbowSparkleUnicorn.start();
 
     RainbowSparkleUnicorn.Sound.stop();
-   // volumeControl();
+    RainbowSparkleUnicorn.Sound.setVolume(10);
 
     basic.showNumber(2)
 
@@ -24,63 +23,47 @@ function startUp() {
 
     basic.showNumber(4)
 
-    //set artificial horizon
-    control.runInParallel(function () {
-       // RainbowSparkleUnicorn.Movement.setServoAngle(horizonServo, horizonLevelAngle)
-        basic.pause(500)
-       // RainbowSparkleUnicorn.Movement.moveServoLinear(horizonServo, horizonLevelAngle, horizonLevelAngle - 30, 2)
-        basic.pause(2500)
-    })
-
     RainbowSparkleUnicorn.comment("This is the big red button")
     RainbowSparkleUnicorn.Light.turnOn(lightPins.P0)
 
     basic.showIcon(IconNames.Happy)
 
     consoleState = "Normal"
+
+    loop();
 }
 
 startUp();
 
-let previouspressureGaugeMillis = 0;
 let previousSoundControlMillis = 0;
-let previousFuelLightMillis = 0;
-let previousvolumeControlMillis = 0;
 let previousSwitchStatesMillis = 0;
 
-RainbowSparkleUnicorn.comment("This is the main fixed timing loop")
-basic.forever(function () {
+function loop() {
 
-    let currentMillis = control.millis()
+    RainbowSparkleUnicorn.comment("This is the main fixed timing loop")
+    basic.forever(function () {
 
-    RainbowSparkleUnicorn.comment("This loop controls the sounds")
-    if (currentMillis - previousSoundControlMillis > 250) {
-        previousSoundControlMillis = currentMillis;
-        soundControl();
-        //let busy = RainbowSparkleUnicorn._readMessage("SBUSY", "SBUSY");
+        RainbowSparkleUnicorn.comment("This loop controls the sounds")
+        if (control.millis() - previousSoundControlMillis > 250) {
+            previousSoundControlMillis = control.millis();
+            soundControl();
+        }
 
-        //serial.writeLine(busy);
-    } 
+        RainbowSparkleUnicorn.comment("This loop controls the switch states")
+        if (control.millis() - previousSwitchStatesMillis > 100) {
+            previousSwitchStatesMillis = control.millis();
+            RainbowSparkleUnicorn.Switch.getSwitchStates()
+        }
 
-    RainbowSparkleUnicorn.comment("This loop controls the switch states")
-    if (currentMillis - previousSwitchStatesMillis > 100) {
-        previousSwitchStatesMillis = currentMillis;
-        //let switchStates = RainbowSparkleUnicorn._readMessage("SUPDATE", "SUPDATE");
-        RainbowSparkleUnicorn.Switch.getSwitchStates()
-
-        //serial.writeLine(switchStates);
-    }
-
-    basic.pause(50);
-})
-
-// Add your code here
+        basic.pause(50);
+    })
+}
 
 function soundControl() {
 
     let playingSound = RainbowSparkleUnicorn.Sound.playingSound();
 
-    serial.writeLine("playingSound:" + playingSound);
+    //serial.writeLine("playingSound:" + playingSound);
 }
 
 RainbowSparkleUnicorn.Sound.onBusyChange(function () {
@@ -88,9 +71,8 @@ RainbowSparkleUnicorn.Sound.onBusyChange(function () {
     let busy = control.eventValue();
 
     serial.writeLine("onBusyChange:" + busy);
+})
 
-    // if (busy == 0) {
-    //     RainbowSparkleUnicorn.Sound.playTrack(Math.randomRange(50, 52));
-    //     basic.pause(500);
-    // }
+RainbowSparkleUnicorn.Switch.onSwitchPressed(switchPins.Any, function() {
+    serial.writeLine("RAINBOW_SPARKLE_UNICORN_SWITCH_PRESSED:" +control.eventValue() )
 })
