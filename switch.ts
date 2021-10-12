@@ -59,6 +59,9 @@ namespace RainbowSparkleUnicorn.Switch {
     //% pin.fieldEditor="gridpicker" pin.fieldOptions.columns=6
     //% pin.fieldOptions.tooltips="false"    
     export function getSwitchState(pin: switchPins): string {
+
+        //Cannot read properties of undefined(reading 'charAt')
+
         return previousSwitchStates.charAt(pin);
     }
 
@@ -70,9 +73,13 @@ namespace RainbowSparkleUnicorn.Switch {
     //% block="Get the switch states" 
     export function getSwitchStates(): string {
 
-        let switchStates = _readMessage("SUPDATE","SUPDATE");
+        let switchStates = _readMessage("SUPDATE", "SUPDATE");
 
         //check for bad data
+        if (switchStates === undefined) {
+            return previousSwitchStates;
+        }
+
         // if (switchStates.length < 16) {
         //     return previousSwitchStates;
         // }
@@ -81,13 +88,13 @@ namespace RainbowSparkleUnicorn.Switch {
 
             const pinState = switchStates.charAt(index);
             const previousPinState = previousSwitchStates.charAt(index);
-    
+
             if (pinState.compare(previousPinState) != 0) {
 
                 //serial.writeLine("index: " + index + " pinState: " + pinState + " previousPinState:" + previousPinState);
 
                 if (pinState.compare("L") == 0) {
-                    control.raiseEvent(RAINBOW_SPARKLE_UNICORN_SWITCH_PRESSED, index+1);
+                    control.raiseEvent(RAINBOW_SPARKLE_UNICORN_SWITCH_PRESSED, index + 1);
                 } else if (pinState.compare("H") == 0) {
                     control.raiseEvent(RAINBOW_SPARKLE_UNICORN_SWITCH_RELEASED, index + 1);
                 }

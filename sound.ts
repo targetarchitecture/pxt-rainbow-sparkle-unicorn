@@ -97,6 +97,11 @@ namespace RainbowSparkleUnicorn.Sound {
 
         //serial.writeLine("SBUSY:" + busy);
 
+        //check for bad data
+        if (busy === undefined) {
+            busy = dfplayerpreviousBusy;
+        }
+
         if (dfplayerpreviousBusy.compare(busy) != 0) {
             if (busy.compare("0") == 0) {
                 control.raiseEvent(RAINBOW_SPARKLE_UNICORN_SOUND_BUSY, 1);
@@ -119,7 +124,7 @@ namespace RainbowSparkleUnicorn.Sound {
                 return true;
             } else if (dfplayerpreviousBusy.compare("1") == 0) {
                 return false;
-            } else{
+            } else {
                 return false;
             }
         };
