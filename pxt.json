@@ -17,10 +17,10 @@
         "movement.ts",
         "ESP32.ts",
         "constants.ts",
-        "i2c.ts",
         "enums.ts",
         "start.ts",
-        "testbed.md"
+        "testbed.md",
+        "uart.ts"
     ],
     "testFiles": [],
     "targetVersions": {

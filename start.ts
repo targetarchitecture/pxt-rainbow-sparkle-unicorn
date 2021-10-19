@@ -11,16 +11,11 @@ namespace RainbowSparkleUnicorn {
      * Add into the start function to initialise the board.
      */
     //% block="Start Rainbow Sparkle Unicorn"
-    export function start(i2cReadInterval: number = 10): void {
+    export function start(): void {
 
-        pins.digitalWritePin(DigitalPin.P8, 0);
-        basic.pause(1);
+        serial.redirect(SerialPin.P15, SerialPin.P16, 115200)
 
         _sendMessage("STARTING");
-
-        loops.everyInterval(i2cReadInterval, function () {
-            readi2c();
-        })
 
         // let x = control.millis();
 
