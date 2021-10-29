@@ -1,8 +1,8 @@
 
 namespace RainbowSparkleUnicorn.Touch {
 
-    export const RAINBOW_SPARKLE_UNICORN_TOUCH_SENSOR_TOUCHED = 5051;
-    export const RAINBOW_SPARKLE_UNICORN_TOUCH_SENSOR_RELEASED = 5052;
+    export const RAINBOW_SPARKLE_UNICORN_TOUCH_SENSOR_TOUCHED = 5050;
+    export const RAINBOW_SPARKLE_UNICORN_TOUCH_SENSOR_RELEASED = 5070;
 
     let previousTouchStates = "000000000000";
 

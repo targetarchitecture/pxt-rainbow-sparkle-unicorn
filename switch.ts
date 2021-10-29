@@ -57,8 +57,8 @@ namespace RainbowSparkleUnicorn.Switch {
         return previousSwitchStates.charAt(pin);
     }
 
-    export const RAINBOW_SPARKLE_UNICORN_SWITCH_PRESSED = 5058;
-    export const RAINBOW_SPARKLE_UNICORN_SWITCH_RELEASED = 5059;
+    export const RAINBOW_SPARKLE_UNICORN_SWITCH_PRESSED = 5010;
+    export const RAINBOW_SPARKLE_UNICORN_SWITCH_RELEASED = 5030;
 
     export function _dealWithSwitchMessage(switchStates: string) {
 
@@ -73,12 +73,12 @@ namespace RainbowSparkleUnicorn.Switch {
 
                     if (pinState.compare("L") == 0) {
 
-                        control.raiseEvent(RAINBOW_SPARKLE_UNICORN_SWITCH_PRESSED, pin)
-                        control.raiseEvent(RAINBOW_SPARKLE_UNICORN_SWITCH_PRESSED, Pins.Any)
+                        control.raiseEvent(RAINBOW_SPARKLE_UNICORN_SWITCH_PRESSED + pin, pin)
+                        control.raiseEvent(RAINBOW_SPARKLE_UNICORN_SWITCH_PRESSED + Pins.Any, pin)
 
                     } else if (pinState.compare("H") == 0) {
-                        control.raiseEvent(RAINBOW_SPARKLE_UNICORN_SWITCH_RELEASED, pin)
-                        control.raiseEvent(RAINBOW_SPARKLE_UNICORN_SWITCH_RELEASED, Pins.Any)
+                        control.raiseEvent(RAINBOW_SPARKLE_UNICORN_SWITCH_RELEASED + pin, pin)
+                        control.raiseEvent(RAINBOW_SPARKLE_UNICORN_SWITCH_RELEASED + Pins.Any, pin)
                     }
                 }
             }
@@ -97,11 +97,11 @@ namespace RainbowSparkleUnicorn.Switch {
     //% weight=65
     export function onPressed(
         pin: Pins,
-        handler: (pin: Number) => void
-    ) {        
+        handler: (pin: number) => void
+    ) {
         control.onEvent(
-            RAINBOW_SPARKLE_UNICORN_SWITCH_PRESSED,
-            pin ,
+            RAINBOW_SPARKLE_UNICORN_SWITCH_PRESSED + pin,
+            pin,
             () => {
                 handler(pin);
             }
@@ -121,12 +121,12 @@ namespace RainbowSparkleUnicorn.Switch {
         handler: (pin: number) => void
     ) {
         control.onEvent(
-            RAINBOW_SPARKLE_UNICORN_SWITCH_RELEASED,
+            RAINBOW_SPARKLE_UNICORN_SWITCH_RELEASED + pin,
             pin,
             () => {
                 handler(pin);
             }
         );
     }
-   
+
 }
