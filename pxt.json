@@ -10,7 +10,8 @@
         "main.blocks",
         "main.ts",
         "README.md",
-        "testbed.md"
+        "testbed.md",
+        "dial.ts"
     ],
     "testFiles": [],
     "targetVersions": {
@@ -20,6 +21,6 @@
     "supportedTargets": [
         "microbit"
     ],
-    "preferredEditor": "blocksprj",
+    "preferredEditor": "tsprj",
     "yotta": {}
 }
