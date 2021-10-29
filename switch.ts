@@ -59,8 +59,8 @@ namespace RainbowSparkleUnicorn.Switch {
 
     export const RAINBOW_SPARKLE_UNICORN_SWITCH_PRESSED_ANY = 5009;
     export const RAINBOW_SPARKLE_UNICORN_SWITCH_PRESSED = 5010;
-    export const RAINBOW_SPARKLE_UNICORN_SWITCH_RELEASED = 5030;
     export const RAINBOW_SPARKLE_UNICORN_SWITCH_RELEASED_ANY = 5029;
+    export const RAINBOW_SPARKLE_UNICORN_SWITCH_RELEASED = 5030;
 
     export function _dealWithSwitchMessage(switchStates: string) {
 
@@ -101,7 +101,6 @@ namespace RainbowSparkleUnicorn.Switch {
         pin: Pins,
         handler: (pin: number) => void
     ) {
-
         if (pin == Pins.Any) {
             control.onEvent(
                 RAINBOW_SPARKLE_UNICORN_SWITCH_PRESSED_ANY,
@@ -126,19 +125,28 @@ namespace RainbowSparkleUnicorn.Switch {
      * @param handler body code to run when the event is raised
      */
     //% subcategory="Switch"
-    //% block="on switch pressed %pin"
+    //% block="on switch released %pin"
     //% weight=65
     export function onReleased(
         pin: Pins,
         handler: (pin: number) => void
     ) {
-        control.onEvent(
-            RAINBOW_SPARKLE_UNICORN_SWITCH_RELEASED + pin,
-            pin,
-            () => {
-                handler(control.eventValue());
-            }
-        );
+        if (pin == Pins.Any) {
+            control.onEvent(
+                RAINBOW_SPARKLE_UNICORN_SWITCH_RELEASED_ANY,
+                EventBusValue.MICROBIT_EVT_ANY,
+                () => {
+                    handler(control.eventValue());
+                }
+            );
+        } else {
+            control.onEvent(
+                RAINBOW_SPARKLE_UNICORN_SWITCH_RELEASED,
+                pin,
+                () => {
+                    handler(control.eventValue());
+                }
+            );
+        }
     }
-
 }
