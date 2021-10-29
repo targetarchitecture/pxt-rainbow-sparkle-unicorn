@@ -1,5 +1,10 @@
 namespace RainbowSparkleUnicorn.Switch {
 
+    export const RAINBOW_SPARKLE_UNICORN_SWITCH_PRESSED_ANY = 5009;
+    export const RAINBOW_SPARKLE_UNICORN_SWITCH_PRESSED = 5010;
+    export const RAINBOW_SPARKLE_UNICORN_SWITCH_RELEASED_ANY = 5029;
+    export const RAINBOW_SPARKLE_UNICORN_SWITCH_RELEASED = 5030;
+
     let previousSwitchStates = "0000000000000000";
 
     export enum Pins {
@@ -57,11 +62,6 @@ namespace RainbowSparkleUnicorn.Switch {
         return previousSwitchStates.charAt(pin);
     }
 
-    export const RAINBOW_SPARKLE_UNICORN_SWITCH_PRESSED_ANY = 5009;
-    export const RAINBOW_SPARKLE_UNICORN_SWITCH_PRESSED = 5010;
-    export const RAINBOW_SPARKLE_UNICORN_SWITCH_RELEASED_ANY = 5029;
-    export const RAINBOW_SPARKLE_UNICORN_SWITCH_RELEASED = 5030;
-
     export function _dealWithSwitchMessage(switchStates: string) {
 
         if (previousSwitchStates.charAt(0) != "0") {
@@ -75,11 +75,11 @@ namespace RainbowSparkleUnicorn.Switch {
 
                     if (pinState.compare("L") == 0) {
 
-                        control.raiseEvent(RAINBOW_SPARKLE_UNICORN_SWITCH_PRESSED, pin)
+                        control.raiseEvent(RAINBOW_SPARKLE_UNICORN_SWITCH_PRESSED + pin, pin)
                         control.raiseEvent(RAINBOW_SPARKLE_UNICORN_SWITCH_PRESSED_ANY, pin)
 
                     } else if (pinState.compare("H") == 0) {
-                        control.raiseEvent(RAINBOW_SPARKLE_UNICORN_SWITCH_RELEASED, pin)
+                        control.raiseEvent(RAINBOW_SPARKLE_UNICORN_SWITCH_RELEASED + pin, pin)
                         control.raiseEvent(RAINBOW_SPARKLE_UNICORN_SWITCH_RELEASED_ANY, pin)
                     }
                 }
@@ -111,8 +111,8 @@ namespace RainbowSparkleUnicorn.Switch {
             );
         } else {
             control.onEvent(
-                RAINBOW_SPARKLE_UNICORN_SWITCH_PRESSED,
-                pin,
+                RAINBOW_SPARKLE_UNICORN_SWITCH_PRESSED + pin,
+                EventBusValue.MICROBIT_EVT_ANY,
                 () => {
                     handler(control.eventValue());
                 }
@@ -133,7 +133,7 @@ namespace RainbowSparkleUnicorn.Switch {
     ) {
         if (pin == Pins.Any) {
             control.onEvent(
-                RAINBOW_SPARKLE_UNICORN_SWITCH_RELEASED_ANY,
+                RAINBOW_SPARKLE_UNICORN_SWITCH_RELEASED_ANY + pin,
                 EventBusValue.MICROBIT_EVT_ANY,
                 () => {
                     handler(control.eventValue());
@@ -141,8 +141,8 @@ namespace RainbowSparkleUnicorn.Switch {
             );
         } else {
             control.onEvent(
-                RAINBOW_SPARKLE_UNICORN_SWITCH_RELEASED,
-                pin,
+                RAINBOW_SPARKLE_UNICORN_SWITCH_RELEASED + pin,
+                EventBusValue.MICROBIT_EVT_ANY,
                 () => {
                     handler(control.eventValue());
                 }
