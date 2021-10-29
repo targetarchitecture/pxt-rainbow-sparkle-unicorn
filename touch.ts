@@ -1,8 +1,12 @@
 
-
 namespace RainbowSparkleUnicorn.Touch {
 
+    export const RAINBOW_SPARKLE_UNICORN_TOUCH_SENSOR_TOUCHED = 5051;
+    export const RAINBOW_SPARKLE_UNICORN_TOUCH_SENSOR_RELEASED = 5052;
+
     let previousTouchStates = "000000000000";
+
+    //console.log(Array(12).fill(0));
 
     export enum Pins {
         //% block="Pin 0"    
@@ -28,80 +32,14 @@ namespace RainbowSparkleUnicorn.Touch {
         //% block="Pin 10" 
         P10 = 10,
         //% block="Pin 11" 
-        P11 = 11
+        P11 = 11,
+        //% block="Any"
+        Any
     }
-
-    /*
-            //% block="Any"
-            //Any
-    */
 
     export enum Event {
-        touched = 0,
-        released = 1
-    }
-
-    let touch_pressed: Action[] = [
-        () => { },
-        () => { },
-        () => { },
-        () => { },
-        () => { },
-        () => { },
-        () => { },
-        () => { },
-        () => { },
-        () => { },
-        () => { },
-        () => { },
-        () => { },
-    ];
-
-    let touch_released: Action[] = [
-        () => { },
-        () => { },
-        () => { },
-        () => { },
-        () => { },
-        () => { },
-        () => { },
-        () => { },
-        () => { },
-        () => { },
-        () => { },
-        () => { },
-        () => { },
-    ];
-
-    //% subcategory="Touch" 
-    //% block="When pin %touchpad| is %event"
-    //% weight=100
-    export function on(pin: Pins, event: Event, handler: Action) {
-
-        switch (event) {
-            case Event.released:
-                touch_released[pin] = handler;
-                break;
-            case Event.touched:
-                touch_pressed[pin] = handler;
-                break;
-        }
-    }
-
-
-    function touchHandler(pin: Pins, event: Event) {
-
-        //serial.writeLine("fn triggerHandler")
-        //serial.writeString(pin.toString())
-
-        switch (event) {
-            case Event.released:
-                touch_released[pin]();
-                break;
-            case Event.touched:
-                touch_pressed[pin]();
-                break;
-        }
+        Touched = 0,
+        Released = 1
     }
 
     /**
@@ -135,31 +73,27 @@ namespace RainbowSparkleUnicorn.Touch {
         //this attempts to set-up an initial state of the switches
         if (previousTouchStates.charAt(0) != "0") {
 
-            for (let index = 0; index < 12; index++) {
+            for (let pin = 0; pin < 12; pin++) {
 
-                const pinState = touchStates.charAt(index);
-                const previousPinState = previousTouchStates.charAt(index);
+                const pinState = touchStates.charAt(pin);
+                const previousPinState = previousTouchStates.charAt(pin);
 
                 if (pinState.compare(previousPinState) != 0) {
                     if (pinState.compare("H") == 0) {
-                        touchHandler(index, Touch.Event.touched)
+
+                        control.raiseEvent(RAINBOW_SPARKLE_UNICORN_TOUCH_SENSOR_TOUCHED, pin)
+                        control.raiseEvent(RAINBOW_SPARKLE_UNICORN_TOUCH_SENSOR_TOUCHED, Pins.Any)
+
                     } else if (pinState.compare("L") == 0) {
-                        touchHandler(index, Touch.Event.released)
+
+                        control.raiseEvent(RAINBOW_SPARKLE_UNICORN_TOUCH_SENSOR_RELEASED, pin)
+                        control.raiseEvent(RAINBOW_SPARKLE_UNICORN_TOUCH_SENSOR_RELEASED, Pins.Any)
+
                     }
                 }
             }
         }
 
         previousTouchStates = touchStates;
-
-        // if (touchStates.includes("H") == true) {
-        //     triggerHandler(Touch.Pins.Any, Touch.Event.touched);
-        // }
-
-        // if (touchStates.includes("L") == true) {
-        //     triggerHandler(Touch.Pins.Any, Touch.Event.released);
-        // }
-
-
     }
 }

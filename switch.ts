@@ -44,70 +44,6 @@ namespace RainbowSparkleUnicorn.Switch {
         Released = 1
     }
 
-
-
-    // let switch_pressed: Action[] = [
-    //     () => { },
-    //     () => { },
-    //     () => { },
-    //     () => { },
-    //     () => { },
-    //     () => { },
-    //     () => { },
-    //     () => { },
-    //     () => { },
-    //     () => { },
-    //     () => { },
-    //     () => { },
-    //     () => { },
-    //     () => { },
-    //     () => { },
-    //     () => { },
-    //     () => { },
-    // ];
-
-    // let switch_released: Action[] = [
-    //     () => { },
-    //     () => { },
-    //     () => { },
-    //     () => { },
-    //     () => { },
-    //     () => { },
-    //     () => { },
-    //     () => { },
-    //     () => { },
-    //     () => { },
-    //     () => { },
-    //     () => { },
-    //     () => { },
-    //     () => { },
-    //     () => { },
-    //     () => { },
-    //     () => { },
-    // ];
-
-    /**
-     * Do something when a switch is pushed or released.
-     * @param pin the switch pin to be checked
-     * @param handler body code to run when the event is raised
-     */
-    //% subcategory="Switch"
-    //% block="When switch on pin %touchpad | is %event"
-    //% pin.fieldEditor="gridpicker" pin.fieldOptions.columns=6
-    //% pin.fieldOptions.tooltips="false"
-    //% weight=100
-    // export function on(pin: Pins, event: Event, handler: Action) {
-
-    //     switch (event) {
-    //         case Event.released:
-    //             switch_released[pin] = handler;
-    //             break;
-    //         case Event.pressed:
-    //             switch_pressed[pin] = handler;
-    //             break;
-    //     }
-    // }
-
     /**
      * Get a switch state
      * @param pin 
@@ -121,17 +57,8 @@ namespace RainbowSparkleUnicorn.Switch {
         return previousSwitchStates.charAt(pin);
     }
 
-    // function switchHandler(pin: Pins, event: Event) {
-
-    //     switch (event) {
-    //         case Event.released:
-    //             switch_released[pin]();
-    //             break;
-    //         case Event.pressed:
-    //             switch_pressed[pin]();
-    //             break;
-    //     }
-    // }
+    export const RAINBOW_SPARKLE_UNICORN_SWITCH_PRESSED = 5058;
+    export const RAINBOW_SPARKLE_UNICORN_SWITCH_RELEASED = 5059;
 
     export function _dealWithSwitchMessage(switchStates: string) {
 
@@ -144,62 +71,62 @@ namespace RainbowSparkleUnicorn.Switch {
 
                 if (pinState.compare(previousPinState) != 0) {
 
-                    //serial.writeLine("pin: " + pin + " pinState: " + pinState + " previousPinState:" + previousPinState);
-
                     if (pinState.compare("L") == 0) {
-                        //switchHandler(pin, Event.released)
 
-                        touchState.eventValue = pin;
-                        touchState.onReleased.forEach((th) => { th.onEvent(pin) });
+                        control.raiseEvent(RAINBOW_SPARKLE_UNICORN_SWITCH_PRESSED, pin)
+                        control.raiseEvent(RAINBOW_SPARKLE_UNICORN_SWITCH_PRESSED, Pins.Any)
 
                     } else if (pinState.compare("H") == 0) {
-                        //switchHandler(pin, Event.pressed)
-
-                        touchState.eventValue = pin;
-                        touchState.onTouched.forEach((th) => { th.onEvent(pin) });
-
-
+                        control.raiseEvent(RAINBOW_SPARKLE_UNICORN_SWITCH_RELEASED, pin)
+                        control.raiseEvent(RAINBOW_SPARKLE_UNICORN_SWITCH_RELEASED, Pins.Any)
                     }
                 }
             }
         }
 
         previousSwitchStates = switchStates;
-
-        // if (switchStates.includes("H") == true) {
-        //     switchHandler(Pins.Any, Event.pressed);
-        // }
-
-        // if (switchStates.includes("L") == true) {
-        //     switchHandler(Pins.Any, Event.released);
-        // }
     }
 
     /**
-     * Do something when a touch sensor is touched or released.
-     * @param sensor the touch sensor to be checked, eg: TouchSensor.T5
-     * @param action the trigger action
+     * Do something when a switch is pushed.
+     * @param pin the switch pin to be checked
      * @param handler body code to run when the event is raised
      */
-    //% subcategory="Touch"
-    //% blockId=makerbit_touch_on_touch_sensor
-    //% block="on touch sensor | %sensor | %action"
-    //% sensor.fieldEditor="gridpicker" sensor.fieldOptions.columns=6
-    //% sensor.fieldOptions.tooltips="false"
+    //% subcategory="Switch"
+    //% block="on switch pressed %pin"
     //% weight=65
-    export function onSwitch(
-        sensor: Pins,
-        action: Event,
-        handler: () => void
-    ) {
-        if (action === Event.Pressed) {
-            touchState.onTouched.push(new TouchHandler(sensor, handler));
-        }
-        else {
-            touchState.onReleased.push(new TouchHandler(sensor, handler));
-        }
+    export function onPressed(
+        pin: Pins,
+        handler: (pin: Number) => void
+    ) {        
+        control.onEvent(
+            RAINBOW_SPARKLE_UNICORN_SWITCH_PRESSED,
+            pin ,
+            () => {
+                handler(pin);
+            }
+        );
     }
 
-
+    /**
+     * Do something when a switch is released.
+     * @param pin the switch pin to be checked
+     * @param handler body code to run when the event is raised
+     */
+    //% subcategory="Switch"
+    //% block="on switch pressed %pin"
+    //% weight=65
+    export function onReleased(
+        pin: Pins,
+        handler: (pin: number) => void
+    ) {
+        control.onEvent(
+            RAINBOW_SPARKLE_UNICORN_SWITCH_RELEASED,
+            pin,
+            () => {
+                handler(pin);
+            }
+        );
+    }
    
 }
