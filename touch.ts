@@ -31,10 +31,10 @@ namespace RainbowSparkleUnicorn.Touch {
         P11 = 11
     }
 
-/*
-        //% block="Any"
-        //Any
-*/
+    /*
+            //% block="Any"
+            //Any
+    */
 
     export enum Event {
         touched = 0,
@@ -89,7 +89,7 @@ namespace RainbowSparkleUnicorn.Touch {
     }
 
 
-    function triggerHandler(pin: Pins, event: Event) {
+    function touchHandler(pin: Pins, event: Event) {
 
         //serial.writeLine("fn triggerHandler")
         //serial.writeString(pin.toString())
@@ -132,19 +132,25 @@ namespace RainbowSparkleUnicorn.Touch {
 
     export function _dealWithTouchMessage(touchStates: string) {
 
-        for (let index = 0; index < 12; index++) {
+        //this attempts to set-up an initial state of the switches
+        if (previousTouchStates.charAt(0) != "0") {
 
-            const pinState = touchStates.charAt(index);
-            const previousPinState = previousTouchStates.charAt(index);
+            for (let index = 0; index < 12; index++) {
 
-            if (pinState.compare(previousPinState) != 0) {
-                if (pinState.compare("H") == 0) {
-                    triggerHandler(index, Touch.Event.touched)
-                } else if (pinState.compare("L") == 0) {
-                    triggerHandler(index, Touch.Event.released)
+                const pinState = touchStates.charAt(index);
+                const previousPinState = previousTouchStates.charAt(index);
+
+                if (pinState.compare(previousPinState) != 0) {
+                    if (pinState.compare("H") == 0) {
+                        touchHandler(index, Touch.Event.touched)
+                    } else if (pinState.compare("L") == 0) {
+                        touchHandler(index, Touch.Event.released)
+                    }
                 }
             }
         }
+
+        previousTouchStates = touchStates;
 
         // if (touchStates.includes("H") == true) {
         //     triggerHandler(Touch.Pins.Any, Touch.Event.touched);
@@ -154,6 +160,6 @@ namespace RainbowSparkleUnicorn.Touch {
         //     triggerHandler(Touch.Pins.Any, Touch.Event.released);
         // }
 
-        previousTouchStates = touchStates;
+
     }
 }
