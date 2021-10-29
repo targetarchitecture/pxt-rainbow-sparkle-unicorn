@@ -1,6 +1,6 @@
 namespace RainbowSparkleUnicorn.Sound {
 
-    let dfplayerpreviousBusy = "1";
+    let dfplayerpreviousBusy: boolean = false;
     let dfplayerVolume: number = 0;
     let dfplayerTrack: number = 0;
 
@@ -84,50 +84,35 @@ namespace RainbowSparkleUnicorn.Sound {
     }
 
     /**
-     * Returns the state of the player has started playing a track or stopped.
-     * This block intended to be used inside of start stop event handler.
-     */
+      * Returns the state of the player has started playing a track or stopped.
+      * This block intended to be used inside of start stop event handler.
+      */
     //% subcategory="Sound"
     //% group="State"
     //% block="sound playing"
     //% weight=39
     export function playingSound(): boolean {
+        return dfplayerpreviousBusy;
+    }
 
-        let busy = _readMessage("SBUSY", "SBUSY");
+    export function _dealWithMusicMessage(value: number) {
 
-        //serial.writeLine("SBUSY:" + busy);
+        let busy: boolean;
 
-        //check for bad data
-        if (busy === undefined) {
-            busy = dfplayerpreviousBusy;
+        if (value == 0) {
+            busy = true;
+            if (MusicStart != null) MusicStart()
+        } else if (value == 1) {
+            busy = false;
+            if (MusicStop != null) MusicStop()
         }
 
-        if (dfplayerpreviousBusy.compare(busy) != 0) {
-            if (busy.compare("0") == 0) {
-                control.raiseEvent(RAINBOW_SPARKLE_UNICORN_SOUND_BUSY, 1);
-            } else if (busy.compare("1") == 0) {
-                control.raiseEvent(RAINBOW_SPARKLE_UNICORN_SOUND_BUSY, 0);
-            }
+        if (dfplayerpreviousBusy != busy) {
+            if (BusyChange != null) BusyChange(busy)
         }
 
         //remember for next time
         dfplayerpreviousBusy = busy;
-
-        if (busy.compare("0") == 0) {
-            return true;
-        } else if (busy.compare("1") == 0) {
-            return false;
-        } else {
-
-            //try the previous state
-            if (dfplayerpreviousBusy.compare("0") == 0) {
-                return true;
-            } else if (dfplayerpreviousBusy.compare("1") == 0) {
-                return false;
-            } else {
-                return false;
-            }
-        };
     }
 
     /**
@@ -154,22 +139,42 @@ namespace RainbowSparkleUnicorn.Sound {
 
     /**
     * Do something when a sound track starts/stops.
-    * @param handler body code to run when event is raised
     */
     //% subcategory="Sound"
-    //% group="State"
+    //% group="Actions"
     //% block="on sound track starts/stops"
     //% weight=41
-    export function onBusyChange(
-        handler: () => void
-    ) {
-        control.onEvent(
-            RAINBOW_SPARKLE_UNICORN_SOUND_BUSY,
-            EventBusValue.MICROBIT_EVT_ANY,
-            () => {
-                handler();
-            }
-        );
+    export function onBusyChange(handler: (busy: boolean) => void): void {
+        BusyChange = handler;
     }
 
+    let BusyChange: (busy: boolean) => void = null;
+
+    /**
+    * Do something when a sound track starts.
+    */
+    //% subcategory="Sound"
+    //% group="Actions"
+    //% block="on sound track starts"
+    //% weight=41
+    export function onStart(handler: () => void): void {
+        MusicStart = handler;
+    }
+
+    let MusicStart: () => void = null;
+
+    /**
+    * Do something when a sound track stops.
+    */
+    //% subcategory="Sound"
+    //% group="Actions"
+    //% block="on sound track stop"
+    //% weight=41
+    export function onStop(handler: () => void): void {
+        MusicStop = handler;
+    }
+
+    let MusicStop: () => void = null;
+
 }
+

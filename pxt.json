@@ -11,7 +11,15 @@
         "main.ts",
         "README.md",
         "testbed.md",
-        "dial.ts"
+        "dial.ts",
+        "light.ts",
+        "movement.ts",
+        "rainbowsparkleunicorn.ts",
+        "slider.ts",
+        "sound.ts",
+        "spinner.ts",
+        "switch.ts",
+        "touch.ts"
     ],
     "testFiles": [],
     "targetVersions": {

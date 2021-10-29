@@ -2,51 +2,109 @@ namespace RainbowSparkleUnicorn.Switch {
 
     let previousSwitchStates = "0000000000000000";
 
+    export enum Pin {
+        //% block="Pin 0"
+        P0 = 0,
+        //% block="Pin 1"
+        P1 = 1,
+        //% block="Pin 2"
+        P2 = 2,
+        //% block="Pin 3"
+        P3 = 3,
+        //% block="Pin 4"
+        P4 = 4,
+        //% block="Pin 5"
+        P5 = 5,
+        //% block="Pin 6"
+        P6 = 6,
+        //% block="Pin 7"
+        P7 = 7,
+        //% block="Pin 8"
+        P8 = 8,
+        //% block="Pin 9"
+        P9 = 9,
+        //% block="Pin 10"
+        P10 = 10,
+        //% block="Pin 11"
+        P11 = 11,
+        //% block="Pin 12"
+        P12 = 12,
+        //% block="Pin 13"
+        P13 = 13,
+        //% block="Pin 14"
+        P14 = 14,
+        //% block="Pin 15"
+        P15 = 15,
+        //% block="Any" 
+        Any
+    }
+
+    //% block
+    export enum Event {
+        pressed = 0,
+        released = 1
+    }
+
+    let switch_pressed: Action[] = [
+        () => { },
+        () => { },
+        () => { },
+        () => { },
+        () => { },
+        () => { },
+        () => { },
+        () => { },
+        () => { },
+        () => { },
+        () => { },
+        () => { },
+        () => { },
+        () => { },
+        () => { },
+        () => { },
+        () => { },
+    ];
+
+    let switch_released: Action[] = [
+        () => { },
+        () => { },
+        () => { },
+        () => { },
+        () => { },
+        () => { },
+        () => { },
+        () => { },
+        () => { },
+        () => { },
+        () => { },
+        () => { },
+        () => { },
+        () => { },
+        () => { },
+        () => { },
+        () => { },
+    ];
+
     /**
-     * Do something when a switch is pushed.
+     * Do something when a switch is pushed or released.
      * @param pin the switch pin to be checked
      * @param handler body code to run when the event is raised
      */
     //% subcategory="Switch"
-    //% block="on switch pressed on | %pin"
+    //% block="When switch on pin %touchpad | is %event"
     //% pin.fieldEditor="gridpicker" pin.fieldOptions.columns=6
     //% pin.fieldOptions.tooltips="false"
     //% weight=100
-    export function onSwitchPressed(
-        pin: switchPins,
-        handler: () => void
-    ) {
+    export function on(pin: Pin, event: Event, handler: Action) {
 
-        control.onEvent(
-            RAINBOW_SPARKLE_UNICORN_SWITCH_PRESSED,
-            pin === switchPins.Any ? EventBusValue.MICROBIT_EVT_ANY : pin,
-            () => {
-                handler();
-            }
-        );
-    }
-
-    /**
-    * Do something when a switch is released.
-    * @param pin the pin to be checked
-    * @param handler body code to run when the event is raised
-    */
-    //% subcategory="Switch"
-    //% block="on switch released on | %pin"
-    //% pin.fieldEditor="gridpicker" pin.fieldOptions.columns=6
-    //% pin.fieldOptions.tooltips="false"
-    //% weight=90
-    export function onSwitchReleased(
-        pin: switchPins,
-        handler: () => void
-    ) {
-        control.onEvent(
-            RAINBOW_SPARKLE_UNICORN_SWITCH_RELEASED,
-            pin === switchPins.Any ? EventBusValue.MICROBIT_EVT_ANY : pin,
-            () => {
-                handler();
-            }
-        );
+        switch (event) {
+            case Event.released:
+                switch_released[pin] = handler;
+                break;
+            case Event.pressed:
+                switch_pressed[pin] = handler;
+                break;
+        }
     }
 
     /**
@@ -58,52 +116,49 @@ namespace RainbowSparkleUnicorn.Switch {
     //% block="Get the switch state on pin $pin"
     //% pin.fieldEditor="gridpicker" pin.fieldOptions.columns=6
     //% pin.fieldOptions.tooltips="false"    
-    export function getSwitchState(pin: switchPins): string {
-
-        //Cannot read properties of undefined(reading 'charAt')
-
+    export function getSwitchState(pin: Pin): string {
         return previousSwitchStates.charAt(pin);
     }
 
-    /**
-     * Get a switch states
-     */
-    //% subcategory="Switch" 
-    //% weight=80        
-    //% block="Get the switch states" 
-    export function getSwitchStates(): string {
+    function switchHandler(pin: Pin, event: Event) {
 
-        let switchStates = _readMessage("SUPDATE", "SUPDATE");
-
-        //check for bad data
-        if (switchStates === undefined) {
-            //serial.writeLine("undefined:" + switchStates)
-            switchStates = previousSwitchStates;
-        } else {
-            //serial.writeLine("switchStates:" + switchStates)
+        switch (event) {
+            case Event.released:
+                switch_released[pin]();
+                break;
+            case Event.pressed:
+                switch_pressed[pin]();
+                break;
         }
+    }
 
-        for (let index = 0; index < 16; index++) {
+    export function _dealWithSwitchMessage(switchStates: string) {
 
-            const pinState = switchStates.charAt(index);
-            const previousPinState = previousSwitchStates.charAt(index);
+        for (let pin = 0; pin < 16; pin++) {
+
+            const pinState = switchStates.charAt(pin);
+            const previousPinState = previousSwitchStates.charAt(pin);
 
             if (pinState.compare(previousPinState) != 0) {
 
-                //serial.writeLine("index: " + index + " pinState: " + pinState + " previousPinState:" + previousPinState);
+                //serial.writeLine("pin: " + pin + " pinState: " + pinState + " previousPinState:" + previousPinState);
 
                 if (pinState.compare("L") == 0) {
-                    //serial.writeLine("RAINBOW_SPARKLE_UNICORN_SWITCH_PRESSED")
-                    control.raiseEvent(RAINBOW_SPARKLE_UNICORN_SWITCH_PRESSED, index + 1);
+                    switchHandler(pin, Event.released)
                 } else if (pinState.compare("H") == 0) {
-                    //serial.writeLine("RAINBOW_SPARKLE_UNICORN_SWITCH_RELEASED")
-                    control.raiseEvent(RAINBOW_SPARKLE_UNICORN_SWITCH_RELEASED, index + 1);
+                    switchHandler(pin, Event.pressed)
                 }
             }
         }
 
-        previousSwitchStates = switchStates;
+        if (switchStates.includes("H") == true) {
+            switchHandler(Pin.Any, Event.pressed);
+        }
 
-        return switchStates
+        if (switchStates.includes("L") == true) {
+            switchHandler(Pin.Any, Event.released);
+        }
+
+        previousSwitchStates = switchStates;
     }
 }

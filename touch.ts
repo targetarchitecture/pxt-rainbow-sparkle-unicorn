@@ -1,55 +1,108 @@
+
+
 namespace RainbowSparkleUnicorn.Touch {
 
     let previousTouchStates = "000000000000";
 
-    /**
-     * Do something when a touch sensor is touched or released.
-     * @param pin the pin which is the touch button on 
-     * @param handler body code to run when the event is raised
-     */
-    //% subcategory="Touch"
-    //% block="when touching on pin %pin"
-    //% pin.fieldEditor="gridpicker" pin.fieldOptions.columns=6
-    //% pin.fieldOptions.tooltips="false"   
+    //% block
+    export enum Pin {
+        //% block="Pin 0"    
+        P0 = 0,
+        //% block="Pin 1"    
+        P1 = 1,
+        //% block="Pin 2"    
+        P2 = 2,
+        //% block="Pin 3" 
+        P3 = 3,
+        //% block="Pin 4" 
+        P4 = 4,
+        //% block="Pin 5" 
+        P5 = 5,
+        //% block="Pin 6" 
+        P6 = 6,
+        //% block="Pin 7" 
+        P7 = 7,
+        //% block="Pin 8" 
+        P8 = 8,
+        //% block="Pin 9" 
+        P9 = 9,
+        //% block="Pin 10" 
+        P10 = 10,
+        //% block="Pin 11" 
+        P11 = 11,
+        //% block="Any" 
+        Any
+    }
+
+
+    //% block
+    export enum Event {
+        touched = 0,
+        released = 1
+    }
+
+    let touch_pressed: Action[] = [
+        () => { },
+        () => { },
+        () => { },
+        () => { },
+        () => { },
+        () => { },
+        () => { },
+        () => { },
+        () => { },
+        () => { },
+        () => { },
+        () => { },
+        () => { },
+    ];
+
+    let touch_released: Action[] = [
+        () => { },
+        () => { },
+        () => { },
+        () => { },
+        () => { },
+        () => { },
+        () => { },
+        () => { },
+        () => { },
+        () => { },
+        () => { },
+        () => { },
+        () => { },
+    ];
+
+    //% subcategory="Touch" 
+    //% block="When pin %touchpad| is %event"
     //% weight=100
-    export function onButtonTouched(
-        pin: touchPins,
-        handler: () => void
-    ) {
-        control.onEvent(
-            RAINBOW_SPARKLE_UNICORN_TOUCH_SENSOR_TOUCHED,
-            pin === touchPins.Any ? EventBusValue.MICROBIT_EVT_ANY : pin,
-            () => {
-                handler();
-            }
-        );
-    }
+    export function on(pin: Pin, event: Event, handler: Action) {
 
-    /**
-     * Do something when a touch sensor is released.
-     * @param pin the pin which is the touch button on
-     * @param handler body code to run when the event is raised
-     */
-    //% subcategory="Touch"
-    //% pin.fieldEditor="gridpicker" pin.fieldOptions.columns=6
-    //% pin.fieldOptions.tooltips="false"  
-    //% block="when touch stopped on pin | %pin"
-    //% weight=90
-    export function onButtonReleased(
-        pin: touchPins,
-        handler: () => void
-    ) {
-
-        control.onEvent(
-            RAINBOW_SPARKLE_UNICORN_TOUCH_SENSOR_RELEASED,
-            pin === touchPins.Any ? EventBusValue.MICROBIT_EVT_ANY : pin,
-            () => {
-                handler();
-            }
-        );
+        switch (event) {
+            case Event.released:
+                touch_released[pin] = handler;
+                break;
+            case Event.touched:
+                touch_pressed[pin] = handler;
+                break;
+        }
     }
 
 
+    function triggerHandler(pin: Pin, event: Event) {
+
+        //serial.writeLine("fn triggerHandler")
+        //serial.writeString(pin.toString())
+
+        switch (event) {
+            case Event.released:
+                touch_released[pin]();
+                break;
+            case Event.touched:
+                touch_pressed[pin]();
+                break;
+        }
+    }
 
     /**
      * Set the touch and release thresholds for all 13 channels on the
@@ -77,39 +130,30 @@ namespace RainbowSparkleUnicorn.Touch {
         _sendMessage("S2," + timing);
     }
 
-
-    /**
-     * Get a the touch states
-     */
-    //% subcategory="Touch"
-    //% weight=80        
-    //% block="Get the touch states" 
-    export function getTouchStates(): string {
-
-        let touchStates = _readMessage("TUPDATE", "TUPDATE");
-
-        //check for bad data
-        if (touchStates.length < 12) {
-            return previousTouchStates;
-        }
+    export function _dealWithTouchMessage(touchStates: string) {
 
         for (let index = 0; index < 12; index++) {
 
             const pinState = touchStates.charAt(index);
             const previousPinState = previousTouchStates.charAt(index);
 
-            if (pinState.compare( previousPinState) !=0) {
-                if (pinState.compare("H")==0) {
-                    control.raiseEvent(RAINBOW_SPARKLE_UNICORN_TOUCH_SENSOR_TOUCHED, index+1);
-                } else if (pinState.compare("L")==0) {
-                    control.raiseEvent(RAINBOW_SPARKLE_UNICORN_TOUCH_SENSOR_RELEASED, index+1);
+            if (pinState.compare(previousPinState) != 0) {
+                if (pinState.compare("H") == 0) {
+                    triggerHandler(index, Touch.Event.touched)
+                } else if (pinState.compare("L") == 0) {
+                    triggerHandler(index, Touch.Event.released)
                 }
             }
         }
 
+        if (touchStates.includes("H") == true) {
+            triggerHandler(Touch.Pin.Any, Touch.Event.touched);
+        }
+
+        if (touchStates.includes("L") == true) {
+            triggerHandler(Touch.Pin.Any, Touch.Event.released);
+        }
+
         previousTouchStates = touchStates;
-
-        return touchStates
     }
-
 }
