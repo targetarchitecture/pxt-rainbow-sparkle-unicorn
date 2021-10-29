@@ -1,6 +1,6 @@
 {
     "name": "Rainbow Sparkle Unicorn",
-    "version": "2.0.21",
+    "version": "3.0.0",
     "description": "",
     "dependencies": {
         "core": "*",
@@ -10,17 +10,7 @@
         "main.blocks",
         "main.ts",
         "README.md",
-        "touch.ts",
-        "switch.ts",
-        "sound.ts",
-        "light.ts",
-        "movement.ts",
-        "ESP32.ts",
-        "constants.ts",
-        "enums.ts",
-        "start.ts",
-        "testbed.md",
-        "uart.ts"
+        "testbed.md"
     ],
     "testFiles": [],
     "targetVersions": {
