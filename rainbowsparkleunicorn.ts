@@ -7,11 +7,11 @@ namespace RainbowSparkleUnicorn {
       * Add into the start function to initialise the board.
       */
     //% block="Start Rainbow Sparkle Unicorn"
-    export function start(TransmissionMs: number = 10, InputInterval: number = 100, CommandInterval: number = 500): void {
+    export function start(txPin: SerialPin = SerialPin.P2, rxPin: SerialPin = SerialPin.P1, rate: BaudRate = BaudRate.BaudRate115200, TxBufferSize: number = 128, RxBufferSize:number=128, TransmissionMs: number = 10, InputInterval: number = 100, CommandInterval: number = 500): void {
 
-        serial.redirect(SerialPin.P2, SerialPin.P1, BaudRate.BaudRate115200);
-        serial.setTxBufferSize(128)
-        serial.setRxBufferSize(128)
+        serial.redirect(txPin, rxPin, rate);
+        serial.setTxBufferSize(TxBufferSize);
+        serial.setRxBufferSize(RxBufferSize);
 
         //add 1s for UART ready to support Micro:bit V2
         basic.pause(1000)
