@@ -3,36 +3,46 @@
 //% subcategories='["Touch", "Switch", "Sound", "Light", "Sliders / Dials / Spinners" ,"Movement", "IoT", "Expert"]'
 namespace RainbowSparkleUnicorn {
 
+    let _MSGTOSEND: string[] = [];
+
     /**
       * Add into the start function to initialise the board.
       */
     //% block="Start Rainbow Sparkle Unicorn"
-    export function start(txPin: SerialPin = SerialPin.P2, rxPin: SerialPin = SerialPin.P1, rate: BaudRate = BaudRate.BaudRate115200, TxBufferSize: number = 128, RxBufferSize:number=128, TransmissionMs: number = 10, InputInterval: number = 100, CommandInterval: number = 500): void {
+    export function start(txPin: SerialPin = SerialPin.P2, rxPin: SerialPin = SerialPin.P1, TxBufferSize: number = 128, RxBufferSize: number = 128, TransmissionMs: number = 10, InputInterval: number = 100, CommandInterval: number = 500): void {
 
-        serial.redirect(txPin, rxPin, rate);
+        serial.redirect(txPin, rxPin, BaudRate.BaudRate115200);
         serial.setTxBufferSize(TxBufferSize);
         serial.setRxBufferSize(RxBufferSize);
 
         //add 1s for UART ready to support Micro:bit V2
-        basic.pause(1000)
+        basic.pause(2000);
 
         //add the serial data recieve handler
         serial.onDataReceived(serial.delimiters(Delimiters.NewLine), () => {
             let msg = serial.readLine()
 
             _readMessage(msg);
+
+            //LED toggle takes two milliseconds - just helps me!
+            led.toggle(1, 0);
         });
 
         //set-up UART transmission loop
         control.inBackground(function () {
             loops.everyInterval(TransmissionMs, function () {
 
-                let msg: string
-
                 //send if array is not empty
-                if (typeof (msg = _MSGTOSEND.shift()) !== 'undefined') {
-                    serial.writeString(msg + String.fromCharCode(Delimiters.CarriageReturn));
-                }
+                if (_MSGTOSEND.length > 0) {
+
+                    //LED toggle takes two milliseconds - just helps me!
+                    led.toggle(0, 0);
+
+                    let msg = _MSGTOSEND.shift();
+                    msg = msg + String.fromCharCode(Delimiters.CarriageReturn);
+
+                    serial.writeString(msg);
+              }
             })
         })
 
@@ -55,7 +65,6 @@ namespace RainbowSparkleUnicorn {
         })
     }
 
-    let _MSGTOSEND: string[] = [];
 
     export function _sendMessage(message: string): void {
         _MSGTOSEND.push(message);

@@ -2,7 +2,7 @@ namespace RainbowSparkleUnicorn.Switch {
 
     let previousSwitchStates = "0000000000000000";
 
-    export enum Pin {
+    export enum Pins {
         //% block="Pin 0"
         P0 = 0,
         //% block="Pin 1"
@@ -35,11 +35,15 @@ namespace RainbowSparkleUnicorn.Switch {
         P14 = 14,
         //% block="Pin 15"
         P15 = 15,
-        //% block="Any" 
-        Any
+
     }
 
-    //% block
+
+/*
+    //% block="Any" 
+    //Any
+*/
+
     export enum Event {
         pressed = 0,
         released = 1
@@ -95,7 +99,7 @@ namespace RainbowSparkleUnicorn.Switch {
     //% pin.fieldEditor="gridpicker" pin.fieldOptions.columns=6
     //% pin.fieldOptions.tooltips="false"
     //% weight=100
-    export function on(pin: Pin, event: Event, handler: Action) {
+    export function on(pin: Pins, event: Event, handler: Action) {
 
         switch (event) {
             case Event.released:
@@ -116,11 +120,11 @@ namespace RainbowSparkleUnicorn.Switch {
     //% block="Get the switch state on pin $pin"
     //% pin.fieldEditor="gridpicker" pin.fieldOptions.columns=6
     //% pin.fieldOptions.tooltips="false"    
-    export function getSwitchState(pin: Pin): string {
+    export function getSwitchState(pin: Pins): string {
         return previousSwitchStates.charAt(pin);
     }
 
-    function switchHandler(pin: Pin, event: Event) {
+    function switchHandler(pin: Pins, event: Event) {
 
         switch (event) {
             case Event.released:
@@ -151,14 +155,16 @@ namespace RainbowSparkleUnicorn.Switch {
             }
         }
 
-        if (switchStates.includes("H") == true) {
-            switchHandler(Pin.Any, Event.pressed);
-        }
-
-        if (switchStates.includes("L") == true) {
-            switchHandler(Pin.Any, Event.released);
-        }
-
         previousSwitchStates = switchStates;
+
+        // if (switchStates.includes("H") == true) {
+        //     switchHandler(Pins.Any, Event.pressed);
+        // }
+
+        // if (switchStates.includes("L") == true) {
+        //     switchHandler(Pins.Any, Event.released);
+        // }
+
+   
     }
 }

@@ -2,7 +2,7 @@
 
 namespace RainbowSparkleUnicorn.Movement {
 
-    export declare const enum Pin {
+    export declare const enum Pins {
         //% block="Servo 0"
         P0 = 0,
         //% block="Servo 1"
@@ -71,7 +71,7 @@ namespace RainbowSparkleUnicorn.Movement {
     //% servo.fieldOptions.tooltips="false"           
     //% minimumPulse.min=0 minimumPulse.max=4096
     //% maximumPulse.min=0 maximumPulse.max=4096
-    export function setServoRange(servo: Pin, minimumPulse: number, maximumPulse: number) {
+    export function setServoRange(servo: Pins, minimumPulse: number, maximumPulse: number) {
         minimumPulse = Math.constrain(minimumPulse, 0, 4096);
         maximumPulse = Math.constrain(maximumPulse, 0, 4096);
 
@@ -89,7 +89,7 @@ namespace RainbowSparkleUnicorn.Movement {
     //% servo.fieldEditor="gridpicker" servo.fieldOptions.columns=6
     //% servo.fieldOptions.tooltips="false"       
     //% block="set $servo type $sType"
-    export function setServoType(servo: Pin, sType: ServoType) {
+    export function setServoType(servo: Pins, sType: ServoType) {
 
         let servoDetails = servoList[servo].split(",");
         servoDetails[2] = sType.toString();
@@ -104,7 +104,7 @@ namespace RainbowSparkleUnicorn.Movement {
     //% servo.fieldOptions.tooltips="false"       
     //% block="set $servo angle to $angle"
     //% angle.min=0 angle.max=180    
-    export function setServoAngle(servo: Pin, angle = 90) {
+    export function setServoAngle(servo: Pins, angle = 90) {
         angle = Math.constrain(angle, 0, 180);
 
         let servoDetails = servoList[servo].split(",");
@@ -125,7 +125,7 @@ namespace RainbowSparkleUnicorn.Movement {
     //% fromAngle.min=0 fromAngle.max=180 fromAngle.defl=0
     //% duration.min=0 
     //% duration.defl=20     
-    export function moveServoLinear(servo: Pin, fromAngle: number, toAngle: number, duration: number) {
+    export function moveServoLinear(servo: Pins, fromAngle: number, toAngle: number, duration: number) {
         fromAngle = Math.constrain(fromAngle, 0, 180);
         toAngle = Math.constrain(toAngle, 0, 180);
 
@@ -149,7 +149,7 @@ namespace RainbowSparkleUnicorn.Movement {
     //% fromAngle.min=0 fromAngle.max=180 fromAngle.defl=0
     //% duration.min=0 
     //% duration.defl=20         
-    export function moveServoBouncy(servo: Pin, fromAngle: number, toAngle: number, duration: number) {
+    export function moveServoBouncy(servo: Pins, fromAngle: number, toAngle: number, duration: number) {
 
         fromAngle = Math.constrain(fromAngle, 0, 180);
         toAngle = Math.constrain(toAngle, 0, 180);
@@ -176,7 +176,7 @@ namespace RainbowSparkleUnicorn.Movement {
     //% fromAngle.min=0 fromAngle.max=180 fromAngle.defl=0
     //% duration.min=0 
     //% duration.defl=20         
-    export function moveServoSmoothly(servo: Pin, fromAngle: number, toAngle: number, duration: number) {
+    export function moveServoSmoothly(servo: Pins, fromAngle: number, toAngle: number, duration: number) {
 
         fromAngle = Math.constrain(fromAngle, 0, 180);
         toAngle = Math.constrain(toAngle, 0, 180);
@@ -197,7 +197,7 @@ namespace RainbowSparkleUnicorn.Movement {
     //% block="stop $servo"
     //% servo.fieldEditor="gridpicker" servo.fieldOptions.columns=6
     //% servo.fieldOptions.tooltips="false" 
-    export function stopServo(servo: Pin) {
+    export function stopServo(servo: Pins) {
         _sendMessage("MSTOP," + servo);
     }
 
@@ -208,7 +208,7 @@ namespace RainbowSparkleUnicorn.Movement {
     //% servo.fieldEditor="gridpicker" servo.fieldOptions.columns=6
     //% servo.fieldOptions.tooltips="false"   
     //% micros.min=0 micros.max=4096
-    export function setServoPulse(servo: Pin, micros: number) {
+    export function setServoPulse(servo: Pins, micros: number) {
         micros = Math.constrain(micros, 0, 4096)
         _sendMessage("MPWM," + servo + "," + micros);
     }

@@ -4,8 +4,7 @@ namespace RainbowSparkleUnicorn.Touch {
 
     let previousTouchStates = "000000000000";
 
-    //% block
-    export enum Pin {
+    export enum Pins {
         //% block="Pin 0"    
         P0 = 0,
         //% block="Pin 1"    
@@ -29,13 +28,14 @@ namespace RainbowSparkleUnicorn.Touch {
         //% block="Pin 10" 
         P10 = 10,
         //% block="Pin 11" 
-        P11 = 11,
-        //% block="Any" 
-        Any
+        P11 = 11
     }
 
+/*
+        //% block="Any"
+        //Any
+*/
 
-    //% block
     export enum Event {
         touched = 0,
         released = 1
@@ -76,7 +76,7 @@ namespace RainbowSparkleUnicorn.Touch {
     //% subcategory="Touch" 
     //% block="When pin %touchpad| is %event"
     //% weight=100
-    export function on(pin: Pin, event: Event, handler: Action) {
+    export function on(pin: Pins, event: Event, handler: Action) {
 
         switch (event) {
             case Event.released:
@@ -89,7 +89,7 @@ namespace RainbowSparkleUnicorn.Touch {
     }
 
 
-    function triggerHandler(pin: Pin, event: Event) {
+    function triggerHandler(pin: Pins, event: Event) {
 
         //serial.writeLine("fn triggerHandler")
         //serial.writeString(pin.toString())
@@ -146,13 +146,13 @@ namespace RainbowSparkleUnicorn.Touch {
             }
         }
 
-        if (touchStates.includes("H") == true) {
-            triggerHandler(Touch.Pin.Any, Touch.Event.touched);
-        }
+        // if (touchStates.includes("H") == true) {
+        //     triggerHandler(Touch.Pins.Any, Touch.Event.touched);
+        // }
 
-        if (touchStates.includes("L") == true) {
-            triggerHandler(Touch.Pin.Any, Touch.Event.released);
-        }
+        // if (touchStates.includes("L") == true) {
+        //     triggerHandler(Touch.Pins.Any, Touch.Event.released);
+        // }
 
         previousTouchStates = touchStates;
     }
