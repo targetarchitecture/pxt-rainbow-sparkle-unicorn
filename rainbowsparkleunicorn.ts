@@ -7,6 +7,7 @@ namespace RainbowSparkleUnicorn {
 
     let _MSGTOSEND: string[] = [];
 
+    //allow quick switch back to normal USB, this is not a problem as the code is so large it only runs on a V2 anyway
     input.onLogoEvent(TouchButtonEvent.Released, function () {
         serial.redirectToUSB();
         basic.showIcon(IconNames.Yes)
@@ -17,11 +18,11 @@ namespace RainbowSparkleUnicorn {
       */
     //% block="Start Rainbow Sparkle Unicorn"
     export function start(
-                        TxPin: SerialPin = SerialPin.P2, 
-                        RxPin: SerialPin = SerialPin.P1, 
-                        TxBufferSize: number = 128, 
-                        RxBufferSize: number = 128, 
-                        TransmissionMs: number = 10): void {
+        TxPin: SerialPin = SerialPin.P2,
+        RxPin: SerialPin = SerialPin.P1,
+        TxBufferSize: number = 128,
+        RxBufferSize: number = 128,
+        TransmissionMs: number = 10): void {
 
         //prevent running more than once
         if (alreadyStarted == true) {
@@ -36,6 +37,10 @@ namespace RainbowSparkleUnicorn {
 
         //add 1s for UART ready to support Micro:bit V2
         basic.pause(1000);
+
+        //reboot ESP32
+        serial.writeString("RESTART" + String.fromCharCode(Delimiters.CarriageReturn));
+        basic.pause(500);
 
         //add the serial data recieve handler
         serial.onDataReceived(serial.delimiters(Delimiters.NewLine), () => {
@@ -92,6 +97,12 @@ namespace RainbowSparkleUnicorn {
         }
         else if (topic == "TUPDATE") {
             Touch._dealWithTouchUpdateMessage(message.split(":")[1]);
+        }
+        else if (topic == "SSTATE") {
+            Switch._previousSwitchStates = message.split(":")[1];
+        }
+        else if (topic == "TSTATE") {
+            Touch._previousTouchStates = message.split(":")[1];
         }
     }
 

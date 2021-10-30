@@ -1,7 +1,7 @@
 
 namespace RainbowSparkleUnicorn.Touch {
 
-    let previousTouchStates = "000000000000";
+    export let _previousTouchStates = "000000000000";
     let pinOffset = 1000;
 
     export enum Pins {
@@ -76,12 +76,12 @@ namespace RainbowSparkleUnicorn.Touch {
     export function _dealWithTouchUpdateMessage(touchStates: string) {
 
         //this attempts to set-up an initial state of the switches
-        if (previousTouchStates.charAt(0) != "0") {
+        if (_previousTouchStates.charAt(0) != "0") {
 
             for (let pin = 0; pin < 12; pin++) {
 
                 const pinState = touchStates.charAt(pin);
-                const previousPinState = previousTouchStates.charAt(pin);
+                const previousPinState = _previousTouchStates.charAt(pin);
 
                 if (pinState.compare(previousPinState) != 0) {
                     if (pinState.compare("H") == 0) {
@@ -99,7 +99,7 @@ namespace RainbowSparkleUnicorn.Touch {
             }
         }
 
-        previousTouchStates = touchStates;
+        _previousTouchStates = touchStates;
     }
 
     /**

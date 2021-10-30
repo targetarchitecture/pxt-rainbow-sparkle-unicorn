@@ -1,6 +1,6 @@
 namespace RainbowSparkleUnicorn.Switch {
 
-    let previousSwitchStates = "0000000000000000";
+    export let _previousSwitchStates = "0000000000000000";
     let pinOffset = 1000;
 
     export enum Pins {
@@ -53,7 +53,7 @@ namespace RainbowSparkleUnicorn.Switch {
     //% pin.fieldEditor="gridpicker" pin.fieldOptions.columns=6
     //% pin.fieldOptions.tooltips="false"    
     export function getSwitchState(pin: Pins): string {
-        return previousSwitchStates.charAt(pin);
+        return _previousSwitchStates.charAt(pin);
     }
 
     /**
@@ -68,12 +68,12 @@ namespace RainbowSparkleUnicorn.Switch {
 
     export function _dealWithSwitchUpdateMessage(switchStates: string) {
 
-        if (previousSwitchStates.charAt(0) != "0") {
+        if (_previousSwitchStates.charAt(0) != "0") {
 
             for (let pin = 0; pin < 16; pin++) {
 
                 const pinState = switchStates.charAt(pin);
-                const previousPinState = previousSwitchStates.charAt(pin);
+                const previousPinState = _previousSwitchStates.charAt(pin);
 
                 if (pinState.compare(previousPinState) != 0) {
 
@@ -88,10 +88,9 @@ namespace RainbowSparkleUnicorn.Switch {
                     }
                 }
             }
-
         }
 
-        previousSwitchStates = switchStates;
+        _previousSwitchStates = switchStates;
     }
 
     /**
