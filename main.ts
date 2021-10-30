@@ -8,14 +8,14 @@ RainbowSparkleUnicorn.start()
 //     basic.showNumber(pin)
 // })
 
-RainbowSparkleUnicorn.Switch.onReleased(RainbowSparkleUnicorn.Switch.Pins.P0, function (pin) {
-    basic.clearScreen()
+RainbowSparkleUnicorn.Switch.onReleased(RainbowSparkleUnicorn.Switch.Pins.P0, function () {
+    basic.showIcon(IconNames.Heart)
 })
 
 RainbowSparkleUnicorn.Switch.onReleased(RainbowSparkleUnicorn.Switch.Pins.P1, function () {
-    basic.clearScreen()
+    basic.showIcon(IconNames.SmallHeart)
 })
 
-RainbowSparkleUnicorn.Switch.onPressed(RainbowSparkleUnicorn.Switch.Pins.Any, function (pin) {
+RainbowSparkleUnicorn.Switch.onAnyPressed( function (pin) {
     basic.showNumber(pin)
 })
