@@ -21,11 +21,12 @@ namespace RainbowSparkleUnicorn {
         serial.setRxBufferSize(RxBufferSize);
 
         //add 1s for UART ready to support Micro:bit V2
-        basic.pause(2000);
+        basic.pause(1000);
 
         //add the serial data recieve handler
         serial.onDataReceived(serial.delimiters(Delimiters.NewLine), () => {
-            let msg = serial.readLine()
+
+            let msg = serial.readUntil(serial.delimiters(Delimiters.NewLine));
 
             _readMessage(msg);
 
@@ -40,13 +41,14 @@ namespace RainbowSparkleUnicorn {
                 //send if array is not empty
                 if (_MSGTOSEND.length > 0) {
 
+                    // let msg = _MSGTOSEND.shift();
+                    // msg = msg + String.fromCharCode(Delimiters.CarriageReturn);
+                    // serial.writeString(msg);
+
+                    serial.writeString(_MSGTOSEND.shift() + String.fromCharCode(Delimiters.CarriageReturn));
+                
                     //LED toggle takes two milliseconds - just helps me!
-                    led.toggle(0, 0);
-
-                    let msg = _MSGTOSEND.shift();
-                    msg = msg + String.fromCharCode(Delimiters.CarriageReturn);
-
-                    serial.writeString(msg);
+                    led.toggle(0, 0);                
                 }
             })
         })
