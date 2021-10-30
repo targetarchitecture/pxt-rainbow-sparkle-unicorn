@@ -64,7 +64,7 @@ namespace RainbowSparkleUnicorn.Touch {
         _sendMessage("S2," + timing);
     }
 
-    export function _dealWithTouchMessage(touchStates: string) {
+    export function _dealWithTouchUpdateMessage(touchStates: string) {
 
         //this attempts to set-up an initial state of the switches
         if (previousTouchStates.charAt(0) != "0") {

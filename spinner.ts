@@ -9,8 +9,8 @@ namespace RainbowSparkleUnicorn.Spinner {
         Spinner2 = 1
     }
 
-    let Encoder1value = 0;
-    let Encoder2value = 0;
+    let _Encoder1value = 0;
+    let _Encoder2value = 0;
 
     /**
     * Get the spiner value
@@ -22,10 +22,10 @@ namespace RainbowSparkleUnicorn.Spinner {
     export function Value(spinner: Spinners): number {
 
         if (spinner == Spinners.Spinner1) {
-            return Encoder1value;
+            return _Encoder1value;
         }
         else {
-            return Encoder2value;
+            return _Encoder2value;
         }
     }
 
@@ -61,10 +61,35 @@ namespace RainbowSparkleUnicorn.Spinner {
     }
 
     export function _dealWithSpinner1Message(value: number) {
-        control.raiseEvent(RAINBOW_SPARKLE_UNICORN_SPINNER_1, value + touchOffset)
+
+        if (value != _Encoder1value) {
+            control.raiseEvent(RAINBOW_SPARKLE_UNICORN_SPINNER_1, value + touchOffset)
+        }
+
+        _Encoder1value = value;
     }
 
     export function _dealWithSpinner2Message(value: number) {
-        control.raiseEvent(RAINBOW_SPARKLE_UNICORN_SPINNER_2, value + touchOffset)
+        if (value != _Encoder2value) {
+            control.raiseEvent(RAINBOW_SPARKLE_UNICORN_SPINNER_2, value + touchOffset)
+        }
+        _Encoder2value = value;
+    }
+
+    /**
+    * Request the spinner value.
+    */
+    //% subcategory="Sliders / Dials / Spinners"
+    //% group="Spinners"
+    //% block="Request spinner %spinner value"
+    //% weight=65
+    export function RequestSpinnerValue(
+        spinner: Spinners
+    ) {
+        if (spinner == Spinners.Spinner1) {
+            _sendMessage("ROTARY1");
+        } else {
+            _sendMessage("ROTARY2");
+        }
     }
 }

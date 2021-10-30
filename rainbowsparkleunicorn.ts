@@ -3,6 +3,8 @@
 //% subcategories='["Touch", "Switch", "Sound", "Light", "Sliders / Dials / Spinners" ,"Movement", "IoT", "Expert"]'
 namespace RainbowSparkleUnicorn {
 
+    let alreadyStarted = false;
+
     let _MSGTOSEND: string[] = [];
 
     input.onLogoEvent(TouchButtonEvent.Released, function () {
@@ -14,7 +16,14 @@ namespace RainbowSparkleUnicorn {
       * Add into the start function to initialise the board.
       */
     //% block="Start Rainbow Sparkle Unicorn"
-    export function start(txPin: SerialPin = SerialPin.P2, rxPin: SerialPin = SerialPin.P1, TxBufferSize: number = 128, RxBufferSize: number = 128, TransmissionMs: number = 10, InputInterval: number = 100, CommandInterval: number = 500): void {
+    export function start(txPin: SerialPin = SerialPin.P2, rxPin: SerialPin = SerialPin.P1, TxBufferSize: number = 128, RxBufferSize: number = 128, TransmissionMs: number = 10): void {
+
+        //prevent running more than once
+        if (alreadyStarted == true) {
+            return;
+        } else {
+            alreadyStarted = true;
+        }
 
         serial.redirect(txPin, rxPin, BaudRate.BaudRate115200);
         serial.setTxBufferSize(TxBufferSize);
@@ -41,37 +50,14 @@ namespace RainbowSparkleUnicorn {
                 //send if array is not empty
                 if (_MSGTOSEND.length > 0) {
 
-                    // let msg = _MSGTOSEND.shift();
-                    // msg = msg + String.fromCharCode(Delimiters.CarriageReturn);
-                    // serial.writeString(msg);
-
                     serial.writeString(_MSGTOSEND.shift() + String.fromCharCode(Delimiters.CarriageReturn));
-                
+
                     //LED toggle takes two milliseconds - just helps me!
-                    led.toggle(0, 0);                
+                    led.toggle(0, 0);
                 }
             })
         })
-
-        //set up updates for events
-        control.inBackground(function () {
-            loops.everyInterval(InputInterval, function () {
-                _sendMessage("TUPDATE");
-                _sendMessage("SUPDATE");
-            })
-        })
-
-        control.inBackground(function () {
-            loops.everyInterval(CommandInterval, function () {
-                _sendMessage("SLIDER1");
-                _sendMessage("SLIDER2");
-                _sendMessage("SBUSY");
-                _sendMessage("ROTARY1");
-                _sendMessage("ROTARY2");
-            })
-        })
     }
-
 
     export function _sendMessage(message: string): void {
         _MSGTOSEND.push(message);
@@ -97,10 +83,10 @@ namespace RainbowSparkleUnicorn {
             Sound._dealWithMusicMessage(parseInt(message.split(":")[1]));
         }
         else if (topic == "SUPDATE") {
-            Switch._dealWithSwitchMessage(message.split(":")[1]);
+            Switch._dealWithSwitchUpdateMessage(message.split(":")[1]);
         }
         else if (topic == "TUPDATE") {
-            Touch._dealWithTouchMessage(message.split(":")[1]);
+            Touch._dealWithTouchUpdateMessage(message.split(":")[1]);
         }
     }
 

@@ -17,7 +17,7 @@ namespace RainbowSparkleUnicorn.Slider {
     //% subcategory="Sliders / Dials / Spinners" 
     //% group="Sliders"
     //% block="Get slider %slider value" 
-    export function value(slider: Sliders): number {
+    export function Value(slider: Sliders): number {
 
         if (slider == Sliders.Slider1) {
             return _Slider1;
@@ -25,5 +25,23 @@ namespace RainbowSparkleUnicorn.Slider {
             return _Slider2;
         }
     }
+
+    /**
+    * Request the slider value.
+    */
+    //% subcategory="Sliders / Dials / Spinners"
+    //% group="Sliders"
+    //% block="Request slider %slider value"
+    //% weight=65
+    export function RequestSliderValue(
+        slider: Sliders
+    ) {
+        if (slider == Sliders.Slider1) {
+            _sendMessage("SLIDER1");
+        } else {
+            _sendMessage("SLIDER2");
+        }
+    }
+
 
 }

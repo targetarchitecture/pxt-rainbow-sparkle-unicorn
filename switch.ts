@@ -56,7 +56,7 @@ namespace RainbowSparkleUnicorn.Switch {
         return previousSwitchStates.charAt(pin);
     }
 
-    export function _dealWithSwitchMessage(switchStates: string) {
+    export function _dealWithSwitchUpdateMessage(switchStates: string) {
 
         if (previousSwitchStates.charAt(0) != "0") {
 
