@@ -65,9 +65,6 @@ namespace RainbowSparkleUnicorn.Switch {
 
         if (previousSwitchStates.charAt(0) != "0") {
 
-            // let anyPressed = false;
-            // let anyReleased = false;
-
             for (let pin = 0; pin < 16; pin++) {
 
                 const pinState = switchStates.charAt(pin);

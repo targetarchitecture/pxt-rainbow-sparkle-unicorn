@@ -19,7 +19,8 @@
         "sound.ts",
         "spinner.ts",
         "switch.ts",
-        "touch.ts"
+        "touch.ts",
+        "constants.ts"
     ],
     "testFiles": [],
     "targetVersions": {

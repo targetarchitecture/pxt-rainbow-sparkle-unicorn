@@ -1,12 +1,13 @@
 
 namespace RainbowSparkleUnicorn.Touch {
 
+    export const RAINBOW_SPARKLE_UNICORN_TOUCH_SENSOR_TOUCHED_ANY = 5049;
+    export const RAINBOW_SPARKLE_UNICORN_TOUCH_SENSOR_RELEASED_ANY = 5069;
     export const RAINBOW_SPARKLE_UNICORN_TOUCH_SENSOR_TOUCHED = 5050;
     export const RAINBOW_SPARKLE_UNICORN_TOUCH_SENSOR_RELEASED = 5070;
 
     let previousTouchStates = "000000000000";
-
-    //console.log(Array(12).fill(0));
+    let pinOffset = 1000;
 
     export enum Pins {
         //% block="Pin 0"    
@@ -32,9 +33,7 @@ namespace RainbowSparkleUnicorn.Touch {
         //% block="Pin 10" 
         P10 = 10,
         //% block="Pin 11" 
-        P11 = 11,
-        //% block="Any"
-        Any
+        P11 = 11
     }
 
     export enum Event {
@@ -81,13 +80,13 @@ namespace RainbowSparkleUnicorn.Touch {
                 if (pinState.compare(previousPinState) != 0) {
                     if (pinState.compare("H") == 0) {
 
-                        control.raiseEvent(RAINBOW_SPARKLE_UNICORN_TOUCH_SENSOR_TOUCHED, pin)
-                        control.raiseEvent(RAINBOW_SPARKLE_UNICORN_TOUCH_SENSOR_TOUCHED, Pins.Any)
+                        control.raiseEvent(RAINBOW_SPARKLE_UNICORN_TOUCH_SENSOR_TOUCHED + pin, pin + pinOffset)
+                        control.raiseEvent(RAINBOW_SPARKLE_UNICORN_TOUCH_SENSOR_TOUCHED_ANY, pin + pinOffset)
 
                     } else if (pinState.compare("L") == 0) {
 
-                        control.raiseEvent(RAINBOW_SPARKLE_UNICORN_TOUCH_SENSOR_RELEASED, pin)
-                        control.raiseEvent(RAINBOW_SPARKLE_UNICORN_TOUCH_SENSOR_RELEASED, Pins.Any)
+                        control.raiseEvent(RAINBOW_SPARKLE_UNICORN_TOUCH_SENSOR_RELEASED + pin, pin + pinOffset)
+                        control.raiseEvent(RAINBOW_SPARKLE_UNICORN_TOUCH_SENSOR_RELEASED_ANY, pin + pinOffset)
 
                     }
                 }
@@ -96,4 +95,89 @@ namespace RainbowSparkleUnicorn.Touch {
 
         previousTouchStates = touchStates;
     }
+
+    /**
+     * Do something when a pin is touched.
+     * @param pin the touch pin to be checked
+     * @param handler body code to run when the event is raised
+     */
+    //% subcategory="Touch"
+    //% block="on pin %pin | touched"
+    //% weight=65
+    export function onTouched(
+        pin: Pins,
+        handler: () => void
+    ) {
+        control.onEvent(
+            RAINBOW_SPARKLE_UNICORN_TOUCH_SENSOR_TOUCHED + pin,
+            EventBusValue.MICROBIT_EVT_ANY,
+            () => {
+                handler();
+            }
+        );
+
+    }
+    /**
+     * Do something when a pin is released.
+     * @param pin the touch pin to be checked
+     * @param handler body code to run when the event is raised
+     */
+    //% subcategory="Touch"
+    //% block="on %pin | released"
+    //% weight=65
+    export function onReleased(
+        pin: Pins,
+        handler: () => void
+    ) {
+        control.onEvent(
+            RAINBOW_SPARKLE_UNICORN_TOUCH_SENSOR_TOUCHED + pin,
+            EventBusValue.MICROBIT_EVT_ANY,
+            () => {
+                handler();
+            }
+        );
+    }
+
+
+    /**
+ * Do something when any pin is touched.
+ * @param handler body code to run when the event is raised
+ */
+    //% subcategory="Touch"
+    //% block="on any pin touched"
+    //% weight=65
+    export function onAnyTouched(
+        handler: (pin: number) => void
+    ) {
+        control.onEvent(
+            RAINBOW_SPARKLE_UNICORN_TOUCH_SENSOR_TOUCHED_ANY,
+            EventBusValue.MICROBIT_EVT_ANY,
+            () => {
+                handler(control.eventValue() - pinOffset);
+            }
+        );
+    }
+
+
+
+    /**
+  * Do something when any pin is released.
+  * @param handler body code to run when the event is raised
+  */
+    //% subcategory="Touch"
+    //% block="on any pin released"
+    //% weight=65
+    export function onAnyReleased(
+        handler: (pin: number) => void
+    ) {
+        control.onEvent(
+            RAINBOW_SPARKLE_UNICORN_TOUCH_SENSOR_RELEASED_ANY,
+            EventBusValue.MICROBIT_EVT_ANY,
+            () => {
+                handler(control.eventValue() - pinOffset);
+            }
+        );
+    }
+
+
 }

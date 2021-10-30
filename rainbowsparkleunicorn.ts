@@ -3,6 +3,12 @@
 //% subcategories='["Touch", "Switch", "Sound", "Light", "Sliders / Dials / Spinners" ,"Movement", "IoT", "Expert"]'
 namespace RainbowSparkleUnicorn {
 
+    //if it's a V2 then we add this to jump back to normal USB for updating    
+    input.onLogoEvent(TouchButtonEvent.Released, function () {
+        serial.redirectToUSB()
+        basic.showIcon(IconNames.Yes)
+    })
+
     let _MSGTOSEND: string[] = [];
 
     /**

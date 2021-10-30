@@ -1,5 +1,13 @@
 RainbowSparkleUnicorn.start()
 
+RainbowSparkleUnicorn.Touch.onTouched(RainbowSparkleUnicorn.Touch.Pins.P0, function () {
+    basic.showString("T")
+})
+
+RainbowSparkleUnicorn.Touch.onAnyTouched( function (pin) {
+    basic.showNumber(pin)
+})
+
 RainbowSparkleUnicorn.Switch.onPressed(RainbowSparkleUnicorn.Switch.Pins.P0, function () {
   basic.showString("A")
 })
@@ -18,9 +26,4 @@ RainbowSparkleUnicorn.Switch.onReleased(RainbowSparkleUnicorn.Switch.Pins.P1, fu
 
 RainbowSparkleUnicorn.Switch.onAnyPressed( function (pin) {
     basic.showNumber(pin)
-})
-
-input.onLogoEvent(TouchButtonEvent.Released, function() {
-    serial.redirectToUSB()
-    basic.showIcon(IconNames.Yes)
 })
