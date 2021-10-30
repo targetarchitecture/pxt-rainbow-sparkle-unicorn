@@ -1,8 +1,5 @@
 namespace RainbowSparkleUnicorn.Spinner {
 
-    export const RAINBOW_SPARKLE_UNICORN_SPINNER_1 = 5091;
-    export const RAINBOW_SPARKLE_UNICORN_SPINNER_2 = 5092;
-
     let touchOffset = 1000;
 
     export declare const enum Spinners {

@@ -1,10 +1,7 @@
 
 namespace RainbowSparkleUnicorn.Touch {
 
-    export const RAINBOW_SPARKLE_UNICORN_TOUCH_SENSOR_TOUCHED_ANY = 5049;
-    export const RAINBOW_SPARKLE_UNICORN_TOUCH_SENSOR_RELEASED_ANY = 5069;
-    export const RAINBOW_SPARKLE_UNICORN_TOUCH_SENSOR_TOUCHED = 5050;
-    export const RAINBOW_SPARKLE_UNICORN_TOUCH_SENSOR_RELEASED = 5070;
+
 
     let previousTouchStates = "000000000000";
     let pinOffset = 1000;

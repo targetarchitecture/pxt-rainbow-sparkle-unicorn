@@ -1,10 +1,5 @@
 namespace RainbowSparkleUnicorn.Switch {
 
-    export const RAINBOW_SPARKLE_UNICORN_SWITCH_PRESSED_ANY = 5009;
-    export const RAINBOW_SPARKLE_UNICORN_SWITCH_PRESSED = 5010;
-    export const RAINBOW_SPARKLE_UNICORN_SWITCH_RELEASED_ANY = 5029;
-    export const RAINBOW_SPARKLE_UNICORN_SWITCH_RELEASED = 5030;
-
     let previousSwitchStates = "0000000000000000";
     let pinOffset = 1000;
 
