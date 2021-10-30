@@ -39,9 +39,7 @@ namespace RainbowSparkleUnicorn.Switch {
         //% block="Pin 14"
         P14 = 14,
         //% block="Pin 15"
-        P15 = 15,
-        //% block="Any" 
-        Any
+        P15 = 15
     }
 
     export enum Event {
@@ -66,6 +64,9 @@ namespace RainbowSparkleUnicorn.Switch {
 
         if (previousSwitchStates.charAt(0) != "0") {
 
+            let anyPressed = false;
+            let anyReleased = false;
+
             for (let pin = 0; pin < 16; pin++) {
 
                 const pinState = switchStates.charAt(pin);
@@ -75,15 +76,18 @@ namespace RainbowSparkleUnicorn.Switch {
 
                     if (pinState.compare("L") == 0) {
 
-                        control.raiseEvent(RAINBOW_SPARKLE_UNICORN_SWITCH_PRESSED + pin, pin)
+                        control.raiseEvent(RAINBOW_SPARKLE_UNICORN_SWITCH_PRESSED , pin)
                         control.raiseEvent(RAINBOW_SPARKLE_UNICORN_SWITCH_PRESSED_ANY, pin)
 
                     } else if (pinState.compare("H") == 0) {
-                        control.raiseEvent(RAINBOW_SPARKLE_UNICORN_SWITCH_RELEASED + pin, pin)
+                        control.raiseEvent(RAINBOW_SPARKLE_UNICORN_SWITCH_RELEASED , pin)
                         control.raiseEvent(RAINBOW_SPARKLE_UNICORN_SWITCH_RELEASED_ANY, pin)
                     }
                 }
             }
+
+
+            if (anyPressed)
         }
 
         previousSwitchStates = switchStates;
@@ -99,25 +103,16 @@ namespace RainbowSparkleUnicorn.Switch {
     //% weight=65
     export function onPressed(
         pin: Pins,
-        handler: (pin: number) => void
+        handler: () => void
     ) {
-        if (pin == Pins.Any) {
-            control.onEvent(
-                RAINBOW_SPARKLE_UNICORN_SWITCH_PRESSED_ANY,
-                EventBusValue.MICROBIT_EVT_ANY,
-                () => {
-                    handler(control.eventValue());
-                }
-            );
-        } else {
-            control.onEvent(
-                RAINBOW_SPARKLE_UNICORN_SWITCH_PRESSED + pin,
-                EventBusValue.MICROBIT_EVT_ANY,
-                () => {
-                    handler(control.eventValue());
-                }
-            );
-        }
+        control.onEvent(
+            RAINBOW_SPARKLE_UNICORN_SWITCH_PRESSED,
+            pin,
+            () => {
+                handler();
+            }
+        );
+
     }
     /**
      * Do something when a switch is released.
@@ -129,24 +124,55 @@ namespace RainbowSparkleUnicorn.Switch {
     //% weight=65
     export function onReleased(
         pin: Pins,
+        handler: () => void
+    ) {
+        control.onEvent(
+            RAINBOW_SPARKLE_UNICORN_SWITCH_RELEASED,
+            pin,
+            () => {
+                handler();
+            }
+        );
+    }
+
+
+    /**
+ * Do something when any switch is pushed.
+ * @param handler body code to run when the event is raised
+ */
+    //% subcategory="Switch"
+    //% block="on any switch pressed"
+    //% weight=65
+    export function onAnyPressed(
         handler: (pin: number) => void
     ) {
-        if (pin == Pins.Any) {
-            control.onEvent(
-                RAINBOW_SPARKLE_UNICORN_SWITCH_RELEASED_ANY + pin,
-                EventBusValue.MICROBIT_EVT_ANY,
-                () => {
-                    handler(control.eventValue());
-                }
-            );
-        } else {
-            control.onEvent(
-                RAINBOW_SPARKLE_UNICORN_SWITCH_RELEASED + pin,
-                EventBusValue.MICROBIT_EVT_ANY,
-                () => {
-                    handler(control.eventValue());
-                }
-            );
-        }
+        control.onEvent(
+            RAINBOW_SPARKLE_UNICORN_SWITCH_PRESSED_ANY,
+            EventBusValue.MICROBIT_EVT_ANY,
+            () => {
+                handler(control.eventValue());
+            }
+        );
+    }
+
+
+
+    /**
+  * Do something when any switch is released.
+  * @param handler body code to run when the event is raised
+  */
+    //% subcategory="Switch"
+    //% block="on any switch released"
+    //% weight=65
+    export function onAnyReleased(
+        handler: (pin: number) => void
+    ) {
+        control.onEvent(
+            RAINBOW_SPARKLE_UNICORN_SWITCH_RELEASED_ANY,
+            EventBusValue.MICROBIT_EVT_ANY,
+            () => {
+                handler(control.eventValue());
+            }
+        );
     }
 }
