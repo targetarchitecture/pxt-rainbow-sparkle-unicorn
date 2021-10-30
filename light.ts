@@ -86,12 +86,12 @@ namespace RainbowSparkleUnicorn.Light {
     export function turnAllOff() {
 
         //see if the pause is needed as sometime the LEDs don't come on when powered up
-        basic.pause(50);
+        //basic.pause(50);
 
         _sendMessage("LLEDALLOFF");
 
         //see if the pause is needed as sometime the LEDs don't come on when powered up
-        basic.pause(50);
+        //basic.pause(50);
     }
 
     /**
@@ -102,11 +102,11 @@ namespace RainbowSparkleUnicorn.Light {
     export function turnAllOn() {
 
         //see if the pause is needed as sometime the LEDs don't come on when powered up
-        basic.pause(50);
+        //basic.pause(50);
 
         _sendMessage("LLEDALLON");
 
         //see if the pause is needed as sometime the LEDs don't come on when powered up
-        basic.pause(50);
+        //basic.pause(50);
     }
 }
