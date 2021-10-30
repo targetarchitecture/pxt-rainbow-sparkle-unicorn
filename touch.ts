@@ -1,8 +1,6 @@
 
 namespace RainbowSparkleUnicorn.Touch {
 
-
-
     let previousTouchStates = "000000000000";
     let pinOffset = 1000;
 
@@ -62,6 +60,17 @@ namespace RainbowSparkleUnicorn.Touch {
     //% timing.min=0 timing.max=100 timing.defl=50
     export function setDebounceDelay(timing: number) {
         _sendMessage("S2," + timing);
+    }
+
+
+    /**
+* Request the touch states, usefull to set the starting values.
+*/
+    //% subcategory="Touch"
+    //% block="Request touch states"
+    //% weight=65
+    export function RequestTouchStates() {
+        _sendMessage("TSTATE");
     }
 
     export function _dealWithTouchUpdateMessage(touchStates: string) {

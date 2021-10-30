@@ -56,6 +56,16 @@ namespace RainbowSparkleUnicorn.Switch {
         return previousSwitchStates.charAt(pin);
     }
 
+    /**
+    * Request the switch states, usefull to set the starting values.
+    */
+    //% subcategory="Switch"
+    //% block="Request switch states"
+    //% weight=65
+    export function RequestSwitchStates() {
+        _sendMessage("SSTATE");
+    }
+
     export function _dealWithSwitchUpdateMessage(switchStates: string) {
 
         if (previousSwitchStates.charAt(0) != "0") {
@@ -141,7 +151,7 @@ namespace RainbowSparkleUnicorn.Switch {
             RAINBOW_SPARKLE_UNICORN_SWITCH_PRESSED_ANY,
             EventBusValue.MICROBIT_EVT_ANY,
             () => {
-                handler(control.eventValue()-pinOffset);
+                handler(control.eventValue() - pinOffset);
             }
         );
     }

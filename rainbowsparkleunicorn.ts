@@ -16,7 +16,12 @@ namespace RainbowSparkleUnicorn {
       * Add into the start function to initialise the board.
       */
     //% block="Start Rainbow Sparkle Unicorn"
-    export function start(txPin: SerialPin = SerialPin.P2, rxPin: SerialPin = SerialPin.P1, TxBufferSize: number = 128, RxBufferSize: number = 128, TransmissionMs: number = 10): void {
+    export function start(
+                        TxPin: SerialPin = SerialPin.P2, 
+                        RxPin: SerialPin = SerialPin.P1, 
+                        TxBufferSize: number = 128, 
+                        RxBufferSize: number = 128, 
+                        TransmissionMs: number = 10): void {
 
         //prevent running more than once
         if (alreadyStarted == true) {
@@ -25,7 +30,7 @@ namespace RainbowSparkleUnicorn {
             alreadyStarted = true;
         }
 
-        serial.redirect(txPin, rxPin, BaudRate.BaudRate115200);
+        serial.redirect(TxPin, RxPin, BaudRate.BaudRate115200);
         serial.setTxBufferSize(TxBufferSize);
         serial.setRxBufferSize(RxBufferSize);
 
