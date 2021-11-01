@@ -19,6 +19,8 @@ namespace RainbowSparkleUnicorn.Dial {
     //% weight=65
     export function value(dial: Dials, value: number) {
 
+        value = Math.round(value);
+
         if (dial == Dials.Dial1) {
             _sendMessage("DIAL1," + Math.clamp(0, 255, value))
         }
