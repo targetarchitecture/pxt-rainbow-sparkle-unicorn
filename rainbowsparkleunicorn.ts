@@ -130,5 +130,18 @@ namespace RainbowSparkleUnicorn.Expert {
         _sendMessage("RESTART");
     }
 
+    /**
+     * Show a message on the USB of the ESP32, maximum message size is 100 characters
+     */
+    //% subcategory="Expert" 
+    //% group="Debug"       
+    //% block="Send Debug Message"
+    export function SendDebugMessage(message: string): void {
+        
+        message = message.substr(0, 100);
+
+        _sendMessage("DEBUG:" + message);
+    }
+
+
 }
-// Add your code here
