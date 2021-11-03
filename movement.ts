@@ -1,5 +1,3 @@
-
-
 namespace RainbowSparkleUnicorn.Movement {
 
     export declare const enum Pins {

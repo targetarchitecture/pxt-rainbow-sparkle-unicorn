@@ -140,7 +140,7 @@ namespace RainbowSparkleUnicorn.Expert {
         
         message = message.substr(0, 100);
 
-        _sendMessage("DEBUG:" + message);
+        _sendMessage("DEBUG," + message);
     }
 
 
