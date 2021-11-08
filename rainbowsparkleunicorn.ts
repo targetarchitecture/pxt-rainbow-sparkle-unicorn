@@ -50,7 +50,7 @@ namespace RainbowSparkleUnicorn {
             _readMessage(msg);
 
             //LED toggle takes two milliseconds - just helps me!
-            led.toggle(1, 0);
+            //led.toggle(1, 0);
         });
 
         //set-up UART transmission loop
@@ -63,7 +63,7 @@ namespace RainbowSparkleUnicorn {
                     serial.writeString(_MSGTOSEND.shift() + String.fromCharCode(Delimiters.CarriageReturn));
 
                     //LED toggle takes two milliseconds - just helps me!
-                    led.toggle(0, 0);
+                    //led.toggle(0, 0);
                 }
             })
         })
