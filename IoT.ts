@@ -17,11 +17,17 @@ namespace RainbowSparkleUnicorn.IoT {
     export function onNewMQTTMessage(handler: (message: string) => void): void {
         MQTTChange = handler;
     }
+
+    /**
+     * Listen (subscribe) to IoT messages on a topic
+     * @param topic 
+     */
+    //% subcategory="IoT" 
+    //% group="Messaging"
+    //% block="subscribe to topic $topic"   
+    export function listen(topic : string) {
+        _sendMessage("SUBSCRIBE," + topic )
+    }
 }
 
-// basic.showIcon(IconNames.Heart)
-// namespace RainbowSparkleUnicorn.PS2 {
-//     RainbowSparkleUnicorn.IoT.onBusyChange(function (message) {
-//         basic.showString(message);
-//     })
-// }
+
