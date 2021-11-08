@@ -20,7 +20,8 @@
         "spinner.ts",
         "switch.ts",
         "touch.ts",
-        "constants.ts"
+        "constants.ts",
+        "IoT.ts"
     ],
     "testFiles": [],
     "targetVersions": {

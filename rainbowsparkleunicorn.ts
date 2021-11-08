@@ -104,6 +104,9 @@ namespace RainbowSparkleUnicorn {
         else if (topic == "TSTATE") {
             Touch._previousTouchStates = message.split(":")[1];
         }
+        else if (topic == "MQTT") {
+            IoT._dealWithMQTTMessage(message.split(":")[1]);
+        }
     }
 
     /**
