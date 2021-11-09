@@ -1,11 +1,17 @@
 namespace RainbowSparkleUnicorn.IoT {
    export function _dealWithMQTTMessage(message: string) {
         if (MQTTChange != null) {
-            MQTTChange(message)
+
+            let parts = message.split("','");
+
+            let topic = parts[0];
+            let content = parts[1];
+
+            MQTTChange(topic, content);
         }
     }
 
-    let MQTTChange: (message: string) => void = null
+    let MQTTChange: (topic: string, message: string) => void = null
 
     /**
     * Use the Internet of Things (IoT) to control your projects
@@ -14,10 +20,10 @@ namespace RainbowSparkleUnicorn.IoT {
     //% group="Messaging"
     //% block="on IoT message arriving"
     //% weight=65
-    export function onNewMQTTMessage(handler: (message: string) => void): void {
+    export function onNewMQTTMessage(handler: (topic: string,message: string) => void): void {
         MQTTChange = handler;
     }
-
+  
     /**
      * Listen (subscribe) to IoT messages on a topic
      * @param topic 
