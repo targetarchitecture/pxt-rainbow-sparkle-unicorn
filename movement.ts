@@ -103,6 +103,7 @@ namespace RainbowSparkleUnicorn.Movement {
     //% block="set $servo angle to $angle"
     //% angle.min=0 angle.max=180    
     export function setServoAngle(servo: Pins, angle = 90) {
+        
         angle = Math.constrain(angle, 0, 180);
 
         let servoDetails = servoList[servo].split(",");

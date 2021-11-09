@@ -137,16 +137,15 @@ namespace RainbowSparkleUnicorn.Expert {
 
     /**
      * Show a message on the USB of the ESP32, maximum message size is 100 characters
+     * @param message the string to send to the ESP32
      */
     //% subcategory="Expert" 
     //% group="Debug"       
-    //% block="Send Debug Message"
+    //% block="Send Debug Message $message"
     export function SendDebugMessage(message: string): void {
 
         message = message.substr(0, 100);
 
         _sendMessage("DEBUG," + message);
     }
-
-
 }
