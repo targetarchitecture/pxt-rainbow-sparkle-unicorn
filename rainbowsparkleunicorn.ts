@@ -22,7 +22,7 @@ namespace RainbowSparkleUnicorn {
         RxPin: SerialPin = SerialPin.P1,
         TxBufferSize: number = 128,
         RxBufferSize: number = 128,
-        TransmissionMs: number = 10): void {
+        TransmissionMs: number = 5): void {
 
         //prevent running more than once
         if (alreadyStarted == true) {
