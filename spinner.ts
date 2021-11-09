@@ -1,6 +1,6 @@
 namespace RainbowSparkleUnicorn.Spinner {
 
-    let touchOffset = 1000;
+    let pinOffset = 1000;
 
     export declare const enum Spinners {
         //% block="Rotary 1"    
@@ -46,7 +46,7 @@ namespace RainbowSparkleUnicorn.Spinner {
                 RAINBOW_SPARKLE_UNICORN_SPINNER_1,
                 EventBusValue.MICROBIT_EVT_ANY,
                 () => {
-                    handler(control.eventValue() - touchOffset);
+                    handler(control.eventValue() - pinOffset);
                 }
             );
         } else {
@@ -54,7 +54,7 @@ namespace RainbowSparkleUnicorn.Spinner {
                 RAINBOW_SPARKLE_UNICORN_SPINNER_2,
                 EventBusValue.MICROBIT_EVT_ANY,
                 () => {
-                    handler(control.eventValue() - touchOffset);
+                    handler(control.eventValue() - pinOffset);
                 }
             );
         }
@@ -63,7 +63,7 @@ namespace RainbowSparkleUnicorn.Spinner {
     export function _dealWithSpinner1Message(value: number) {
 
         if (value != _Encoder1value) {
-            control.raiseEvent(RAINBOW_SPARKLE_UNICORN_SPINNER_1, value + touchOffset)
+            control.raiseEvent(RAINBOW_SPARKLE_UNICORN_SPINNER_1, value + pinOffset)
         }
 
         _Encoder1value = value;
@@ -71,7 +71,7 @@ namespace RainbowSparkleUnicorn.Spinner {
 
     export function _dealWithSpinner2Message(value: number) {
         if (value != _Encoder2value) {
-            control.raiseEvent(RAINBOW_SPARKLE_UNICORN_SPINNER_2, value + touchOffset)
+            control.raiseEvent(RAINBOW_SPARKLE_UNICORN_SPINNER_2, value + pinOffset)
         }
         _Encoder2value = value;
     }

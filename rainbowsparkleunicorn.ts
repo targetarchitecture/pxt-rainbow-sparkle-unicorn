@@ -75,37 +75,39 @@ namespace RainbowSparkleUnicorn {
 
     function _readMessage(message: string): void {
 
-        let topic: string = message.split(":")[0];
+        let messageParts = message.split(":");
+
+        let topic: string = messageParts[0];
 
         if (topic == "SLIDER1") {
-            RainbowSparkleUnicorn.Slider._Slider1 = parseInt(message.split(":")[1]);
+            RainbowSparkleUnicorn.Slider._Slider1 = parseInt(messageParts[1]);
         }
         else if (topic == "SLIDER2") {
-            RainbowSparkleUnicorn.Slider._Slider2 = parseInt(message.split(":")[1]);
+            RainbowSparkleUnicorn.Slider._Slider2 = parseInt(messageParts[1]);
         }
         else if (topic == "ROTARY1") {
-            RainbowSparkleUnicorn.Spinner._dealWithSpinner1Message(parseInt(message.split(":")[1]));
+            RainbowSparkleUnicorn.Spinner._dealWithSpinner1Message(parseInt(messageParts[1]));
         }
         else if (topic == "ROTARY2") {
-            RainbowSparkleUnicorn.Spinner._dealWithSpinner2Message(parseInt(message.split(":")[1]));
+            RainbowSparkleUnicorn.Spinner._dealWithSpinner2Message(parseInt(messageParts[1]));
         }
         else if (topic == "SBUSY") {
-            Sound._dealWithMusicMessage(parseInt(message.split(":")[1]));
+            Sound._dealWithMusicMessage(parseInt(messageParts[1]));
         }
         else if (topic == "SUPDATE") {
-            Switch._dealWithSwitchUpdateMessage(message.split(":")[1]);
+            Switch._dealWithSwitchUpdateMessage(messageParts[1]);
         }
         else if (topic == "TUPDATE") {
-            Touch._dealWithTouchUpdateMessage(message.split(":")[1]);
+            Touch._dealWithTouchUpdateMessage(messageParts[1]);
         }
         else if (topic == "SSTATE") {
-            Switch._previousSwitchStates = message.split(":")[1];
+            Switch._previousSwitchStates = messageParts[1];
         }
         else if (topic == "TSTATE") {
-            Touch._previousTouchStates = message.split(":")[1];
+            Touch._previousTouchStates = messageParts[1];
         }
         else if (topic == "MQTT") {
-            IoT._dealWithMQTTMessage(message.split(":")[1]);
+            IoT._dealWithMQTTMessage(messageParts[1]);
         }
     }
 
@@ -140,7 +142,7 @@ namespace RainbowSparkleUnicorn.Expert {
     //% group="Debug"       
     //% block="Send Debug Message"
     export function SendDebugMessage(message: string): void {
-        
+
         message = message.substr(0, 100);
 
         _sendMessage("DEBUG," + message);

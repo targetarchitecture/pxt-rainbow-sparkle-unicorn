@@ -10,7 +10,6 @@
         "main.blocks",
         "main.ts",
         "README.md",
-        "testbed.md",
         "dial.ts",
         "light.ts",
         "movement.ts",
