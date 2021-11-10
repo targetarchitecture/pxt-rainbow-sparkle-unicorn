@@ -44,9 +44,8 @@ namespace RainbowSparkleUnicorn.IoT {
     //% group="Messaging"
     //% block="publish an IoT message to topic $topic with content $message"   
     export function publish(topic: string, message: string) {
-        _sendMessage("PUBLISH," + topic + "," + message);
+        _sendMessage("PUBLISH," + topic + "|" + message);
     }
-
 }
 
 
