@@ -18,8 +18,8 @@ namespace RainbowSparkleUnicorn {
       */
     //% block="Start Rainbow Sparkle Unicorn"
     export function start(
-        TxPin: SerialPin = SerialPin.P2,
-        RxPin: SerialPin = SerialPin.P1,
+        TxPin: SerialPin = SerialPin.P15,
+        RxPin: SerialPin = SerialPin.P14,
         TxBufferSize: number = 128,
         RxBufferSize: number = 128,
         TransmissionMs: number = 5): void {
