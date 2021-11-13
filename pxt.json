@@ -30,7 +30,7 @@
     "supportedTargets": [
         "microbit"
     ],
-    "preferredEditor": "tsprj",
+    "preferredEditor": "blocksprj",
     "yotta": {},
     "icon": "https://github.com/targetarchitecture/pxt-rainbow-sparkle-unicorn/blob/master/icon.png"
 }
