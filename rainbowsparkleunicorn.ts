@@ -8,18 +8,20 @@ namespace RainbowSparkleUnicorn {
     let _MSGTOSEND: string[] = [];
 
     //allow quick switch back to normal USB, this is not a problem as the code is so large it only runs on a V2 anyway
-    input.onLogoEvent(TouchButtonEvent.Released, function () {
-        serial.redirectToUSB();
-        basic.showIcon(IconNames.Yes)
-    })
+    if (control.hardwareVersion() == "V2") {
+        input.onLogoEvent(TouchButtonEvent.Released, function () {
+            serial.redirectToUSB();
+            basic.showIcon(IconNames.Yes)
+        })
+    }
 
     /**
       * Add into the start function to initialise the board.
       */
     //% block="Start Rainbow Sparkle Unicorn"
     export function start(
-        TxPin: SerialPin = SerialPin.P15,
-        RxPin: SerialPin = SerialPin.P14,
+        TxPin: SerialPin = SerialPin.P14,
+        RxPin: SerialPin = SerialPin.P15,
         TxBufferSize: number = 128,
         RxBufferSize: number = 128,
         TransmissionMs: number = 5): void {
@@ -40,7 +42,9 @@ namespace RainbowSparkleUnicorn {
 
         //reboot ESP32
         serial.writeString("RESTART" + String.fromCharCode(Delimiters.CarriageReturn));
-        basic.pause(500);
+        
+        //was 500,but 1000 seems more stable
+        basic.pause(1000);
 
         //add the serial data recieve handler
         serial.onDataReceived(serial.delimiters(Delimiters.NewLine), () => {
