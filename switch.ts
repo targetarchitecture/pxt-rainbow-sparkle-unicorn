@@ -58,12 +58,15 @@ namespace RainbowSparkleUnicorn.Switch {
 
     /**
     * Request the switch states, usefull to set the starting values.
+    * waits half a second to get switch states back
     */
     //% subcategory="Switch"
     //% block="Request switch states"
     //% weight=65
-    export function RequestSwitchStates() {
+    export function RequestSwitchStates(): string {
         _sendMessage("SSTATE");
+        basic.pause(500);
+        return _previousSwitchStates;
     }
 
     export function _dealWithSwitchUpdateMessage(switchStates: string) {

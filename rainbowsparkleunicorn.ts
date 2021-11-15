@@ -4,27 +4,23 @@
 namespace RainbowSparkleUnicorn {
 
     let alreadyStarted = false;
+    let redirectedToUSB = false;
 
     let _MSGTOSEND: string[] = [];
 
     //allow quick switch back to normal USB, this is not a problem as the code is so large it only runs on a V2 anyway
-    if (control.hardwareVersion() == "V2") {
-        input.onLogoEvent(TouchButtonEvent.Released, function () {
-            serial.redirectToUSB();
-            basic.showIcon(IconNames.Yes)
-        })
-    }
+    input.onLogoEvent(TouchButtonEvent.Released, function () {
+        redirectedToUSB = true;
+        serial.redirectToUSB();
+        basic.pause(1000);
+        basic.showIcon(IconNames.Yes)
+    })
 
     /**
       * Add into the start function to initialise the board.
       */
     //% block="Start Rainbow Sparkle Unicorn"
-    export function start(
-        TxPin: SerialPin = SerialPin.P14,
-        RxPin: SerialPin = SerialPin.P15,
-        TxBufferSize: number = 128,
-        RxBufferSize: number = 128,
-        TransmissionMs: number = 5): void {
+    export function start(TxBufferSize: number = 128, RxBufferSize: number = 128,TransmissionMs: number = 5): void {
 
         //prevent running more than once
         if (alreadyStarted == true) {
@@ -33,7 +29,7 @@ namespace RainbowSparkleUnicorn {
             alreadyStarted = true;
         }
 
-        serial.redirect(TxPin, RxPin, BaudRate.BaudRate115200);
+        serial.redirect(SerialPin.P14, SerialPin.P15, BaudRate.BaudRate115200);
         serial.setTxBufferSize(TxBufferSize);
         serial.setRxBufferSize(RxBufferSize);
 
@@ -42,16 +38,19 @@ namespace RainbowSparkleUnicorn {
 
         //reboot ESP32
         serial.writeString("RESTART" + String.fromCharCode(Delimiters.CarriageReturn));
-        
+
         //was 500,but 1000 seems more stable
         basic.pause(1000);
 
         //add the serial data recieve handler
         serial.onDataReceived(serial.delimiters(Delimiters.NewLine), () => {
 
-            let msg = serial.readUntil(serial.delimiters(Delimiters.NewLine));
+            let msgrecieved = serial.readUntil(serial.delimiters(Delimiters.NewLine));
 
-            _readMessage(msg);
+            //just stop processing if redirectred back to USB
+            if (redirectedToUSB == false) {
+                _readMessage(msgrecieved);
+            }
 
             //LED toggle takes two milliseconds - just helps me!
             //led.toggle(1, 0);
@@ -64,7 +63,12 @@ namespace RainbowSparkleUnicorn {
                 //send if array is not empty
                 if (_MSGTOSEND.length > 0) {
 
-                    serial.writeString(_MSGTOSEND.shift() + String.fromCharCode(Delimiters.CarriageReturn));
+                    let msgtosend = _MSGTOSEND.shift() + String.fromCharCode(Delimiters.CarriageReturn);
+
+                    //if redirected to USB just shift the message off the loop but don't send
+                    if (redirectedToUSB == false) {
+                        serial.writeString(msgtosend);
+                    }
 
                     //LED toggle takes two milliseconds - just helps me!
                     //led.toggle(0, 0);

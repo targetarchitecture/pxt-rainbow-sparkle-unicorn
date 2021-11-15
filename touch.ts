@@ -63,14 +63,17 @@ namespace RainbowSparkleUnicorn.Touch {
     }
 
 
-    /**
+/**
 * Request the touch states, usefull to set the starting values.
+* waits for half a second to get the switch state back
 */
     //% subcategory="Touch"
     //% block="Request touch states"
     //% weight=65
-    export function RequestTouchStates() {
-        _sendMessage("TSTATE");
+    export function RequestTouchStates(): string {
+        _sendMessage("TSTATE");        
+        basic.pause(500);
+        return _previousTouchStates;
     }
 
     export function _dealWithTouchUpdateMessage(touchStates: string) {
