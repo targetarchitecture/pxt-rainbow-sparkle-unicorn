@@ -47,6 +47,9 @@ namespace RainbowSparkleUnicorn {
 
             let msgrecieved = serial.readUntil(serial.delimiters(Delimiters.NewLine));
 
+            //LED toggle takes two milliseconds - just helps me!
+            //led.toggle(1, 0);
+
             //just stop processing if redirectred back to USB
             if (redirectedToUSB == false) {
                 _readMessage(msgrecieved);
@@ -62,6 +65,9 @@ namespace RainbowSparkleUnicorn {
 
                 //send if array is not empty
                 if (_MSGTOSEND.length > 0) {
+
+                    //LED toggle takes two milliseconds - just helps me!
+                    //led.toggle(0, 0);
 
                     let msgtosend = _MSGTOSEND.shift() + String.fromCharCode(Delimiters.CarriageReturn);
 
