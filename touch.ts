@@ -66,7 +66,7 @@ namespace RainbowSparkleUnicorn.Touch {
     export function _dealWithReleasedUpdateMessage(pin: number) {
         control.raiseEvent(RAINBOW_SPARKLE_UNICORN_TOUCH_SENSOR_RELEASED + pin, pin + pinOffset)
         control.raiseEvent(RAINBOW_SPARKLE_UNICORN_TOUCH_SENSOR_RELEASED_ANY, pin + pinOffset)
-        basic.showIcon(IconNames.Yes)
+        //basic.showIcon(IconNames.Yes)
     }
 
     export function _dealWithTouchedUpdateMessage(pin: number) {
@@ -75,7 +75,7 @@ namespace RainbowSparkleUnicorn.Touch {
         control.raiseEvent(RAINBOW_SPARKLE_UNICORN_TOUCH_SENSOR_TOUCHED + pin, pin + pinOffset)
         control.raiseEvent(RAINBOW_SPARKLE_UNICORN_TOUCH_SENSOR_TOUCHED_ANY, pin + pinOffset)
 
-        basic.showIcon(IconNames.No)
+       // basic.showIcon(IconNames.No)
 
         // //this attempts to set-up an initial state of the switches
         // if (_previousTouchStates.charAt(0) != "0") {
@@ -138,7 +138,7 @@ namespace RainbowSparkleUnicorn.Touch {
         handler: () => void
     ) {
         control.onEvent(
-            RAINBOW_SPARKLE_UNICORN_TOUCH_SENSOR_TOUCHED + pin,
+            RAINBOW_SPARKLE_UNICORN_TOUCH_SENSOR_RELEASED + pin,
             EventBusValue.MICROBIT_EVT_ANY,
             () => {
                 handler();

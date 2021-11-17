@@ -20,7 +20,7 @@ namespace RainbowSparkleUnicorn {
       * Add into the start function to initialise the board.
       */
     //% block="Start Rainbow Sparkle Unicorn"
-    export function start(TxBufferSize: number = 128, RxBufferSize: number = 128,TransmissionMs: number = 5): void {
+    export function start(TxBufferSize: number = 128, RxBufferSize: number = 128,TransmissionMs: number = 10): void {
 
         //prevent running more than once
         if (alreadyStarted == true) {
