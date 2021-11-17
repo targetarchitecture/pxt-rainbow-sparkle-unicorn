@@ -7,14 +7,14 @@ namespace RainbowSparkleUnicorn {
     let redirectedToUSB = false;
 
     let _MSGTOSEND: string[] = [];
-    //let _MSGTOACTION: string[] = [];
+    let _MSGTOACTION: string[] = [];
 
     //allow quick switch back to normal USB, this is not a problem as the code is so large it only runs on a V2 anyway
-    input.onLogoEvent(TouchButtonEvent.Released, function () {
+    input.onButtonPressed(Button.AB, function () {
         redirectedToUSB = true;
         serial.redirectToUSB();
-        basic.pause(1000);
         basic.showIcon(IconNames.Yes)
+        basic.pause(500);
     })
 
     /**
@@ -45,37 +45,18 @@ namespace RainbowSparkleUnicorn {
 
         //add the serial data recieve handler
         serial.onDataReceived(serial.delimiters(Delimiters.NewLine), () => {
-            //RainbowSparkleUnicorn.Expert.SendDebugMessage("A:" + control.millis().toString());
 
             let msgrecieved = serial.readUntil(serial.delimiters(Delimiters.NewLine));
 
-            //LED toggle takes two milliseconds - just helps me!
-            //led.toggle(1, 0);
-
             //just stop processing if redirectred back to USB
             if (redirectedToUSB == false) {
-                //_MSGTOACTION.push(msgrecieved);
-                _readMessage(msgrecieved);
+                _MSGTOACTION.push(msgrecieved);
+                //_readMessage(msgrecieved);
             }
-            //RainbowSparkleUnicorn.Expert.SendDebugMessage("B:" + control.millis().toString());
 
             //LED toggle takes two milliseconds - just helps me!
-            //led.toggle(1, 0);
+            led.toggle(0, 0);
         });
-
-        // //set-up message action loop
-        // control.inBackground(function () {
-        //     loops.everyInterval(5, function () {
-
-        //         //send if array is not empty
-        //         if (_MSGTOACTION.length > 0) {
-
-        //             let msgrecieved = _MSGTOACTION.shift();
-
-        //             _readMessage(msgrecieved);
-        //         }
-        //     })
-        // });
 
         //set-up UART transmission loop
         control.inBackground(function () {
@@ -85,7 +66,7 @@ namespace RainbowSparkleUnicorn {
                 if (_MSGTOSEND.length > 0) {
 
                     //LED toggle takes two milliseconds - just helps me!
-                    //led.toggle(0, 0);
+                    led.toggle(2, 0);
 
                     let msgtosend = _MSGTOSEND.shift() + String.fromCharCode(Delimiters.CarriageReturn);
 
@@ -93,9 +74,23 @@ namespace RainbowSparkleUnicorn {
                     if (redirectedToUSB == false) {
                         serial.writeString(msgtosend);
                     }
+                }
+            })
+        })
+
+        //set-up an action loop
+        control.inBackground(function () {
+            loops.everyInterval(10, function () {
+
+                //send if array is not empty
+                if (_MSGTOACTION.length > 0) {
 
                     //LED toggle takes two milliseconds - just helps me!
-                    led.toggle(0, 0);
+                    led.toggle(1, 0);
+
+                    let msgtoaction = _MSGTOACTION.shift();
+
+                    _readMessage(msgtoaction);
                 }
             })
         })
@@ -129,13 +124,8 @@ namespace RainbowSparkleUnicorn {
         else if (topic == "SUPDATE") {
             Switch._dealWithSwitchUpdateMessage(messageParts[1]);
         }
-        // else if (topic == "TUPDATE") {
-        //     Touch._dealWithTouchUpdateMessage(messageParts[1]);
-        // }
         else if (topic == "TTOUCHED") {
-            //RainbowSparkleUnicorn.Expert.SendDebugMessage("TTOUCHED START:" + control.millis().toString());
             Touch._dealWithTouchedUpdateMessage(parseInt(messageParts[1]));
-            //RainbowSparkleUnicorn.Expert.SendDebugMessage("TTOUCHED END:" + control.millis().toString());
         }
         else if (topic == "TRELEASED") {
             Touch._dealWithReleasedUpdateMessage(parseInt(messageParts[1]));
@@ -143,9 +133,6 @@ namespace RainbowSparkleUnicorn {
         else if (topic == "SSTATE") {
             Switch._previousSwitchStates = messageParts[1];
         }
-        // else if (topic == "TSTATE") {
-        //     Touch._previousTouchStates = messageParts[1];
-        // }
         else if (topic == "MQTT") {
             IoT._dealWithMQTTMessage(messageParts[1]);
         }

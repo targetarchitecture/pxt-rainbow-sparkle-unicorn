@@ -3,6 +3,7 @@ namespace RainbowSparkleUnicorn.Sound {
     let dfplayerpreviousBusy: boolean = false;
     let dfplayerVolume: number = 0;
     let dfplayerTrack: number = 0;
+    let Offset: number = 666;
 
     /**
      * Set the volume
@@ -97,18 +98,25 @@ namespace RainbowSparkleUnicorn.Sound {
 
     export function _dealWithMusicMessage(value: number) {
 
+        //basic.showNumber(value);
+
         let busy: boolean;
 
-        if (value == 0) {
+        if (value == 1) {
             busy = true;
-            if (MusicStart != null) MusicStart()
-        } else if (value == 1) {
+        } else  {
             busy = false;
-            if (MusicStop != null) MusicStop()
         }
 
         if (dfplayerpreviousBusy != busy) {
-            if (BusyChange != null) BusyChange(busy)
+
+            if (busy == true) {
+               control.raiseEvent(RAINBOW_SPARKLE_UNICORN_MUSIC_START, 1)
+               control.raiseEvent(RAINBOW_SPARKLE_UNICORN_MUSIC_CHANGE, Offset + 1);
+            } else {
+               control.raiseEvent(RAINBOW_SPARKLE_UNICORN_MUSIC_STOP, 1)
+               control.raiseEvent(RAINBOW_SPARKLE_UNICORN_MUSIC_CHANGE, Offset + 0);
+            }
         }
 
         //remember for next time
@@ -144,11 +152,21 @@ namespace RainbowSparkleUnicorn.Sound {
     //% group="Actions"
     //% block="on sound track starts/stops"
     //% weight=41
-    export function onBusyChange(handler: (busy: boolean) => void): void {
-        BusyChange = handler;
+    export function onStopStart(
+        handler: (busy: boolean) => void
+    ) {
+        control.onEvent(
+            RAINBOW_SPARKLE_UNICORN_MUSIC_CHANGE,
+            EventBusValue.MICROBIT_EVT_ANY,
+            () => {
+                if (control.eventValue() - Offset == 1) {
+                    handler(true);
+                } else {
+                    handler(false);
+                }
+            }
+        );
     }
-
-    let BusyChange: (busy: boolean) => void = null;
 
     /**
     * Do something when a sound track starts.
@@ -158,10 +176,15 @@ namespace RainbowSparkleUnicorn.Sound {
     //% block="on sound track starts"
     //% weight=41
     export function onStart(handler: () => void): void {
-        MusicStart = handler;
+        control.onEvent(
+            RAINBOW_SPARKLE_UNICORN_MUSIC_START,
+            EventBusValue.MICROBIT_EVT_ANY,
+            () => {
+                handler();
+            }
+        );
     }
 
-    let MusicStart: () => void = null;
 
     /**
     * Do something when a sound track stops.
@@ -171,10 +194,15 @@ namespace RainbowSparkleUnicorn.Sound {
     //% block="on sound track stop"
     //% weight=41
     export function onStop(handler: () => void): void {
-        MusicStop = handler;
+        control.onEvent(
+            RAINBOW_SPARKLE_UNICORN_MUSIC_STOP,
+            EventBusValue.MICROBIT_EVT_ANY,
+            () => {
+                handler();
+            }
+        );
     }
 
-    let MusicStop: () => void = null;
 
 }
 

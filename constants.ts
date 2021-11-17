@@ -17,4 +17,7 @@ namespace RainbowSparkleUnicorn {
     export const RAINBOW_SPARKLE_UNICORN_SPINNER_1 = 5091;
     export const RAINBOW_SPARKLE_UNICORN_SPINNER_2 = 5092;
 
+    export const RAINBOW_SPARKLE_UNICORN_MUSIC_STOP = 5093;
+    export const RAINBOW_SPARKLE_UNICORN_MUSIC_START = 5094;
+    export const RAINBOW_SPARKLE_UNICORN_MUSIC_CHANGE = 5095;
 }
