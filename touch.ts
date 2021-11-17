@@ -71,9 +71,11 @@ namespace RainbowSparkleUnicorn.Touch {
 
     export function _dealWithTouchedUpdateMessage(pin: number) {
         // basic.showNumber(pin)
+        //RainbowSparkleUnicorn.Expert.SendDebugMessage(control.millis().toString());
 
         control.raiseEvent(RAINBOW_SPARKLE_UNICORN_TOUCH_SENSOR_TOUCHED + pin, pin + pinOffset)
         control.raiseEvent(RAINBOW_SPARKLE_UNICORN_TOUCH_SENSOR_TOUCHED_ANY, pin + pinOffset)
+        //RainbowSparkleUnicorn.Expert.SendDebugMessage(control.millis().toString());
 
        // basic.showIcon(IconNames.No)
 

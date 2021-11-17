@@ -20,7 +20,7 @@ namespace RainbowSparkleUnicorn {
       * Add into the start function to initialise the board.
       */
     //% block="Start Rainbow Sparkle Unicorn"
-    export function start(TxBufferSize: number = 128, RxBufferSize: number = 128,TransmissionMs: number = 10): void {
+    export function start(TxBufferSize: number = 128, RxBufferSize: number = 128,TransmissionMs: number = 5): void {
 
         //prevent running more than once
         if (alreadyStarted == true) {
@@ -44,6 +44,7 @@ namespace RainbowSparkleUnicorn {
 
         //add the serial data recieve handler
         serial.onDataReceived(serial.delimiters(Delimiters.NewLine), () => {
+            //RainbowSparkleUnicorn.Expert.SendDebugMessage("A:" + control.millis().toString());
 
             let msgrecieved = serial.readUntil(serial.delimiters(Delimiters.NewLine));
 
@@ -54,9 +55,10 @@ namespace RainbowSparkleUnicorn {
             if (redirectedToUSB == false) {
                 _readMessage(msgrecieved);
             }
+            //RainbowSparkleUnicorn.Expert.SendDebugMessage("B:" + control.millis().toString());
 
             //LED toggle takes two milliseconds - just helps me!
-            //led.toggle(1, 0);
+            led.toggle(1, 0);
         });
 
         //set-up UART transmission loop
@@ -77,7 +79,7 @@ namespace RainbowSparkleUnicorn {
                     }
 
                     //LED toggle takes two milliseconds - just helps me!
-                    //led.toggle(0, 0);
+                    led.toggle(0, 0);
                 }
             })
         })
@@ -115,6 +117,7 @@ namespace RainbowSparkleUnicorn {
         //     Touch._dealWithTouchUpdateMessage(messageParts[1]);
         // }
         else if (topic == "TTOUCHED") {
+            //RainbowSparkleUnicorn.Expert.SendDebugMessage("TTOUCHED:" + control.millis().toString());
             Touch._dealWithTouchedUpdateMessage(parseInt(messageParts[1]));
         }
         else if (topic == "TRELEASED") {
