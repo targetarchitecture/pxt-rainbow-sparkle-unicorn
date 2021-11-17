@@ -7,6 +7,7 @@ namespace RainbowSparkleUnicorn {
     let redirectedToUSB = false;
 
     let _MSGTOSEND: string[] = [];
+    //let _MSGTOACTION: string[] = [];
 
     //allow quick switch back to normal USB, this is not a problem as the code is so large it only runs on a V2 anyway
     input.onLogoEvent(TouchButtonEvent.Released, function () {
@@ -20,7 +21,7 @@ namespace RainbowSparkleUnicorn {
       * Add into the start function to initialise the board.
       */
     //% block="Start Rainbow Sparkle Unicorn"
-    export function start(TxBufferSize: number = 128, RxBufferSize: number = 128,TransmissionMs: number = 5): void {
+    export function start(TxBufferSize: number = 128, RxBufferSize: number = 128, TransmissionMs: number = 5): void {
 
         //prevent running more than once
         if (alreadyStarted == true) {
@@ -53,13 +54,28 @@ namespace RainbowSparkleUnicorn {
 
             //just stop processing if redirectred back to USB
             if (redirectedToUSB == false) {
+                //_MSGTOACTION.push(msgrecieved);
                 _readMessage(msgrecieved);
             }
             //RainbowSparkleUnicorn.Expert.SendDebugMessage("B:" + control.millis().toString());
 
             //LED toggle takes two milliseconds - just helps me!
-            led.toggle(1, 0);
+            //led.toggle(1, 0);
         });
+
+        // //set-up message action loop
+        // control.inBackground(function () {
+        //     loops.everyInterval(5, function () {
+
+        //         //send if array is not empty
+        //         if (_MSGTOACTION.length > 0) {
+
+        //             let msgrecieved = _MSGTOACTION.shift();
+
+        //             _readMessage(msgrecieved);
+        //         }
+        //     })
+        // });
 
         //set-up UART transmission loop
         control.inBackground(function () {
@@ -117,8 +133,9 @@ namespace RainbowSparkleUnicorn {
         //     Touch._dealWithTouchUpdateMessage(messageParts[1]);
         // }
         else if (topic == "TTOUCHED") {
-            //RainbowSparkleUnicorn.Expert.SendDebugMessage("TTOUCHED:" + control.millis().toString());
+            //RainbowSparkleUnicorn.Expert.SendDebugMessage("TTOUCHED START:" + control.millis().toString());
             Touch._dealWithTouchedUpdateMessage(parseInt(messageParts[1]));
+            //RainbowSparkleUnicorn.Expert.SendDebugMessage("TTOUCHED END:" + control.millis().toString());
         }
         else if (topic == "TRELEASED") {
             Touch._dealWithReleasedUpdateMessage(parseInt(messageParts[1]));

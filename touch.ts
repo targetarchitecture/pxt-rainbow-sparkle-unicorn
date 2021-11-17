@@ -64,7 +64,7 @@ namespace RainbowSparkleUnicorn.Touch {
 
 
     export function _dealWithReleasedUpdateMessage(pin: number) {
-        control.raiseEvent(RAINBOW_SPARKLE_UNICORN_TOUCH_SENSOR_RELEASED + pin, pin + pinOffset)
+        control.raiseEvent(RAINBOW_SPARKLE_UNICORN_TOUCH_SENSOR_RELEASED + pin, pin + pinOffset,)
         control.raiseEvent(RAINBOW_SPARKLE_UNICORN_TOUCH_SENSOR_RELEASED_ANY, pin + pinOffset)
         //basic.showIcon(IconNames.Yes)
     }
@@ -77,33 +77,6 @@ namespace RainbowSparkleUnicorn.Touch {
         control.raiseEvent(RAINBOW_SPARKLE_UNICORN_TOUCH_SENSOR_TOUCHED_ANY, pin + pinOffset)
         //RainbowSparkleUnicorn.Expert.SendDebugMessage(control.millis().toString());
 
-       // basic.showIcon(IconNames.No)
-
-        // //this attempts to set-up an initial state of the switches
-        // if (_previousTouchStates.charAt(0) != "0") {
-
-        //     for (let pin = 0; pin < 12; pin++) {
-
-        //         const pinState = touchStates.charAt(pin);
-        //         const previousPinState = _previousTouchStates.charAt(pin);
-
-        //         if (pinState.compare(previousPinState) != 0) {
-        //             if (pinState.compare("H") == 0) {
-
-        //                 control.raiseEvent(RAINBOW_SPARKLE_UNICORN_TOUCH_SENSOR_TOUCHED + pin, pin + pinOffset)
-        //                 control.raiseEvent(RAINBOW_SPARKLE_UNICORN_TOUCH_SENSOR_TOUCHED_ANY, pin + pinOffset)
-
-        //             } else if (pinState.compare("L") == 0) {
-
-        //                 control.raiseEvent(RAINBOW_SPARKLE_UNICORN_TOUCH_SENSOR_RELEASED + pin, pin + pinOffset)
-        //                 control.raiseEvent(RAINBOW_SPARKLE_UNICORN_TOUCH_SENSOR_RELEASED_ANY, pin + pinOffset)
-
-        //             }
-        //         }
-        //     }
-        // }
-
-        //_previousTouchStates = touchStates;
     }
 
     /**
