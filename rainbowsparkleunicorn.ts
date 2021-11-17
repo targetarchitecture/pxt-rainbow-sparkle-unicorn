@@ -111,15 +111,21 @@ namespace RainbowSparkleUnicorn {
         else if (topic == "SUPDATE") {
             Switch._dealWithSwitchUpdateMessage(messageParts[1]);
         }
-        else if (topic == "TUPDATE") {
-            Touch._dealWithTouchUpdateMessage(messageParts[1]);
+        // else if (topic == "TUPDATE") {
+        //     Touch._dealWithTouchUpdateMessage(messageParts[1]);
+        // }
+        else if (topic == "TTOUCHED") {
+            Touch._dealWithTouchedUpdateMessage(parseInt(messageParts[1]));
+        }
+        else if (topic == "TRELEASED") {
+            Touch._dealWithReleasedUpdateMessage(parseInt(messageParts[1]));
         }
         else if (topic == "SSTATE") {
             Switch._previousSwitchStates = messageParts[1];
         }
-        else if (topic == "TSTATE") {
-            Touch._previousTouchStates = messageParts[1];
-        }
+        // else if (topic == "TSTATE") {
+        //     Touch._previousTouchStates = messageParts[1];
+        // }
         else if (topic == "MQTT") {
             IoT._dealWithMQTTMessage(messageParts[1]);
         }

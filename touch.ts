@@ -1,7 +1,7 @@
 
 namespace RainbowSparkleUnicorn.Touch {
 
-    export let _previousTouchStates = "000000000000";
+    //export let _previousTouchStates = "000000000000";
     let pinOffset = 1000;
 
     export enum Pins {
@@ -63,46 +63,45 @@ namespace RainbowSparkleUnicorn.Touch {
     }
 
 
-/**
-* Request the touch states, usefull to set the starting values.
-* waits for half a second to get the switch state back
-*/
-    //% subcategory="Touch"
-    //% block="Request touch states"
-    //% weight=65
-    export function RequestTouchStates(): string {
-        _sendMessage("TSTATE");        
-        basic.pause(500);
-        return _previousTouchStates;
+    export function _dealWithReleasedUpdateMessage(pin: number) {
+        control.raiseEvent(RAINBOW_SPARKLE_UNICORN_TOUCH_SENSOR_RELEASED + pin, pin + pinOffset)
+        control.raiseEvent(RAINBOW_SPARKLE_UNICORN_TOUCH_SENSOR_RELEASED_ANY, pin + pinOffset)
+        basic.showIcon(IconNames.Yes)
     }
 
-    export function _dealWithTouchUpdateMessage(touchStates: string) {
+    export function _dealWithTouchedUpdateMessage(pin: number) {
+        // basic.showNumber(pin)
 
-        //this attempts to set-up an initial state of the switches
-        if (_previousTouchStates.charAt(0) != "0") {
+        control.raiseEvent(RAINBOW_SPARKLE_UNICORN_TOUCH_SENSOR_TOUCHED + pin, pin + pinOffset)
+        control.raiseEvent(RAINBOW_SPARKLE_UNICORN_TOUCH_SENSOR_TOUCHED_ANY, pin + pinOffset)
 
-            for (let pin = 0; pin < 12; pin++) {
+        basic.showIcon(IconNames.No)
 
-                const pinState = touchStates.charAt(pin);
-                const previousPinState = _previousTouchStates.charAt(pin);
+        // //this attempts to set-up an initial state of the switches
+        // if (_previousTouchStates.charAt(0) != "0") {
 
-                if (pinState.compare(previousPinState) != 0) {
-                    if (pinState.compare("H") == 0) {
+        //     for (let pin = 0; pin < 12; pin++) {
 
-                        control.raiseEvent(RAINBOW_SPARKLE_UNICORN_TOUCH_SENSOR_TOUCHED + pin, pin + pinOffset)
-                        control.raiseEvent(RAINBOW_SPARKLE_UNICORN_TOUCH_SENSOR_TOUCHED_ANY, pin + pinOffset)
+        //         const pinState = touchStates.charAt(pin);
+        //         const previousPinState = _previousTouchStates.charAt(pin);
 
-                    } else if (pinState.compare("L") == 0) {
+        //         if (pinState.compare(previousPinState) != 0) {
+        //             if (pinState.compare("H") == 0) {
 
-                        control.raiseEvent(RAINBOW_SPARKLE_UNICORN_TOUCH_SENSOR_RELEASED + pin, pin + pinOffset)
-                        control.raiseEvent(RAINBOW_SPARKLE_UNICORN_TOUCH_SENSOR_RELEASED_ANY, pin + pinOffset)
+        //                 control.raiseEvent(RAINBOW_SPARKLE_UNICORN_TOUCH_SENSOR_TOUCHED + pin, pin + pinOffset)
+        //                 control.raiseEvent(RAINBOW_SPARKLE_UNICORN_TOUCH_SENSOR_TOUCHED_ANY, pin + pinOffset)
 
-                    }
-                }
-            }
-        }
+        //             } else if (pinState.compare("L") == 0) {
 
-        _previousTouchStates = touchStates;
+        //                 control.raiseEvent(RAINBOW_SPARKLE_UNICORN_TOUCH_SENSOR_RELEASED + pin, pin + pinOffset)
+        //                 control.raiseEvent(RAINBOW_SPARKLE_UNICORN_TOUCH_SENSOR_RELEASED_ANY, pin + pinOffset)
+
+        //             }
+        //         }
+        //     }
+        // }
+
+        //_previousTouchStates = touchStates;
     }
 
     /**
