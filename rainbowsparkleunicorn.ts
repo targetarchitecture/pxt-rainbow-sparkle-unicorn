@@ -51,6 +51,8 @@ namespace RainbowSparkleUnicorn {
 
             let msgrecieved = serial.readUntil(serial.delimiters(Delimiters.NewLine));
 
+            basic.pause(1);
+
             //just stop processing if redirectred back to USB
             if (redirectedToUSB == false) {
                 _MSGTOACTION.push(msgrecieved);
@@ -75,7 +77,7 @@ namespace RainbowSparkleUnicorn {
 
                     //if redirected to USB just shift the message off the loop but don't send
                     //if (redirectedToUSB == false) {
-                        serial.writeString(msgtosend);                        
+                    serial.writeString(msgtosend);
                     //}
                 }
             })
