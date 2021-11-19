@@ -21,7 +21,7 @@ namespace RainbowSparkleUnicorn {
       * Add into the start function to initialise the board.
       */
     //% block="Start Rainbow Sparkle Unicorn"
-    export function start(TransmissionMs: number = 20): void {
+    export function start(TransmissionMs: number = 10): void {
 
         //prevent running more than once
         if (alreadyStarted == true) {
@@ -76,9 +76,9 @@ namespace RainbowSparkleUnicorn {
                     let msgtosend = _MSGTOSEND.shift() + String.fromCharCode(Delimiters.CarriageReturn);
 
                     //if redirected to USB just shift the message off the loop but don't send
-                    //if (redirectedToUSB == false) {
+                    if (redirectedToUSB == false) {
                     serial.writeString(msgtosend);
-                    //}
+                    }
                 }
             })
         })
