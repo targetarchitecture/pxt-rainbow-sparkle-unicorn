@@ -53,16 +53,13 @@ namespace RainbowSparkleUnicorn.Switch {
     //% pin.fieldEditor="gridpicker" pin.fieldOptions.columns=6
     //% pin.fieldOptions.tooltips="false"    
     export function getSwitchState(pin: Pins): Event {
-        if (_previousSwitchStates.charAt(pin) == "0") {
-            return Event.Released;
-        } else {
+        if (_previousSwitchStates.charAt(pin) == "L") {
             return Event.Pressed;
+        } else {
+            return Event.Released;
         }
         //return _previousSwitchStates.charAt(pin);
     }
-    let list = [1, 2, 3];
-
-    let text_list: string[] = []
 
     /**
     * Request the switch states, usefull to set the starting values.
@@ -78,10 +75,10 @@ namespace RainbowSparkleUnicorn.Switch {
         let retval: Array<Event> = [];
 
         for (let i = 0; i < _previousSwitchStates.length; i++) {
-            if (_previousSwitchStates.charAt(i) == "0") {
-                retval.push(Event.Released);
-            } else {
+            if (_previousSwitchStates.charAt(i) == "L") {
                 retval.push(Event.Pressed);
+            } else {
+                retval.push(Event.Released);
             }
         }
 
