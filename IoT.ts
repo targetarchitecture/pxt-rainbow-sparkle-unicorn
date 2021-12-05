@@ -54,7 +54,7 @@ namespace RainbowSparkleUnicorn.IoT {
      */
     //% subcategory="IoT" 
     //% group="Credentials"
-    //% block="set Wifi credentials"   
+    //% block="set Wifi credentials with $ssid and $password"   
     export function setWifi(ssid: string, password: string) {
         _sendMessage("NVMSSID," + ssid);
         _sendMessage("NVMPASSWORD," + password);
@@ -68,7 +68,7 @@ namespace RainbowSparkleUnicorn.IoT {
      */
     //% subcategory="IoT" 
     //% group="Credentials"
-    //% block="set MQTT server credentials"   
+    //% block="set MQTT credentials on $server with $user and $password"   
     export function setMQTT(server: string, user: string, password: string) {
         _sendMessage("NVMMQTTSERVER," + server);
         _sendMessage("NVMMQTTUSER," + user);
