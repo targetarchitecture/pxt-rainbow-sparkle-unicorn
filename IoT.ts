@@ -46,6 +46,34 @@ namespace RainbowSparkleUnicorn.IoT {
     export function publish(topic: string, message: string) {
         _sendMessage("PUBLISH," + topic + "|" + message);
     }
+
+    /**
+     * Set Wifi
+     * @param ssid
+     * @param password
+     */
+    //% subcategory="IoT" 
+    //% group="Credentials"
+    //% block="set Wifi credentials"   
+    export function setWifi(ssid: string, password: string) {
+        _sendMessage("NVMSSID," + ssid);
+        _sendMessage("NVMPASSWORD," + password);
+    }
+
+    /**
+     * Set MQTT
+     * @param server
+     * @param user
+     * @param password
+     */
+    //% subcategory="IoT" 
+    //% group="Credentials"
+    //% block="set MQTT server credentials"   
+    export function setMQTT(server: string, user: string, password: string) {
+        _sendMessage("NVMMQTTSERVER," + server);
+        _sendMessage("NVMMQTTUSER," + user);
+        _sendMessage("NVMMQTTPASSWORD," + password);
+    }
 }
 
 
