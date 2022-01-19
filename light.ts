@@ -78,6 +78,16 @@ namespace RainbowSparkleUnicorn.Light {
         _sendMessage("LLEDONOFF," + pin + ",1")
     }
 
+    //% subcategory="Light" 
+    //% block="turn on light on pin $pin with brightness $brightness"
+    //% brightness.min=0 brightness.max=255
+    export function turnOnWithBrightness(pin: Pins, brightness: number) {
+
+        brightness=   Math.clamp(0, 255, brightness);
+
+        _sendMessage("LLEDINTENSITY," + pin + "," + brightness);
+    }
+
     /**
       turn off all lights
     **/
