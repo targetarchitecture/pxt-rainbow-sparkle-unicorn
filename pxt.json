@@ -24,7 +24,7 @@
     ],
     "testFiles": [],
     "targetVersions": {
-        "target": "4.0.17",
+        "target": "5.0.12",
         "targetId": "microbit"
     },
     "supportedTargets": [
