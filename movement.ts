@@ -35,8 +35,8 @@ namespace RainbowSparkleUnicorn.Movement {
         P15 = 15
     }
 
-    let servoMinimum = [100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100];
-    let servoMaximum = [500, 500, 500, 500, 500, 500, 500, 500, 500, 500, 500, 500, 500, 500, 500, 500];
+     let servoMinimum = [100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100];
+     let servoMaximum = [500, 500, 500, 500, 500, 500, 500, 500, 500, 500, 500, 500, 500, 500, 500, 500];
 
     //% subcategory="Movement" 
     //% weight=10
@@ -51,8 +51,8 @@ namespace RainbowSparkleUnicorn.Movement {
         maximumPulse = Math.constrain(maximumPulse, 0, 4096);
 
         //make sure they are right way around
-        servoMinimum[servo] = Math.min(minimumPulse, maximumPulse);
-        servoMaximum[servo] = Math.max(minimumPulse, maximumPulse);
+       servoMinimum[servo] = Math.min(minimumPulse, maximumPulse);
+       servoMaximum[servo] = Math.max(minimumPulse, maximumPulse);
     }
 
     //% subcategory="Movement" 
@@ -105,7 +105,7 @@ namespace RainbowSparkleUnicorn.Movement {
 
         if (duration < 0) { duration = 0; }
 
-        _sendMessage("MBOUNCY," + servo + "," + fromAngle + "," + toAngle + "," + duration + "," + servoMinimum[servo] + "," + servoMaximum[servo]);
+        _sendMessage("MBOUNCY," + servo + "," + fromAngle + "," + toAngle + "," + duration + ","+ servoMinimum[servo] + "," + servoMaximum[servo]);
     }
 
     //% subcategory="Movement" 
@@ -125,7 +125,7 @@ namespace RainbowSparkleUnicorn.Movement {
 
         if (duration < 0) { duration = 0; }
 
-        _sendMessage("MSMOOTH," + servo + "," + fromAngle + "," + toAngle + "," + duration + "," + servoMinimum[servo] + "," + servoMaximum[servo]);
+        _sendMessage("MSMOOTH," + servo + "," + fromAngle + "," + toAngle + "," + duration + ","+ servoMinimum[servo] + "," + servoMaximum[servo]);
     }
 
     //% weight=50   
