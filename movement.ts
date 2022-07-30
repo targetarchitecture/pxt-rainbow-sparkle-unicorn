@@ -35,31 +35,24 @@ namespace RainbowSparkleUnicorn.Movement {
         P15 = 15
     }
 
-    declare const enum ServoType {
-        //% block="Normal"
-        Normal = 0,
-        //% block="Rotating"
-        Rotating = 1
-    }
-
     let servoList = [
-        "100,500,0",
-        "100,500,0",
-        "100,500,0",
-        "100,500,0",
-        "100,500,0",
-        "100,500,0",
-        "100,500,0",
-        "100,500,0",
-        "100,500,0",
-        "100,500,0",
-        "100,500,0",
-        "100,500,0",
-        "100,500,0",
-        "100,500,0",
-        "100,500,0",
-        "100,500,0",
-        "100,500,0"];
+        "100,500",
+        "100,500",
+        "100,500",
+        "100,500",
+        "100,500",
+        "100,500",
+        "100,500",
+        "100,500",
+        "100,500",
+        "100,500",
+        "100,500",
+        "100,500",
+        "100,500",
+        "100,500",
+        "100,500",
+        "100,500",
+        "100,500"];
 
     //% subcategory="Movement" 
     //% weight=10
@@ -78,21 +71,7 @@ namespace RainbowSparkleUnicorn.Movement {
         servoDetails[0] = Math.min(minimumPulse, maximumPulse).toString();
         servoDetails[1] = Math.max(minimumPulse, maximumPulse).toString();
 
-        servoList[servo] = servoDetails[0] + "," + servoDetails[1] + "," + servoDetails[2];
-    }
-
-    //% subcategory="Movement" 
-    //% weight=20    
-    //% inlineInputMode=inline
-    //% servo.fieldEditor="gridpicker" servo.fieldOptions.columns=6
-    //% servo.fieldOptions.tooltips="false"       
-    //% block="set $servo type $sType"
-    export function setServoType(servo: Pins, sType: ServoType) {
-
-        let servoDetails = servoList[servo].split(",");
-        servoDetails[2] = sType.toString();
-
-        servoList[servo] = servoDetails[0] + "," + servoDetails[1] + "," + servoDetails[2];
+        servoList[servo] = servoDetails[0] + "," + servoDetails[1];
     }
 
     //% subcategory="Movement" 
