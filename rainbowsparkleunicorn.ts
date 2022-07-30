@@ -54,18 +54,18 @@ namespace RainbowSparkleUnicorn {
             //this tiny pause improves the stability soo much
             basic.pause(1);
 
-            //just stop processing if redirectred back to USB
-            if (redirectedToUSB == false) {
+            //just stop processing if redirected back to USB
+            //if (redirectedToUSB == false) {
                 _MSGTOACTION.push(msgrecieved);
                 //_readMessage(msgrecieved);
-            }
+            //}
 
             //LED toggle takes two milliseconds - just helps me!
             led.toggle(0, 0);
         });
 
         //set-up UART transmission loop
-        control.inBackground(function () {
+        //control.inBackground(function () {
             loops.everyInterval(TransmissionMs, function () {
 
                 //send if array is not empty
@@ -77,15 +77,15 @@ namespace RainbowSparkleUnicorn {
                     let msgtosend = _MSGTOSEND.shift() + String.fromCharCode(Delimiters.CarriageReturn);
 
                     //if redirected to USB just shift the message off the loop but don't send
-                    if (redirectedToUSB == false) {
+                    //if (redirectedToUSB == false) {
                         serial.writeString(msgtosend);
-                    }
+                    //}
                 }
             })
-        })
+        //})
 
         //set-up an action loop
-        control.inBackground(function () {
+        //control.inBackground(function () {
             loops.everyInterval(10, function () {
 
                 //send if array is not empty
@@ -99,7 +99,7 @@ namespace RainbowSparkleUnicorn {
                     _readMessage(msgtoaction);
                 }
             })
-        })
+        //})
     }
 
     export function _sendMessage(message: string): void {
