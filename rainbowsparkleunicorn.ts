@@ -46,7 +46,6 @@ namespace RainbowSparkleUnicorn {
         //was 500,but 1000 seems more stable
         basic.pause(1000);
 
-
         //add the serial data recieve handler
         serial.onDataReceived(serial.delimiters(Delimiters.NewLine), () => {
 
@@ -57,8 +56,8 @@ namespace RainbowSparkleUnicorn {
 
             //just stop processing if redirected back to USB
             //if (redirectedToUSB == false) {
-            _MSGTOACTION.push(msgrecieved);
-            //_readMessage(msgrecieved);
+                _MSGTOACTION.push(msgrecieved);
+                //_readMessage(msgrecieved);
             //}
 
             //LED toggle takes two milliseconds - just helps me!
@@ -68,36 +67,34 @@ namespace RainbowSparkleUnicorn {
         //set-up UART transmission loop
         loops.everyInterval(TransmissionMs, function () {
 
-                //send if array is not empty
-                if (_MSGTOSEND.length > 0) {
+            //send if array is not empty
+            if (_MSGTOSEND.length > 0) {
 
-                    //LED toggle takes two milliseconds - just helps me!
-                    led.toggle(2, 0);
+                //LED toggle takes two milliseconds - just helps me!
+                led.toggle(2, 0);
 
-                    let msgtosend = _MSGTOSEND.shift() + String.fromCharCode(Delimiters.CarriageReturn);
+                let msgtosend = _MSGTOSEND.shift() + String.fromCharCode(Delimiters.CarriageReturn);
 
-                    //if redirected to USB just shift the message off the loop but don't send
-                    //if (redirectedToUSB == false) {
-                    serial.writeString(msgtosend);
-                    //}
-                }
-
-            
+                //if redirected to USB just shift the message off the loop but don't send
+                //if (redirectedToUSB == false) {
+                serial.writeString(msgtosend);
+                //}
+            }
         })
 
         //set-up an action loop
         loops.everyInterval(10, function () {
 
-                //send if array is not empty
-                if (_MSGTOACTION.length > 0) {
+            //send if array is not empty
+            if (_MSGTOACTION.length > 0) {
 
-                    //LED toggle takes two milliseconds - just helps me!
-                    led.toggle(1, 0);
+                //LED toggle takes two milliseconds - just helps me!
+                led.toggle(1, 0);
 
-                    let msgtoaction = _MSGTOACTION.shift();
+                let msgtoaction = _MSGTOACTION.shift();
 
-                    _readMessage(msgtoaction);
-                }            
+                _readMessage(msgtoaction);
+            }
         })
     }
 
