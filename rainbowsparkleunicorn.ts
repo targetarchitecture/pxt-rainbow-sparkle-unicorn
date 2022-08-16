@@ -10,7 +10,7 @@ namespace RainbowSparkleUnicorn {
     let _MSGTOACTION: string[] = [];
 
     //allow quick switch back to normal USB, this is not a problem as the code is so large it only runs on a V2 anyway
-    input.onButtonPressed(Button.AB, function () {
+    input.onLogoEvent(TouchButtonEvent.Pressed, function () {
         redirectedToUSB = true;
         serial.redirectToUSB();
         basic.showIcon(IconNames.Yes)
@@ -56,8 +56,7 @@ namespace RainbowSparkleUnicorn {
 
             //just stop processing if redirected back to USB
             //if (redirectedToUSB == false) {
-                _MSGTOACTION.push(msgrecieved);
-                //_readMessage(msgrecieved);
+            _MSGTOACTION.push(msgrecieved);
             //}
 
             //LED toggle takes two milliseconds - just helps me!
