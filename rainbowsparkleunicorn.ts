@@ -46,6 +46,7 @@ namespace RainbowSparkleUnicorn {
         //was 500,but 1000 seems more stable
         basic.pause(1000);
 
+
         //add the serial data recieve handler
         serial.onDataReceived(serial.delimiters(Delimiters.NewLine), () => {
 
@@ -65,8 +66,7 @@ namespace RainbowSparkleUnicorn {
         });
 
         //set-up UART transmission loop
-        control.inBackground(() => {
-            while (true) {
+        loops.everyInterval(TransmissionMs, function () {
 
                 //send if array is not empty
                 if (_MSGTOSEND.length > 0) {
@@ -82,13 +82,11 @@ namespace RainbowSparkleUnicorn {
                     //}
                 }
 
-                basic.pause(TransmissionMs)
-            }
+            
         })
 
         //set-up an action loop
-        control.inBackground(function () {
-            while (true) {
+        loops.everyInterval(10, function () {
 
                 //send if array is not empty
                 if (_MSGTOACTION.length > 0) {
@@ -99,10 +97,7 @@ namespace RainbowSparkleUnicorn {
                     let msgtoaction = _MSGTOACTION.shift();
 
                     _readMessage(msgtoaction);
-                }
-
-                basic.pause(10)
-            }
+                }            
         })
     }
 
