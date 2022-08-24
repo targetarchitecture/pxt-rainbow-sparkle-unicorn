@@ -6,8 +6,8 @@ namespace RainbowSparkleUnicorn {
     let alreadyStarted = false;
     let redirectedToUSB = false;
 
-    let _MSGTOSEND: string[] = [];
-    let _MSGTOACTION: string[] = [];
+    //let _MSGTOSEND: string[] = [];
+    //let _MSGTOACTION: string[] = [];
 
     //allow quick switch back to normal USB, this is not a problem as the code is so large it only runs on a V2 anyway
     input.onLogoEvent(TouchButtonEvent.Pressed, function () {
@@ -56,49 +56,55 @@ namespace RainbowSparkleUnicorn {
 
             //just stop processing if redirected back to USB
             //if (redirectedToUSB == false) {
-            _MSGTOACTION.push(msgrecieved);
+            //_MSGTOACTION.push(msgrecieved);
             //}
 
+            _readMessage(msgrecieved);
+
             //LED toggle takes two milliseconds - just helps me!
-            led.toggle(0, 0);
+            //led.toggle(0, 0);
         });
 
         //set-up UART transmission loop
-        loops.everyInterval(TransmissionMs, function () {
+        // loops.everyInterval(TransmissionMs, function () {
 
-            //send if array is not empty
-            if (_MSGTOSEND.length > 0) {
+        //     //send if array is not empty
+        //     if (_MSGTOSEND.length > 0) {
 
-                //LED toggle takes two milliseconds - just helps me!
-                led.toggle(2, 0);
+        //         //LED toggle takes two milliseconds - just helps me!
+        //         //led.toggle(2, 0);
 
-                let msgtosend = _MSGTOSEND.shift() + String.fromCharCode(Delimiters.CarriageReturn);
+        //         let msgtosend = _MSGTOSEND.shift() + String.fromCharCode(Delimiters.CarriageReturn);
 
-                //if redirected to USB just shift the message off the loop but don't send
-                //if (redirectedToUSB == false) {
-                serial.writeString(msgtosend);
-                //}
-            }
-        })
+        //         //if redirected to USB just shift the message off the loop but don't send
+        //         //if (redirectedToUSB == false) {
+        //         serial.writeString(msgtosend);
+        //         //}
+        //     }
+        // })
 
         //set-up an action loop
-        loops.everyInterval(10, function () {
+        // loops.everyInterval(10, function () {
 
-            //send if array is not empty
-            if (_MSGTOACTION.length > 0) {
+        //     //send if array is not empty
+        //     if (_MSGTOACTION.length > 0) {
 
-                //LED toggle takes two milliseconds - just helps me!
-                led.toggle(1, 0);
+        //         //LED toggle takes two milliseconds - just helps me!
+        //         //led.toggle(1, 0);
 
-                let msgtoaction = _MSGTOACTION.shift();
+        //         let msgtoaction = _MSGTOACTION.shift();
 
-                _readMessage(msgtoaction);
-            }
-        })
+        //         _readMessage(msgtoaction);
+        //     }
+        // })
     }
 
     export function _sendMessage(message: string): void {
-        _MSGTOSEND.push(message);
+        //_MSGTOSEND.push(message);
+
+        let msgtosend = message + String.fromCharCode(Delimiters.CarriageReturn);
+
+        serial.writeString(msgtosend);
     }
 
     function _readMessage(message: string): void {
@@ -107,37 +113,132 @@ namespace RainbowSparkleUnicorn {
 
         let topic: string = messageParts[0];
 
-        if (topic == "SLIDER1") {
-           // RainbowSparkleUnicorn.Slider._Slider1 = parseInt(messageParts[1]);
-        }
-        else if (topic == "SLIDER2") {
-          //  RainbowSparkleUnicorn.Slider._Slider2 = parseInt(messageParts[1]);
-        }
-        else if (topic == "ROTARY1") {
-            //RainbowSparkleUnicorn.Spinner._dealWithSpinner1Message(parseInt(messageParts[1]));
-        }
-        else if (topic == "ROTARY2") {
-            //RainbowSparkleUnicorn.Spinner._dealWithSpinner2Message(parseInt(messageParts[1]));
-        }
-        else if (topic == "SBUSY") {
-            Sound._dealWithMusicMessage(parseInt(messageParts[1]));
-        }
-        else if (topic == "SUPDATE") {
-           // Switch._dealWithSwitchUpdateMessage(messageParts[1]);
-        }
-        else if (topic == "TTOUCHED") {
-            Touch._dealWithTouchedUpdateMessage(parseInt(messageParts[1]));
-        }
-        else if (topic == "TRELEASED") {
-            Touch._dealWithReleasedUpdateMessage(parseInt(messageParts[1]));
-        }
-        else if (topic == "SSTATE") {
-            //Switch._previousSwitchStates = messageParts[1];
-        }
-        else if (topic == "MQTT") {
-        //    IoT._dealWithMQTTMessage(messageParts[1]);
+        switch (topic) {
+            case "SLIDER1":
+                control.raiseEvent(RAINBOW_SPARKLE_UNICORN_SLIDER_1, parseInt(messageParts[1]) + pinOffset);
+                // RainbowSparkleUnicorn.Slider._Slider1 = parseInt(messageParts[1]);
+                break;
+            case "SLIDER2":
+                control.raiseEvent(RAINBOW_SPARKLE_UNICORN_SLIDER_2, parseInt(messageParts[1]) + pinOffset);
+
+                //  RainbowSparkleUnicorn.Slider._Slider2 = parseInt(messageParts[1]);
+                break;
+            case "ROTARY1":
+                dealWithSpinner1Message(parseInt(messageParts[1]));
+                break;
+            case "ROTARY2":
+                dealWithSpinner2Message(parseInt(messageParts[1]));
+                break;
+            case "SBUSY":
+                dealWithMusicMessage(parseInt(messageParts[1]));
+                break;
+            case "SUPDATE":
+                 dealWithSwitchUpdateMessage(messageParts[1]);
+                break;
+            case "TTOUCHED":
+
+                let pinTouched = parseInt(messageParts[1]);
+
+                control.raiseEvent(RAINBOW_SPARKLE_UNICORN_TOUCH_SENSOR_TOUCHED + pinTouched, pinTouched + pinOffset)
+                control.raiseEvent(RAINBOW_SPARKLE_UNICORN_TOUCH_SENSOR_TOUCHED_ANY, pinTouched + pinOffset)
+
+                //Touch._dealWithTouchedUpdateMessage(parseInt(messageParts[1]));
+                break;
+            case "TRELEASED":
+                //Touch._dealWithReleasedUpdateMessage(parseInt(messageParts[1]));
+
+                let pinReleased = parseInt(messageParts[1]);
+
+                control.raiseEvent(RAINBOW_SPARKLE_UNICORN_TOUCH_SENSOR_RELEASED + pinReleased, pinReleased + pinOffset,)
+                control.raiseEvent(RAINBOW_SPARKLE_UNICORN_TOUCH_SENSOR_RELEASED_ANY, pinReleased + pinOffset)
+
+                break;
+            case "SSTATE":
+                Switch._previousSwitchStates = messageParts[1];
+                break;
+            case "MQTT":
+                    IoT._dealWithMQTTMessage(messageParts[1]);
+                break;
         }
     }
+
+    let _Encoder1value=0;
+    let _Encoder2value = 0;
+
+     function dealWithSpinner1Message(value: number) {
+
+         if (value != _Encoder1value) {
+            control.raiseEvent(RAINBOW_SPARKLE_UNICORN_SPINNER_1, value + pinOffset)
+        }
+
+        // RainbowSparkleUnicorn.Spinner._Encoder1value = value;
+    }
+
+     function dealWithSpinner2Message(value: number) {
+         if (value != _Encoder2value) {
+            control.raiseEvent(RAINBOW_SPARKLE_UNICORN_SPINNER_2, value + pinOffset)
+        }
+         //RainbowSparkleUnicorn.Spinner_Encoder2value = value;
+    }
+
+    function dealWithSwitchUpdateMessage(switchStates: string) {
+
+        if (RainbowSparkleUnicorn.Switch._previousSwitchStates.charAt(0) != "0") {
+
+            for (let pin = 0; pin < 16; pin++) {
+
+                const pinState = switchStates.charAt(pin);
+                const previousPinState = RainbowSparkleUnicorn.Switch._previousSwitchStates.charAt(pin);
+
+                if (pinState.compare(previousPinState) != 0) {
+
+                    if (pinState.compare("L") == 0) {
+
+                        control.raiseEvent(RAINBOW_SPARKLE_UNICORN_SWITCH_PRESSED + pin, pin + pinOffset)
+                        control.raiseEvent(RAINBOW_SPARKLE_UNICORN_SWITCH_PRESSED_ANY, pin + pinOffset)
+
+                    } else if (pinState.compare("H") == 0) {
+                        control.raiseEvent(RAINBOW_SPARKLE_UNICORN_SWITCH_RELEASED + pin, pin + pinOffset)
+                        control.raiseEvent(RAINBOW_SPARKLE_UNICORN_SWITCH_RELEASED_ANY, pin + pinOffset)
+                    }
+                }
+            }
+        }
+
+        RainbowSparkleUnicorn.Switch._previousSwitchStates = switchStates;
+    }
+
+    let dfplayerpreviousBusy: boolean = false;
+
+     function dealWithMusicMessage(value: number) {
+
+        //basic.showNumber(value);
+
+        let busy: boolean;
+
+        if (value == 1) {
+            busy = true;
+        } else {
+            busy = false;
+        }
+
+         if (dfplayerpreviousBusy != busy) {
+
+            if (busy == true) {
+                control.raiseEvent(RAINBOW_SPARKLE_UNICORN_MUSIC_START, 1)
+                control.raiseEvent(RAINBOW_SPARKLE_UNICORN_MUSIC_CHANGE, pinOffset + 1);
+            } else {
+                control.raiseEvent(RAINBOW_SPARKLE_UNICORN_MUSIC_STOP, 1)
+                control.raiseEvent(RAINBOW_SPARKLE_UNICORN_MUSIC_CHANGE, pinOffset + 0);
+            }
+        }
+
+        //remember for next time
+        dfplayerpreviousBusy = busy;
+    }
+
+
+
 
     /**
     * Write a comment

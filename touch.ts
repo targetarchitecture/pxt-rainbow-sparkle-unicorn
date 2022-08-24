@@ -3,7 +3,7 @@
 namespace RainbowSparkleUnicorn.Touch {
 
     //export let _previousTouchStates = "000000000000";
-    let pinOffset = 1000;
+    //let pinOffset = 1000;
 
     export enum Pins {
         //% block="Pin 0"    
@@ -64,21 +64,21 @@ namespace RainbowSparkleUnicorn.Touch {
     }
 
 
-    export function _dealWithReleasedUpdateMessage(pin: number) {
-        control.raiseEvent(RAINBOW_SPARKLE_UNICORN_TOUCH_SENSOR_RELEASED + pin, pin + pinOffset,)
-        control.raiseEvent(RAINBOW_SPARKLE_UNICORN_TOUCH_SENSOR_RELEASED_ANY, pin + pinOffset)
-        //basic.showIcon(IconNames.Yes)
-    }
+    // export function _dealWithReleasedUpdateMessage(pin: number) {
+    //     control.raiseEvent(RAINBOW_SPARKLE_UNICORN_TOUCH_SENSOR_RELEASED + pin, pin + pinOffset,)
+    //     control.raiseEvent(RAINBOW_SPARKLE_UNICORN_TOUCH_SENSOR_RELEASED_ANY, pin + pinOffset)
+    //     //basic.showIcon(IconNames.Yes)
+    // }
 
-    export function _dealWithTouchedUpdateMessage(pin: number) {
-        // basic.showNumber(pin)
-        //RainbowSparkleUnicorn.Expert.SendDebugMessage(control.millis().toString());
+    // export function _dealWithTouchedUpdateMessage(pin: number) {
+    //     // basic.showNumber(pin)
+    //     //RainbowSparkleUnicorn.Expert.SendDebugMessage(control.millis().toString());
 
-        control.raiseEvent(RAINBOW_SPARKLE_UNICORN_TOUCH_SENSOR_TOUCHED + pin, pin + pinOffset)
-        control.raiseEvent(RAINBOW_SPARKLE_UNICORN_TOUCH_SENSOR_TOUCHED_ANY, pin + pinOffset)
-        //RainbowSparkleUnicorn.Expert.SendDebugMessage(control.millis().toString());
+    //     control.raiseEvent(RAINBOW_SPARKLE_UNICORN_TOUCH_SENSOR_TOUCHED + pin, pin + pinOffset)
+    //     control.raiseEvent(RAINBOW_SPARKLE_UNICORN_TOUCH_SENSOR_TOUCHED_ANY, pin + pinOffset)
+    //     //RainbowSparkleUnicorn.Expert.SendDebugMessage(control.millis().toString());
 
-    }
+    // }
 
     /**
      * Do something when a pin is touched.

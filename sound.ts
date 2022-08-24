@@ -2,10 +2,11 @@
 
 namespace RainbowSparkleUnicorn.Sound {
 
-    let dfplayerpreviousBusy: boolean = false;
+    // export let dfplayerpreviousBusy: boolean = false;
+    let dfplayerBusy: boolean = false;
     let dfplayerVolume: number = 0;
     let dfplayerTrack: number = 0;
-    let Offset: number = 666;
+    //let Offset: number = 666;
 
     /**
      * Set the volume
@@ -95,35 +96,9 @@ namespace RainbowSparkleUnicorn.Sound {
     //% block="sound playing"
     //% weight=39
     export function playingSound(): boolean {
-        return dfplayerpreviousBusy;
+        return dfplayerBusy;
     }
 
-    export function _dealWithMusicMessage(value: number) {
-
-        //basic.showNumber(value);
-
-        let busy: boolean;
-
-        if (value == 1) {
-            busy = true;
-        } else {
-            busy = false;
-        }
-
-        if (dfplayerpreviousBusy != busy) {
-
-            if (busy == true) {
-                control.raiseEvent(RAINBOW_SPARKLE_UNICORN_MUSIC_START, 1)
-                control.raiseEvent(RAINBOW_SPARKLE_UNICORN_MUSIC_CHANGE, Offset + 1);
-            } else {
-                control.raiseEvent(RAINBOW_SPARKLE_UNICORN_MUSIC_STOP, 1)
-                control.raiseEvent(RAINBOW_SPARKLE_UNICORN_MUSIC_CHANGE, Offset + 0);
-            }
-        }
-
-        //remember for next time
-        dfplayerpreviousBusy = busy;
-    }
 
     /**
     * Returns the current volume
@@ -161,9 +136,11 @@ namespace RainbowSparkleUnicorn.Sound {
             RAINBOW_SPARKLE_UNICORN_MUSIC_CHANGE,
             EventBusValue.MICROBIT_EVT_ANY,
             () => {
-                if (control.eventValue() - Offset == 1) {
+                if (control.eventValue() - pinOffset == 1) {
+                    dfplayerBusy = true;
                     handler(true);
                 } else {
+                    dfplayerBusy = false;
                     handler(false);
                 }
             }
@@ -182,6 +159,7 @@ namespace RainbowSparkleUnicorn.Sound {
             RAINBOW_SPARKLE_UNICORN_MUSIC_START,
             EventBusValue.MICROBIT_EVT_ANY,
             () => {
+                dfplayerBusy = true; 
                 handler();
             }
         );
@@ -200,6 +178,7 @@ namespace RainbowSparkleUnicorn.Sound {
             RAINBOW_SPARKLE_UNICORN_MUSIC_STOP,
             EventBusValue.MICROBIT_EVT_ANY,
             () => {
+                dfplayerBusy = false;
                 handler();
             }
         );
