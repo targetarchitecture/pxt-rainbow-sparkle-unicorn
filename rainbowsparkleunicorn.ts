@@ -108,22 +108,22 @@ namespace RainbowSparkleUnicorn {
         let topic: string = messageParts[0];
 
         if (topic == "SLIDER1") {
-            RainbowSparkleUnicorn.Slider._Slider1 = parseInt(messageParts[1]);
+           // RainbowSparkleUnicorn.Slider._Slider1 = parseInt(messageParts[1]);
         }
         else if (topic == "SLIDER2") {
-            RainbowSparkleUnicorn.Slider._Slider2 = parseInt(messageParts[1]);
+          //  RainbowSparkleUnicorn.Slider._Slider2 = parseInt(messageParts[1]);
         }
         else if (topic == "ROTARY1") {
-            RainbowSparkleUnicorn.Spinner._dealWithSpinner1Message(parseInt(messageParts[1]));
+            //RainbowSparkleUnicorn.Spinner._dealWithSpinner1Message(parseInt(messageParts[1]));
         }
         else if (topic == "ROTARY2") {
-            RainbowSparkleUnicorn.Spinner._dealWithSpinner2Message(parseInt(messageParts[1]));
+            //RainbowSparkleUnicorn.Spinner._dealWithSpinner2Message(parseInt(messageParts[1]));
         }
         else if (topic == "SBUSY") {
             Sound._dealWithMusicMessage(parseInt(messageParts[1]));
         }
         else if (topic == "SUPDATE") {
-            Switch._dealWithSwitchUpdateMessage(messageParts[1]);
+           // Switch._dealWithSwitchUpdateMessage(messageParts[1]);
         }
         else if (topic == "TTOUCHED") {
             Touch._dealWithTouchedUpdateMessage(parseInt(messageParts[1]));
@@ -132,17 +132,17 @@ namespace RainbowSparkleUnicorn {
             Touch._dealWithReleasedUpdateMessage(parseInt(messageParts[1]));
         }
         else if (topic == "SSTATE") {
-            Switch._previousSwitchStates = messageParts[1];
+            //Switch._previousSwitchStates = messageParts[1];
         }
         else if (topic == "MQTT") {
-            IoT._dealWithMQTTMessage(messageParts[1]);
+        //    IoT._dealWithMQTTMessage(messageParts[1]);
         }
     }
 
     /**
-* Write a comment
-* @param theComment eg:'write comment here'
-*/
+    * Write a comment
+    * @param theComment eg:'write comment here'
+    */
     //% subcategory="Expert" 
     //% group="Comments"       
     //% block=comment|%theComment
