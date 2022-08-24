@@ -16,7 +16,7 @@ namespace RainbowSparkleUnicorn.Sound {
     //% volume.defl=20
     //% volume.min=0 volume.max=30
     export function setVolume(volume: number) {
-        dfplayerVolume = Math.constrain(volume, 0, 30);
+       dfplayerVolume = Math.constrain(volume, 0, 30);
         _sendMessage("SVOL," + dfplayerVolume);
     }
 
@@ -43,7 +43,7 @@ namespace RainbowSparkleUnicorn.Sound {
     //% weight=90  
     //% block="Increase volume"
     export function increaseVolume() {
-        dfplayerVolume = Math.constrain(dfplayerVolume + 1, 0, 30);
+        dfplayerVolume = Math.constrain(dfplayerVolume + 1, 0, 30);        
         _sendMessage("SVOL," + dfplayerVolume);
     }
 
