@@ -21,7 +21,8 @@
         "touch.ts",
         "constants.ts",
         "IoT.ts",
-        "tutorial-info-cache.json"
+        "tutorial-info-cache.json",
+        "expert.ts"
     ],
     "testFiles": [],
     "targetVersions": {
