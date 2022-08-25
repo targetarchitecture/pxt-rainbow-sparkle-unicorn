@@ -26,12 +26,15 @@
     ],
     "testFiles": [],
     "targetVersions": {
-        "target": "5.0.13",
+        "target": "5.0.12",
         "targetId": "microbit"
     },
     "supportedTargets": [
         "microbit"
     ],
     "preferredEditor": "tsprj",
+    "disablesVariants": [
+        "mbdal"
+    ],
     "yotta": {}
 }
