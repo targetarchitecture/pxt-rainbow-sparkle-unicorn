@@ -20,12 +20,13 @@ namespace RainbowSparkleUnicorn.Dial {
     export function value(dial: Dials, value: number) {
 
         value = Math.round(value);
+        //value = Math.clamp(0, 255, value);
 
         if (dial == Dials.Dial1) {
-            _sendMessage("DIAL1," + Math.clamp(0, 255, value))
+            _sendMessage("DIAL1," + value)
         }
         else {
-            _sendMessage("DIAL2," + Math.clamp(0, 255, value))
+            _sendMessage("DIAL2," + value)
         }
     }
 }
