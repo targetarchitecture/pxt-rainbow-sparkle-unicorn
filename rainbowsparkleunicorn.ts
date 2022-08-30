@@ -56,8 +56,6 @@ namespace RainbowSparkleUnicorn {
 
             _MSGTOACTION.push(msgrecieved);
 
-            //_readMessage(msgrecieved);
-
             //LED toggle takes two milliseconds - just helps me!
             //led.toggle(0, 0);
         });
@@ -94,11 +92,7 @@ namespace RainbowSparkleUnicorn {
     }
 
     export function _sendMessage(message: string): void {
-        //_MSGTOSEND.push(message);
-
-        let msgtosend = message + String.fromCharCode(Delimiters.CarriageReturn);
-
-        serial.writeString(msgtosend);
+        _MSGTOSEND.push(message);
     }
 
     function _readMessage(message: string): void {
