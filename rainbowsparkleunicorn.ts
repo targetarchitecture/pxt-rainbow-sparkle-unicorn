@@ -6,8 +6,8 @@ namespace RainbowSparkleUnicorn {
     let alreadyStarted = false;
     let redirectedToUSB = false;
 
-    //let _MSGTOSEND: string[] = [];
-    //let _MSGTOACTION: string[] = [];
+    let _MSGTOSEND: string[] = [];
+    let _MSGTOACTION: string[] = [];
 
     //allow quick switch back to normal USB, this is not a problem as the code is so large it only runs on a V2 anyway
     input.onLogoEvent(TouchButtonEvent.Pressed, function () {
@@ -54,49 +54,43 @@ namespace RainbowSparkleUnicorn {
             //this tiny pause improves the stability soo much
             basic.pause(1);
 
-            //just stop processing if redirected back to USB
-            //if (redirectedToUSB == false) {
-            //_MSGTOACTION.push(msgrecieved);
-            //}
+            _MSGTOACTION.push(msgrecieved);
 
-            _readMessage(msgrecieved);
+            //_readMessage(msgrecieved);
 
             //LED toggle takes two milliseconds - just helps me!
             //led.toggle(0, 0);
         });
 
         //set-up UART transmission loop
-        // loops.everyInterval(TransmissionMs, function () {
+        loops.everyInterval(TransmissionMs, function () {
 
-        //     //send if array is not empty
-        //     if (_MSGTOSEND.length > 0) {
+            //send if array is not empty
+            if (_MSGTOSEND.length > 0) {
 
-        //         //LED toggle takes two milliseconds - just helps me!
-        //         //led.toggle(2, 0);
+                //LED toggle takes two milliseconds - just helps me!
+                //led.toggle(2, 0);
 
-        //         let msgtosend = _MSGTOSEND.shift() + String.fromCharCode(Delimiters.CarriageReturn);
+                let msgtosend = _MSGTOSEND.shift() + String.fromCharCode(Delimiters.CarriageReturn);
 
-        //         //if redirected to USB just shift the message off the loop but don't send
-        //         //if (redirectedToUSB == false) {
-        //         serial.writeString(msgtosend);
-        //         //}
-        //     }
-        // })
+                serial.writeString(msgtosend);
+            }
+        })
 
         //set-up an action loop
-        // loops.everyInterval(10, function () {
+        loops.everyInterval(10, function () {
 
-        //     //send if array is not empty
-        //     if (_MSGTOACTION.length > 0) {
+            //send if array is not empty
+            if (_MSGTOACTION.length > 0) {
 
-        //         //LED toggle takes two milliseconds - just helps me!
-        //         //led.toggle(1, 0);
+                //LED toggle takes two milliseconds - just helps me!
+                //led.toggle(1, 0);
 
-        //         let msgtoaction = _MSGTOACTION.shift();
+                let msgtoaction = _MSGTOACTION.shift();
 
-        //         _readMessage(msgtoaction);
-        //     }
-        // })
+                _readMessage(msgtoaction);
+            }
+        })
     }
 
     export function _sendMessage(message: string): void {
