@@ -2,10 +2,7 @@
 
 namespace RainbowSparkleUnicorn.Touch {
 
-    //export let _previousTouchStates = "000000000000";
-    //let pinOffset = 1000;
-
-    export enum Pins {
+     export enum Pins {
         //% block="Pin 0"    
         P0 = 0,
         //% block="Pin 1"    

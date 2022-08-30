@@ -2,7 +2,6 @@
 namespace RainbowSparkleUnicorn.Switch {
 
     export let _previousSwitchStates = "0000000000000000";
-    //let pinOffset = 1000;
 
     export enum Pins {
         //% block="Pin 0"

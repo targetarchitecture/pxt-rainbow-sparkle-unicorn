@@ -83,7 +83,7 @@ namespace RainbowSparkleUnicorn.Light {
     //% brightness.min=0 brightness.max=255
     export function turnOnWithBrightness(pin: Pins, brightness: number) {
 
-        //brightness= Math.clamp(0, 255, brightness);
+        brightness= Math.clamp(0, 255, brightness);
 
         brightness = Math.map(brightness, 0, 255, 255, 0)
 

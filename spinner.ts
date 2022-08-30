@@ -1,8 +1,6 @@
 
 namespace RainbowSparkleUnicorn.Spinner {
 
-    //let pinOffset = 1000;
-
     export declare const enum Spinners {
         //% block="Rotary 1"    
         Spinner1 = 0,
