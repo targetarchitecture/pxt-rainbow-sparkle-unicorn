@@ -81,15 +81,13 @@ namespace RainbowSparkleUnicorn.Light {
     //% subcategory="Light" 
     //% block="turn on light on pin $pin with brightness $brightness"
     //% brightness.min=0 brightness.max=255
-    export function turnOnWithBrightness(pin: Pins, brightness: number) {
+export function turnOnWithBrightness(pin: Pins, brightness: number) {
+    brightness = Math.constrain(brightness, 0, 255);
+    brightness = Math.map(brightness, 0, 255, 255, 0);
+    _sendMessage("LLEDINTENSITY," + pin + "," + brightness);
+}
 
-        brightness= Math.clamp(0, 255, brightness);
-
-        brightness = Math.map(brightness, 0, 255, 255, 0)
-
-        _sendMessage("LLEDINTENSITY," + pin + "," + brightness);
-    }
-
+    
     /**
       turn off all lights
     **/
