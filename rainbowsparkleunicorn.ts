@@ -97,6 +97,8 @@ namespace RainbowSparkleUnicorn {
 
     function _readMessage(message: string): void {
 
+        if (!message || message.indexOf(":") === -1) return; // Ignore malformed lines
+
         let messageParts = message.split(":");
 
         let topic: string = messageParts[0];
@@ -156,17 +158,16 @@ namespace RainbowSparkleUnicorn {
      function dealWithSpinner1Message(value: number) {
 
          if (value != _Encoder1value) {
+             _Encoder1value = value; // Update the cache
             control.raiseEvent(RAINBOW_SPARKLE_UNICORN_SPINNER_1, value + pinOffset)
         }
-
-        // RainbowSparkleUnicorn.Spinner._Encoder1value = value;
     }
 
      function dealWithSpinner2Message(value: number) {
          if (value != _Encoder2value) {
+             _Encoder2value = value; // Update the cache
             control.raiseEvent(RAINBOW_SPARKLE_UNICORN_SPINNER_2, value + pinOffset)
         }
-         //RainbowSparkleUnicorn.Spinner_Encoder2value = value;
     }
 
     function dealWithSwitchUpdateMessage(switchStates: string) {
@@ -178,18 +179,17 @@ namespace RainbowSparkleUnicorn {
                 const pinState = switchStates.charAt(pin);
                 const previousPinState = RainbowSparkleUnicorn.Switch._previousSwitchStates.charAt(pin);
 
-                if (pinState.compare(previousPinState) != 0) {
+                if (pinState !== previousPinState) {
+    if (pinState === "L") {
+        control.raiseEvent(RAINBOW_SPARKLE_UNICORN_SWITCH_PRESSED + pin, pin + pinOffset)
+        control.raiseEvent(RAINBOW_SPARKLE_UNICORN_SWITCH_PRESSED_ANY, pin + pinOffset)
+    } else if (pinState === "H") {
+        control.raiseEvent(RAINBOW_SPARKLE_UNICORN_SWITCH_RELEASED + pin, pin + pinOffset)
+        control.raiseEvent(RAINBOW_SPARKLE_UNICORN_SWITCH_RELEASED_ANY, pin + pinOffset)
+    }
+}
 
-                    if (pinState.compare("L") == 0) {
-
-                        control.raiseEvent(RAINBOW_SPARKLE_UNICORN_SWITCH_PRESSED + pin, pin + pinOffset)
-                        control.raiseEvent(RAINBOW_SPARKLE_UNICORN_SWITCH_PRESSED_ANY, pin + pinOffset)
-
-                    } else if (pinState.compare("H") == 0) {
-                        control.raiseEvent(RAINBOW_SPARKLE_UNICORN_SWITCH_RELEASED + pin, pin + pinOffset)
-                        control.raiseEvent(RAINBOW_SPARKLE_UNICORN_SWITCH_RELEASED_ANY, pin + pinOffset)
-                    }
-                }
+                
             }
         }
 
@@ -224,9 +224,6 @@ namespace RainbowSparkleUnicorn {
         //remember for next time
         dfplayerpreviousBusy = busy;
     }
-
-
-
 
     /**
     * Write a comment
