@@ -11,6 +11,17 @@ namespace RainbowSparkleUnicorn.Spinner {
     let Encoder1value = 0;
     let Encoder2value = 0;
 
+    // Global background listeners ensure state tracking is always active
+    control.onEvent(RAINBOW_SPARKLE_UNICORN_SPINNER_1, EventBusValue.MICROBIT_EVT_ANY, () => {
+        Encoder1value = control.eventValue() - pinOffset;
+        if (_rotationHandler1) _rotationHandler1(Encoder1value);
+    });
+
+    control.onEvent(RAINBOW_SPARKLE_UNICORN_SPINNER_2, EventBusValue.MICROBIT_EVT_ANY, () => {
+        Encoder2value = control.eventValue() - pinOffset;
+        if (_rotationHandler2) _rotationHandler2(Encoder2value);
+    });
+
     /**
     * Get the spiner value
     */
@@ -35,33 +46,15 @@ namespace RainbowSparkleUnicorn.Spinner {
     //% group="Spinners"
     //% block="When spinner %spinner| is rotating"
     //% weight=65
-    export function onRotation(
-        spinner: Spinners,
-        handler: (pin: number) => void
-    ) {
+export function onRotation(spinner: Spinners, handler: (value: number) => void) {
         if (spinner == Spinners.Spinner1) {
-
-            control.onEvent(
-                RAINBOW_SPARKLE_UNICORN_SPINNER_1,
-                EventBusValue.MICROBIT_EVT_ANY,
-                () => {
-                    Encoder1value = control.eventValue() - pinOffset;
-                    handler(control.eventValue() - pinOffset);
-                }
-            );
+            _rotationHandler1 = handler;
         } else {
-            control.onEvent(
-                RAINBOW_SPARKLE_UNICORN_SPINNER_2,
-                EventBusValue.MICROBIT_EVT_ANY,
-                () => {
-                    Encoder2value = control.eventValue() - pinOffset;
-                    handler(control.eventValue() - pinOffset);
-                }
-            );
+            _rotationHandler2 = handler;
         }
     }
-
-
+    
+  
 
     /**
     * Request the spinner value.
