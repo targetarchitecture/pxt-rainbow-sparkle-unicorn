@@ -68,24 +68,24 @@ namespace RainbowSparkleUnicorn.Switch {
     //% subcategory="Switch"
     //% block="Request switch states"
     //% weight=65
-    export function RequestSwitchStates(): Array<Event> {
-        _sendMessage("SSTATE");
-        basic.pause(500);
+// Call this once on startup to sync initial conditions without blocking loops
+//% subcategory="Switch" block="Sync switch states with board"
+export function requestSwitchStatesAsync(): void {
+    _sendMessage("SSTATE");
+}
 
-        let retval: Array<Event> = [];
-
-        for (let i = 0; i < _previousSwitchStates.length; i++) {
-            if (_previousSwitchStates.charAt(i) == "L") {
-                retval.push(Event.Pressed);
-            } else {
-                retval.push(Event.Released);
-            }
+//% subcategory="Switch" block="Get current switch states snapshot"
+export function getCachedSwitchStates(): Array<Event> {
+    let retval: Array<Event> = [];
+    for (let i = 0; i < _previousSwitchStates.length; i++) {
+        if (_previousSwitchStates.charAt(i) == "L") {
+            retval.push(Event.Pressed);
+        } else {
+            retval.push(Event.Released);
         }
-
-        return retval;
-
-        // return _previousSwitchStates;
     }
+    return retval;
+}
 
     /**
      * Do something when a switch is pushed.
