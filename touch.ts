@@ -85,19 +85,11 @@ namespace RainbowSparkleUnicorn.Touch {
     //% subcategory="Touch"
     //% block="on pin %pin | touched"
     //% weight=65
-    export function onTouched(
-        pin: Pins,
-        handler: () => void
-    ) {
-        control.onEvent(
-            RAINBOW_SPARKLE_UNICORN_TOUCH_SENSOR_TOUCHED + pin,
-            EventBusValue.MICROBIT_EVT_ANY,
-            () => {
-                handler();
-            }
-        );
+export function onTouched(pin: Pins, handler: () => void) {
+    control.onEvent(RAINBOW_SPARKLE_UNICORN_TOUCH_SENSOR_TOUCHED + pin, EventBusValue.MICROBIT_EVT_ANY, handler);
+}
 
-    }
+     
     /**
      * Do something when a pin is released.
      * @param pin the touch pin to be checked
