@@ -142,21 +142,20 @@ namespace RainbowSparkleUnicorn {
         }
     }
 
-    let _Encoder1value=0;
+    let _Encoder1value = 0;
     let _Encoder2value = 0;
 
-     function dealWithSpinner1Message(value: number) {
-
+function dealWithSpinner1Message(value: number) {
          if (value != _Encoder1value) {
-             _Encoder1value = value; // Update the cache
-            control.raiseEvent(RAINBOW_SPARKLE_UNICORN_SPINNER_1, value + pinOffset)
+            _Encoder1value = value; // Update the cache
+            control.raiseEvent(RAINBOW_SPARKLE_UNICORN_SPINNER_1, value + pinOffset);
         }
     }
 
      function dealWithSpinner2Message(value: number) {
          if (value != _Encoder2value) {
-             _Encoder2value = value; // Update the cache
-            control.raiseEvent(RAINBOW_SPARKLE_UNICORN_SPINNER_2, value + pinOffset)
+            _Encoder2value = value; // Update the cache
+            control.raiseEvent(RAINBOW_SPARKLE_UNICORN_SPINNER_2, value + pinOffset);
         }
     }
 
