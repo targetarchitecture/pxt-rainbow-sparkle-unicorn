@@ -34,8 +34,8 @@ namespace RainbowSparkleUnicorn.Touch {
         Released = 1
     }
 
-    /**
-     * Set the touch and release thresholds for all 13 channels on the
+     /**
+     * Set the touch and release thresholds for all channels on the MPR121
      * @param touchThreshold the touch threshold value from 0 to 255.
      * @param releaseThreshold the release threshold value from 0 to 255.
      */
@@ -45,11 +45,12 @@ namespace RainbowSparkleUnicorn.Touch {
     //% releaseThreshold.min=0 releaseThreshold.max=255 releaseThreshold.defl=6
     //% touchThreshold.min=0 touchThreshold.max=255 touchThreshold.defl=12
     export function setTouchThresholds(touchThreshold: number, releaseThreshold: number) {
-        _sendMessage("S1," + touchThreshold + "," + releaseThreshold);
+        // Aligned with ESP32 messaging.cpp identifier contract
+        _sendMessage("TTHRSLD," + touchThreshold + "," + releaseThreshold);
     }
 
     /**
-    * Set the debounce timing
+    * Set the debounce timing (Note: Currently unhandled on firmware side)
     * @param timing 
     */
     //% subcategory="Expert"     
@@ -57,7 +58,8 @@ namespace RainbowSparkleUnicorn.Touch {
     //% block="Set the debounce timing $timing"
     //% timing.min=0 timing.max=100 timing.defl=50
     export function setDebounceDelay(timing: number) {
-        _sendMessage("S2," + timing);
+        // Maintained signature compatibility but marked for internal visibility
+        _sendMessage("TDEBOUNCE," + timing);
     }
 
 
