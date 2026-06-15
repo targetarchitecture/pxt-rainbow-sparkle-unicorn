@@ -19,7 +19,7 @@ namespace RainbowSparkleUnicorn.Dial {
     //% weight=65
 export function value(dial: Dials, value: number) {
         value = Math.round(value);
-        value = Math.constrain(value, 0, 255); // Repaired invalid clamp API error
+        value = Math.constrain(value, 0, 255); // Repaired invalid clamp API
 
         if (dial == Dials.Dial1) {
             _sendMessage("DIAL1," + value);
