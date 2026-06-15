@@ -2,11 +2,12 @@
 namespace RainbowSparkleUnicorn.IoT {
     export function _dealWithMQTTMessage(message: string) {
         if (MQTTChange != null) {
-
             let parts = message.split("','");
+            if (parts.length < 2) return;
 
-            let topic = parts[0];
-            let content = parts[1];
+            // Strip the residual outer single quotes
+            let topic = parts[0].replace(/^'/, "");
+            let content = parts[1].replace(/'$/, "");
 
             MQTTChange(topic, content);
         }
