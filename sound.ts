@@ -35,7 +35,11 @@ namespace RainbowSparkleUnicorn.Sound {
     //% track.min=1 track.max=99
     export function playTrack(track: number) {
         dfplayerTrack = track;
-        _sendMessage("SPLAY," + track + ",1");
+
+        // Corrected format: SPLAY, folderNum, trackNum
+        _sendMessage("SPLAY,1," + track);
+        
+        //_sendMessage("SPLAY," + track + ",1");
     }
 
     /**
