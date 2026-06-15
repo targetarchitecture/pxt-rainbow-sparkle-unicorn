@@ -96,58 +96,48 @@ namespace RainbowSparkleUnicorn {
     }
 
     function _readMessage(message: string): void {
+        if (!message) return;
 
-        if (!message || message.indexOf(":") === -1) return; // Ignore malformed lines
+        let firstColon = message.indexOf(":");
+        if (firstColon === -1) return;
 
-        let messageParts = message.split(":");
-
-        let topic: string = messageParts[0];
+        let topic: string = message.substring(0, firstColon);
+        let payload: string = message.substring(firstColon + 1);
 
         switch (topic) {
             case "SLIDER1":
-                control.raiseEvent(RAINBOW_SPARKLE_UNICORN_SLIDER_1, parseInt(messageParts[1]) + pinOffset);
-                // RainbowSparkleUnicorn.Slider._Slider1 = parseInt(messageParts[1]);
+                control.raiseEvent(RAINBOW_SPARKLE_UNICORN_SLIDER_1, parseInt(payload) + pinOffset);
                 break;
             case "SLIDER2":
-                control.raiseEvent(RAINBOW_SPARKLE_UNICORN_SLIDER_2, parseInt(messageParts[1]) + pinOffset);
-
-                //  RainbowSparkleUnicorn.Slider._Slider2 = parseInt(messageParts[1]);
+                control.raiseEvent(RAINBOW_SPARKLE_UNICORN_SLIDER_2, parseInt(payload) + pinOffset);
                 break;
             case "ROTARY1":
-                dealWithSpinner1Message(parseInt(messageParts[1]));
+                dealWithSpinner1Message(parseInt(payload));
                 break;
             case "ROTARY2":
-                dealWithSpinner2Message(parseInt(messageParts[1]));
+                dealWithSpinner2Message(parseInt(payload));
                 break;
             case "SBUSY":
-                dealWithMusicMessage(parseInt(messageParts[1]));
+                dealWithMusicMessage(parseInt(payload));
                 break;
             case "SUPDATE":
-                 dealWithSwitchUpdateMessage(messageParts[1]);
+                dealWithSwitchUpdateMessage(payload);
                 break;
             case "TTOUCHED":
-
-                let pinTouched = parseInt(messageParts[1]);
-
-                control.raiseEvent(RAINBOW_SPARKLE_UNICORN_TOUCH_SENSOR_TOUCHED + pinTouched, pinTouched + pinOffset)
-                control.raiseEvent(RAINBOW_SPARKLE_UNICORN_TOUCH_SENSOR_TOUCHED_ANY, pinTouched + pinOffset)
-
-                //Touch._dealWithTouchedUpdateMessage(parseInt(messageParts[1]));
+                let pinTouched = parseInt(payload);
+                control.raiseEvent(RAINBOW_SPARKLE_UNICORN_TOUCH_SENSOR_TOUCHED + pinTouched, pinTouched + pinOffset);
+                control.raiseEvent(RAINBOW_SPARKLE_UNICORN_TOUCH_SENSOR_TOUCHED_ANY, pinTouched + pinOffset);
                 break;
             case "TRELEASED":
-                //Touch._dealWithReleasedUpdateMessage(parseInt(messageParts[1]));
-
-                let pinReleased = parseInt(messageParts[1]);
-
-                control.raiseEvent(RAINBOW_SPARKLE_UNICORN_TOUCH_SENSOR_RELEASED + pinReleased, pinReleased + pinOffset,)
-                control.raiseEvent(RAINBOW_SPARKLE_UNICORN_TOUCH_SENSOR_RELEASED_ANY, pinReleased + pinOffset)
-
+                let pinReleased = parseInt(payload);
+                control.raiseEvent(RAINBOW_SPARKLE_UNICORN_TOUCH_SENSOR_RELEASED + pinReleased, pinReleased + pinOffset);
+                control.raiseEvent(RAINBOW_SPARKLE_UNICORN_TOUCH_SENSOR_RELEASED_ANY, pinReleased + pinOffset);
                 break;
             case "SSTATE":
-                Switch._previousSwitchStates = messageParts[1];
+                Switch._previousSwitchStates = payload;
                 break;
             case "MQTT":
-                    IoT._dealWithMQTTMessage(messageParts[1]);
+                IoT._dealWithMQTTMessage(payload);
                 break;
         }
     }
