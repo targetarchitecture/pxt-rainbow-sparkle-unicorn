@@ -17,16 +17,14 @@ namespace RainbowSparkleUnicorn.Dial {
     //% block="Set dial %dial to $value"
     //% value.min=0 value.max=255
     //% weight=65
-    export function value(dial: Dials, value: number) {
-
+export function value(dial: Dials, value: number) {
         value = Math.round(value);
-        value = Math.clamp(0, 255, value);
+        value = Math.constrain(value, 0, 255); // Repaired invalid clamp API error
 
         if (dial == Dials.Dial1) {
-            _sendMessage("DIAL1," + value)
-        }
-        else {
-            _sendMessage("DIAL2," + value)
+            _sendMessage("DIAL1," + value);
+        } else {
+            _sendMessage("DIAL2," + value);
         }
     }
 }
